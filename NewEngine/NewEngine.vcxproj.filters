@@ -13,5 +13,21 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\MemoryAllocators">
+      <UniqueIdentifier>{feaac6e7-757f-409b-987f-3eea9dd83b28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MemoryAllocators">
+      <UniqueIdentifier>{762f08e3-3ca7-4504-bc9a-40eb09b44d5c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MemoryAllocators\BlockAllocator.cpp">
+      <Filter>Source Files\MemoryAllocators</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MemoryAllocators\BlockAllocator.h">
+      <Filter>Header Files\MemoryAllocators</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

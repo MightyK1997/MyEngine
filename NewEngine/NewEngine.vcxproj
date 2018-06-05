@@ -18,6 +18,12 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MemoryAllocators\BlockAllocator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MemoryAllocators\BlockAllocator.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{F7D1B133-D54C-4A46-9BDB-0FAB5EFC2121}</ProjectGuid>
