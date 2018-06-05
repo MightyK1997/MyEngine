@@ -34,7 +34,7 @@ namespace Engine
 		public:
 			Accumulator& RegisterAccumulator(std::string i_Name)
 			{
-				auto &m_Accumulator = m_AllAccumulators.insert(make_pair(i_Name, Accumulator()));
+				auto m_Accumulator = m_AllAccumulators.insert(make_pair(i_Name, Accumulator()));
 				return m_Accumulator.first->second;
 			}
 
