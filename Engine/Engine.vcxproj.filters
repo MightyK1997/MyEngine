@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Renderer">
+      <UniqueIdentifier>{39039ffe-6544-4258-8b80-c404648753f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MemoryAllocators">
+      <UniqueIdentifier>{a169dcf9-b2b6-44b3-832b-7d40ce191573}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Math">
+      <UniqueIdentifier>{f6de351e-6f76-4935-84a5-df857065c282}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Console">
+      <UniqueIdentifier>{b3dfb614-dfc0-4487-82d5-33eb9ee574d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MemoryAllocators">
+      <UniqueIdentifier>{310babd5-64a4-4bb8-aa2f-890814933a86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Console">
+      <UniqueIdentifier>{9cab2469-3877-4d9d-8a72-c93f60bd8f46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer">
+      <UniqueIdentifier>{1795e0b6-c9df-43c9-93f4-76a6e605a977}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer\System">
+      <UniqueIdentifier>{0152499c-57ff-4cc1-9c63-584af83682d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer\System">
+      <UniqueIdentifier>{c590ecb6-90e4-41f9-b976-fce92e110530}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer\Sprite">
+      <UniqueIdentifier>{308dd0c7-a8f5-46e8-b6bf-4c5d6345b29e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{90838934-01f3-4e55-94c5-ca3cb76618f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer\Sprite">
+      <UniqueIdentifier>{7bd40a38-520e-40e8-b0ae-aaa185eb3f92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer\Resources">
+      <UniqueIdentifier>{65f28ca3-e44e-4ab0-8cdb-2c3396b2d3e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer\Resources">
+      <UniqueIdentifier>{268e5f6e-6044-4d05-bb8f-c5078ef73174}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer\DDSLoader">
+      <UniqueIdentifier>{a821b2d3-304a-416d-80ee-2c9222caf538}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer\DDSLoader">
+      <UniqueIdentifier>{94898717-6604-467b-96ee-23fe3eb2da28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer\Buffers">
+      <UniqueIdentifier>{65d3c41e-1fb8-4d44-8162-4dd86540dbaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer\Buffers">
+      <UniqueIdentifier>{71296177-22a6-4731-a514-60ed39c9d4f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math">
+      <UniqueIdentifier>{c6ee336d-9e0c-4a27-a7ad-5663426d1f3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Timer">
+      <UniqueIdentifier>{a34e5357-3296-47b3-b52b-ef8d1e3a2587}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Timer">
+      <UniqueIdentifier>{3b217692-fce0-4d1e-91ba-e23ca8c6529c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Physics">
+      <UniqueIdentifier>{1f3d0319-fe5c-4f93-abf9-c164d1e74962}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{78e37b8d-864d-4107-9f66-bd437a82454a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject">
+      <UniqueIdentifier>{22de1f12-4319-4344-ba5e-4f3256fc8f11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject">
+      <UniqueIdentifier>{b914bb8a-a671-443a-acff-5a158769f016}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SmartPointers">
+      <UniqueIdentifier>{3bd0c083-86f9-4262-ba26-2bf784662fd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SmartPointers">
+      <UniqueIdentifier>{49e20ecc-0c0a-4def-b203-383d1441a9dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameData">
+      <UniqueIdentifier>{4d7ac749-a84b-4d45-a1f1-a0528fa57068}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameData">
+      <UniqueIdentifier>{5c8ad168-fda0-4e84-bb35-4f3949284ad5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CoreFunctions">
+      <UniqueIdentifier>{f4372d16-26da-4c1a-8628-722b8fc61087}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\JobSystem">
+      <UniqueIdentifier>{6b91e191-d563-49ab-8bb5-738ad5d96bdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\JobSystem">
+      <UniqueIdentifier>{bd88ce48-90be-4409-b7a8-8feae7dcfeab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CoreFunctions">
+      <UniqueIdentifier>{471995f0-e4a9-494a-a226-868250505de7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Messaging System">
+      <UniqueIdentifier>{eb89e0a3-bfe4-4604-b26f-d938308f8f67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Messaging System">
+      <UniqueIdentifier>{a7bfc505-6be6-472c-ab4e-8c45f8fbf815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Profiling">
+      <UniqueIdentifier>{96ad0fd0-9dd8-4a70-8c9f-a635c907a2c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Profiling">
+      <UniqueIdentifier>{490b5204-57e8-4fb9-a719-31e12d31de7b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Engine\MemoryAllocator\OverloadingNewAndDelete.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineInit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Renderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\BasicTypes.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\MemoryAllocator\AllocatingAllocators.h">
+      <Filter>Header Files\MemoryAllocators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\MemoryAllocator\BlockAllocator\BlockAllocator.h">
+      <Filter>Header Files\MemoryAllocators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\MemoryAllocator\FixedSizeAllocator\FixedSizeAllocator.h">
+      <Filter>Header Files\MemoryAllocators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\MemoryAllocator\FixedSizeAllocator\BitArray.h">
+      <Filter>Header Files\MemoryAllocators</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector2D.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Logging\ConsolePrint.h">
+      <Filter>Header Files\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Renderer\System\Initialization.h">
+      <Filter>Header Files\Renderer\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Renderer\System\Device.h">
+      <Filter>Header Files\Renderer\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\System\Helpers.h">
+      <Filter>Header Files\Renderer\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Renderer\System\DXHelpers.h">
+      <Filter>Header Files\Renderer\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Renderer\System\DXHelpers-inl.h">
+      <Filter>Header Files\Renderer\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Renderer\System\Input.h">
+      <Filter>Header Files\Renderer\System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Renderer\System\Window.h">
+      <Filter>Header Files\Renderer\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Sprite\SpritePS.h">
+      <Filter>Header Files\Renderer\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Sprite\SpriteVS.h">
+      <Filter>Header Files\Renderer\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Renderer\Resources\Texture.h">
+      <Filter>Header Files\Renderer\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Renderer\DDSLoader\DDSTextureLoader.h">
+      <Filter>Header Files\Renderer\DDSLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Buffers\DrawResourceBuffer-inl.h">
+      <Filter>Header Files\Renderer\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Buffers\IGPUResourceBuffer.h">
+      <Filter>Header Files\Renderer\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Renderer\Buffers\CPUAccessableBuffer.h">
+      <Filter>Header Files\Renderer\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Renderer\Buffers\DrawResourceBuffer.h">
+      <Filter>Header Files\Renderer\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Engine\Renderer\Buffers\ImmutableBuffer.h">
+      <Filter>Header Files\Renderer\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector3D.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer\Timer.h">
+      <Filter>Header Files\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Physics.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\GameObject.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SmartPointers\SharedPointer.h">
+      <Filter>Header Files\SmartPointers</Filter>
+    </ClInclude>
+    <ClInclude Include="SmartPointers\WeakPointer.h">
+      <Filter>Header Files\SmartPointers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameData\Classes\ReadGameData.h">
+      <Filter>Header Files\GameData</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreFuntions\CoreFunctions.h">
+      <Filter>Header Files\CoreFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="JobSystem\JobSystem.h">
+      <Filter>Header Files\JobSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="JobSystem\JobQueue.h">
+      <Filter>Header Files\JobSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="JobSystem\Job.h">
+      <Filter>Header Files\JobSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector4D.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Matrix4.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Messaging\Messaging.h">
+      <Filter>Header Files\Messaging System</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\IGameObjectController.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\SIMDMatrix4.h">
+      <Filter>Header Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Profiling\Profiler.h">
+      <Filter>Header Files\Profiling</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Engine\MemoryAllocator\OverloadingNewAndDelete.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineInit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\MemoryAllocator\AllocatingAllocators.cpp">
+      <Filter>Source Files\MemoryAllocators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\MemoryAllocator\FixedSizeAllocator\BitArray.cpp">
+      <Filter>Source Files\MemoryAllocators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\MemoryAllocator\BlockAllocator\BlockAllocator.cpp">
+      <Filter>Source Files\MemoryAllocators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\MemoryAllocator\FixedSizeAllocator\FixedSizeAllocator.cpp">
+      <Filter>Source Files\MemoryAllocators</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Logging\ConsolePrint_Windows.cpp">
+      <Filter>Source Files\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Renderer\System\Initialization.cpp">
+      <Filter>Source Files\Renderer\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Renderer\System\Device.cpp">
+      <Filter>Source Files\Renderer\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Renderer\System\Input.cpp">
+      <Filter>Source Files\Renderer\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\System\Render.cpp">
+      <Filter>Source Files\Renderer\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\System\Service.cpp">
+      <Filter>Source Files\Renderer\System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Renderer\System\Window.cpp">
+      <Filter>Source Files\Renderer\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Sprite\SpriteRender.cpp">
+      <Filter>Source Files\Renderer\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Renderer\Resources\Texture.cpp">
+      <Filter>Source Files\Renderer\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Renderer\DDSLoader\DDSTextureLoader.cpp">
+      <Filter>Source Files\Renderer\DDSLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Renderer\Buffers\CPUAccessableBuffer.cpp">
+      <Filter>Source Files\Renderer\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Renderer\Buffers\DrawResourceBuffer.cpp">
+      <Filter>Source Files\Renderer\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Engine\Renderer\Buffers\ImmutableBuffer.cpp">
+      <Filter>Source Files\Renderer\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Vector2D.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Vector3D.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer\Timer.cpp">
+      <Filter>Source Files\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics\Physics.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\GameObject.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="SmartPointers\SharedPointer.cpp">
+      <Filter>Source Files\SmartPointers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameData\Classes\ReadGameData.cpp">
+      <Filter>Source Files\GameData</Filter>
+    </ClCompile>
+    <ClCompile Include="JobSystem\JobSystem.cpp">
+      <Filter>Source Files\JobSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="JobSystem\JobQueue.cpp">
+      <Filter>Source Files\JobSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="JobSystem\Job.cpp">
+      <Filter>Source Files\JobSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreFuntions\CoreFunctions.cpp">
+      <Filter>Source Files\CoreFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Vector4D.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Matrix4.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Messaging\Messaging.cpp">
+      <Filter>Source Files\Messaging System</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\SIMDMatrix4.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Profiling\Profiler.cpp">
+      <Filter>Source Files\Profiling</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Renderer\Shaders\SpritePS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Renderer\Shaders\SpriteVS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Renderer\Shaders\VSOutput.hlsli">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>
