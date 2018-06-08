@@ -29,17 +29,18 @@ public:
 	//Constructor and Destructor
 	BlockAllocator(size_t i_sizeMemory, void* i_pMemory);
 	static BlockAllocator* _Init(size_t i_sizeMemory, void* i_pMemory);
-	~BlockAllocator() {}
+	~BlockAllocator();
 
 
 	//Other Public Functions
 	void* _alloc(size_t i_BlockSize, unsigned int alignment = 4);
 	void _free(void* i_pPointer);
 	void collect();
+	void destroy();
 	size_t GetLargestFreeBlock();
 	size_t GetTotalFreeMemory();
-	const bool Contains(void* i_pPointer);
-	bool IsBlockFree(void* i_pPointer);
+	bool Contains(void* i_pPointer);
+	bool IsAllocated(void* i_pPointer);
 
 
 private:
