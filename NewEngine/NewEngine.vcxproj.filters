@@ -24,9 +24,15 @@
     <ClCompile Include="MemoryAllocators\BlockAllocator.cpp">
       <Filter>Source Files\MemoryAllocators</Filter>
     </ClCompile>
+    <ClCompile Include="MemoryAllocators\FixedSizeAllocator.cpp">
+      <Filter>Source Files\MemoryAllocators</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MemoryAllocators\BlockAllocator.h">
+      <Filter>Header Files\MemoryAllocators</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryAllocators\FixedSizeAllocator.h">
       <Filter>Header Files\MemoryAllocators</Filter>
     </ClInclude>
   </ItemGroup>
