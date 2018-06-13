@@ -19,10 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Debug\Log.cpp" />
+    <ClCompile Include="GameObject\GameObject.cpp" />
+    <ClCompile Include="Math\Vector\Vector2.cpp" />
+    <ClCompile Include="Math\Vector\Vector3.cpp" />
+    <ClCompile Include="Math\Vector\Vector4.cpp" />
     <ClCompile Include="MemoryAllocators\BlockAllocator.cpp" />
     <ClCompile Include="MemoryAllocators\FixedSizeAllocator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Debug\Log.h" />
+    <ClInclude Include="GameObject\GameObject.h" />
+    <ClInclude Include="Math\Vector\Vector2.h" />
+    <ClInclude Include="Math\Vector\Vector3.h" />
+    <ClInclude Include="Math\Vector\Vector4.h" />
     <ClInclude Include="MemoryAllocators\BlockAllocator.h" />
     <ClInclude Include="MemoryAllocators\FixedSizeAllocator.h" />
   </ItemGroup>

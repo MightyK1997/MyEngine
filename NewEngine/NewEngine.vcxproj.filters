@@ -19,6 +19,30 @@
     <Filter Include="Header Files\MemoryAllocators">
       <UniqueIdentifier>{762f08e3-3ca7-4504-bc9a-40eb09b44d5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Debug">
+      <UniqueIdentifier>{5cccf910-6914-4691-9e34-7ee1b2f95737}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Debug">
+      <UniqueIdentifier>{cfc8b376-eebc-4eb3-8de4-423cc4f8b57b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject">
+      <UniqueIdentifier>{603f6c70-b122-46de-a90a-19a48bbd9c22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject">
+      <UniqueIdentifier>{b230d40d-b0e7-4d97-923d-9c331c317af2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Math">
+      <UniqueIdentifier>{af5d4c5c-f0ae-4b58-9fbd-e0d739b2b29b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math">
+      <UniqueIdentifier>{4b399de2-0564-4019-83fa-5ea7bcc82eb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Math\Vector">
+      <UniqueIdentifier>{f3dd4a9d-8603-477c-a66a-e46444cdee42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math\Vector">
+      <UniqueIdentifier>{af4fff67-bc0b-43cf-bfc0-c559722598c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MemoryAllocators\BlockAllocator.cpp">
@@ -27,6 +51,21 @@
     <ClCompile Include="MemoryAllocators\FixedSizeAllocator.cpp">
       <Filter>Source Files\MemoryAllocators</Filter>
     </ClCompile>
+    <ClCompile Include="Debug\Log.cpp">
+      <Filter>Source Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\GameObject.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Vector\Vector2.cpp">
+      <Filter>Source Files\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Vector\Vector3.cpp">
+      <Filter>Source Files\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Vector\Vector4.cpp">
+      <Filter>Source Files\Math\Vector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MemoryAllocators\BlockAllocator.h">
@@ -34,6 +73,21 @@
     </ClInclude>
     <ClInclude Include="MemoryAllocators\FixedSizeAllocator.h">
       <Filter>Header Files\MemoryAllocators</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug\Log.h">
+      <Filter>Header Files\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\GameObject.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector\Vector2.h">
+      <Filter>Header Files\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector\Vector3.h">
+      <Filter>Header Files\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector\Vector4.h">
+      <Filter>Header Files\Math\Vector</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

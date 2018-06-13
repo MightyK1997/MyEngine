@@ -2,12 +2,7 @@
 #include <string>
 #include <stdarg.h>
 #include <iostream>
-#ifdef _WIN32 || _WIN64
 #include <Windows.h>
-#endif
-#ifdef _gcc
-
-#endif
 
 namespace Engine
 {
@@ -31,4 +26,4 @@ namespace Engine
 			std::clog << strOutput;
 		}
 	}
-}|
+}
