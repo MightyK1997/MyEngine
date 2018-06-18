@@ -34,6 +34,22 @@ namespace Engine
 				m_Vector3[2] = i_Input;
 				return *this;
 			}
+			Vector3 operator+(Vector3 & i_Lhs, Vector3 & i_Rhs)
+			{
+				return Vector3(i_Lhs.x() + i_Rhs.x(), i_Lhs.y() + i_Rhs.y(), i_Lhs.z() + i_Rhs.z());
+			}
+			Vector3 operator-(Vector3 & i_Lhs, Vector3 & i_Rhs)
+			{
+				return Vector3(i_Lhs.x() - i_Rhs.x(), i_Lhs.y() - i_Rhs.y(), i_Lhs.z() - i_Rhs.z());
+			}
+			Vector3 operator+(Vector3 & i_Lhs, float & i_Rhs)
+			{
+				return Vector3(i_Lhs.x() + i_Rhs, i_Lhs.y() + i_Rhs, i_Lhs.z() + i_Rhs);
+			}
+			Vector3 operator-(Vector3 & i_Lhs, float & i_Rhs)
+			{
+				return Vector3(i_Lhs.x() - i_Rhs, i_Lhs.y() - i_Rhs, i_Lhs.z() - i_Rhs);
+			}
 		}
 	}
 }

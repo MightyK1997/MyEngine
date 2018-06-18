@@ -1,6 +1,8 @@
 #pragma once
 
 #include <array>
+#include <immintrin.h>
+#include <xmmintrin.h>
 
 namespace Engine
 {
@@ -26,9 +28,15 @@ namespace Engine
 				Vector3 x(float i_Input);
 				Vector3 y(float i_Input);
 				Vector3 z(float i_Input);
+
 			private:
 				std::array<float, 3> m_Vector3;
 			};
+
+			extern inline Vector3 operator+(Vector3& i_Lhs, Vector3& i_Rhs);
+			extern inline Vector3 operator-(Vector3& i_Lhs, Vector3& i_Rhs);
+			extern inline Vector3 operator+(Vector3& i_Lhs , float& i_Rhs);
+			extern inline Vector3 operator-(Vector3& i_Lhs , float& i_Rhs);
 		}
 	}
 }
