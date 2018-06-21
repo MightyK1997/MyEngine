@@ -20,7 +20,7 @@ namespace Engine
 				Vector4(Vector3 i_Vector3) { m_Vector4 = { i_Vector3[0], i_Vector3[1],i_Vector3[2], 0 }; }
 				Vector4(__m128 i_Input) { m_Vector4 = i_Input; }
 				~Vector4(){}
-				float operator[](int i_Pos) { return m_Vector4.m128_f32[i_Pos]; }
+				float& operator[](int i_Pos) { return m_Vector4.m128_f32[i_Pos]; }
 				float x() { return m_Vector4.m128_f32[0]; }
 				float y() { return m_Vector4.m128_f32[1]; }
 				float z() { return m_Vector4.m128_f32[2]; }
@@ -34,7 +34,7 @@ namespace Engine
 				Vector4 operator*=(Vector4);
 				bool operator==(Vector4);
 				bool operator!=(Vector4 i_Vec) { return !(*this == i_Vec); }
-				__m128 GetVector() { return m_Vector4; }
+				__m128 GetVector() const { return m_Vector4; }
 				std::array<float, 4> Get();
 			private:
 				__m128 m_Vector4;
@@ -44,6 +44,9 @@ namespace Engine
 			extern inline Vector4 operator-(const Vector4& i_Lhs, const Vector4& i_Rhs);
 			extern inline Vector4 operator-(const Vector4& i_Lhs, float& i_Rhs);
 			extern inline Vector4 operator+(const Vector4& i_Lhs, float& i_Rhs);
+			extern inline Vector4 operator*(const Vector4& i_Lhs, const Vector4& i_Rhs);
+			extern inline Vector4 operator*(const Vector4& i_Lhs, const float& i_Rhs);
 		}
 	}
 }
+

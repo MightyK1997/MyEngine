@@ -56,21 +56,29 @@ namespace Engine
 				}
 				return returnValue;
 			}
-			Vector4 operator+(Vector4& i_Lhs, Vector4& i_Rhs)
+			Vector4 operator+(const Vector4& i_Lhs, const Vector4& i_Rhs)
 			{
 				return Vector4(_mm_add_ps(i_Lhs.GetVector(), i_Rhs.GetVector()));
 			}
-			Vector4 operator-(Vector4 & i_Lhs, Vector4 & i_Rhs)
+			Vector4 operator-(const Vector4 & i_Lhs, const Vector4 & i_Rhs)
 			{
 				return Vector4(_mm_sub_ps(i_Lhs.GetVector(), i_Rhs.GetVector()));
 			}
-			Vector4 operator-(Vector4 & i_Lhs, float & i_Rhs)
+			Vector4 operator-(const Vector4 & i_Lhs, const float & i_Rhs)
 			{
 				return Vector4(_mm_sub_ps(i_Lhs.GetVector(), __m128{i_Rhs, i_Rhs, i_Rhs, i_Rhs}));
 			}
-			Vector4 operator+(Vector4 & i_Lhs, float & i_Rhs)
+			Vector4 operator+(const Vector4 & i_Lhs, const float & i_Rhs)
 			{
 				return Vector4(_mm_add_ps(i_Lhs.GetVector(), __m128{i_Rhs, i_Rhs, i_Rhs, i_Rhs}));
+			}
+			Vector4 operator*(const Vector4 & i_Lhs, const Vector4 & i_Rhs)
+			{
+				return Vector4(_mm_mul_ps(i_Lhs.GetVector(), i_Rhs.GetVector()));
+			}
+			Vector4 operator*(const Vector4 & i_Lhs, const float & i_Rhs)
+			{
+				return Vector4(_mm_mul_ps(i_Lhs.GetVector(), __m128{i_Rhs, i_Rhs, i_Rhs, i_Rhs}));
 			}
 		}
 	}

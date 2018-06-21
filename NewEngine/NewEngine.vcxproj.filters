@@ -43,6 +43,12 @@
     <Filter Include="Source Files\Math\Vector">
       <UniqueIdentifier>{af4fff67-bc0b-43cf-bfc0-c559722598c6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Math\Matrix">
+      <UniqueIdentifier>{171a62d5-bfef-49ce-80d4-3a22e2b6ae1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math\Matrix">
+      <UniqueIdentifier>{8d8d89ae-0d6d-497f-b58e-9b46b446413a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MemoryAllocators\BlockAllocator.cpp">
@@ -66,6 +72,9 @@
     <ClCompile Include="Math\Vector\Vector4.cpp">
       <Filter>Source Files\Math\Vector</Filter>
     </ClCompile>
+    <ClCompile Include="Math\Matrix\Matrix.cpp">
+      <Filter>Source Files\Math\Matrix</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MemoryAllocators\BlockAllocator.h">
@@ -88,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="Math\Vector\Vector4.h">
       <Filter>Header Files\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Matrix\Matrix.h">
+      <Filter>Header Files\Math\Matrix</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
