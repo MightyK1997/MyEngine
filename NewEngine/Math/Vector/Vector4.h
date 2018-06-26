@@ -20,15 +20,15 @@ namespace Engine
 				Vector4(Vector3 i_Vector3) { m_Vector4 = { i_Vector3[0], i_Vector3[1],i_Vector3[2], 0 }; }
 				Vector4(__m128 i_Input) { m_Vector4 = i_Input; }
 				~Vector4(){}
-				float& operator[](int i_Pos) { return m_Vector4.m128_f32[i_Pos]; }
+				float operator[](int i_Pos) { return m_Vector4.m128_f32[i_Pos]; }
 				float x() { return m_Vector4.m128_f32[0]; }
 				float y() { return m_Vector4.m128_f32[1]; }
 				float z() { return m_Vector4.m128_f32[2]; }
 				float w() { return m_Vector4.m128_f32[3]; }
-				Vector4 x(float i_Input);
-				Vector4 y(float i_Input);
-				Vector4 z(float i_Input);
-				Vector4 w(float i_Input);
+				//Vector4 x(float i_Input);
+				//Vector4 y(float i_Input);
+				//Vector4 z(float i_Input);
+				//Vector4 w(float i_Input);
 				Vector4 operator+=(Vector4);
 				Vector4 operator-=(Vector4);
 				Vector4 operator*=(Vector4);

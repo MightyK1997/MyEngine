@@ -19,21 +19,21 @@ namespace Engine
 					m_Vector3[i] = i_Input;
 				}
 			}
-			Vector3 Engine::Math::Vector::Vector3::x(float i_Input)
-			{
-				m_Vector3[0] = i_Input;
-				return *this;
-			}
-			Vector3 Engine::Math::Vector::Vector3::y(float i_Input)
-			{
-				m_Vector3[1] = i_Input;
-				return *this;
-			}
-			Vector3 Engine::Math::Vector::Vector3::z(float i_Input)
-			{
-				m_Vector3[2] = i_Input;
-				return *this;
-			}
+			//Vector3 Engine::Math::Vector::Vector3::x(float i_Input)
+			//{
+			//	m_Vector3[0] = i_Input;
+			//	return *this;
+			//}
+			//Vector3 Engine::Math::Vector::Vector3::y(float i_Input)
+			//{
+			//	m_Vector3[1] = i_Input;
+			//	return *this;
+			//}
+			//Vector3 Engine::Math::Vector::Vector3::z(float i_Input)
+			//{
+			//	m_Vector3[2] = i_Input;
+			//	return *this;
+			//}
 			Vector3 operator+(Vector3 & i_Lhs, Vector3 & i_Rhs)
 			{
 				return Vector3(i_Lhs.x() + i_Rhs.x(), i_Lhs.y() + i_Rhs.y(), i_Lhs.z() + i_Rhs.z());

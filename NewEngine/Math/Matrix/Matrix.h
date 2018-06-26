@@ -33,7 +33,7 @@ namespace Engine
 				Matrix CreateXRotation(float i_Degrees);
 				Matrix CreateYRotation(float i_Degrees);
 				Matrix CreateZRotation(float i_Degrees);
-				Matrix CreateTranslation(const Vector::Vector3& i_Translation);
+				Matrix CreateTranslation(Vector::Vector3 i_Translation);
 				Matrix CreateTranslation(const float i_xTrans, const float i_yTrans, const float i_zTrans);
 				Matrix CreateScale(const float i_xScale, const float i_yScale, const float i_zScale);
 				Matrix GetInverse(void) const;
@@ -41,7 +41,7 @@ namespace Engine
 				float GetDeterminant(void) const;
 				Matrix operator*(const Matrix& i_Rhs);
 				Matrix operator*(const float& i_Rhs);
-				Vector::Vector4& operator*(const Vector::Vector4& i_Rhs);
+				Vector::Vector4 operator*(Vector::Vector4& i_Rhs);
 			private:
 				std::array<__m128, 4> m_Matrix;
 			};
