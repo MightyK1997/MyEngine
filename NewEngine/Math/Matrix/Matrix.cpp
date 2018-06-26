@@ -106,6 +106,14 @@ namespace Engine
 				}
 				return returnMatrix;
 			}
+			Matrix Matrix::operator*(const float & i_Rhs)
+			{
+				for (size_t i = 0; i < 4; i++)
+				{
+					_mm_mul_ps(m_Matrix[i], __m128{i_Rhs, i_Rhs, i_Rhs, i_Rhs});
+				}
+				return *this;
+			}
 			Vector4 Matrix::operator*(Vector4 & i_Rhs)
 			{
 				__m128 tempVariable = { i_Rhs[0], i_Rhs[1], i_Rhs[2], i_Rhs[3] };
@@ -116,6 +124,24 @@ namespace Engine
 				}
 				return Vector4(temp2.m128_f32[0], temp2.m128_f32[1], temp2.m128_f32[2], temp2.m128_f32[3]);
 			}
-		}
+			Matrix operator+(Matrix m1, Matrix m2)
+			{
+				Matrix returnMatrix;
+				for (size_t i = 0; i < 4; i++)
+				{
+					returnMatrix[i] = _mm_add_ps(m1[i], m2[i]);
+				}
+				return returnMatrix;
+			}
+			Matrix operator-(Matrix m1, Matrix m2)
+			{
+				Matrix returnMatrix;
+				for (size_t i = 0; i < 4; i++)
+				{
+					returnMatrix[i] = _mm_sub_ps(m1[i], m2[i]);
+				}
+				return returnMatrix;
+			}
+}
 	}
 }

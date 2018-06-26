@@ -25,10 +25,6 @@ namespace Engine
 				float y() { return m_Vector4.m128_f32[1]; }
 				float z() { return m_Vector4.m128_f32[2]; }
 				float w() { return m_Vector4.m128_f32[3]; }
-				//Vector4 x(float i_Input);
-				//Vector4 y(float i_Input);
-				//Vector4 z(float i_Input);
-				//Vector4 w(float i_Input);
 				Vector4 operator+=(Vector4);
 				Vector4 operator-=(Vector4);
 				Vector4 operator*=(Vector4);

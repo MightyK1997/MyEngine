@@ -42,9 +42,13 @@ namespace Engine
 				Matrix operator*(const Matrix& i_Rhs);
 				Matrix operator*(const float& i_Rhs);
 				Vector::Vector4 operator*(Vector::Vector4& i_Rhs);
+				__m128 operator[](size_t pos) { return m_Matrix[pos]; }
 			private:
 				std::array<__m128, 4> m_Matrix;
 			};
+
+			extern inline Matrix operator+(Matrix m1, Matrix m2);
+			extern inline Matrix operator-(Matrix m1, Matrix m2);
 		}
 	}
 }
