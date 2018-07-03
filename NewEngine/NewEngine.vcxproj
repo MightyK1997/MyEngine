@@ -27,6 +27,7 @@
     <ClCompile Include="Math\Vector\Vector4.cpp" />
     <ClCompile Include="MemoryAllocators\BlockAllocator.cpp" />
     <ClCompile Include="MemoryAllocators\FixedSizeAllocator.cpp" />
+    <ClCompile Include="Timer\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug\Log.h" />
@@ -37,6 +38,7 @@
     <ClInclude Include="Math\Vector\Vector4.h" />
     <ClInclude Include="MemoryAllocators\BlockAllocator.h" />
     <ClInclude Include="MemoryAllocators\FixedSizeAllocator.h" />
+    <ClInclude Include="Timer\Timer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -111,6 +113,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalIncludeDirectories>C:\Users\gslc\source\repos\MyEngine\Engine\Lua\export;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -126,6 +129,7 @@
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalIncludeDirectories>C:\Users\gslc\source\repos\MyEngine\Engine\Lua\export;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -142,6 +146,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\gslc\source\repos\MyEngine\Engine\Lua\export;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -160,6 +165,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\gslc\source\repos\MyEngine\Engine\Lua\export;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

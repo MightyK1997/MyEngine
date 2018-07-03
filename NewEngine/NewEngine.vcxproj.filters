@@ -49,6 +49,12 @@
     <Filter Include="Source Files\Math\Matrix">
       <UniqueIdentifier>{8d8d89ae-0d6d-497f-b58e-9b46b446413a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Timer">
+      <UniqueIdentifier>{14c34b45-56f3-4db5-93c0-e81e3e4849f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Timer">
+      <UniqueIdentifier>{f940f1ff-0655-4365-abf0-b3c51243e0a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MemoryAllocators\BlockAllocator.cpp">
@@ -75,6 +81,9 @@
     <ClCompile Include="Math\Matrix\Matrix.cpp">
       <Filter>Source Files\Math\Matrix</Filter>
     </ClCompile>
+    <ClCompile Include="Timer\Timer.cpp">
+      <Filter>Source Files\Timer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MemoryAllocators\BlockAllocator.h">
@@ -100,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="Math\Matrix\Matrix.h">
       <Filter>Header Files\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer\Timer.h">
+      <Filter>Header Files\Timer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
