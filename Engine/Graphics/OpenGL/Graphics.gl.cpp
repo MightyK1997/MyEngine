@@ -605,7 +605,7 @@ namespace
 			EAE6320_ASSERT( false );
 			goto OnExit;
 		}
-		if ( !( result = eae6320::Graphics::cShader::s_manager.Load( "data/Shaders/Fragment/standard.shader",
+		if ( !( result = eae6320::Graphics::cShader::s_manager.Load( "data/Shaders/Fragment/animatedshader.shader",
 			s_fragmentShader, eae6320::Graphics::ShaderTypes::Fragment ) ) )
 		{
 			EAE6320_ASSERT( false );
