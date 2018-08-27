@@ -15,16 +15,16 @@
 // Constant Buffers
 //=================
 
-cbuffer g_constantBuffer_perFrame : register( b0 )
-{
-	float4x4 g_transform_worldToCamera;
-	float4x4 g_transform_cameraToProjected;
-
-	float g_elapsedSecondCount_systemTime;
-	float g_elapsedSecondCount_simulationTime;
-	// For float4 alignment
-	float2 g_padding;
-};
+//cbuffer g_constantBuffer_perFrame : register( b0 )
+//{
+//	float4x4 g_transform_worldToCamera;
+//	float4x4 g_transform_cameraToProjected;
+//
+//	float g_elapsedSecondCount_systemTime;
+//	float g_elapsedSecondCount_simulationTime;
+//	// For float4 alignment
+//	float2 g_padding;
+//};
 
 // Entry Point
 //============
@@ -71,16 +71,16 @@ void main(
 // Constant Buffers
 //=================
 
-layout( std140, binding = 0 ) uniform g_constantBuffer_perFrame
-{
-	mat4 g_transform_worldToCamera;
-	mat4 g_transform_cameraToProjected;
-
-	float g_elapsedSecondCount_systemTime;
-	float g_elapsedSecondCount_simulationTime;
-	// For vec4 alignment
-	vec2 g_padding;
-};
+//layout( std140, binding = 0 ) uniform g_constantBuffer_perFrame
+//{
+//	mat4 g_transform_worldToCamera;
+//	mat4 g_transform_cameraToProjected;
+//
+//	float g_elapsedSecondCount_systemTime;
+//	float g_elapsedSecondCount_simulationTime;
+//	// For vec4 alignment
+//	vec2 g_padding;
+//};
 
 // Input
 //======
