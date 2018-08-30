@@ -43,9 +43,6 @@
     <ProjectReference Include="..\..\Engine\Asserts\Asserts.vcxproj">
       <Project>{464a6551-fca9-4027-bd9e-2b26914782ab}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\Engine\Graphics\Graphics.vcxproj">
-      <Project>{fde9dfdd-6cf3-41ac-b2a1-45a49763a5e4}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\..\Engine\Math\Math.vcxproj">
       <Project>{999c3d5f-7f79-4bd7-ae21-92eeed0c5962}</Project>
     </ProjectReference>
@@ -164,7 +161,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>Graphics.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\ukoun\Desktop\GameEngineering2\temp\x86\Debug\output;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutputDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <CustomBuildStep>
       <Command>copy "$(TargetPath)" "$(GameInstallDir)$(TargetFileName)" /y</Command>
