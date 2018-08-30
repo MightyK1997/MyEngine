@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Direct3D">
+      <UniqueIdentifier>{1b9eda5f-1554-4b49-b136-6bf7b671c61a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGL">
+      <UniqueIdentifier>{7a2b2676-3315-470f-a91e-6f3df45db369}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows">
+      <UniqueIdentifier>{74a1e191-75e5-4aa1-92cf-c70f8bbd386f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Direct3D\cConstantBuffer.d3d.cpp">
+      <Filter>Direct3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct3D\cRenderState.d3d.cpp">
+      <Filter>Direct3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct3D\cShader.d3d.cpp">
+      <Filter>Direct3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct3D\Graphics.d3d.cpp">
+      <Filter>Direct3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct3D\sContext.d3d.cpp">
+      <Filter>Direct3D</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL\cConstantBuffer.gl.cpp">
+      <Filter>OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL\cRenderState.gl.cpp">
+      <Filter>OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL\cShader.gl.cpp">
+      <Filter>OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL\Graphics.gl.cpp">
+      <Filter>OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL\sContext.gl.cpp">
+      <Filter>OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="cConstantBuffer.cpp" />
+    <ClCompile Include="cRenderState.cpp" />
+    <ClCompile Include="cShader.cpp" />
+    <ClCompile Include="sContext.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Direct3D\Includes.h">
+      <Filter>Direct3D</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL\Includes.h">
+      <Filter>OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\ExternalLibraries.win.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="cConstantBuffer.h" />
+    <ClInclude Include="Configuration.h" />
+    <ClInclude Include="ConstantBufferFormats.h" />
+    <ClInclude Include="cRenderState.h" />
+    <ClInclude Include="cShader.h" />
+    <ClInclude Include="Graphics.h" />
+    <ClInclude Include="sContext.h" />
+    <ClInclude Include="VertexFormats.h" />
+  </ItemGroup>
+</Project>
