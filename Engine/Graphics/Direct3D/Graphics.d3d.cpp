@@ -229,7 +229,9 @@ void eae6320::Graphics::RenderFrame()
 		{
 			// As of this comment only a single triangle is drawn
 			// (you will have to update this code in future assignments!)
-			constexpr unsigned int triangleCount = 1;
+
+			//Changing the number of triangles to 2 to render a rectangle
+			constexpr unsigned int triangleCount = 2;
 			constexpr unsigned int vertexCountPerTriangle = 3;
 			constexpr auto vertexCountToRender = triangleCount * vertexCountPerTriangle;
 			// It's possible to start rendering primitives in the middle of the stream
@@ -507,7 +509,9 @@ namespace
 		}
 		// Vertex Buffer
 		{
-			constexpr unsigned int triangleCount = 1;
+
+			//Changing the triangle count to 2 to render a rectangle.
+			constexpr unsigned int triangleCount = 2;
 			constexpr unsigned int vertexCountPerTriangle = 3;
 			constexpr auto vertexCount = triangleCount * vertexCountPerTriangle;
 			eae6320::Graphics::VertexFormats::sMesh vertexData[vertexCount];
@@ -523,6 +527,18 @@ namespace
 				vertexData[2].x = 1.0f;
 				vertexData[2].y = 0.0f;
 				vertexData[2].z = 0.0f;
+
+				vertexData[3].x = 0.0f;
+				vertexData[3].y = 0.0f;
+				vertexData[3].z = 0.0f;
+
+				vertexData[4].x = 0.0f;
+				vertexData[4].y = 1.0f;
+				vertexData[4].z = 0.0f;
+
+				vertexData[5].x = 1.0f;
+				vertexData[5].y = 1.0f;
+				vertexData[5].z = 0.0f;
 			}
 			D3D11_BUFFER_DESC bufferDescription{};
 			{
