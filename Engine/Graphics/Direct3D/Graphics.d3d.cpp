@@ -539,43 +539,6 @@ namespace
 				vertexData[5].x = 1.0f;
 				vertexData[5].y = 1.0f;
 				vertexData[5].z = 0.0f;
-
-				//vertexData[0].x = -1.0f;
-				//vertexData[0].y = -1.0f;
-				//vertexData[0].z = 0.0f;
-
-				//vertexData[1].x = 0.0f;
-				//vertexData[1].y = -1.0f;
-				//vertexData[1].z = 0.0f;
-
-				//vertexData[2].x = 1.0f;
-				//vertexData[2].y = 0.0f;
-				//vertexData[2].z = 0.0f;
-
-				//vertexData[3].x = 0.0f;
-				//vertexData[3].y = -1.0f;
-				//vertexData[3].z = 0.0f;
-
-				//vertexData[4].x = 0.0f;
-				//vertexData[4].y = 0.0f;
-				//vertexData[4].z = 0.0f;
-
-				//vertexData[5].x = 1.0f;
-				//vertexData[5].y = 0.0f;
-				//vertexData[5].z = 0.0f;
-
-				//vertexData[6].x = 0.0f;
-				//vertexData[6].y = 0.0f;
-				//vertexData[6].z = 0.0f;
-
-				//vertexData[7].x = 0.5f;
-				//vertexData[7].y = 1.0f;
-				//vertexData[7].z = 0.0f;
-
-				//vertexData[8].x = 1.0f;
-				//vertexData[8].y = 0.0f;
-				//vertexData[8].z = 0.0f;
-
 			}
 			D3D11_BUFFER_DESC bufferDescription{};
 			{

@@ -46,6 +46,8 @@
     <ClCompile Include="cRenderState.cpp" />
     <ClCompile Include="cShader.cpp" />
     <ClCompile Include="sContext.cpp" />
+    <ClCompile Include="cMesh.cpp" />
+    <ClCompile Include="cEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Includes.h">
@@ -65,5 +67,7 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="sContext.h" />
     <ClInclude Include="VertexFormats.h" />
+    <ClInclude Include="cMesh.h" />
+    <ClInclude Include="cEffect.h" />
   </ItemGroup>
 </Project>
