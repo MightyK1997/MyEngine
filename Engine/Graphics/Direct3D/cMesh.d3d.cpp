@@ -50,7 +50,7 @@ namespace eae6320
 					}
 
 					const auto d3dResult = direct3dDevice->CreateInputLayout(layoutDescription, vertexElementCount,
-						vertexShaderDataFromFile.data, vertexShaderDataFromFile.size, &s_vertexInputLayout);
+						vertexShaderDataFromFile.data, vertexShaderDataFromFile.size, &m_vertexInputLayout);
 					if (FAILED(result))
 					{
 						result = eae6320::Results::Failure;
@@ -117,7 +117,7 @@ namespace eae6320
 					// (The other data members are ignored for non-texture buffers)
 				}
 
-				const auto d3dResult = direct3dDevice->CreateBuffer(&bufferDescription, &initialData, &s_vertexBuffer);
+				const auto d3dResult = direct3dDevice->CreateBuffer(&bufferDescription, &initialData, &m_vertexBuffer);
 				if (FAILED(d3dResult))
 				{
 					result = eae6320::Results::Failure;
@@ -137,21 +137,21 @@ namespace eae6320
 			{
 				// Bind a specific vertex buffer to the device as a data source
 				{
-					EAE6320_ASSERT(s_vertexBuffer);
+					EAE6320_ASSERT(m_vertexBuffer);
 					constexpr unsigned int startingSlot = 0;
 					constexpr unsigned int vertexBufferCount = 1;
 					// The "stride" defines how large a single vertex is in the stream of data
 					constexpr unsigned int bufferStride = sizeof(VertexFormats::sMesh);
 					// It's possible to start streaming data in the middle of a vertex buffer
 					constexpr unsigned int bufferOffset = 0;
-					direct3dImmediateContext->IASetVertexBuffers(startingSlot, vertexBufferCount, &s_vertexBuffer, &bufferStride, &bufferOffset);
+					direct3dImmediateContext->IASetVertexBuffers(startingSlot, vertexBufferCount, &m_vertexBuffer, &bufferStride, &bufferOffset);
 				}
 				// Specify what kind of data the vertex buffer holds
 				{
 					// Set the layout (which defines how to interpret a single vertex)
 					{
-						EAE6320_ASSERT(s_vertexInputLayout);
-						direct3dImmediateContext->IASetInputLayout(s_vertexInputLayout);
+						EAE6320_ASSERT(m_vertexInputLayout);
+						direct3dImmediateContext->IASetInputLayout(m_vertexInputLayout);
 					}
 					// Set the topology (which defines how to interpret multiple vertices as a single "primitive";
 					// the vertex buffer was defined as a triangle list
@@ -177,15 +177,15 @@ namespace eae6320
 		cResult cMesh::Shutdown()
 		{
 			auto result = Results::Success;
-			if (s_vertexBuffer)
+			if (m_vertexBuffer)
 			{
-				s_vertexBuffer->Release();
-				s_vertexBuffer = nullptr;
+				m_vertexBuffer->Release();
+				m_vertexBuffer = nullptr;
 			}
-			if (s_vertexInputLayout)
+			if (m_vertexInputLayout)
 			{
-				s_vertexInputLayout->Release();
-				s_vertexInputLayout = nullptr;
+				m_vertexInputLayout->Release();
+				m_vertexInputLayout = nullptr;
 			}
 			return result;
 		}

@@ -46,17 +46,13 @@ namespace
 
 	// Shading Data
 	//-------------
-	eae6320::Graphics::cEffect effect;
-	//eae6320::Graphics::cShader::Handle s_vertexShader;
-	//eae6320::Graphics::cShader::Handle s_fragmentShader;
-
-	//eae6320::Graphics::cRenderState s_renderState;
+	eae6320::Graphics::cEffect s_Effect;
 
 	// Geometry Data
 	//--------------
 
 	//Removing the variables and moved them to mesh files
-	eae6320::Graphics::cMesh mesh;
+	eae6320::Graphics::cMesh s_Mesh;
 }
 
 // Helper Function Declarations
@@ -162,30 +158,11 @@ void eae6320::Graphics::RenderFrame()
 
 	// Bind the shading data
 	{
-		effect.Bind();
-		//{
-		//	constexpr ID3D11ClassInstance* const* noInterfaces = nullptr;
-		//	constexpr unsigned int interfaceCount = 0;
-		//	// Vertex shader
-		//	{
-		//		EAE6320_ASSERT( s_vertexShader );
-		//		auto* const shader = cShader::s_manager.Get( s_vertexShader );
-		//		EAE6320_ASSERT( shader && shader->m_shaderObject.vertex );
-		//		direct3dImmediateContext->VSSetShader( shader->m_shaderObject.vertex, noInterfaces, interfaceCount );
-		//	}
-		//	// Fragment shader
-		//	{
-		//		EAE6320_ASSERT( s_fragmentShader );
-		//		auto* const shader = cShader::s_manager.Get( s_fragmentShader );
-		//		EAE6320_ASSERT( shader && shader->m_shaderObject.fragment );
-		//		direct3dImmediateContext->PSSetShader( shader->m_shaderObject.fragment, noInterfaces, interfaceCount );
-		//	}
-		//}
-		//s_renderState.Bind();
+		s_Effect.Bind();
 	}
 	// Draw the geometry
 	{
-		mesh.Draw();
+		s_Mesh.Draw();
 	}
 
 	// Everything has been drawn to the "back buffer", which is just an image in memory.
@@ -304,8 +281,8 @@ eae6320::cResult eae6320::Graphics::CleanUp()
 		s_depthStencilView->Release();
 		s_depthStencilView = nullptr;
 	}
-	mesh.Shutdown();
-	result = effect.Shutdown();
+	s_Mesh.Shutdown();
+	result = s_Effect.Shutdown();
 	/*if ( s_vertexShader )
 	{
 		const auto localResult = cShader::s_manager.Release( s_vertexShader );
@@ -389,13 +366,13 @@ namespace
 	eae6320::cResult InitializeGeometry()
 	{
 		
-		auto result = mesh.Initialize();
+		auto result = s_Mesh.Initialize();
 		return result;
 	}
 
 	eae6320::cResult InitializeShadingData()
 	{
-		auto result = effect.Initialize();
+		auto result = s_Effect.Initialize();
 		return result;
 		/*auto result = eae6320::Results::Success;
 

@@ -34,15 +34,15 @@ namespace eae6320
 		private:
 #ifdef EAE6320_PLATFORM_D3D
 			// A vertex buffer holds the data for each vertex
-			ID3D11Buffer* s_vertexBuffer = nullptr;
+			ID3D11Buffer* m_vertexBuffer = nullptr;
 			// D3D has an "input layout" object that associates the layout of the vertex format struct
 			// with the input from a vertex shader
-			ID3D11InputLayout* s_vertexInputLayout = nullptr;
+			ID3D11InputLayout* m_vertexInputLayout = nullptr;
 #elif EAE6320_PLATFORM_GL
 			// A vertex buffer holds the data for each vertex
-			GLuint s_vertexBufferId = 0;
+			GLuint m_vertexBufferId = 0;
 			// A vertex array encapsulates the vertex data as well as the vertex input layout
-			GLuint s_vertexArrayId = 0;
+			GLuint m_vertexArrayId = 0;
 #endif
 		};
 	}

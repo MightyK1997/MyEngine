@@ -9,13 +9,13 @@ namespace eae6320
 			auto result = eae6320::Results::Success;
 
 			if (!(result = eae6320::Graphics::cShader::s_manager.Load("data/Shaders/Vertex/standard.shader",
-				s_vertexShader, eae6320::Graphics::ShaderTypes::Vertex)))
+				m_vertexShader, eae6320::Graphics::ShaderTypes::Vertex)))
 			{
 				EAE6320_ASSERT(false);
 				goto OnExit;
 			}
 			if (!(result = eae6320::Graphics::cShader::s_manager.Load("data/Shaders/Fragment/animatedshader.shader",
-				s_fragmentShader, eae6320::Graphics::ShaderTypes::Fragment)))
+				m_fragmentShader, eae6320::Graphics::ShaderTypes::Fragment)))
 			{
 				EAE6320_ASSERT(false);
 				goto OnExit;
@@ -53,7 +53,7 @@ namespace eae6320
 			{
 				// Vertex
 				{
-					glAttachShader(s_programId, eae6320::Graphics::cShader::s_manager.Get(s_vertexShader)->m_shaderId);
+					glAttachShader(s_programId, eae6320::Graphics::cShader::s_manager.Get(m_vertexShader)->m_shaderId);
 					const auto errorCode = glGetError();
 					if (errorCode != GL_NO_ERROR)
 					{
@@ -66,7 +66,7 @@ namespace eae6320
 				}
 				// Fragment
 				{
-					glAttachShader(s_programId, eae6320::Graphics::cShader::s_manager.Get(s_fragmentShader)->m_shaderId);
+					glAttachShader(s_programId, eae6320::Graphics::cShader::s_manager.Get(m_fragmentShader)->m_shaderId);
 					const auto errorCode = glGetError();
 					if (errorCode != GL_NO_ERROR)
 					{
@@ -211,9 +211,9 @@ namespace eae6320
 				}
 				s_programId = 0;
 			}
-			if (s_vertexShader)
+			if (m_vertexShader)
 			{
-				const auto localResult = cShader::s_manager.Release(s_vertexShader);
+				const auto localResult = cShader::s_manager.Release(m_vertexShader);
 				if (!localResult)
 				{
 					EAE6320_ASSERT(false);
@@ -223,9 +223,9 @@ namespace eae6320
 					}
 				}
 			}
-			if (s_fragmentShader)
+			if (m_fragmentShader)
 			{
-				const auto localResult = cShader::s_manager.Release(s_fragmentShader);
+				const auto localResult = cShader::s_manager.Release(m_fragmentShader);
 				if (!localResult)
 				{
 					EAE6320_ASSERT(false);

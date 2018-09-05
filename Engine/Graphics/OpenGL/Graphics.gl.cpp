@@ -41,12 +41,12 @@ namespace
 	// Shading Data
 	//-------------
 
-	eae6320::Graphics::cEffect effect;
+	eae6320::Graphics::cEffect s_Effect;
 
 	// Geometry Data
 	//--------------
 
-	eae6320::Graphics::cMesh mesh;
+	eae6320::Graphics::cMesh s_Mesh;
 }
 
 // Helper Function Declarations
@@ -159,11 +159,11 @@ void eae6320::Graphics::RenderFrame()
 
 	// Bind the shading data
 	{
-		effect.Bind();
+		s_Effect.Bind();
 	}
 	// Draw the geometry
 	{
-		mesh.Draw();
+		s_Mesh.Draw();
 	}
 
 	// Everything has been drawn to the "back buffer", which is just an image in memory.
@@ -264,10 +264,10 @@ eae6320::cResult eae6320::Graphics::CleanUp()
 	auto result = Results::Success;
 
 	{
-		result = mesh.Shutdown();
+		result = s_Mesh.Shutdown();
 	}
 	{
-		result = effect.Shutdown();
+		result = s_Effect.Shutdown();
 	}
 
 	{
@@ -316,13 +316,13 @@ namespace
 {
 	eae6320::cResult InitializeGeometry()
 	{
-		auto result = mesh.Initialize();
+		auto result = s_Mesh.Initialize();
 		return result;
 	}
 
 	eae6320::cResult InitializeShadingData()
 	{
-		auto result = effect.Initialize();
+		auto result = s_Effect.Initialize();
 		return result;
 	}
 }

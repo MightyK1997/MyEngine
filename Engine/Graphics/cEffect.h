@@ -33,13 +33,13 @@ namespace eae6320
 			cResult Shutdown();
 		private:
 #ifdef EAE6320_PLATFORM_D3D
-			eae6320::Graphics::cShader::Handle s_vertexShader;
-			eae6320::Graphics::cShader::Handle s_fragmentShader;
+			eae6320::Graphics::cShader::Handle m_vertexShader;
+			eae6320::Graphics::cShader::Handle m_fragmentShader;
 
 			eae6320::Graphics::cRenderState s_renderState;
 #elif EAE6320_PLATFORM_GL
-			eae6320::Graphics::cShader::Handle s_vertexShader;
-			eae6320::Graphics::cShader::Handle s_fragmentShader;
+			eae6320::Graphics::cShader::Handle m_vertexShader;
+			eae6320::Graphics::cShader::Handle m_fragmentShader;
 			GLuint s_programId = 0;
 			eae6320::Graphics::cRenderState s_renderState;
 #endif

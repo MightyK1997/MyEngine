@@ -11,11 +11,11 @@ namespace eae6320
 			// Create a vertex array object and make it active
 			{
 				constexpr GLsizei arrayCount = 1;
-				glGenVertexArrays(arrayCount, &s_vertexArrayId);
+				glGenVertexArrays(arrayCount, &m_vertexArrayId);
 				const auto errorCode = glGetError();
 				if (errorCode == GL_NO_ERROR)
 				{
-					glBindVertexArray(s_vertexArrayId);
+					glBindVertexArray(m_vertexArrayId);
 					const auto errorCode = glGetError();
 					if (errorCode != GL_NO_ERROR)
 					{
@@ -38,11 +38,11 @@ namespace eae6320
 			// Create a vertex buffer object and make it active
 			{
 				constexpr GLsizei bufferCount = 1;
-				glGenBuffers(bufferCount, &s_vertexBufferId);
+				glGenBuffers(bufferCount, &m_vertexBufferId);
 				const auto errorCode = glGetError();
 				if (errorCode == GL_NO_ERROR)
 				{
-					glBindBuffer(GL_ARRAY_BUFFER, s_vertexBufferId);
+					glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferId);
 					const auto errorCode = glGetError();
 					if (errorCode != GL_NO_ERROR)
 					{
@@ -156,7 +156,7 @@ namespace eae6320
 		{
 			// Bind a specific vertex buffer to the device as a data source
 			{
-				glBindVertexArray(s_vertexArrayId);
+				glBindVertexArray(m_vertexArrayId);
 				EAE6320_ASSERT(glGetError() == GL_NO_ERROR);
 			}
 			// Render triangles from the currently-bound vertex buffer
@@ -179,7 +179,7 @@ namespace eae6320
 		cResult cMesh::Shutdown()
 		{
 			auto result = Results::Success;
-			if (s_vertexArrayId != 0)
+			if (m_vertexArrayId != 0)
 			{
 				// Make sure that the vertex array isn't bound
 				{
@@ -198,7 +198,7 @@ namespace eae6320
 					}
 				}
 				constexpr GLsizei arrayCount = 1;
-				glDeleteVertexArrays(arrayCount, &s_vertexArrayId);
+				glDeleteVertexArrays(arrayCount, &m_vertexArrayId);
 				const auto errorCode = glGetError();
 				if (errorCode != GL_NO_ERROR)
 				{
@@ -210,12 +210,12 @@ namespace eae6320
 					Logging::OutputError("OpenGL failed to delete the vertex array: %s",
 						reinterpret_cast<const char*>(gluErrorString(errorCode)));
 				}
-				s_vertexArrayId = 0;
+				m_vertexArrayId = 0;
 			}
-			if (s_vertexBufferId != 0)
+			if (m_vertexBufferId != 0)
 			{
 				constexpr GLsizei bufferCount = 1;
-				glDeleteBuffers(bufferCount, &s_vertexBufferId);
+				glDeleteBuffers(bufferCount, &m_vertexBufferId);
 				const auto errorCode = glGetError();
 				if (errorCode != GL_NO_ERROR)
 				{
@@ -227,7 +227,7 @@ namespace eae6320
 					Logging::OutputError("OpenGL failed to delete the vertex buffer: %s",
 						reinterpret_cast<const char*>(gluErrorString(errorCode)));
 				}
-				s_vertexBufferId = 0;
+				m_vertexBufferId = 0;
 			}
 			return result;
 		} 

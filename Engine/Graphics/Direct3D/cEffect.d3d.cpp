@@ -9,13 +9,13 @@ namespace eae6320
 			auto result = eae6320::Results::Success;
 
 			if (!(result = eae6320::Graphics::cShader::s_manager.Load("data/Shaders/Vertex/standard.shader",
-				s_vertexShader, eae6320::Graphics::ShaderTypes::Vertex)))
+				m_vertexShader, eae6320::Graphics::ShaderTypes::Vertex)))
 			{
 				EAE6320_ASSERT(false);
 				goto OnExit;
 			}
 			if (!(result = eae6320::Graphics::cShader::s_manager.Load("data/Shaders/Fragment/animatedshader.shader",
-				s_fragmentShader, eae6320::Graphics::ShaderTypes::Fragment)))
+				m_fragmentShader, eae6320::Graphics::ShaderTypes::Fragment)))
 			{
 				EAE6320_ASSERT(false);
 				goto OnExit;
@@ -41,15 +41,15 @@ namespace eae6320
 				constexpr unsigned int interfaceCount = 0;
 				// Vertex shader
 				{
-					EAE6320_ASSERT(s_vertexShader);
-					auto* const shader = cShader::s_manager.Get(s_vertexShader);
+					EAE6320_ASSERT(m_vertexShader);
+					auto* const shader = cShader::s_manager.Get(m_vertexShader);
 					EAE6320_ASSERT(shader && shader->m_shaderObject.vertex);
 					direct3dImmediateContext->VSSetShader(shader->m_shaderObject.vertex, noInterfaces, interfaceCount);
 				}
 				// Fragment shader
 				{
-					EAE6320_ASSERT(s_fragmentShader);
-					auto* const shader = cShader::s_manager.Get(s_fragmentShader);
+					EAE6320_ASSERT(m_fragmentShader);
+					auto* const shader = cShader::s_manager.Get(m_fragmentShader);
 					EAE6320_ASSERT(shader && shader->m_shaderObject.fragment);
 					direct3dImmediateContext->PSSetShader(shader->m_shaderObject.fragment, noInterfaces, interfaceCount);
 				}
@@ -59,9 +59,9 @@ namespace eae6320
 		cResult cEffect::Shutdown()
 		{
 			auto result = Results::Success;
-			if (s_vertexShader)
+			if (m_vertexShader)
 			{
-				const auto localResult = cShader::s_manager.Release(s_vertexShader);
+				const auto localResult = cShader::s_manager.Release(m_vertexShader);
 				if (!localResult)
 				{
 					EAE6320_ASSERT(false);
@@ -71,9 +71,9 @@ namespace eae6320
 					}
 				}
 			}
-			if (s_fragmentShader)
+			if (m_fragmentShader)
 			{
-				const auto localResult = cShader::s_manager.Release(s_fragmentShader);
+				const auto localResult = cShader::s_manager.Release(m_fragmentShader);
 				if (!localResult)
 				{
 					EAE6320_ASSERT(false);
