@@ -46,11 +46,11 @@ namespace
 
 	// Shading Data
 	//-------------
+	eae6320::Graphics::cEffect effect;
+	//eae6320::Graphics::cShader::Handle s_vertexShader;
+	//eae6320::Graphics::cShader::Handle s_fragmentShader;
 
-	eae6320::Graphics::cShader::Handle s_vertexShader;
-	eae6320::Graphics::cShader::Handle s_fragmentShader;
-
-	eae6320::Graphics::cRenderState s_renderState;
+	//eae6320::Graphics::cRenderState s_renderState;
 
 	// Geometry Data
 	//--------------
@@ -162,25 +162,26 @@ void eae6320::Graphics::RenderFrame()
 
 	// Bind the shading data
 	{
-		{
-			constexpr ID3D11ClassInstance* const* noInterfaces = nullptr;
-			constexpr unsigned int interfaceCount = 0;
-			// Vertex shader
-			{
-				EAE6320_ASSERT( s_vertexShader );
-				auto* const shader = cShader::s_manager.Get( s_vertexShader );
-				EAE6320_ASSERT( shader && shader->m_shaderObject.vertex );
-				direct3dImmediateContext->VSSetShader( shader->m_shaderObject.vertex, noInterfaces, interfaceCount );
-			}
-			// Fragment shader
-			{
-				EAE6320_ASSERT( s_fragmentShader );
-				auto* const shader = cShader::s_manager.Get( s_fragmentShader );
-				EAE6320_ASSERT( shader && shader->m_shaderObject.fragment );
-				direct3dImmediateContext->PSSetShader( shader->m_shaderObject.fragment, noInterfaces, interfaceCount );
-			}
-		}
-		s_renderState.Bind();
+		effect.Bind();
+		//{
+		//	constexpr ID3D11ClassInstance* const* noInterfaces = nullptr;
+		//	constexpr unsigned int interfaceCount = 0;
+		//	// Vertex shader
+		//	{
+		//		EAE6320_ASSERT( s_vertexShader );
+		//		auto* const shader = cShader::s_manager.Get( s_vertexShader );
+		//		EAE6320_ASSERT( shader && shader->m_shaderObject.vertex );
+		//		direct3dImmediateContext->VSSetShader( shader->m_shaderObject.vertex, noInterfaces, interfaceCount );
+		//	}
+		//	// Fragment shader
+		//	{
+		//		EAE6320_ASSERT( s_fragmentShader );
+		//		auto* const shader = cShader::s_manager.Get( s_fragmentShader );
+		//		EAE6320_ASSERT( shader && shader->m_shaderObject.fragment );
+		//		direct3dImmediateContext->PSSetShader( shader->m_shaderObject.fragment, noInterfaces, interfaceCount );
+		//	}
+		//}
+		//s_renderState.Bind();
 	}
 	// Draw the geometry
 	{
@@ -304,7 +305,8 @@ eae6320::cResult eae6320::Graphics::CleanUp()
 		s_depthStencilView = nullptr;
 	}
 	mesh.Shutdown();
-	if ( s_vertexShader )
+	result = effect.Shutdown();
+	/*if ( s_vertexShader )
 	{
 		const auto localResult = cShader::s_manager.Release( s_vertexShader );
 		if ( !localResult )
@@ -338,7 +340,7 @@ eae6320::cResult eae6320::Graphics::CleanUp()
 				result = localResult;
 			}
 		}
-	}
+	}*/
 
 	{
 		const auto localResult = s_constantBuffer_perFrame.CleanUp();
@@ -393,7 +395,9 @@ namespace
 
 	eae6320::cResult InitializeShadingData()
 	{
-		auto result = eae6320::Results::Success;
+		auto result = effect.Initialize();
+		return result;
+		/*auto result = eae6320::Results::Success;
 
 		if ( !( result = eae6320::Graphics::cShader::s_manager.Load( "data/Shaders/Vertex/standard.shader",
 			s_vertexShader, eae6320::Graphics::ShaderTypes::Vertex ) ) )
@@ -418,7 +422,7 @@ namespace
 
 	OnExit:
 
-		return result;
+		return result;*/
 	}
 
 	eae6320::cResult InitializeViews( const unsigned int i_resolutionWidth, const unsigned int i_resolutionHeight )

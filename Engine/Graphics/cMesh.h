@@ -30,11 +30,7 @@ namespace eae6320
 		public:
 			cResult Initialize();
 			void Draw();
-#ifdef EAE6320_PLATFORM_D3D
-			void Shutdown();
-#elif EAE6320_PLATFORM_GL
 			cResult Shutdown();
-#endif
 		private:
 #ifdef EAE6320_PLATFORM_D3D
 			// A vertex buffer holds the data for each vertex
