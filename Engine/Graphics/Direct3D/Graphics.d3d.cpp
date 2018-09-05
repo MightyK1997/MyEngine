@@ -1,25 +1,8 @@
 // Includes
 //=========
 
-//#include "../Graphics.h"
-
-
 #include "../cMesh.h"
-//#include "Includes.h"
-//#include "../cConstantBuffer.h"
-//#include "../ConstantBufferFormats.h"
-//#include "../cRenderState.h"
-//#include "../cShader.h"
-//#include "../sContext.h"
-//#include "../VertexFormats.h"
-//
-//#include <Engine/Asserts/Asserts.h>
-//#include <Engine/Concurrency/cEvent.h>
-//#include <Engine/Logging/Logging.h>
-//#include <Engine/Platform/Platform.h>
-//#include <Engine/Time/Time.h>
-//#include <Engine/UserOutput/UserOutput.h>
-//#include <utility>
+#include "../cEffect.h"
 
 // Static Data Initialization
 //===========================
