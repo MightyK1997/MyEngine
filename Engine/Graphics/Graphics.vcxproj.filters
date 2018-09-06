@@ -58,6 +58,7 @@
     <ClCompile Include="OpenGL\cEffect.gl.cpp">
       <Filter>OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="cEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Includes.h">

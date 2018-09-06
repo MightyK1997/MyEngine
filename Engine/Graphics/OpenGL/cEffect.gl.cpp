@@ -4,30 +4,9 @@ namespace eae6320
 {
 	namespace Graphics
 	{
-		cResult cEffect::Initialize()
+		cResult cEffect::InitGL()
 		{
 			auto result = eae6320::Results::Success;
-
-			if (!(result = eae6320::Graphics::cShader::s_manager.Load("data/Shaders/Vertex/standard.shader",
-				m_vertexShader, eae6320::Graphics::ShaderTypes::Vertex)))
-			{
-				EAE6320_ASSERT(false);
-				goto OnExit;
-			}
-			if (!(result = eae6320::Graphics::cShader::s_manager.Load("data/Shaders/Fragment/animatedshader.shader",
-				m_fragmentShader, eae6320::Graphics::ShaderTypes::Fragment)))
-			{
-				EAE6320_ASSERT(false);
-				goto OnExit;
-			}
-			{
-				constexpr uint8_t defaultRenderState = 0;
-				if (!(result = s_renderState.Initialize(defaultRenderState)))
-				{
-					EAE6320_ASSERT(false);
-					goto OnExit;
-				}
-			}
 
 			// Create a program
 			{
@@ -192,7 +171,7 @@ namespace eae6320
 			s_renderState.Bind();
 		}
 
-		cResult cEffect::Shutdown()
+		cResult cEffect::ShutdownGL()
 		{
 			auto result = Results::Success;
 			if (s_programId != 0)
@@ -210,41 +189,6 @@ namespace eae6320
 						reinterpret_cast<const char*>(gluErrorString(errorCode)));
 				}
 				s_programId = 0;
-			}
-			if (m_vertexShader)
-			{
-				const auto localResult = cShader::s_manager.Release(m_vertexShader);
-				if (!localResult)
-				{
-					EAE6320_ASSERT(false);
-					if (result)
-					{
-						result = localResult;
-					}
-				}
-			}
-			if (m_fragmentShader)
-			{
-				const auto localResult = cShader::s_manager.Release(m_fragmentShader);
-				if (!localResult)
-				{
-					EAE6320_ASSERT(false);
-					if (result)
-					{
-						result = localResult;
-					}
-				}
-			}
-			{
-				const auto localResult = s_renderState.CleanUp();
-				if (!localResult)
-				{
-					EAE6320_ASSERT(false);
-					if (result)
-					{
-						result = localResult;
-					}
-				}
 			}
 			return result;
 		}
