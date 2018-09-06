@@ -64,35 +64,7 @@ namespace eae6320
 			}
 			// Assign the data to the buffer
 			{
-				constexpr unsigned int triangleCount = 2;
-				constexpr unsigned int vertexCountPerTriangle = 3;
-				const auto vertexCount = triangleCount * vertexCountPerTriangle;
-				eae6320::Graphics::VertexFormats::sMesh vertexData[vertexCount];
-				{
-					vertexData[0].x = 0.0f;
-					vertexData[0].y = 0.0f;
-					vertexData[0].z = 0.0f;
 
-					vertexData[1].x = 1.0f;
-					vertexData[1].y = 0.0f;
-					vertexData[1].z = 0.0f;
-
-					vertexData[2].x = 1.0f;
-					vertexData[2].y = 1.0f;
-					vertexData[2].z = 0.0f;
-
-					vertexData[3].x = 0.0f;
-					vertexData[3].y = 0.0f;
-					vertexData[3].z = 0.0f;
-
-					vertexData[4].x = 1.0f;
-					vertexData[4].y = 1.0f;
-					vertexData[4].z = 0.0f;
-
-					vertexData[5].x = 0.0f;
-					vertexData[5].y = 1.0f;
-					vertexData[5].z = 0.0f;
-				}
 				const auto bufferSize = vertexCount * sizeof(*vertexData);
 				EAE6320_ASSERT(bufferSize < (uint64_t(1u) << (sizeof(GLsizeiptr) * 8)));
 				glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(bufferSize), reinterpret_cast<GLvoid*>(vertexData),
@@ -169,10 +141,9 @@ namespace eae6320
 				constexpr GLint indexOfFirstVertexToRender = 0;
 				// As of this comment we are only drawing a single triangle
 				// (you will have to update this code in future assignments!)
-				constexpr unsigned int triangleCount = 2;
-				constexpr unsigned int vertexCountPerTriangle = 3;
-				constexpr auto vertexCountToRender = triangleCount * vertexCountPerTriangle;
-				glDrawArrays(mode, indexOfFirstVertexToRender, vertexCountToRender);
+
+				//Changing vertexCountToRender to vertexCount
+				glDrawArrays(mode, indexOfFirstVertexToRender, vertexCount);
 				EAE6320_ASSERT(glGetError() == GL_NO_ERROR);
 			}
 		}

@@ -28,6 +28,84 @@ namespace eae6320
 		class cMesh
 		{
 		public:
+			cMesh()
+			{
+				{
+#if EAE6320_PLATFORM_GL
+					vertexData[0].x = 0.0f;
+					vertexData[0].y = 0.0f;
+					vertexData[0].z = 0.0f;
+
+					vertexData[1].x = 1.0f;
+					vertexData[1].y = 0.0f;
+					vertexData[1].z = 0.0f;
+
+					vertexData[2].x = 1.0f;
+					vertexData[2].y = 1.0f;
+					vertexData[2].z = 0.0f;
+
+					vertexData[3].x = 0.0f;
+					vertexData[3].y = 0.0f;
+					vertexData[3].z = 0.0f;
+
+					vertexData[4].x = 1.0f;
+					vertexData[4].y = 1.0f;
+					vertexData[4].z = 0.0f;
+
+					vertexData[5].x = 0.0f;
+					vertexData[5].y = 1.0f;
+					vertexData[5].z = 0.0f;
+
+					vertexData[6].x = 0.0f;
+					vertexData[6].y = 0.0f;
+					vertexData[6].z = 0.0f;
+
+					vertexData[7].x = 0.5f;
+					vertexData[7].y = -1.0f;
+					vertexData[7].z = 0.0f;
+
+					vertexData[8].x = 1.0f;
+					vertexData[8].y = 0.0f;
+					vertexData[8].z = 0.0f;
+#elif EAE6320_PLATFORM_D3D
+					vertexData[0].x = 0.0f;
+					vertexData[0].y = 0.0f;
+					vertexData[0].z = 0.0f;
+
+					vertexData[1].x = 1.0f;
+					vertexData[1].y = 1.0f;
+					vertexData[1].z = 0.0f;
+
+					vertexData[2].x = 1.0f;
+					vertexData[2].y = 0.0f;
+					vertexData[2].z = 0.0f;
+
+					vertexData[3].x = 0.0f;
+					vertexData[3].y = 0.0f;
+					vertexData[3].z = 0.0f;
+
+					vertexData[4].x = 0.0f;
+					vertexData[4].y = 1.0f;
+					vertexData[4].z = 0.0f;
+
+					vertexData[5].x = 1.0f;
+					vertexData[5].y = 1.0f;
+					vertexData[5].z = 0.0f;
+
+					vertexData[6].x = 0.0f;
+					vertexData[6].y = 0.0f;
+					vertexData[6].z = 0.0f;
+
+					vertexData[7].x = 1.0f;
+					vertexData[7].y = 0.0f;
+					vertexData[7].z = 0.0f;
+
+					vertexData[8].x = 0.5f;
+					vertexData[8].y = -1.0f;
+					vertexData[8].z = 0.0f;
+#endif
+				}
+			}
 			cResult Initialize();
 			void Draw();
 			cResult Shutdown();
@@ -44,6 +122,10 @@ namespace eae6320
 			// A vertex array encapsulates the vertex data as well as the vertex input layout
 			GLuint m_vertexArrayId = 0;
 #endif
+			static const unsigned int triangleCount = 3;
+			static const unsigned int vertexCountPerTriangle = 3;
+			static const auto vertexCount = triangleCount * vertexCountPerTriangle;
+			eae6320::Graphics::VertexFormats::sMesh vertexData[vertexCount];
 		};
 	}
 }
