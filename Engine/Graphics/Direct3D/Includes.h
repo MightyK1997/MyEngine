@@ -10,5 +10,6 @@
 
 #include <d3d11.h>
 #include <dxgi.h>
+#include <d3d12.h>
 
 #endif	// EAE6320_ENGINE_GRAPHICS_D3D_INCLUDES_H
