@@ -1,25 +1,24 @@
 #pragma once
 #include "Graphics.h"
-//#include <Engine/Windows/Includes.h>
-
 #ifdef EAE6320_PLATFORM_D3D 
 #include <d3d11.h>
 #include <dxgi.h>
 #endif
-
-#include "cConstantBuffer.h"                            
+#include "cConstantBuffer.h"
 #include "ConstantBufferFormats.h"
 #include "cRenderState.h"
-#include "sContext.h"
+#include "cShader.h"
 #include "VertexFormats.h"
 
 #include <Engine/Asserts/Asserts.h>
-#include <Engine/Concurrency/cEvent.h>
 #include <Engine/Logging/Logging.h>
 #include <Engine/Platform/Platform.h>
 #include <Engine/Time/Time.h>
 #include <Engine/UserOutput/UserOutput.h>
 #include <utility>
+
+
+#include "sContext.h"
 
 namespace eae6320
 {
@@ -204,6 +203,7 @@ namespace eae6320
 				}
 			}
 			cResult Initialize();
+			cResult Initialize(eae6320::Graphics::VertexFormats::sMesh* i_InputVertexMesh);
 			void Draw();
 			cResult Shutdown();
 		private:
@@ -223,6 +223,7 @@ namespace eae6320
 			static const unsigned int vertexCountPerTriangle = 3;
 			static const auto vertexCount = triangleCount * vertexCountPerTriangle;
 			eae6320::Graphics::VertexFormats::sMesh vertexData[vertexCount];
+
 		};
 	}
 }

@@ -1,20 +1,17 @@
 #pragma once
 #include "Graphics.h"
-
 #ifdef EAE6320_PLATFORM_D3D 
 #include <d3d11.h>
 #include <dxgi.h>
 #endif
-
+#include "sContext.h"
 #include "cConstantBuffer.h"
 #include "ConstantBufferFormats.h"
 #include "cRenderState.h"
 #include "cShader.h"
-#include "sContext.h"
 #include "VertexFormats.h"
 
 #include <Engine/Asserts/Asserts.h>
-#include <Engine/Concurrency/cEvent.h>
 #include <Engine/Logging/Logging.h>
 #include <Engine/Platform/Platform.h>
 #include <Engine/Time/Time.h>

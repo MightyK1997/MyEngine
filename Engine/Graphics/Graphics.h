@@ -4,15 +4,11 @@
 
 #ifndef EAE6320_GRAPHICS_H
 #define EAE6320_GRAPHICS_H
-
-// Includes
-//=========
-
 #include "Configuration.h"
-
 #include <cstdint>
+#include "cConstantBuffer.h"
+#include "ConstantBufferFormats.h"
 #include <Engine/Results/Results.h>
-
 #if defined( EAE6320_PLATFORM_WINDOWS )
 	#include <Engine/Windows/Includes.h>
 #endif
@@ -24,6 +20,8 @@ namespace eae6320
 {
 	namespace Graphics
 	{
+		class cMesh;
+		class cEffect;
 		// Submission
 		//-----------
 
@@ -67,8 +65,33 @@ namespace eae6320
 #endif
 		};
 
+
 		cResult Initialize( const sInitializationParameters& i_initializationParameters );
 		cResult CleanUp();
+
+
+		//Mesh and Effect Data
+		extern eae6320::Graphics::cEffect* s_Effect;
+		extern eae6320::Graphics::cMesh* s_Mesh;
+
+		//Constant Buffer Info
+		extern eae6320::Graphics::cConstantBuffer s_constantBuffer_perFrame;
+
+		//Data Required To Render
+		struct sDataRequiredToRenderAFrame
+		{
+			eae6320::Graphics::ConstantBufferFormats::sPerFrame constantData_perFrame;
+		};
+		extern sDataRequiredToRenderAFrame* m_dataRequiredToRenderAFrame;
+
+		//Back Buffer Struct
+		struct sBackBuffer
+		{
+			float r;
+			float g;
+			float b;
+			float alpha;
+		};
 	}
 }
 
