@@ -8,6 +8,13 @@ namespace eae6320
 		cResult cMesh::Initialize()
 		{
 			auto result = eae6320::Results::Success;
+			static const unsigned int vertexCountPerTriangle = 3;
+			static const unsigned int vertexCount = triangleCount * vertexCountPerTriangle;
+			eae6320::Graphics::VertexFormats::sMesh vertexData[vertexCount];
+			for (size_t i = 0; i < vertexCount; i++)
+			{
+
+			}
 			// Create a vertex array object and make it active
 			{
 				constexpr GLsizei arrayCount = 1;
