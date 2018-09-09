@@ -4,6 +4,7 @@
 #include "cEffect.h"
 //#include <Engine/Asserts/Asserts.h>
 eae6320::Graphics::cMesh* eae6320::Graphics::s_Mesh;
+eae6320::Graphics::cMesh* eae6320::Graphics::s_Mesh2;
 eae6320::Graphics::cEffect* eae6320::Graphics::s_Effect;
 eae6320::Graphics::sDataRequiredToRenderAFrame* eae6320::Graphics::m_dataRequiredToRenderAFrame;
 eae6320::Graphics::cConstantBuffer eae6320::Graphics::s_constantBuffer_perFrame(eae6320::Graphics::ConstantBufferTypes::PerFrame);
@@ -108,7 +109,7 @@ eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& 
 	auto result = Results::Success;
 	s_helper = new eae6320::Graphics::GraphicsHelper();
 	s_Effect = new eae6320::Graphics::cEffect();
-	eae6320::Graphics::VertexFormats::sMesh vertexData[9];
+	eae6320::Graphics::VertexFormats::sMesh vertexData[5];
 	{
 		vertexData[0].x = 0.0f;
 		vertexData[0].y = 0.5f;
@@ -127,24 +128,8 @@ eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& 
 		vertexData[3].z = 0.0f;
 
 		vertexData[4].x = 1.0f;
-		vertexData[4].y = 0.5f;
+		vertexData[4].y = -0.5f;
 		vertexData[4].z = 0.0f;
-
-		vertexData[5].x = 0.0f;
-		vertexData[5].y = 0.5f;
-		vertexData[5].z = 0.0f;
-
-		vertexData[6].x = 0.0f;
-		vertexData[6].y = -0.5f;
-		vertexData[6].z = 0.0f;
-
-		vertexData[7].x = 1.0f;
-		vertexData[7].y = -0.5f;
-		vertexData[7].z = 0.0f;
-
-		vertexData[8].x = 1.0f;
-		vertexData[8].y = 0.5f;
-		vertexData[8].z = 0.0f;
 	}
 	eae6320::Graphics::cMesh::sIndex indexData[9];
 	{
@@ -152,13 +137,64 @@ eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& 
 		indexData[1].indexValue = 1;
 		indexData[2].indexValue = 2;
 		indexData[3].indexValue = 3;
-		indexData[4].indexValue = 4;
-		indexData[5].indexValue = 5;
-		indexData[6].indexValue = 6;
-		indexData[7].indexValue = 7;
-		indexData[8].indexValue = 8;
+		indexData[4].indexValue = 1;
+		indexData[5].indexValue = 0;
+		indexData[6].indexValue = 3;
+		indexData[7].indexValue = 4;
+		indexData[8].indexValue = 1;
 	}
-	s_Mesh = new eae6320::Graphics::cMesh(vertexData, indexData);
+	eae6320::Graphics::VertexFormats::sMesh vertexData2[10];
+	{
+		vertexData2[0].x = -0.5f;
+		vertexData2[0].y = -0.5f;
+		vertexData2[0].z = 0.0f;
+
+		vertexData2[1].x = -0.25f;
+		vertexData2[1].y = -0.5f;
+		vertexData2[1].z = 0.0f;
+
+		vertexData2[2].x = -0.25f;
+		vertexData2[2].y = 0.25f;
+		vertexData2[2].z = 0.0f;
+
+		vertexData2[3].x = -0.5f;
+		vertexData2[3].y = 0.25f;
+		vertexData2[3].z = 0.0f;
+
+		vertexData2[4].x = -0.5f;
+		vertexData2[4].y = 0.75f;
+		vertexData2[4].z = 0.0f;
+
+		vertexData2[5].x = -0.75f;
+		vertexData2[5].y = 0.75f;
+		vertexData2[5].z = 0.0f;
+
+		vertexData2[6].x = 0.0f;
+		vertexData2[6].y = 0.75f;
+		vertexData2[6].z = 0.0f;
+
+		vertexData2[7].x = -0.25f;
+		vertexData2[7].y = 0.75f;
+		vertexData2[7].z = 0.0f;
+
+	}
+	eae6320::Graphics::cMesh::sIndex indexData2[12];
+	{
+		indexData2[0].indexValue = 0;
+		indexData2[1].indexValue = 1;
+		indexData2[2].indexValue = 2;
+		indexData2[3].indexValue = 0;
+		indexData2[4].indexValue = 2;
+		indexData2[5].indexValue = 3;
+		indexData2[6].indexValue = 3;
+		indexData2[7].indexValue = 4;
+		indexData2[8].indexValue = 5;
+		indexData2[9].indexValue = 2;
+		indexData2[10].indexValue = 6;
+		indexData2[11].indexValue = 7;
+	}
+	s_Mesh = new eae6320::Graphics::cMesh(vertexData, indexData, 9);
+	s_Mesh2 = new eae6320::Graphics::cMesh(vertexData2, indexData2, 12);
 	m_dataRequiredToRenderAFrame = reinterpret_cast<eae6320::Graphics::sDataRequiredToRenderAFrame*>(s_dataRequiredToRenderAFrame);
 	//result = s_helper->Initialize(i_initializationParameters);
 

@@ -74,6 +74,8 @@ namespace eae6320
 		extern eae6320::Graphics::cEffect* s_Effect;
 		extern eae6320::Graphics::cMesh* s_Mesh;
 
+		extern eae6320::Graphics::cMesh* s_Mesh2;
+
 		//Constant Buffer Info
 		extern eae6320::Graphics::cConstantBuffer s_constantBuffer_perFrame;
 

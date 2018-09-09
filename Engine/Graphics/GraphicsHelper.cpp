@@ -43,6 +43,7 @@ namespace eae6320
 			}
 #endif
 			s_Mesh->Shutdown();
+			s_Mesh2->Shutdown();
 			result = s_Effect->Shutdown();
 
 			{
@@ -81,6 +82,7 @@ namespace eae6320
 				}
 			}
 			delete s_Mesh;
+			delete s_Mesh2;
 			delete s_Effect;
 			return result;
 		}
@@ -164,6 +166,7 @@ namespace eae6320
 			// Draw the geometry
 			{
 				s_Mesh->Draw();
+				s_Mesh2->Draw();
 			}
 
 			// Everything has been drawn to the "back buffer", which is just an image in memory.
@@ -365,6 +368,7 @@ namespace
 	eae6320::cResult InitializeGeometry()
 	{
 		auto result = eae6320::Graphics::s_Mesh->Initialize();
+		result = eae6320::Graphics::s_Mesh2->Initialize();
 		return result;
 	}
 
