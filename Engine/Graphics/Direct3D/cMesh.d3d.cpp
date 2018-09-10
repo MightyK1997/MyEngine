@@ -9,8 +9,8 @@ namespace eae6320
 		cResult cMesh::Initialize()
 		{
 			auto result = eae6320::Results::Success;
-			static const unsigned int vertexCountPerTriangle = 3;
-			static const unsigned int vertexCount = triangleCount * vertexCountPerTriangle;
+			unsigned int vertexCountPerTriangle = 3;
+			unsigned int vertexCount = triangleCount * vertexCountPerTriangle;
 			for (unsigned int i = 0; i < vertexCount; i++)
 			{
 				if ((i % 3) == 0 )
@@ -108,7 +108,7 @@ namespace eae6320
 			{
 				D3D11_BUFFER_DESC indexDescription{};
 				{
-					const auto bufferSize = vertexCount * sizeof(*indexData);
+					const auto bufferSize = vertexCount * sizeof(indexData);
 					EAE6320_ASSERT(bufferSize < (uint64_t(1u) << (sizeof(indexDescription.ByteWidth) * 8)));
 					indexDescription.ByteWidth = static_cast<unsigned int>(bufferSize);
 					indexDescription.Usage = D3D11_USAGE_IMMUTABLE;	// In our class the buffer will never change after it's been created
@@ -139,8 +139,8 @@ namespace eae6320
 		}
 		void cMesh::Draw()
 		{
-			static const unsigned int vertexCountPerTriangle = 3;
-			static const unsigned int vertexCount = triangleCount * vertexCountPerTriangle;
+			unsigned int vertexCountPerTriangle = 3;
+			unsigned int vertexCount = triangleCount * vertexCountPerTriangle;
 			auto* const direct3dImmediateContext = sContext::g_context.direct3dImmediateContext;
 			{
 				// Bind a specific vertex buffer to the device as a data source

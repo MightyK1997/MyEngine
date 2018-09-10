@@ -8,8 +8,8 @@ namespace eae6320
 		cResult cMesh::Initialize()
 		{
 			auto result = eae6320::Results::Success;
-			static const unsigned int vertexCountPerTriangle = 3;
-			static const unsigned int vertexCount = triangleCount * vertexCountPerTriangle;
+			unsigned int vertexCountPerTriangle = 3;
+			unsigned int vertexCount = triangleCount * vertexCountPerTriangle;
 			// Create a vertex array object and make it active
 			{
 				constexpr GLsizei arrayCount = 1;
@@ -171,8 +171,8 @@ namespace eae6320
 		}
 		void cMesh::Draw()
 		{
-			static const unsigned int vertexCountPerTriangle = 3;
-			static const unsigned int vertexCount = triangleCount * vertexCountPerTriangle;
+			unsigned int vertexCountPerTriangle = 3;
+			unsigned int vertexCount = triangleCount * vertexCountPerTriangle;
 			// Bind a specific vertex buffer to the device as a data source
 			{
 				glBindVertexArray(m_vertexArrayId);

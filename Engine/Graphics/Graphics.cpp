@@ -199,14 +199,13 @@ eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& 
 		indexData2[6].indexValue = 3;
 		indexData2[7].indexValue = 4;
 		indexData2[8].indexValue = 5;
-		indexData2[9].indexValue = 2;
-		indexData2[10].indexValue = 6;
-		indexData2[11].indexValue = 7;
+		indexData2[9].indexValue = 7;
+		indexData2[10].indexValue = 2;
+		indexData2[11].indexValue = 6;
 	}
-	s_Mesh = new eae6320::Graphics::cMesh(vertexData, indexData, 9);
-	s_Mesh2 = new eae6320::Graphics::cMesh(vertexData2, indexData2, 12);
+	s_Mesh = new eae6320::Graphics::cMesh(vertexData, indexData, 3);
+	s_Mesh2 = new eae6320::Graphics::cMesh(vertexData2, indexData2, 4);
 	m_dataRequiredToRenderAFrame = reinterpret_cast<eae6320::Graphics::sDataRequiredToRenderAFrame*>(s_dataRequiredToRenderAFrame);
-	//result = s_helper->Initialize(i_initializationParameters);
 
 	// Initialize the platform-specific context
 	if (!(result = sContext::g_context.Initialize(i_initializationParameters)))
