@@ -1,7 +1,10 @@
+
+#include <cmath>
 #include "Graphics.h"
 #include "GraphicsHelper.h"
 #include "cMesh.h"
 #include "cEffect.h"
+
 //#include <Engine/Asserts/Asserts.h>
 eae6320::Graphics::cMesh* eae6320::Graphics::s_Mesh;
 eae6320::Graphics::cMesh* eae6320::Graphics::s_Mesh2;
@@ -74,7 +77,7 @@ void eae6320::Graphics::RenderFrame()
 {
 	// Wait for the application loop to submit data to be rendered
 	{
-		sBackBuffer m_BackBuffer{ 1,1,1,1 };
+		sBackBuffer m_BackBuffer{ abs(sin(s_dataBeingSubmittedByApplicationThread->constantData_perFrame.g_elapsedSecondCount_simulationTime)), abs(cos(s_dataBeingSubmittedByApplicationThread->constantData_perFrame.g_elapsedSecondCount_simulationTime)) , abs(cos(s_dataBeingSubmittedByApplicationThread->constantData_perFrame.g_elapsedSecondCount_simulationTime)) , 1};
 		const auto result = Concurrency::WaitForEvent(s_whenAllDataHasBeenSubmittedFromApplicationThread);
 		if (result)
 		{
