@@ -9,6 +9,7 @@
 eae6320::Graphics::cMesh* eae6320::Graphics::s_Mesh;
 eae6320::Graphics::cMesh* eae6320::Graphics::s_Mesh2;
 eae6320::Graphics::cEffect* eae6320::Graphics::s_Effect;
+eae6320::Graphics::cEffect* eae6320::Graphics::s_Effect2;
 eae6320::Graphics::sDataRequiredToRenderAFrame* eae6320::Graphics::m_dataRequiredToRenderAFrame;
 eae6320::Graphics::cConstantBuffer eae6320::Graphics::s_constantBuffer_perFrame(eae6320::Graphics::ConstantBufferTypes::PerFrame);
 namespace
@@ -111,7 +112,13 @@ eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& 
 {
 	auto result = Results::Success;
 	s_helper = new eae6320::Graphics::GraphicsHelper();
-	s_Effect = new eae6320::Graphics::cEffect();
+	std::string m_vertShader1Location = "data/Shaders/Vertex/standard.shader";
+	std::string m_fragShader1Location = "data/Shaders/Fragment/animatedshader.shader";
+	std::string m_vertShader2Location = "data/Shaders/Vertex/standard.shader";
+	std::string m_fragShader2Location = "data/Shaders/Fragment/standard.shader";
+	s_Effect = new eae6320::Graphics::cEffect(m_vertShader1Location, m_fragShader1Location);
+	s_Effect2 = new eae6320::Graphics::cEffect(m_vertShader2Location, m_fragShader2Location);
+
 	eae6320::Graphics::VertexFormats::sMesh vertexData[5];
 	{
 		vertexData[0].x = 0.0f;

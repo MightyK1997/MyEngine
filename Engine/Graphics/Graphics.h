@@ -72,6 +72,7 @@ namespace eae6320
 
 		//Mesh and Effect Data
 		extern eae6320::Graphics::cEffect* s_Effect;
+		extern eae6320::Graphics::cEffect* s_Effect2;
 		extern eae6320::Graphics::cMesh* s_Mesh;
 
 		extern eae6320::Graphics::cMesh* s_Mesh2;

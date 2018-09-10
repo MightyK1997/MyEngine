@@ -45,6 +45,7 @@ namespace eae6320
 			s_Mesh->Shutdown();
 			s_Mesh2->Shutdown();
 			result = s_Effect->Shutdown();
+			result = s_Effect2->Shutdown();
 
 			{
 				const auto localResult = s_constantBuffer_perFrame.CleanUp();
@@ -84,6 +85,7 @@ namespace eae6320
 			delete s_Mesh;
 			delete s_Mesh2;
 			delete s_Effect;
+			delete s_Effect2;
 			return result;
 		}
 		void GraphicsHelper::RenderFrame()
@@ -166,6 +168,7 @@ namespace eae6320
 			// Draw the geometry
 			{
 				s_Mesh->Draw();
+				s_Effect2->Bind();
 				s_Mesh2->Draw();
 			}
 
@@ -375,6 +378,7 @@ namespace
 	eae6320::cResult InitializeShadingData()
 	{
 		auto result = eae6320::Graphics::s_Effect->Initialize();
+		result = eae6320::Graphics::s_Effect2->Initialize();
 		return result;
 	}
 }

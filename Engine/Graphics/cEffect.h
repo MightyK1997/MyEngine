@@ -25,6 +25,7 @@ namespace eae6320
 		class cEffect
 		{
 		public:
+			cEffect(std::string i_vertexShaderLocation, std::string i_fragmentShaderLocation):m_vertexShaderLocation(i_vertexShaderLocation), m_fragmentShaderLocation(i_fragmentShaderLocation){}
 			cResult Initialize();
 			void Bind();
 			cResult Shutdown();
@@ -41,6 +42,8 @@ namespace eae6320
 			cResult InitGL();
 			cResult ShutdownGL();
 #endif
+			std::string m_vertexShaderLocation;
+			std::string m_fragmentShaderLocation;
 		};
 	}
 }
