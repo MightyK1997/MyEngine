@@ -1,20 +1,17 @@
 #pragma once
 #include "Graphics.h"
-
 #ifdef EAE6320_PLATFORM_D3D 
 #include <d3d11.h>
 #include <dxgi.h>
 #endif
-
+#include "sContext.h"
 #include "cConstantBuffer.h"
 #include "ConstantBufferFormats.h"
 #include "cRenderState.h"
 #include "cShader.h"
-#include "sContext.h"
 #include "VertexFormats.h"
 
 #include <Engine/Asserts/Asserts.h>
-#include <Engine/Concurrency/cEvent.h>
 #include <Engine/Logging/Logging.h>
 #include <Engine/Platform/Platform.h>
 #include <Engine/Time/Time.h>
@@ -28,7 +25,16 @@ namespace eae6320
 		class cEffect
 		{
 		public:
+			cEffect(){}
 			cResult Initialize();
+			cResult Initialize(std::string i_vertexShaderLocation, std::string i_fragmentShaderLocation)
+			{
+				auto result = Results::Success;
+				m_vertexShaderLocation = i_vertexShaderLocation;
+				m_fragmentShaderLocation = i_fragmentShaderLocation;
+				result = Initialize();
+				return result;
+			}
 			void Bind();
 			cResult Shutdown();
 		private:
@@ -44,6 +50,8 @@ namespace eae6320
 			cResult InitGL();
 			cResult ShutdownGL();
 #endif
+			std::string m_vertexShaderLocation;
+			std::string m_fragmentShaderLocation;
 		};
 	}
 }

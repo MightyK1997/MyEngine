@@ -9,6 +9,15 @@ namespace eae6320
 		cResult cMesh::Initialize()
 		{
 			auto result = eae6320::Results::Success;
+			unsigned int vertexCountPerTriangle = 3;
+			unsigned int vertexCount = triangleCount * vertexCountPerTriangle;
+			for (unsigned int i = 0; i < vertexCount; i++)
+			{
+				if ((i % 3) == 0 )
+				{
+					std::swap(indexData[i + 1], indexData[i + 2]);
+				}
+			}
 
 			auto* const direct3dDevice = eae6320::Graphics::sContext::g_context.direct3dDevice;
 			EAE6320_ASSERT(direct3dDevice);
@@ -95,6 +104,34 @@ namespace eae6320
 					goto OnExit;
 				}
 			}
+			// Index Buffer
+			{
+				D3D11_BUFFER_DESC indexDescription{};
+				{
+					const auto bufferSize = vertexCount * sizeof(indexData);
+					EAE6320_ASSERT(bufferSize < (uint64_t(1u) << (sizeof(indexDescription.ByteWidth) * 8)));
+					indexDescription.ByteWidth = static_cast<unsigned int>(bufferSize);
+					indexDescription.Usage = D3D11_USAGE_IMMUTABLE;	// In our class the buffer will never change after it's been created
+					indexDescription.BindFlags = D3D11_BIND_INDEX_BUFFER;
+					indexDescription.CPUAccessFlags = 0;	// No CPU access is necessary
+					indexDescription.MiscFlags = 0;
+					indexDescription.StructureByteStride = 0;	// Not used
+				}
+				D3D11_SUBRESOURCE_DATA indexInitialData{};
+				{
+					indexInitialData.pSysMem = indexData;
+					// (The other data members are ignored for non-texture buffers)
+				}
+
+				const auto d3dResult = direct3dDevice->CreateBuffer(&indexDescription, &indexInitialData, &m_indexBuffer);
+				if (FAILED(d3dResult))
+				{
+					result = eae6320::Results::Failure;
+					EAE6320_ASSERTF(false, "Geometry vertex buffer creation failed (HRESULT %#010x)", d3dResult);
+					eae6320::Logging::OutputError("Direct3D failed to create a geometry vertex buffer (HRESULT %#010x)", d3dResult);
+					goto OnExit;
+				}
+			}
 
 		OnExit:
 
@@ -102,6 +139,8 @@ namespace eae6320
 		}
 		void cMesh::Draw()
 		{
+			unsigned int vertexCountPerTriangle = 3;
+			unsigned int vertexCount = triangleCount * vertexCountPerTriangle;
 			auto* const direct3dImmediateContext = sContext::g_context.direct3dImmediateContext;
 			{
 				// Bind a specific vertex buffer to the device as a data source
@@ -127,15 +166,31 @@ namespace eae6320
 					// (meaning that every primitive is a triangle and will be defined by three vertices)
 					direct3dImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 				}
+				// Bind a specific Index buffer to the device as a data source
+				{
+					EAE6320_ASSERT(m_indexBuffer);
+					constexpr DXGI_FORMAT indexFormat = DXGI_FORMAT_R16_UINT;
+					// The indices start at the beginning of the buffer
+					constexpr unsigned int offset = 0;
+					direct3dImmediateContext->IASetIndexBuffer(m_indexBuffer, indexFormat, offset);
+				}
 				// Render triangles from the currently-bound vertex buffer
 				{
 					// As of this comment only a single triangle is drawn
 					// (you will have to update this code in future assignments!)
 					// It's possible to start rendering primitives in the middle of the stream
-					constexpr unsigned int indexOfFirstVertexToRender = 0;
+					constexpr unsigned int indexOfFirstIndexToUse = 0;
+					constexpr unsigned int offsetToAddToEachIndex = 0;
+					for (unsigned int i = 0; i < vertexCount; i++)
+					{
+						direct3dImmediateContext->DrawIndexed(static_cast<unsigned int>((indexData + i)->indexValue), indexOfFirstIndexToUse, offsetToAddToEachIndex);
+					}
 
-					//Changing vertexCountToRender to vertexCount
-					direct3dImmediateContext->Draw(vertexCount, indexOfFirstVertexToRender);
+
+					//constexpr unsigned int indexOfFirstVertexToRender = 0;
+
+					////Changing vertexCountToRender to vertexCount
+					//direct3dImmediateContext->Draw(vertexCount, indexOfFirstVertexToRender);
 				}
 			}
 
@@ -147,6 +202,11 @@ namespace eae6320
 			{
 				m_vertexBuffer->Release();
 				m_vertexBuffer = nullptr;
+			}
+			if (m_indexBuffer)
+			{
+				m_indexBuffer->Release();
+				m_indexBuffer = nullptr;
 			}
 			if (m_vertexInputLayout)
 			{
