@@ -213,23 +213,7 @@ namespace eae6320
 				}
 			}
 #endif
-			// Initialize the shading data
-			{
-				if (!(result = InitializeShadingData()))
-				{
-					EAE6320_ASSERT(false);
-					goto OnExit;
-				}
-			}
-			// Initialize the geometry
-			{
-				if (!(result = InitializeGeometry()))
-				{
-					EAE6320_ASSERT(false);
-					goto OnExit;
-				}
-			}
-
+			goto OnExit;
 		OnExit:
 
 			return result;
@@ -368,17 +352,17 @@ namespace eae6320
 }
 namespace
 {
-	eae6320::cResult InitializeGeometry()
-	{
-		auto result = eae6320::Graphics::s_Mesh->Initialize();
-		result = eae6320::Graphics::s_Mesh2->Initialize();
-		return result;
-	}
+	//eae6320::cResult InitializeGeometry()
+	//{
+	//	auto result = eae6320::Graphics::s_Mesh->Initialize();
+	//	result = eae6320::Graphics::s_Mesh2->Initialize();
+	//	return result;
+	//}
 
-	eae6320::cResult InitializeShadingData()
-	{
-		auto result = eae6320::Graphics::s_Effect->Initialize();
-		result = eae6320::Graphics::s_Effect2->Initialize();
-		return result;
-	}
+	//eae6320::cResult InitializeShadingData()
+	//{
+	//	auto result = eae6320::Graphics::s_Effect->Initialize();
+	//	result = eae6320::Graphics::s_Effect2->Initialize();
+	//	return result;
+	//}
 }

@@ -31,14 +31,17 @@ namespace eae6320
 			{
 				uint16_t indexValue;
 			};
-			cMesh(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, sIndex* i_inputIndex, unsigned int i_triangleCount)
+			cMesh(){}
+			cResult Initialize();
+			cResult Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, sIndex* i_inputIndex, unsigned int i_triangleCount)
 			{
+				auto result = Results::Success;
 				indexData = i_inputIndex;
 				triangleCount = i_triangleCount;
 				vertexData = i_inputMesh;
+				result = Initialize();
+				return result;
 			}
-			cResult Initialize();
-			cResult Initialize(eae6320::Graphics::VertexFormats::sMesh* i_InputVertexMesh);
 			void Draw();
 			cResult Shutdown();
 		private:
