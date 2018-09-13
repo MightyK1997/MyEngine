@@ -17,7 +17,7 @@ namespace eae6320
 			cResult Initialize(const sInitializationParameters& i_initializationParameters);
 			void RenderFrame();
 			cResult CleanUp();
-			void SetBackBuffer(sBackBuffer i_backBuffer) { m_BackBuffer = i_backBuffer; }
+			void SetBackBuffer(sColor i_backBuffer) { m_BackBuffer = i_backBuffer; }
 #ifdef EAE6320_PLATFORM_D3D
 			cResult InitializeViews(const unsigned int i_resolutionWidth, const unsigned int i_resolutionHeight);
 			void SetRenderTargetView(ID3D11RenderTargetView* i_inputRenderTargetView) { m_renderTargetView = i_inputRenderTargetView; }
@@ -32,7 +32,7 @@ namespace eae6320
 			// A depth/stencil view allows a texture to have depth rendered to it
 			ID3D11DepthStencilView* m_depthStencilView = nullptr;
 #endif
-			sBackBuffer m_BackBuffer;
+			sColor m_BackBuffer;
 		};
 	}
 }

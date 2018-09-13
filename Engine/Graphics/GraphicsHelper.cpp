@@ -17,11 +17,6 @@ namespace
 #endif
 }
 
-namespace
-{
-	eae6320::cResult InitializeGeometry();
-	eae6320::cResult InitializeShadingData();
-}
 namespace eae6320
 {
 	namespace Graphics
@@ -349,20 +344,4 @@ namespace eae6320
 		return result;
 	}
 #endif
-}
-namespace
-{
-	//eae6320::cResult InitializeGeometry()
-	//{
-	//	auto result = eae6320::Graphics::s_Mesh->Initialize();
-	//	result = eae6320::Graphics::s_Mesh2->Initialize();
-	//	return result;
-	//}
-
-	//eae6320::cResult InitializeShadingData()
-	//{
-	//	auto result = eae6320::Graphics::s_Effect->Initialize();
-	//	result = eae6320::Graphics::s_Effect2->Initialize();
-	//	return result;
-	//}
 }
