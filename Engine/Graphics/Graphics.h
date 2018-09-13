@@ -87,7 +87,7 @@ namespace eae6320
 		};
 		extern sDataRequiredToRenderAFrame* m_dataRequiredToRenderAFrame;
 
-		//Back Buffer Struct
+		//Color Struct
 		struct sColor
 		{
 			float r;
