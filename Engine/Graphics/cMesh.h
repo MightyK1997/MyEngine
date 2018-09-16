@@ -43,7 +43,6 @@ namespace eae6320
 				result = o_Mesh->Initialize(i_inputMesh, i_inputIndex, i_triangleCount);
 				return result;
 			}
-		private:
 			cMesh() {}
 			~cMesh()
 			{
@@ -60,6 +59,8 @@ namespace eae6320
 				return result;
 			}
 			cResult Shutdown();
+		private:
+
 #ifdef EAE6320_PLATFORM_D3D
 			// A vertex buffer holds the data for each vertex
 			ID3D11Buffer* m_vertexBuffer = nullptr;
