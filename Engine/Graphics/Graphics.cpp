@@ -163,7 +163,7 @@ eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& 
 		indexData[7].indexValue = 4;
 		indexData[8].indexValue = 1;
 	}
-	eae6320::Graphics::VertexFormats::sMesh vertexData2[8];
+	eae6320::Graphics::VertexFormats::sMesh vertexData2[10];
 	{
 		vertexData2[0].x = -0.5f;
 		vertexData2[0].y = -0.5f;

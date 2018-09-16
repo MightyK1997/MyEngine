@@ -37,8 +37,6 @@ namespace eae6320
 				s_depthStencilView = nullptr;
 			}
 #endif
-			//s_Mesh->Shutdown();
-			//s_Mesh2->Shutdown();
 			s_Mesh->DecrementReferenceCount();
 			s_Mesh = nullptr;
 			s_Mesh2->DecrementReferenceCount();
@@ -83,7 +81,6 @@ namespace eae6320
 					}
 				}
 			}
-
 			//delete s_Mesh;
 			//delete s_Mesh2;
 			//delete s_Effect;
@@ -104,7 +101,7 @@ namespace eae6320
 			{
 				EAE6320_ASSERT(m_renderTargetView);
 				// Black is usually used
-				const float clearColor[4] = { m_backBufferColor.r, m_backBufferColor.g, m_backBufferColor.b, m_backBufferColor.alpha };
+				/*constexpr*/ float clearColor[4] = { m_backBufferColor.r, m_backBufferColor.g, m_backBufferColor.b, m_backBufferColor.alpha };
 				direct3dImmediateContext->ClearRenderTargetView(m_renderTargetView, clearColor);
 			}
 #elif EAE6320_PLATFORM_GL
