@@ -118,16 +118,16 @@ eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& 
 {
 	auto result = Results::Success;
 	s_helper = new eae6320::Graphics::GraphicsHelper();
-	s_Mesh = new eae6320::Graphics::cMesh();
-	s_Mesh2 = new eae6320::Graphics::cMesh();
-	s_Effect = new eae6320::Graphics::cEffect();
-	s_Effect2 = new eae6320::Graphics::cEffect();
+	//s_Mesh = new eae6320::Graphics::cMesh();
+	//s_Mesh2 = new eae6320::Graphics::cMesh();
+	//s_Effect = new eae6320::Graphics::cEffect();
+	//s_Effect2 = new eae6320::Graphics::cEffect();
 	std::string m_vertShader1Location = "data/Shaders/Vertex/standard.shader";
 	std::string m_fragShader1Location = "data/Shaders/Fragment/animatedshader.shader";
 	std::string m_vertShader2Location = "data/Shaders/Vertex/standard.shader";
 	std::string m_fragShader2Location = "data/Shaders/Fragment/standard.shader";
-	size_t sizeOfMesh = sizeof(eae6320::Graphics::cMesh);
-	size_t sizeOfEffect = sizeof(eae6320::Graphics::cEffect);
+	//size_t sizeOfMesh = sizeof(eae6320::Graphics::cMesh);
+	//size_t sizeOfEffect = sizeof(eae6320::Graphics::cEffect);
 
 	eae6320::Graphics::VertexFormats::sMesh vertexData[5];
 	{
@@ -262,11 +262,30 @@ eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& 
 	}
 	// Initialize the views, Shading  data and Geometry
 	result = s_helper->Initialize(i_initializationParameters);
-	s_Effect->Initialize(m_vertShader1Location, m_fragShader1Location);
-	s_Effect2->Initialize(m_vertShader2Location, m_fragShader2Location);
-	s_Mesh->Initialize(vertexData, indexData, 3);
-	s_Mesh2->Initialize(vertexData2, indexData2, 4);
-	
+	//s_Effect->Initialize(m_vertShader1Location, m_fragShader1Location);
+	//s_Effect2->Initialize(m_vertShader2Location, m_fragShader2Location);
+	//s_Mesh->Initialize(vertexData, indexData, 3);
+	//s_Mesh2->Initialize(vertexData2, indexData2, 4);
+	if (!(eae6320::Graphics::cEffect::CreateEffect(m_vertShader1Location, m_fragShader1Location, s_Effect)))
+	{
+		EAE6320_ASSERT(false);
+		goto OnExit;
+	}
+	if (!(eae6320::Graphics::cEffect::CreateEffect(m_vertShader2Location, m_fragShader2Location, s_Effect2)))
+	{
+		EAE6320_ASSERT(false);
+		goto OnExit;
+	}
+	if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData, indexData, 3, s_Mesh)))
+	{
+		EAE6320_ASSERT(false);
+		goto OnExit;
+	}
+	if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData2, indexData2, 4, s_Mesh2)))
+	{
+		EAE6320_ASSERT(false);
+		goto OnExit;
+	}
 
 OnExit:
 

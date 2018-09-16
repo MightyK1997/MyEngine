@@ -37,10 +37,14 @@ namespace eae6320
 				s_depthStencilView = nullptr;
 			}
 #endif
-			s_Mesh->Shutdown();
-			s_Mesh2->Shutdown();
-			result = s_Effect->Shutdown();
-			result = s_Effect2->Shutdown();
+			s_Mesh->DecrementReferenceCount();
+			s_Mesh = nullptr;
+			s_Mesh2->DecrementReferenceCount();
+			s_Mesh2 = nullptr;
+			s_Effect->DecrementReferenceCount();
+			s_Effect = nullptr;
+			s_Effect2->DecrementReferenceCount();
+			s_Effect2 = nullptr;
 
 			{
 				const auto localResult = s_constantBuffer_perFrame.CleanUp();
@@ -77,10 +81,10 @@ namespace eae6320
 					}
 				}
 			}
-			delete s_Mesh;
-			delete s_Mesh2;
-			delete s_Effect;
-			delete s_Effect2;
+			//delete s_Mesh;
+			//delete s_Mesh2;
+			//delete s_Effect;
+			//delete s_Effect2;
 			return result;
 		}
 		void GraphicsHelper::RenderFrame()

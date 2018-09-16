@@ -16,6 +16,7 @@
 #include <Engine/Platform/Platform.h>
 #include <Engine/Time/Time.h>
 #include <Engine/UserOutput/UserOutput.h>
+#include <Engine/Assets/ReferenceCountedAssets.h>
 #include <utility>
 
 namespace eae6320
@@ -25,7 +26,23 @@ namespace eae6320
 		class cEffect
 		{
 		public:
-			cEffect(){}
+			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()
+			EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cEffect)
+			EAE6320_ASSETS_DECLAREREFERENCECOUNT()
+			void Bind();
+			static cResult CreateEffect(std::string i_vertexShaderLocation, std::string i_fragmentShaderLocation, cEffect*& o_Effect)
+			{
+				cResult result = Results::Success;
+				o_Effect = new cEffect();
+				result = o_Effect->Initialize(i_vertexShaderLocation, i_fragmentShaderLocation);
+				return result;
+			}
+		private:
+			cEffect() {}
+			~cEffect() 
+			{
+				Shutdown();
+			}
 			cResult Initialize();
 			cResult Initialize(std::string i_vertexShaderLocation, std::string i_fragmentShaderLocation)
 			{
@@ -35,9 +52,7 @@ namespace eae6320
 				result = Initialize();
 				return result;
 			}
-			void Bind();
 			cResult Shutdown();
-		private:
 #ifdef EAE6320_PLATFORM_D3D
 			eae6320::Graphics::cShader::Handle m_vertexShader;
 			eae6320::Graphics::cShader::Handle m_fragmentShader;

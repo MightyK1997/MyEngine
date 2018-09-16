@@ -15,6 +15,7 @@
 #include <Engine/Platform/Platform.h>
 #include <Engine/Time/Time.h>
 #include <Engine/UserOutput/UserOutput.h>
+#include <Engine/Assets/ReferenceCountedAssets.h>
 #include <utility>
 
 
@@ -27,11 +28,27 @@ namespace eae6320
 		class cMesh
 		{
 		public:
+			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()
+			EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cMesh)
+			EAE6320_ASSETS_DECLAREREFERENCECOUNT()
 			struct sIndex
 			{
 				uint16_t indexValue;
 			};
-			cMesh(){}
+			void Draw();
+			static cResult CreateMesh(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, sIndex* i_inputIndex, unsigned int i_triangleCount, cMesh*& o_Mesh)
+			{
+				cResult result = Results::Success;
+				o_Mesh = new cMesh();
+				result = o_Mesh->Initialize(i_inputMesh, i_inputIndex, i_triangleCount);
+				return result;
+			}
+		private:
+			cMesh() {}
+			~cMesh()
+			{
+				Shutdown();
+			}
 			cResult Initialize();
 			cResult Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, sIndex* i_inputIndex, unsigned int i_triangleCount)
 			{
@@ -42,9 +59,7 @@ namespace eae6320
 				result = Initialize();
 				return result;
 			}
-			void Draw();
 			cResult Shutdown();
-		private:
 #ifdef EAE6320_PLATFORM_D3D
 			// A vertex buffer holds the data for each vertex
 			ID3D11Buffer* m_vertexBuffer = nullptr;
