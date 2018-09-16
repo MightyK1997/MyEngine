@@ -86,6 +86,7 @@ namespace eae6320
 		void GraphicsHelper::RenderFrame()
 		{
 			auto* s_dataBeingRenderedByRenderThread = &eae6320::Graphics::m_dataRequiredToRenderAFrame[1];
+			auto m_backBufferColor = s_dataBeingRenderedByRenderThread->backBufferValue_perFrame;
 #ifdef EAE6320_PLATFORM_D3D
 			auto* const direct3dImmediateContext = sContext::g_context.direct3dImmediateContext;
 			EAE6320_ASSERT(direct3dImmediateContext);
@@ -96,14 +97,14 @@ namespace eae6320
 			{
 				EAE6320_ASSERT(m_renderTargetView);
 				// Black is usually used
-				/*constexpr*/ float clearColor[4] = { m_BackBuffer.r, m_BackBuffer.g, m_BackBuffer.b, m_BackBuffer.alpha };
+				/*constexpr*/ float clearColor[4] = { m_backBufferColor.r, m_backBufferColor.g, m_backBufferColor.b, m_backBufferColor.alpha };
 				direct3dImmediateContext->ClearRenderTargetView(m_renderTargetView, clearColor);
 			}
 #elif EAE6320_PLATFORM_GL
 			{
 				// Black is usually used
 				{
-					glClearColor(m_BackBuffer.r, m_BackBuffer.g, m_BackBuffer.b, m_BackBuffer.alpha);
+					glClearColor(m_backBufferColor.r, m_backBufferColor.g, m_backBufferColor.b, m_backBufferColor.alpha);
 					EAE6320_ASSERT(glGetError() == GL_NO_ERROR);
 				}
 				{

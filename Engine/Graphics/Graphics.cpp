@@ -17,6 +17,7 @@ namespace
 	struct sDataRequiredToRenderAFrame
 	{
 		eae6320::Graphics::ConstantBufferFormats::sPerFrame constantData_perFrame;
+		eae6320::Graphics::sColor backBufferValue_perFrame;
 	};
 	 //In our class there will be two copies of the data required to render a frame:
 		//* One of them will be getting populated by the data currently being submitted by the application loop thread
@@ -73,6 +74,11 @@ eae6320::cResult eae6320::Graphics::SignalThatAllDataForAFrameHasBeenSubmitted()
 
 // Render
 //-------
+void eae6320::Graphics::SetBackBufferValue(eae6320::Graphics::sColor i_BackBuffer)
+{
+	auto& ColorValue = s_dataBeingSubmittedByApplicationThread->backBufferValue_perFrame;
+	ColorValue = i_BackBuffer;
+}
 
 void eae6320::Graphics::RenderFrame()
 {

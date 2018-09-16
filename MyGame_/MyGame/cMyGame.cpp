@@ -2,7 +2,7 @@
 //=========
 
 #include "cMyGame.h"
-
+#include <Engine/Graphics/Graphics.h>
 #include <Engine/Asserts/Asserts.h>
 #include <Engine/UserInput/UserInput.h>
 
@@ -22,6 +22,22 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 		EAE6320_ASSERT( result );
 	}
 	Application::cbApplication::SetSimulationRate(UserInput::IsKeyPressed(UserInput::KeyCodes::Shift) ? 0.5f : 1.0f);
+}
+
+void eae6320::cMyGame::UpdateSimulationBasedOnInput()
+{
+}
+
+void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_systemTime, const float i_elapsedSecondCount_sinceLastSimulationUpdate)
+{
+	//Submit The value of Backbuffer
+	eae6320::Graphics::SetBackBufferValue(eae6320::Graphics::sColor
+		{
+			abs(sin(i_elapsedSecondCount_systemTime)),
+			abs(cos(i_elapsedSecondCount_systemTime)) ,
+			abs(cos(i_elapsedSecondCount_systemTime)) ,
+			1
+		});
 }
 
 // Initialization / Clean Up

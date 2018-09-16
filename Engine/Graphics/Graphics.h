@@ -20,6 +20,14 @@ namespace eae6320
 {
 	namespace Graphics
 	{
+		//Color Struct
+		struct sColor
+		{
+			float r;
+			float g;
+			float b;
+			float alpha;
+		};
 		class cMesh;
 		class cEffect;
 		// Submission
@@ -84,17 +92,11 @@ namespace eae6320
 		struct sDataRequiredToRenderAFrame
 		{
 			eae6320::Graphics::ConstantBufferFormats::sPerFrame constantData_perFrame;
+			eae6320::Graphics::sColor backBufferValue_perFrame;
 		};
 		extern sDataRequiredToRenderAFrame* m_dataRequiredToRenderAFrame;
 
-		//Color Struct
-		struct sColor
-		{
-			float r;
-			float g;
-			float b;
-			float alpha;
-		};
+		void SetBackBufferValue(sColor i_BackBuffer);
 	}
 }
 
