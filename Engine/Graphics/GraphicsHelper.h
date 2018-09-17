@@ -15,7 +15,10 @@ namespace eae6320
 		{
 		public:
 			cResult Initialize(const sInitializationParameters& i_initializationParameters);
-			void RenderFrame();
+			void SetRenderTargetView(sColor i_BackBufferColor);
+			void ClearDepthStencilView();
+			void UpdateConstantBuffer(eae6320::Graphics::ConstantBufferFormats::sPerFrame);
+			void SwapChain();
 			cResult CleanUp();
 			void SetBackBuffer(sColor i_backBuffer) { m_BackBuffer = i_backBuffer; }
 #ifdef EAE6320_PLATFORM_D3D

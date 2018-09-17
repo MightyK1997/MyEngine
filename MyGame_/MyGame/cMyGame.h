@@ -7,7 +7,8 @@
 
 // Includes
 //=========
-
+#include <Engine/Graphics/cMesh.h>
+#include <Engine/Graphics/cEffect.h>
 #include <Engine/Application/cbApplication.h>
 #include <Engine/Results/Results.h>
 
@@ -79,7 +80,14 @@ namespace eae6320
 
 		virtual cResult Initialize() override;
 		virtual cResult CleanUp() override;
-
+	private:
+		eae6320::Graphics::cEffect* s_Effect;
+		eae6320::Graphics::cEffect* s_Effect2;
+		eae6320::Graphics::cMesh* s_Mesh;
+		eae6320::Graphics::cMesh* s_Mesh2;
+		eae6320::Graphics::sEffectsAndMeshesToRender m_EffectsAndMeshes[2];
+	public:
+		int m_NumberOfMeshesToRender;
 	};
 }
 

@@ -30,6 +30,11 @@ namespace eae6320
 		};
 		class cMesh;
 		class cEffect;
+		struct sEffectsAndMeshesToRender
+		{
+			cEffect* m_RenderEffect;
+			cMesh* m_RenderMesh;
+		};
 		// Submission
 		//-----------
 
@@ -84,19 +89,14 @@ namespace eae6320
 		extern eae6320::Graphics::cMesh* s_Mesh;
 
 		extern eae6320::Graphics::cMesh* s_Mesh2;
+		extern eae6320::Graphics::sEffectsAndMeshesToRender m_EffectsAndMeshes[2];
 
 		//Constant Buffer Info
 		extern eae6320::Graphics::cConstantBuffer s_constantBuffer_perFrame;
 
-		//Data Required To Render
-		struct sDataRequiredToRenderAFrame
-		{
-			eae6320::Graphics::ConstantBufferFormats::sPerFrame constantData_perFrame;
-			eae6320::Graphics::sColor backBufferValue_perFrame;
-		};
-		extern sDataRequiredToRenderAFrame* m_dataRequiredToRenderAFrame;
-
 		void SetBackBufferValue(sColor i_BackBuffer);
+
+		void SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender* i_EffectsAndMeshes, unsigned int i_NumberOfEffectsAndMeshesToRender);
 	}
 }
 
