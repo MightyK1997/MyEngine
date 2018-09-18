@@ -39,10 +39,10 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 			abs(cos(i_elapsedSecondCount_systemTime)) ,
 			1
 		});
-	s_Effect->IncrementReferenceCount();
-	s_Effect2->IncrementReferenceCount();
-	s_Mesh->IncrementReferenceCount();
-	s_Mesh2->IncrementReferenceCount();
+	//s_Effect->IncrementReferenceCount();
+	//s_Effect2->IncrementReferenceCount();
+	//s_Mesh->IncrementReferenceCount();
+	//s_Mesh2->IncrementReferenceCount();
 	m_EffectsAndMeshes[0].m_RenderEffect = s_Effect;
 	m_EffectsAndMeshes[0].m_RenderMesh = s_Mesh;
 	m_EffectsAndMeshes[1].m_RenderEffect = s_Effect2;
@@ -169,5 +169,9 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 
 eae6320::cResult eae6320::cMyGame::CleanUp()
 {
+	s_Effect->DecrementReferenceCount();
+	s_Effect2->DecrementReferenceCount();
+	s_Mesh->DecrementReferenceCount();
+	s_Mesh2->DecrementReferenceCount();
 	return Results::Success;
 }

@@ -88,6 +88,17 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender * 
 	meshesAndEffects = i_EffectsAndMeshes;
 	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = i_NumberOfEffectsAndMeshesToRender;
 	s_dataBeingSubmittedByApplicationThread->m_NumberOfMeshesToRender = i_NumberOfEffectsAndMeshesToRender;
+	auto m_allMeshes = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
+
+ 	if (m_allMeshes != nullptr)
+	{
+		for (int i = 0; i < s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender; i++)
+		{
+			(m_allMeshes + i)->m_RenderEffect->IncrementReferenceCount();
+			(m_allMeshes + i)->m_RenderMesh->IncrementReferenceCount();
+		}
+	}
+
 }
 
 void eae6320::Graphics::RenderFrame()
@@ -131,15 +142,22 @@ void eae6320::Graphics::RenderFrame()
 			for (int i = 0; i < s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender; i++)
 			{
 				(m_allMeshes + i)->m_RenderEffect->Bind();
-				(m_allMeshes + i)->m_RenderEffect->DecrementReferenceCount();
 				(m_allMeshes + i)->m_RenderMesh->Draw();
-				(m_allMeshes + i)->m_RenderMesh->DecrementReferenceCount();
 			}
 		}
 		s_helper->SwapChain();
 
 		//CleanUp
-		s_dataBeingRenderedByRenderThread->m_MeshesAndEffects = nullptr;
+		if (m_allMeshes != nullptr)
+		{
+			for (int i = 0; i < s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender; i++)
+			{
+				(m_allMeshes + i)->m_RenderEffect->DecrementReferenceCount();
+				(m_allMeshes + i)->m_RenderMesh->DecrementReferenceCount();
+			}
+
+		}
+		//s_dataBeingRenderedByRenderThread->m_MeshesAndEffects = nullptr;
 		s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender = 0;
 		s_dataBeingRenderedByRenderThread->m_NumberOfMeshesToRender = 0;
 	}
@@ -206,15 +224,20 @@ eae6320::cResult eae6320::Graphics::CleanUp()
 {
 	auto result = s_helper->CleanUp();
 
-	for (int i = 0; i < 2; i++)
+	auto m_allMeshes = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
+
+	if (m_allMeshes != nullptr)
 	{
-		auto m_Meshes = s_dataBeingRenderedByRenderThread->m_MeshesAndEffects;
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender; i++)
 		{
-			(m_Meshes + i)->m_RenderEffect->DecrementReferenceCount();
-			(m_Meshes + i)->m_RenderEffect->DecrementReferenceCount();
+			(m_allMeshes + i)->m_RenderEffect->DecrementReferenceCount();
+			(m_allMeshes + i)->m_RenderMesh->DecrementReferenceCount();
 		}
 	}
+
+	//CleanUp
+	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = 0;
+	s_dataBeingSubmittedByApplicationThread->m_NumberOfMeshesToRender = 0;
 	{
 		const auto localResult = s_constantBuffer_perFrame.CleanUp();
 		if (!localResult)
