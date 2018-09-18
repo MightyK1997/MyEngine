@@ -23,6 +23,10 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 	}
 	Application::cbApplication::SetSimulationRate(UserInput::IsKeyPressed(UserInput::KeyCodes::Shift) ? 0.5f : 1.0f);
 	m_NumberOfMeshesToRender = UserInput::IsKeyPressed(UserInput::KeyCodes::F1) ? 1 : 2;
+	if (UserInput::IsKeyPressed(UserInput::KeyCodes::F2))
+	{
+		std::swap(m_EffectsAndMeshes[0].m_RenderEffect, m_EffectsAndMeshes[1].m_RenderEffect);
+	}
 }
 
 void eae6320::cMyGame::UpdateSimulationBasedOnInput()
