@@ -5,8 +5,9 @@ namespace eae6320
 {
 	namespace Graphics
 	{
-		cResult cMesh::Initialize()
+		cResult cMesh::Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, sIndex* i_inputIndex, unsigned int i_triangleCount)
 		{
+			triangleCount = i_triangleCount;
 			auto result = eae6320::Results::Success;
 			unsigned int vertexCountPerTriangle = 3;
 			unsigned int vertexCount = triangleCount * vertexCountPerTriangle;
@@ -66,9 +67,9 @@ namespace eae6320
 			}
 			// Assign the data to the Vertex buffer
 			{
-				const auto bufferSize = vertexCount * sizeof(*vertexData);
+				const auto bufferSize = vertexCount * sizeof(*i_inputMesh);
 				EAE6320_ASSERT(bufferSize < (uint64_t(1u) << (sizeof(GLsizeiptr) * 8)));
-				glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(bufferSize), reinterpret_cast<GLvoid*>(vertexData),
+				glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(bufferSize), reinterpret_cast<GLvoid*>(i_inputMesh),
 					// In our class we won't ever read from the buffer
 					GL_STATIC_DRAW);
 				const auto errorCode = glGetError();
@@ -110,9 +111,9 @@ namespace eae6320
 			}
 			// Assign the data to the Index buffer
 			{
-				const auto bufferSize = vertexCount * sizeof(*indexData);
+				const auto bufferSize = vertexCount /** sizeof(*indexData)*/;
 				EAE6320_ASSERT(bufferSize < (uint64_t(1u) << (sizeof(GLsizeiptr) * 8)));
-				glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(bufferSize), reinterpret_cast<GLvoid*>(indexData),
+				glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(bufferSize), reinterpret_cast<GLvoid*>(i_inputIndex),
 					// In our class we won't ever read from the buffer
 					GL_STATIC_DRAW);
 				const auto errorCode = glGetError();
@@ -188,10 +189,7 @@ namespace eae6320
 
 				//Updating this for using index buffers
 				const GLvoid* const offset = 0;
-				for (unsigned int i = 0; i < vertexCount; i++)
-				{
-					glDrawElements(mode, static_cast<GLsizei>((indexData + i)->indexValue), GL_UNSIGNED_SHORT, offset);
-				}
+				glDrawElements(mode, static_cast<GLsizei>(vertexCount), GL_UNSIGNED_SHORT, offset);
 				//constexpr GLint indexOfFirstVertexToRender = 0;
 				//// As of this comment we are only drawing a single triangle
 				//// (you will have to update this code in future assignments!)

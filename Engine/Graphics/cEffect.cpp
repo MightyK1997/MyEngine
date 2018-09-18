@@ -4,17 +4,17 @@ namespace eae6320
 {
 	namespace Graphics
 	{
-		cResult cEffect::Initialize()
+		cResult cEffect::Initialize(std::string i_vertexShaderLocation, std::string i_fragmentShaderLocation)
 		{
 			auto result = eae6320::Results::Success;
 
-			if (!(result = eae6320::Graphics::cShader::s_manager.Load(m_vertexShaderLocation.c_str(),
+			if (!(result = eae6320::Graphics::cShader::s_manager.Load(i_vertexShaderLocation.c_str(),
 				m_vertexShader, eae6320::Graphics::ShaderTypes::Vertex)))
 			{
 				EAE6320_ASSERT(false);
 				goto OnExit;
 			}
-			if (!(result = eae6320::Graphics::cShader::s_manager.Load(m_fragmentShaderLocation.c_str(),
+			if (!(result = eae6320::Graphics::cShader::s_manager.Load(i_fragmentShaderLocation.c_str(),
 				m_fragmentShader, eae6320::Graphics::ShaderTypes::Fragment)))
 			{
 				EAE6320_ASSERT(false);

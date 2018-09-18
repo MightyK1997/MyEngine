@@ -49,16 +49,7 @@ namespace eae6320
 			{
 				Shutdown();
 			}
-			cResult Initialize();
-			cResult Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, sIndex* i_inputIndex, unsigned int i_triangleCount)
-			{
-				auto result = Results::Success;
-				indexData = i_inputIndex;
-				triangleCount = i_triangleCount;
-				vertexData = i_inputMesh;
-				result = Initialize();
-				return result;
-			}
+			cResult Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, sIndex* i_inputIndex, unsigned int i_triangleCount);
 			cResult Shutdown();
 #ifdef EAE6320_PLATFORM_D3D
 			// A vertex buffer holds the data for each vertex
@@ -79,8 +70,6 @@ namespace eae6320
 
 #endif
 			unsigned int triangleCount;
-			eae6320::Graphics::VertexFormats::sMesh* vertexData;
-			sIndex* indexData;
 		};
 	}
 }

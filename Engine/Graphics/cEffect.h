@@ -43,15 +43,7 @@ namespace eae6320
 			{
 				Shutdown();
 			}
-			cResult Initialize();
-			cResult Initialize(std::string i_vertexShaderLocation, std::string i_fragmentShaderLocation)
-			{
-				auto result = Results::Success;
-				m_vertexShaderLocation = i_vertexShaderLocation;
-				m_fragmentShaderLocation = i_fragmentShaderLocation;
-				result = Initialize();
-				return result;
-			}
+			cResult Initialize(std::string i_vertexShaderLocation, std::string i_fragmentShaderLocation);
 			cResult Shutdown();
 #ifdef EAE6320_PLATFORM_D3D
 			eae6320::Graphics::cShader::Handle m_vertexShader;
@@ -65,8 +57,6 @@ namespace eae6320
 			cResult InitGL();
 			cResult ShutdownGL();
 #endif
-			std::string m_vertexShaderLocation;
-			std::string m_fragmentShaderLocation;
 		};
 	}
 }
