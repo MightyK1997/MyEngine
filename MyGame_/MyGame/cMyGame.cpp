@@ -43,10 +43,6 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 			abs(cos(i_elapsedSecondCount_systemTime)) ,
 			1
 		});
-	//s_Effect->IncrementReferenceCount();
-	//s_Effect2->IncrementReferenceCount();
-	//s_Mesh->IncrementReferenceCount();
-	//s_Mesh2->IncrementReferenceCount();
 	m_EffectsAndMeshes[0].m_RenderEffect = s_Effect;
 	m_EffectsAndMeshes[0].m_RenderMesh = s_Mesh;
 	m_EffectsAndMeshes[1].m_RenderEffect = s_Effect2;

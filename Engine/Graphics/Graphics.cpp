@@ -18,8 +18,7 @@ namespace
 		eae6320::Graphics::ConstantBufferFormats::sPerFrame constantData_perFrame;
 		eae6320::Graphics::sColor backBufferValue_perFrame;
 		eae6320::Graphics::sEffectsAndMeshesToRender* m_MeshesAndEffects;
-		int m_NumberOfEffectsToRender;
-		int m_NumberOfMeshesToRender;
+		unsigned int m_NumberOfEffectsToRender;
 	};
 	//In our class there will be two copies of the data required to render a frame:
 	   //* One of them will be getting populated by the data currently being submitted by the application loop thread
@@ -84,15 +83,15 @@ void eae6320::Graphics::SetBackBufferValue(eae6320::Graphics::sColor i_BackBuffe
 
 void eae6320::Graphics::SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender * i_EffectsAndMeshes, unsigned int i_NumberOfEffectsAndMeshesToRender)
 {
+	EAE6320_ASSERT(i_NumberOfEffectsAndMeshesToRender < m_maxNumberofMeshesAndEffects);
 	auto& meshesAndEffects = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
 	meshesAndEffects = i_EffectsAndMeshes;
 	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = i_NumberOfEffectsAndMeshesToRender;
-	s_dataBeingSubmittedByApplicationThread->m_NumberOfMeshesToRender = i_NumberOfEffectsAndMeshesToRender;
 	auto m_allMeshes = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
 
  	if (m_allMeshes != nullptr)
 	{
-		for (int i = 0; i < s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender; i++)
+		for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
 		{
 			(m_allMeshes + i)->m_RenderEffect->IncrementReferenceCount();
 			(m_allMeshes + i)->m_RenderMesh->IncrementReferenceCount();
@@ -139,7 +138,7 @@ void eae6320::Graphics::RenderFrame()
 
 		if (m_allMeshes != nullptr)
 		{
-			for (int i = 0; i < s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender; i++)
+			for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
 			{
 				(m_allMeshes + i)->m_RenderEffect->Bind();
 				(m_allMeshes + i)->m_RenderMesh->Draw();
@@ -150,7 +149,7 @@ void eae6320::Graphics::RenderFrame()
 		//CleanUp
 		if (m_allMeshes != nullptr)
 		{
-			for (int i = 0; i < s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender; i++)
+			for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
 			{
 				(m_allMeshes + i)->m_RenderEffect->DecrementReferenceCount();
 				(m_allMeshes + i)->m_RenderMesh->DecrementReferenceCount();
@@ -159,7 +158,6 @@ void eae6320::Graphics::RenderFrame()
 		}
 		//s_dataBeingRenderedByRenderThread->m_MeshesAndEffects = nullptr;
 		s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender = 0;
-		s_dataBeingRenderedByRenderThread->m_NumberOfMeshesToRender = 0;
 	}
 }
 eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& i_initializationParameters)
@@ -228,7 +226,7 @@ eae6320::cResult eae6320::Graphics::CleanUp()
 
 	if (m_allMeshes != nullptr)
 	{
-		for (int i = 0; i < s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender; i++)
+		for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
 		{
 			(m_allMeshes + i)->m_RenderEffect->DecrementReferenceCount();
 			(m_allMeshes + i)->m_RenderMesh->DecrementReferenceCount();
@@ -237,7 +235,6 @@ eae6320::cResult eae6320::Graphics::CleanUp()
 
 	//CleanUp
 	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = 0;
-	s_dataBeingSubmittedByApplicationThread->m_NumberOfMeshesToRender = 0;
 	{
 		const auto localResult = s_constantBuffer_perFrame.CleanUp();
 		if (!localResult)

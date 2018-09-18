@@ -89,7 +89,8 @@ namespace eae6320
 		extern eae6320::Graphics::cMesh* s_Mesh;
 
 		extern eae6320::Graphics::cMesh* s_Mesh2;
-		extern eae6320::Graphics::sEffectsAndMeshesToRender m_EffectsAndMeshes[2];
+		const unsigned int m_maxNumberofMeshesAndEffects = 100;
+		extern eae6320::Graphics::sEffectsAndMeshesToRender m_EffectsAndMeshes[m_maxNumberofMeshesAndEffects];
 
 		//Constant Buffer Info
 		extern eae6320::Graphics::cConstantBuffer s_constantBuffer_perFrame;

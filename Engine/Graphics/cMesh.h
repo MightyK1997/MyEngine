@@ -30,7 +30,6 @@ namespace eae6320
 		public:
 			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()
 			EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cMesh)
-			EAE6320_ASSETS_DECLAREREFERENCECOUNT()
 			struct sIndex
 			{
 				uint16_t indexValue;
@@ -43,6 +42,7 @@ namespace eae6320
 				result = o_Mesh->Initialize(i_inputMesh, i_inputIndex, i_triangleCount);
 				return result;
 			}
+			EAE6320_ASSETS_DECLAREREFERENCECOUNT()
 		private:
 			cMesh() {}
 			~cMesh()
