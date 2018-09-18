@@ -111,7 +111,7 @@ namespace eae6320
 			}
 			// Assign the data to the Index buffer
 			{
-				const auto bufferSize = vertexCount /** sizeof(*indexData)*/;
+				const auto bufferSize = vertexCount * sizeof(*i_inputIndex);
 				EAE6320_ASSERT(bufferSize < (uint64_t(1u) << (sizeof(GLsizeiptr) * 8)));
 				glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(bufferSize), reinterpret_cast<GLvoid*>(i_inputIndex),
 					// In our class we won't ever read from the buffer

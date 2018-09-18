@@ -110,7 +110,7 @@ namespace eae6320
 			{
 				D3D11_BUFFER_DESC indexDescription{};
 				{
-					const auto bufferSize = indexCount;
+					const auto bufferSize = indexCount * sizeof(*i_inputIndex);
 					EAE6320_ASSERT(bufferSize < (uint64_t(1u) << (sizeof(indexDescription.ByteWidth) * 8)));
 					indexDescription.ByteWidth = static_cast<unsigned int>(bufferSize);
 					indexDescription.Usage = D3D11_USAGE_IMMUTABLE;	// In our class the buffer will never change after it's been created

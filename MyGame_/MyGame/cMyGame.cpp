@@ -87,12 +87,12 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 		indexData[0].indexValue = 0;
 		indexData[1].indexValue = 1;
 		indexData[2].indexValue = 2;
-		indexData[3].indexValue = 3;
-		indexData[4].indexValue = 1;
-		indexData[5].indexValue = 0;
-		indexData[6].indexValue = 3;
-		indexData[7].indexValue = 4;
-		indexData[8].indexValue = 1;
+		indexData[3].indexValue = 1;
+		indexData[4].indexValue = 0;
+		indexData[5].indexValue = 3;
+		indexData[6].indexValue = 4;
+		indexData[7].indexValue = 1;
+		indexData[8].indexValue = 3;
 	}
 	eae6320::Graphics::VertexFormats::sMesh vertexData2[8];
 	{
