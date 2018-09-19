@@ -30,19 +30,19 @@ namespace eae6320
 		public:
 			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()
 			EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cMesh)
+			EAE6320_ASSETS_DECLAREREFERENCECOUNT()
 			struct sIndex
 			{
 				uint16_t indexValue;
 			};
 			void Draw();
-			static cResult CreateMesh(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, sIndex* i_inputIndex, unsigned int i_triangleCount, cMesh*& o_Mesh)
+			static cResult CreateMesh(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, sIndex* i_inputIndex, unsigned int i_IndexCount, cMesh*& o_Mesh)
 			{
 				cResult result = Results::Success;
 				o_Mesh = new cMesh();
-				result = o_Mesh->Initialize(i_inputMesh, i_inputIndex, i_triangleCount);
+				result = o_Mesh->Initialize(i_inputMesh, i_inputIndex, i_IndexCount);
 				return result;
 			}
-			EAE6320_ASSETS_DECLAREREFERENCECOUNT()
 		private:
 			cMesh() {}
 			~cMesh()
@@ -69,7 +69,7 @@ namespace eae6320
 			GLuint m_indexBufferId = 0;
 
 #endif
-			unsigned int triangleCount;
+			unsigned int indexCount;
 		};
 	}
 }

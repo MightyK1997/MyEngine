@@ -82,14 +82,8 @@ namespace eae6320
 		cResult Initialize( const sInitializationParameters& i_initializationParameters );
 		cResult CleanUp();
 
-
-		//Mesh and Effect Data
-		extern eae6320::Graphics::cEffect* s_Effect;
-		extern eae6320::Graphics::cEffect* s_Effect2;
-		extern eae6320::Graphics::cMesh* s_Mesh;
-
-		extern eae6320::Graphics::cMesh* s_Mesh2;
 		const unsigned int m_maxNumberofMeshesAndEffects = 100;
+
 		extern eae6320::Graphics::sEffectsAndMeshesToRender m_EffectsAndMeshes[m_maxNumberofMeshesAndEffects];
 
 		//Constant Buffer Info

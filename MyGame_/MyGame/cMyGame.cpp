@@ -154,12 +154,12 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 		EAE6320_ASSERT(false);
 		//goto OnExit;
 	}
-	if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData, indexData, 3, s_Mesh)))
+	if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData, indexData, 9, s_Mesh)))
 	{
 		EAE6320_ASSERT(false);
 		//goto OnExit;
 	}
-	if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData2, indexData2, 4, s_Mesh2)))
+	if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData2, indexData2, 12, s_Mesh2)))
 	{
 		EAE6320_ASSERT(false);
 		//goto OnExit;

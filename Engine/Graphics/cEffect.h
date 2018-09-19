@@ -28,6 +28,7 @@ namespace eae6320
 		public:
 			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()
 			EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cEffect)
+			EAE6320_ASSETS_DECLAREREFERENCECOUNT()
 			void Bind();
 			static cResult CreateEffect(std::string i_vertexShaderLocation, std::string i_fragmentShaderLocation, cEffect*& o_Effect)
 			{
@@ -36,7 +37,6 @@ namespace eae6320
 				result = o_Effect->Initialize(i_vertexShaderLocation, i_fragmentShaderLocation);
 				return result;
 			}
-			EAE6320_ASSETS_DECLAREREFERENCECOUNT()
 		private:
 			cEffect() {}
 			~cEffect() 

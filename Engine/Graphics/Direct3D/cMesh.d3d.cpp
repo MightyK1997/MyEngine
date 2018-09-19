@@ -6,12 +6,10 @@ namespace eae6320
 {
 	namespace Graphics
 	{
-		cResult cMesh::Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, sIndex* i_inputIndex, unsigned int i_triangleCount)
+		cResult cMesh::Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, sIndex* i_inputIndex, unsigned int i_IndexCount)
 		{
-			triangleCount = i_triangleCount;
+			indexCount = i_IndexCount;
 			auto result = eae6320::Results::Success;
-			unsigned int vertexCountPerTriangle = 3;
-			unsigned int indexCount = triangleCount * vertexCountPerTriangle;
 			for (unsigned int i = 0; i < indexCount; i++)
 			{
 				if ((i % 3) == 0 )
@@ -141,8 +139,6 @@ namespace eae6320
 		}
 		void cMesh::Draw()
 		{
-			unsigned int vertexCountPerTriangle = 3;
-			unsigned int indexCount = triangleCount * vertexCountPerTriangle;
 			auto* const direct3dImmediateContext = sContext::g_context.direct3dImmediateContext;
 			{
 				// Bind a specific vertex buffer to the device as a data source

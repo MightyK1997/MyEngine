@@ -1,24 +1,18 @@
-
 #include <cmath>
 #include "Graphics.h"
 #include "GraphicsHelper.h"
 #include "cMesh.h"
 #include "cEffect.h"
 
-//#include <Engine/Asserts/Asserts.h>
-eae6320::Graphics::cMesh* eae6320::Graphics::s_Mesh;
-eae6320::Graphics::cMesh* eae6320::Graphics::s_Mesh2;
-eae6320::Graphics::cEffect* eae6320::Graphics::s_Effect;
-eae6320::Graphics::cEffect* eae6320::Graphics::s_Effect2;
 eae6320::Graphics::cConstantBuffer eae6320::Graphics::s_constantBuffer_perFrame(eae6320::Graphics::ConstantBufferTypes::PerFrame);
 namespace
 {
 	struct sDataRequiredToRenderAFrame
 	{
+		unsigned int m_NumberOfEffectsToRender;
 		eae6320::Graphics::ConstantBufferFormats::sPerFrame constantData_perFrame;
 		eae6320::Graphics::sColor backBufferValue_perFrame;
 		eae6320::Graphics::sEffectsAndMeshesToRender* m_MeshesAndEffects;
-		unsigned int m_NumberOfEffectsToRender;
 	};
 	//In our class there will be two copies of the data required to render a frame:
 	   //* One of them will be getting populated by the data currently being submitted by the application loop thread
@@ -42,15 +36,6 @@ namespace
 	eae6320::Graphics::GraphicsHelper* s_helper;
 
 }
-
-//namespace
-//{
-//	eae6320::cResult InitializeGeometry();
-//	eae6320::cResult InitializeShadingData();
-//}
-
-// Interface
-//==========
 
 // Submission
 //-----------
@@ -81,6 +66,7 @@ void eae6320::Graphics::SetBackBufferValue(eae6320::Graphics::sColor i_BackBuffe
 	ColorValue = i_BackBuffer;
 }
 
+//This function gets called from the game to set the meshes and effects to render
 void eae6320::Graphics::SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender * i_EffectsAndMeshes, unsigned int i_NumberOfEffectsAndMeshesToRender)
 {
 	EAE6320_ASSERT(i_NumberOfEffectsAndMeshesToRender < m_maxNumberofMeshesAndEffects);
@@ -97,7 +83,9 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender * 
 			(m_allMeshes + i)->m_RenderMesh->IncrementReferenceCount();
 		}
 	}
-
+	size_t meshSize = sizeof(cMesh);
+	size_t effectSize = sizeof(cEffect);
+	size_t structSize = sizeof(sDataRequiredToRenderAFrame);
 }
 
 void eae6320::Graphics::RenderFrame()
