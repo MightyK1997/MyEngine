@@ -20,8 +20,21 @@ namespace eae6320
 {
 	namespace Graphics
 	{
+		//Color Struct
+		struct sColor
+		{
+			float r;
+			float g;
+			float b;
+			float alpha;
+		};
 		class cMesh;
 		class cEffect;
+		struct sEffectsAndMeshesToRender
+		{
+			cEffect* m_RenderEffect;
+			cMesh* m_RenderMesh;
+		};
 		// Submission
 		//-----------
 
@@ -69,32 +82,16 @@ namespace eae6320
 		cResult Initialize( const sInitializationParameters& i_initializationParameters );
 		cResult CleanUp();
 
+		const unsigned int m_maxNumberofMeshesAndEffects = 10;
 
-		//Mesh and Effect Data
-		extern eae6320::Graphics::cEffect* s_Effect;
-		extern eae6320::Graphics::cEffect* s_Effect2;
-		extern eae6320::Graphics::cMesh* s_Mesh;
-
-		extern eae6320::Graphics::cMesh* s_Mesh2;
+		extern eae6320::Graphics::sEffectsAndMeshesToRender m_EffectsAndMeshes[m_maxNumberofMeshesAndEffects];
 
 		//Constant Buffer Info
 		extern eae6320::Graphics::cConstantBuffer s_constantBuffer_perFrame;
 
-		//Data Required To Render
-		struct sDataRequiredToRenderAFrame
-		{
-			eae6320::Graphics::ConstantBufferFormats::sPerFrame constantData_perFrame;
-		};
-		extern sDataRequiredToRenderAFrame* m_dataRequiredToRenderAFrame;
+		void SetBackBufferValue(sColor i_BackBuffer);
 
-		//Color Struct
-		struct sColor
-		{
-			float r;
-			float g;
-			float b;
-			float alpha;
-		};
+		void SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender* i_EffectsAndMeshes, unsigned int i_NumberOfEffectsAndMeshesToRender);
 	}
 }
 

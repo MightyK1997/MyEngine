@@ -37,55 +37,32 @@ namespace eae6320
 				s_depthStencilView = nullptr;
 			}
 #endif
-			s_Mesh->Shutdown();
-			s_Mesh2->Shutdown();
-			result = s_Effect->Shutdown();
-			result = s_Effect2->Shutdown();
-
-			{
-				const auto localResult = s_constantBuffer_perFrame.CleanUp();
-				if (!localResult)
-				{
-					EAE6320_ASSERT(false);
-					if (result)
-					{
-						result = localResult;
-					}
-				}
-			}
-
-			{
-				const auto localResult = cShader::s_manager.CleanUp();
-				if (!localResult)
-				{
-					EAE6320_ASSERT(false);
-					if (result)
-					{
-						result = localResult;
-					}
-				}
-			}
-
-			{
-				const auto localResult = sContext::g_context.CleanUp();
-				if (!localResult)
-				{
-					EAE6320_ASSERT(false);
-					if (result)
-					{
-						result = localResult;
-					}
-				}
-			}
-			delete s_Mesh;
-			delete s_Mesh2;
-			delete s_Effect;
-			delete s_Effect2;
+			//delete s_Mesh;
+			//delete s_Mesh2;
+			//delete s_Effect;
+			//delete s_Effect2;
 			return result;
 		}
-		void GraphicsHelper::RenderFrame()
+		cResult GraphicsHelper::Initialize(const sInitializationParameters& i_initializationParameters)
 		{
-			auto* s_dataBeingRenderedByRenderThread = &eae6320::Graphics::m_dataRequiredToRenderAFrame[1];
+			auto result = Results::Success;
+			// Initialize the views
+#ifdef EAE6320_PLATFORM_D3D
+			{
+				if (!(result = InitializeViews(i_initializationParameters.resolutionWidth, i_initializationParameters.resolutionHeight)))
+				{
+					EAE6320_ASSERT(false);
+					goto OnExit;
+				}
+			}
+#endif
+			goto OnExit;
+		OnExit:
+
+			return result;
+		}
+		void GraphicsHelper::SetRenderTargetView(sColor i_BackBufferColor)
+		{
 #ifdef EAE6320_PLATFORM_D3D
 			auto* const direct3dImmediateContext = sContext::g_context.direct3dImmediateContext;
 			EAE6320_ASSERT(direct3dImmediateContext);
@@ -96,14 +73,15 @@ namespace eae6320
 			{
 				EAE6320_ASSERT(m_renderTargetView);
 				// Black is usually used
-				/*constexpr*/ float clearColor[4] = { m_BackBuffer.r, m_BackBuffer.g, m_BackBuffer.b, m_BackBuffer.alpha };
+				/*constexpr*/ float clearColor[4] = { i_BackBufferColor.r, i_BackBufferColor.g, i_BackBufferColor.b, i_BackBufferColor.alpha };
+				//float clearColor[4] = {1,1,1,1 };
 				direct3dImmediateContext->ClearRenderTargetView(m_renderTargetView, clearColor);
 			}
 #elif EAE6320_PLATFORM_GL
 			{
 				// Black is usually used
 				{
-					glClearColor(m_BackBuffer.r, m_BackBuffer.g, m_BackBuffer.b, m_BackBuffer.alpha);
+					glClearColor(i_BackBufferColor.r, i_BackBufferColor.g, i_BackBufferColor.b, i_BackBufferColor.alpha);
 					EAE6320_ASSERT(glGetError() == GL_NO_ERROR);
 				}
 				{
@@ -113,12 +91,13 @@ namespace eae6320
 				}
 			}
 #endif
-			// In addition to the color buffer there is	result =  s_helper->RenderFrame(s_dataBeingRenderedByRenderThread); also a hidden image called the "depth buffer"
-			// which is used to make it less important which order draw calls are made.
-			// It must also be "cleared" every frame just like the visible color buffer.
+		}
+		void GraphicsHelper::ClearDepthStencilView()
+		{
 #ifdef EAE6320_PLATFORM_D3D
 			{
 				EAE6320_ASSERT(m_depthStencilView);
+				auto* const direct3dImmediateContext = sContext::g_context.direct3dImmediateContext;
 
 				constexpr float clearToFarDepth = 1.0f;
 				constexpr uint8_t stencilValue = 0;	// Arbitrary if stencil isn't used
@@ -140,36 +119,24 @@ namespace eae6320
 				}
 			}
 #endif
-
-			EAE6320_ASSERT(s_dataBeingRenderedByRenderThread);
-
+		}
+		void GraphicsHelper::UpdateConstantBuffer(eae6320::Graphics::ConstantBufferFormats::sPerFrame i_ConstantBuffer)
+		{
 			// Update the per-frame constant buffer
 #ifdef EAE6320_PLATFORM_D3D
 			{
 				// Copy the data from the system memory that the application owns to GPU memory
-				auto& constantData_perFrame = s_dataBeingRenderedByRenderThread->constantData_perFrame;
-				s_constantBuffer_perFrame.Update(&constantData_perFrame);
+				s_constantBuffer_perFrame.Update(&i_ConstantBuffer);
 			}
 #elif EAE6320_PLATFORM_GL
 			{
 				// Copy the data from the system memory that the application owns to GPU memory
-				s_constantBuffer_perFrame.Update(&s_dataBeingRenderedByRenderThread->constantData_perFrame);
+				s_constantBuffer_perFrame.Update(&i_ConstantBuffer);
 			}
 #endif
-			// Bind the shading data
-			{
-				s_Effect->Bind();
-			}
-			// Draw the geometry
-			{
-				s_Mesh->Draw();
-				s_Effect2->Bind();
-				s_Mesh2->Draw();
-			}
-
-			// Everything has been drawn to the "back buffer", which is just an image in memory.
-			// In order to display it the contents of the back buffer must be "presented"
-			// (or "swapped" with the "front buffer")
+		}
+		void GraphicsHelper::SwapChain()
+		{
 #ifdef EAE6320_PLATFORM_D3D
 			{
 				auto* const swapChain = sContext::g_context.swapChain;
@@ -188,30 +155,6 @@ namespace eae6320
 				EAE6320_ASSERT(glResult != FALSE);
 			}
 #endif
-			// Once everything has been drawn the data that was submitted for this frame
-			// should be cleaned up and cleared.
-			// so that the struct can be re-used (i.e. so that data for a new frame can be submitted to it)
-			{
-				// (At this point in the class there isn't anything that needs to be cleaned up)
-			}
-		}
-		cResult GraphicsHelper::Initialize(const sInitializationParameters& i_initializationParameters)
-		{
-			auto result = Results::Success;
-			// Initialize the views
-#ifdef EAE6320_PLATFORM_D3D
-			{
-				if (!(result = InitializeViews(i_initializationParameters.resolutionWidth, i_initializationParameters.resolutionHeight)))
-				{
-					EAE6320_ASSERT(false);
-					goto OnExit;
-				}
-			}
-#endif
-			goto OnExit;
-		OnExit:
-
-			return result;
 		}
 	}
 #ifdef EAE6320_PLATFORM_D3D

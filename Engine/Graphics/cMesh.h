@@ -15,6 +15,7 @@
 #include <Engine/Platform/Platform.h>
 #include <Engine/Time/Time.h>
 #include <Engine/UserOutput/UserOutput.h>
+#include <Engine/Assets/ReferenceCountedAssets.h>
 #include <utility>
 
 
@@ -27,28 +28,30 @@ namespace eae6320
 		class cMesh
 		{
 		public:
-			struct sIndex
+			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()
+			EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cMesh)
+			void Draw();
+			static cResult CreateMesh(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, eae6320::Graphics::VertexFormats::sIndex* i_inputIndex, unsigned int i_IndexCount, cMesh*& o_Mesh)
 			{
-				uint16_t indexValue;
-			};
-			cMesh(){}
-			cResult Initialize();
-			cResult Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, sIndex* i_inputIndex, unsigned int i_triangleCount)
-			{
-				auto result = Results::Success;
-				indexData = i_inputIndex;
-				triangleCount = i_triangleCount;
-				vertexData = i_inputMesh;
-				result = Initialize();
+				cResult result = Results::Success;
+				o_Mesh = new cMesh();
+				result = o_Mesh->Initialize(i_inputMesh, i_inputIndex, i_IndexCount);
 				return result;
 			}
-			void Draw();
-			cResult Shutdown();
 		private:
+			cMesh() {}
+			~cMesh()
+			{
+				Shutdown();
+			}
+			cResult Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, eae6320::Graphics::VertexFormats::sIndex* i_inputIndex, unsigned int i_triangleCount);
+			cResult Shutdown();
+			unsigned int indexCount;
+			EAE6320_ASSETS_DECLAREREFERENCECOUNT()
 #ifdef EAE6320_PLATFORM_D3D
 			// A vertex buffer holds the data for each vertex
 			ID3D11Buffer* m_vertexBuffer = nullptr;
-			// D3D has an "input layout" object that associates the layout of the vertex format struct
+			// D3D has an "input layout" object that associate s the layout of the vertex format struct
 			// with the input from a vertex shader
 			ID3D11InputLayout* m_vertexInputLayout = nullptr;
 
@@ -63,9 +66,6 @@ namespace eae6320
 			GLuint m_indexBufferId = 0;
 
 #endif
-			unsigned int triangleCount;
-			eae6320::Graphics::VertexFormats::sMesh* vertexData;
-			sIndex* indexData;
 		};
 	}
 }

@@ -5,11 +5,10 @@ namespace eae6320
 {
 	namespace Graphics
 	{
-		cResult cMesh::Initialize()
+		cResult cMesh::Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, eae6320::Graphics::VertexFormats::sIndex* i_inputIndex, unsigned int i_IndexCount)
 		{
+			indexCount = i_IndexCount;
 			auto result = eae6320::Results::Success;
-			unsigned int vertexCountPerTriangle = 3;
-			unsigned int vertexCount = triangleCount * vertexCountPerTriangle;
 			// Create a vertex array object and make it active
 			{
 				constexpr GLsizei arrayCount = 1;
@@ -66,9 +65,9 @@ namespace eae6320
 			}
 			// Assign the data to the Vertex buffer
 			{
-				const auto bufferSize = vertexCount * sizeof(*vertexData);
+				const auto bufferSize = indexCount * sizeof(*i_inputMesh);
 				EAE6320_ASSERT(bufferSize < (uint64_t(1u) << (sizeof(GLsizeiptr) * 8)));
-				glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(bufferSize), reinterpret_cast<GLvoid*>(vertexData),
+				glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(bufferSize), reinterpret_cast<GLvoid*>(i_inputMesh),
 					// In our class we won't ever read from the buffer
 					GL_STATIC_DRAW);
 				const auto errorCode = glGetError();
@@ -110,9 +109,9 @@ namespace eae6320
 			}
 			// Assign the data to the Index buffer
 			{
-				const auto bufferSize = vertexCount * sizeof(*indexData);
+				const auto bufferSize = indexCount * sizeof(*i_inputIndex);
 				EAE6320_ASSERT(bufferSize < (uint64_t(1u) << (sizeof(GLsizeiptr) * 8)));
-				glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(bufferSize), reinterpret_cast<GLvoid*>(indexData),
+				glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(bufferSize), reinterpret_cast<GLvoid*>(i_inputIndex),
 					// In our class we won't ever read from the buffer
 					GL_STATIC_DRAW);
 				const auto errorCode = glGetError();
@@ -171,8 +170,6 @@ namespace eae6320
 		}
 		void cMesh::Draw()
 		{
-			unsigned int vertexCountPerTriangle = 3;
-			unsigned int vertexCount = triangleCount * vertexCountPerTriangle;
 			// Bind a specific vertex buffer to the device as a data source
 			{
 				glBindVertexArray(m_vertexArrayId);
@@ -188,10 +185,7 @@ namespace eae6320
 
 				//Updating this for using index buffers
 				const GLvoid* const offset = 0;
-				for (unsigned int i = 0; i < vertexCount; i++)
-				{
-					glDrawElements(mode, static_cast<GLsizei>((indexData + i)->indexValue), GL_UNSIGNED_SHORT, offset);
-				}
+				glDrawElements(mode, static_cast<GLsizei>(indexCount), GL_UNSIGNED_SHORT, offset);
 				//constexpr GLint indexOfFirstVertexToRender = 0;
 				//// As of this comment we are only drawing a single triangle
 				//// (you will have to update this code in future assignments!)

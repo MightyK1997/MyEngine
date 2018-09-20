@@ -1,26 +1,22 @@
-
 #include <cmath>
 #include "Graphics.h"
 #include "GraphicsHelper.h"
 #include "cMesh.h"
 #include "cEffect.h"
 
-//#include <Engine/Asserts/Asserts.h>
-eae6320::Graphics::cMesh* eae6320::Graphics::s_Mesh;
-eae6320::Graphics::cMesh* eae6320::Graphics::s_Mesh2;
-eae6320::Graphics::cEffect* eae6320::Graphics::s_Effect;
-eae6320::Graphics::cEffect* eae6320::Graphics::s_Effect2;
-eae6320::Graphics::sDataRequiredToRenderAFrame* eae6320::Graphics::m_dataRequiredToRenderAFrame;
 eae6320::Graphics::cConstantBuffer eae6320::Graphics::s_constantBuffer_perFrame(eae6320::Graphics::ConstantBufferTypes::PerFrame);
 namespace
 {
 	struct sDataRequiredToRenderAFrame
 	{
 		eae6320::Graphics::ConstantBufferFormats::sPerFrame constantData_perFrame;
+		eae6320::Graphics::sColor backBufferValue_perFrame;
+		eae6320::Graphics::sEffectsAndMeshesToRender m_MeshesAndEffects[eae6320::Graphics::m_maxNumberofMeshesAndEffects];
+		unsigned int m_NumberOfEffectsToRender;
 	};
-	 //In our class there will be two copies of the data required to render a frame:
-		//* One of them will be getting populated by the data currently being submitted by the application loop thread
-		//* One of them will be fully populated, 
+	//In our class there will be two copies of the data required to render a frame:
+	   //* One of them will be getting populated by the data currently being submitted by the application loop thread
+	   //* One of them will be fully populated, 
 	sDataRequiredToRenderAFrame s_dataRequiredToRenderAFrame[2];
 	auto* s_dataBeingSubmittedByApplicationThread = &s_dataRequiredToRenderAFrame[0];
 	auto* s_dataBeingRenderedByRenderThread = &s_dataRequiredToRenderAFrame[1];
@@ -40,15 +36,6 @@ namespace
 	eae6320::Graphics::GraphicsHelper* s_helper;
 
 }
-
-//namespace
-//{
-//	eae6320::cResult InitializeGeometry();
-//	eae6320::cResult InitializeShadingData();
-//}
-
-// Interface
-//==========
 
 // Submission
 //-----------
@@ -73,12 +60,35 @@ eae6320::cResult eae6320::Graphics::SignalThatAllDataForAFrameHasBeenSubmitted()
 
 // Render
 //-------
+void eae6320::Graphics::SetBackBufferValue(eae6320::Graphics::sColor i_BackBuffer)
+{
+	auto& ColorValue = s_dataBeingSubmittedByApplicationThread->backBufferValue_perFrame;
+	ColorValue = i_BackBuffer;
+}
+
+//This function gets called from the game to set the meshes and effects to render
+void eae6320::Graphics::SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender i_EffectsAndMeshes[eae6320::Graphics::m_maxNumberofMeshesAndEffects], unsigned int i_NumberOfEffectsAndMeshesToRender)
+{
+	EAE6320_ASSERT(i_NumberOfEffectsAndMeshesToRender < m_maxNumberofMeshesAndEffects);
+	auto& meshesAndEffects = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
+	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = i_NumberOfEffectsAndMeshesToRender;
+	auto m_allMeshes = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
+
+	for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
+	{
+		meshesAndEffects[i] = i_EffectsAndMeshes[i];
+		meshesAndEffects[i].m_RenderEffect->IncrementReferenceCount();
+		meshesAndEffects[i].m_RenderMesh->IncrementReferenceCount();
+	}
+	size_t meshSize = sizeof(cMesh);
+	size_t effectSize = sizeof(cEffect);
+	size_t structSize = sizeof(sDataRequiredToRenderAFrame);
+}
 
 void eae6320::Graphics::RenderFrame()
 {
 	// Wait for the application loop to submit data to be rendered
 	{
-		sColor m_BackBuffer{ abs(sin(s_dataBeingSubmittedByApplicationThread->constantData_perFrame.g_elapsedSecondCount_simulationTime)), abs(cos(s_dataBeingSubmittedByApplicationThread->constantData_perFrame.g_elapsedSecondCount_simulationTime)) , abs(cos(s_dataBeingSubmittedByApplicationThread->constantData_perFrame.g_elapsedSecondCount_simulationTime)) , 1};
 		const auto result = Concurrency::WaitForEvent(s_whenAllDataHasBeenSubmittedFromApplicationThread);
 		if (result)
 		{
@@ -104,110 +114,41 @@ void eae6320::Graphics::RenderFrame()
 				" The application is probably in a bad state and should be exited");
 			return;
 		}
-		s_helper->SetBackBuffer(m_BackBuffer);
-		s_helper->RenderFrame();
+		s_helper->SetRenderTargetView(s_dataBeingRenderedByRenderThread->backBufferValue_perFrame);
+		s_helper->ClearDepthStencilView();
+		s_helper->UpdateConstantBuffer(s_dataBeingRenderedByRenderThread->constantData_perFrame);
+
+
+		auto& m_allMeshes = s_dataBeingRenderedByRenderThread->m_MeshesAndEffects;
+
+		if (m_allMeshes != nullptr)
+		{
+			for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
+			{
+				m_allMeshes[i].m_RenderEffect->Bind();
+				m_allMeshes[i].m_RenderMesh->Draw();
+			}
+		}
+		s_helper->SwapChain();
+
+		//CleanUp
+		if (m_allMeshes != nullptr)
+		{
+			for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
+			{
+				m_allMeshes[i].m_RenderEffect->DecrementReferenceCount();
+				m_allMeshes[i].m_RenderMesh->DecrementReferenceCount();
+			}
+
+		}
+		//s_dataBeingRenderedByRenderThread->m_MeshesAndEffects = nullptr;
+		s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender = 0;
 	}
 }
 eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& i_initializationParameters)
 {
 	auto result = Results::Success;
 	s_helper = new eae6320::Graphics::GraphicsHelper();
-	s_Mesh = new eae6320::Graphics::cMesh();
-	s_Mesh2 = new eae6320::Graphics::cMesh();
-	s_Effect = new eae6320::Graphics::cEffect();
-	s_Effect2 = new eae6320::Graphics::cEffect();
-	std::string m_vertShader1Location = "data/Shaders/Vertex/standard.shader";
-	std::string m_fragShader1Location = "data/Shaders/Fragment/animatedshader.shader";
-	std::string m_vertShader2Location = "data/Shaders/Vertex/standard.shader";
-	std::string m_fragShader2Location = "data/Shaders/Fragment/standard.shader";
-	size_t sizeOfMesh = sizeof(eae6320::Graphics::cMesh);
-	size_t sizeOfEffect = sizeof(eae6320::Graphics::cEffect);
-
-	eae6320::Graphics::VertexFormats::sMesh vertexData[5];
-	{
-		vertexData[0].x = 0.0f;
-		vertexData[0].y = 0.5f;
-		vertexData[0].z = 0.0f;
-
-		vertexData[1].x = 1.0f;
-		vertexData[1].y = 0.5f;
-		vertexData[1].z = 0.0f;
-
-		vertexData[2].x = 0.5f;
-		vertexData[2].y = 1.0f;
-		vertexData[2].z = 0.0f;
-
-		vertexData[3].x = 0.0f;
-		vertexData[3].y = -0.5f;
-		vertexData[3].z = 0.0f;
-
-		vertexData[4].x = 1.0f;
-		vertexData[4].y = -0.5f;
-		vertexData[4].z = 0.0f;
-	}
-	eae6320::Graphics::cMesh::sIndex indexData[9];
-	{
-		indexData[0].indexValue = 0;
-		indexData[1].indexValue = 1;
-		indexData[2].indexValue = 2;
-		indexData[3].indexValue = 3;
-		indexData[4].indexValue = 1;
-		indexData[5].indexValue = 0;
-		indexData[6].indexValue = 3;
-		indexData[7].indexValue = 4;
-		indexData[8].indexValue = 1;
-	}
-	eae6320::Graphics::VertexFormats::sMesh vertexData2[10];
-	{
-		vertexData2[0].x = -0.5f;
-		vertexData2[0].y = -0.5f;
-		vertexData2[0].z = 0.0f;
-
-		vertexData2[1].x = -0.25f;
-		vertexData2[1].y = -0.5f;
-		vertexData2[1].z = 0.0f;
-
-		vertexData2[2].x = -0.25f;
-		vertexData2[2].y = 0.25f;
-		vertexData2[2].z = 0.0f;
-
-		vertexData2[3].x = -0.5f;
-		vertexData2[3].y = 0.25f;
-		vertexData2[3].z = 0.0f;
-
-		vertexData2[4].x = -0.5f;
-		vertexData2[4].y = 0.75f;
-		vertexData2[4].z = 0.0f;
-
-		vertexData2[5].x = -0.75f;
-		vertexData2[5].y = 0.75f;
-		vertexData2[5].z = 0.0f;
-
-		vertexData2[6].x = 0.0f;
-		vertexData2[6].y = 0.75f;
-		vertexData2[6].z = 0.0f;
-
-		vertexData2[7].x = -0.25f;
-		vertexData2[7].y = 0.75f;
-		vertexData2[7].z = 0.0f;
-
-	}
-	eae6320::Graphics::cMesh::sIndex indexData2[12];
-	{
-		indexData2[0].indexValue = 0;
-		indexData2[1].indexValue = 1;
-		indexData2[2].indexValue = 2;
-		indexData2[3].indexValue = 0;
-		indexData2[4].indexValue = 2;
-		indexData2[5].indexValue = 3;
-		indexData2[6].indexValue = 3;
-		indexData2[7].indexValue = 4;
-		indexData2[8].indexValue = 5;
-		indexData2[9].indexValue = 7;
-		indexData2[10].indexValue = 2;
-		indexData2[11].indexValue = 6;
-	}
-	m_dataRequiredToRenderAFrame = reinterpret_cast<eae6320::Graphics::sDataRequiredToRenderAFrame*>(s_dataRequiredToRenderAFrame);
 
 	// Initialize the platform-specific context
 	if (!(result = sContext::g_context.Initialize(i_initializationParameters)))
@@ -256,20 +197,62 @@ eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& 
 	}
 	// Initialize the views, Shading  data and Geometry
 	result = s_helper->Initialize(i_initializationParameters);
-	s_Effect->Initialize(m_vertShader1Location, m_fragShader1Location);
-	s_Effect2->Initialize(m_vertShader2Location, m_fragShader2Location);
-	s_Mesh->Initialize(vertexData, indexData, 3);
-	s_Mesh2->Initialize(vertexData2, indexData2, 4);
-	
 
 OnExit:
 
-return result;
+	return result;
 }
 
 eae6320::cResult eae6320::Graphics::CleanUp()
 {
 	auto result = s_helper->CleanUp();
+
+	auto m_allMeshes = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
+
+	if (m_allMeshes != nullptr)
+	{
+		for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
+		{
+			m_allMeshes[i].m_RenderEffect->DecrementReferenceCount();
+			m_allMeshes[i].m_RenderMesh->DecrementReferenceCount();
+		}
+	}
+
+	//CleanUp
+	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = 0;
+	{
+		const auto localResult = s_constantBuffer_perFrame.CleanUp();
+		if (!localResult)
+		{
+			EAE6320_ASSERT(false);
+			if (result)
+			{
+				result = localResult;
+			}
+		}
+	}
+	{
+		const auto localResult = cShader::s_manager.CleanUp();
+		if (!localResult)
+		{
+			EAE6320_ASSERT(false);
+			if (result)
+			{
+				result = localResult;
+			}
+		}
+	}
+	{
+		const auto localResult = sContext::g_context.CleanUp();
+		if (!localResult)
+		{
+			EAE6320_ASSERT(false);
+			if (result)
+			{
+				result = localResult;
+			}
+		}
+	}
 	delete(s_helper);
 	return result;
 }

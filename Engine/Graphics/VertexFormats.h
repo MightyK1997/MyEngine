@@ -31,6 +31,10 @@ namespace eae6320
 				// Offset = 0
 				float x, y, z;
 			};
+			struct sIndex
+			{
+				uint16_t indexValue;
+			};
 		}
 	}
 }
