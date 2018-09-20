@@ -25,7 +25,7 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 	m_NumberOfMeshesToRender = UserInput::IsKeyPressed(UserInput::KeyCodes::F1) ? 1 : 2;
 	if (UserInput::IsKeyPressed(UserInput::KeyCodes::F2))
 	{
-		std::swap(m_EffectsAndMeshes[0].m_RenderEffect, m_EffectsAndMeshes[1].m_RenderEffect);
+		std::swap(s_Effect, s_Effect2);
 	}
 }
 

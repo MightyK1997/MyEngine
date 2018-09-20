@@ -9,10 +9,10 @@ namespace
 {
 	struct sDataRequiredToRenderAFrame
 	{
-		unsigned int m_NumberOfEffectsToRender;
 		eae6320::Graphics::ConstantBufferFormats::sPerFrame constantData_perFrame;
 		eae6320::Graphics::sColor backBufferValue_perFrame;
-		eae6320::Graphics::sEffectsAndMeshesToRender* m_MeshesAndEffects;
+		eae6320::Graphics::sEffectsAndMeshesToRender m_MeshesAndEffects[eae6320::Graphics::m_maxNumberofMeshesAndEffects];
+		unsigned int m_NumberOfEffectsToRender;
 	};
 	//In our class there will be two copies of the data required to render a frame:
 	   //* One of them will be getting populated by the data currently being submitted by the application loop thread
@@ -67,21 +67,18 @@ void eae6320::Graphics::SetBackBufferValue(eae6320::Graphics::sColor i_BackBuffe
 }
 
 //This function gets called from the game to set the meshes and effects to render
-void eae6320::Graphics::SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender * i_EffectsAndMeshes, unsigned int i_NumberOfEffectsAndMeshesToRender)
+void eae6320::Graphics::SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender i_EffectsAndMeshes[eae6320::Graphics::m_maxNumberofMeshesAndEffects], unsigned int i_NumberOfEffectsAndMeshesToRender)
 {
 	EAE6320_ASSERT(i_NumberOfEffectsAndMeshesToRender < m_maxNumberofMeshesAndEffects);
 	auto& meshesAndEffects = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
-	meshesAndEffects = i_EffectsAndMeshes;
 	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = i_NumberOfEffectsAndMeshesToRender;
 	auto m_allMeshes = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
 
- 	if (m_allMeshes != nullptr)
+	for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
 	{
-		for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
-		{
-			(m_allMeshes + i)->m_RenderEffect->IncrementReferenceCount();
-			(m_allMeshes + i)->m_RenderMesh->IncrementReferenceCount();
-		}
+		meshesAndEffects[i] = i_EffectsAndMeshes[i];
+		meshesAndEffects[i].m_RenderEffect->IncrementReferenceCount();
+		meshesAndEffects[i].m_RenderMesh->IncrementReferenceCount();
 	}
 	size_t meshSize = sizeof(cMesh);
 	size_t effectSize = sizeof(cEffect);
@@ -122,14 +119,14 @@ void eae6320::Graphics::RenderFrame()
 		s_helper->UpdateConstantBuffer(s_dataBeingRenderedByRenderThread->constantData_perFrame);
 
 
-		auto m_allMeshes = s_dataBeingRenderedByRenderThread->m_MeshesAndEffects;
+		auto& m_allMeshes = s_dataBeingRenderedByRenderThread->m_MeshesAndEffects;
 
 		if (m_allMeshes != nullptr)
 		{
 			for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
 			{
-				(m_allMeshes + i)->m_RenderEffect->Bind();
-				(m_allMeshes + i)->m_RenderMesh->Draw();
+				m_allMeshes[i].m_RenderEffect->Bind();
+				m_allMeshes[i].m_RenderMesh->Draw();
 			}
 		}
 		s_helper->SwapChain();
@@ -139,8 +136,8 @@ void eae6320::Graphics::RenderFrame()
 		{
 			for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
 			{
-				(m_allMeshes + i)->m_RenderEffect->DecrementReferenceCount();
-				(m_allMeshes + i)->m_RenderMesh->DecrementReferenceCount();
+				m_allMeshes[i].m_RenderEffect->DecrementReferenceCount();
+				m_allMeshes[i].m_RenderMesh->DecrementReferenceCount();
 			}
 
 		}
@@ -216,8 +213,8 @@ eae6320::cResult eae6320::Graphics::CleanUp()
 	{
 		for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
 		{
-			(m_allMeshes + i)->m_RenderEffect->DecrementReferenceCount();
-			(m_allMeshes + i)->m_RenderMesh->DecrementReferenceCount();
+			m_allMeshes[i].m_RenderEffect->DecrementReferenceCount();
+			m_allMeshes[i].m_RenderMesh->DecrementReferenceCount();
 		}
 	}
 
