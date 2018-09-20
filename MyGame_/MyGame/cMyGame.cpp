@@ -41,7 +41,7 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 	}
 }
 
-void eae6320::cMyGame::UpdateSimulationBasedOnInput()
+void eae6320::cMyGame::UpdateSimulationBasedOnTime(const float i_elapsedSecondCount_sinceLastUpdate)
 {
 }
 

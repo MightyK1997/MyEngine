@@ -80,9 +80,14 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender i_
 		meshesAndEffects[i].m_RenderEffect->IncrementReferenceCount();
 		meshesAndEffects[i].m_RenderMesh->IncrementReferenceCount();
 	}
-	size_t meshSize = sizeof(cMesh);
-	size_t effectSize = sizeof(cEffect);
-	size_t structSize = sizeof(sDataRequiredToRenderAFrame);
+	//size_t somesize = sizeof(eae6320::Graphics::ConstantBufferFormats::sPerFrame);
+	//somesize = sizeof(eae6320::Graphics::sColor);
+	//somesize = sizeof(eae6320::Graphics::sEffectsAndMeshesToRender);
+	//somesize = sizeof(unsigned int);
+
+	//size_t meshSize = sizeof(cMesh);
+	//size_t effectSize = sizeof(cEffect);
+	//size_t structSize = sizeof(sDataRequiredToRenderAFrame);
 }
 
 void eae6320::Graphics::RenderFrame()
