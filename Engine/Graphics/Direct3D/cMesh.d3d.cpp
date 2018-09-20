@@ -6,7 +6,7 @@ namespace eae6320
 {
 	namespace Graphics
 	{
-		cResult cMesh::Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, sIndex* i_inputIndex, unsigned int i_IndexCount)
+		cResult cMesh::Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, eae6320::Graphics::VertexFormats::sIndex* i_inputIndex, unsigned int i_IndexCount)
 		{
 			indexCount = i_IndexCount;
 			auto result = eae6320::Results::Success;

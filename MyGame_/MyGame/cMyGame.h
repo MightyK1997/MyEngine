@@ -86,6 +86,7 @@ namespace eae6320
 		eae6320::Graphics::cMesh* s_Mesh;
 		eae6320::Graphics::cMesh* s_Mesh2;
 		eae6320::Graphics::sEffectsAndMeshesToRender m_EffectsAndMeshes[2];
+		bool isEffectSwapped = false;
 	public:
 		int m_NumberOfMeshesToRender;
 	};

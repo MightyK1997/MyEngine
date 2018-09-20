@@ -25,7 +25,19 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 	m_NumberOfMeshesToRender = UserInput::IsKeyPressed(UserInput::KeyCodes::F1) ? 1 : 2;
 	if (UserInput::IsKeyPressed(UserInput::KeyCodes::F2))
 	{
-		std::swap(s_Effect, s_Effect2);
+		if (!isEffectSwapped)
+		{
+			std::swap(s_Effect, s_Effect2);
+			isEffectSwapped = true;
+		}
+	}
+	else
+	{
+		if (isEffectSwapped)
+		{
+			std::swap(s_Effect, s_Effect2);
+			isEffectSwapped = false;
+		}
 	}
 }
 
@@ -82,7 +94,7 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 		vertexData[4].y = -0.5f;
 		vertexData[4].z = 0.0f;
 	}
-	eae6320::Graphics::cMesh::sIndex indexData[9];
+	eae6320::Graphics::VertexFormats::sIndex indexData[9];
 	{
 		indexData[0].indexValue = 0;
 		indexData[1].indexValue = 1;
@@ -129,7 +141,7 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 		vertexData2[7].z = 0.0f;
 
 	}
-	eae6320::Graphics::cMesh::sIndex indexData2[12];
+	eae6320::Graphics::VertexFormats::sIndex indexData2[12];
 	{
 		indexData2[0].indexValue = 0;
 		indexData2[1].indexValue = 1;

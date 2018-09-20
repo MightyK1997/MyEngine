@@ -30,13 +30,8 @@ namespace eae6320
 		public:
 			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()
 			EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cMesh)
-			EAE6320_ASSETS_DECLAREREFERENCECOUNT()
-			struct sIndex
-			{
-				uint16_t indexValue;
-			};
 			void Draw();
-			static cResult CreateMesh(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, sIndex* i_inputIndex, unsigned int i_IndexCount, cMesh*& o_Mesh)
+			static cResult CreateMesh(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, eae6320::Graphics::VertexFormats::sIndex* i_inputIndex, unsigned int i_IndexCount, cMesh*& o_Mesh)
 			{
 				cResult result = Results::Success;
 				o_Mesh = new cMesh();
@@ -49,12 +44,14 @@ namespace eae6320
 			{
 				Shutdown();
 			}
-			cResult Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, sIndex* i_inputIndex, unsigned int i_triangleCount);
+			cResult Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, eae6320::Graphics::VertexFormats::sIndex* i_inputIndex, unsigned int i_triangleCount);
 			cResult Shutdown();
+			unsigned int indexCount;
+			EAE6320_ASSETS_DECLAREREFERENCECOUNT()
 #ifdef EAE6320_PLATFORM_D3D
 			// A vertex buffer holds the data for each vertex
 			ID3D11Buffer* m_vertexBuffer = nullptr;
-			// D3D has an "input layout" object that associates the layout of the vertex format struct
+			// D3D has an "input layout" object that associate s the layout of the vertex format struct
 			// with the input from a vertex shader
 			ID3D11InputLayout* m_vertexInputLayout = nullptr;
 
@@ -69,7 +66,6 @@ namespace eae6320
 			GLuint m_indexBufferId = 0;
 
 #endif
-			unsigned int indexCount;
 		};
 	}
 }
