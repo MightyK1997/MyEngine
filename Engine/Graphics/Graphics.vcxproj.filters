@@ -55,6 +55,7 @@
     <ClCompile Include="cEffect.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="GraphicsHelper.cpp" />
+    <ClCompile Include="cCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Includes.h">
@@ -77,5 +78,6 @@
     <ClInclude Include="cMesh.h" />
     <ClInclude Include="cEffect.h" />
     <ClInclude Include="GraphicsHelper.h" />
+    <ClInclude Include="cCamera.h" />
   </ItemGroup>
 </Project>
