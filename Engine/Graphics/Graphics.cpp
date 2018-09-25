@@ -3,6 +3,7 @@
 #include "GraphicsHelper.h"
 #include "cMesh.h"
 #include "cEffect.h"
+#include "../Physics/cGameObject.h"
 
 eae6320::Graphics::cConstantBuffer eae6320::Graphics::s_constantBuffer_perFrame(eae6320::Graphics::ConstantBufferTypes::PerFrame);
 namespace
@@ -10,10 +11,12 @@ namespace
 	struct sDataRequiredToRenderAFrame
 	{
 		eae6320::Graphics::ConstantBufferFormats::sPerFrame constantData_perFrame;
+		eae6320::Graphics::ConstantBufferFormats::sPerDrawCall constantData_perDrawCall[eae6320::Graphics::m_maxNumberofMeshesAndEffects];
 		eae6320::Graphics::sColor backBufferValue_perFrame;
 		eae6320::Graphics::sEffectsAndMeshesToRender m_MeshesAndEffects[eae6320::Graphics::m_maxNumberofMeshesAndEffects];
 		unsigned int m_NumberOfEffectsToRender;
 	};
+	eae6320::Graphics::cConstantBuffer s_constantBuffer_perDrawCall(eae6320::Graphics::ConstantBufferTypes::PerDrawCall);
 	//In our class there will be two copies of the data required to render a frame:
 	   //* One of them will be getting populated by the data currently being submitted by the application loop thread
 	   //* One of them will be fully populated, 
@@ -106,6 +109,23 @@ void eae6320::Graphics::SetCameraToRender(eae6320::Graphics::cCamera i_Camera)
 	constDataBuffer.g_transform_cameraToProjected = eae6320::Math::cMatrix_transformation::CreateCameraToProjectedTransform_perspective(0.745f, 4 / 3, 0.1f, 100);
 }
 
+void eae6320::Graphics::SetGameObjectsToRender(eae6320::Physics::cGameObject i_GameObjects[eae6320::Graphics::m_maxNumberofMeshesAndEffects], unsigned int i_NumberOfEffectsAndMeshesToRender)
+{
+	EAE6320_ASSERT(i_NumberOfEffectsAndMeshesToRender < m_maxNumberofMeshesAndEffects);
+	auto& meshesAndEffects = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
+	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = i_NumberOfEffectsAndMeshesToRender;
+	auto m_allMeshes = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
+	auto m_allDrawCallConstants = s_dataBeingSubmittedByApplicationThread->constantData_perDrawCall;
+
+	for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
+	{
+		meshesAndEffects[i] = i_GameObjects[i].m_EffectMeshPairForRigidBody;
+		m_allDrawCallConstants[i].g_transform_localToWorld = eae6320::Math::cMatrix_transformation(i_GameObjects[i].m_RigidBody.orientation, i_GameObjects[i].m_RigidBody.position);
+		meshesAndEffects[i].m_RenderEffect->IncrementReferenceCount();
+		meshesAndEffects[i].m_RenderMesh->IncrementReferenceCount();
+	}
+}
+
 void eae6320::Graphics::RenderFrame()
 {
 	// Wait for the application loop to submit data to be rendered
@@ -147,6 +167,7 @@ void eae6320::Graphics::RenderFrame()
 			for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
 			{
 				m_allMeshes[i].m_RenderEffect->Bind();
+				s_constantBuffer_perDrawCall.Update(&s_dataBeingRenderedByRenderThread->constantData_perDrawCall[i]);
 				m_allMeshes[i].m_RenderMesh->Draw();
 			}
 		}
@@ -202,6 +223,19 @@ eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& 
 			goto OnExit;
 		}
 	}
+
+	//Initialize Platform dependent per draw buffer
+	{
+		if (result = s_constantBuffer_perDrawCall.Initialize())
+		{
+			s_constantBuffer_perDrawCall.Bind(ShaderTypes::Vertex | ShaderTypes::Fragment);
+		}
+		else
+		{
+			EAE6320_ASSERT(false);
+			goto OnExit;
+		}
+	}
 	// Initialize the events
 	{
 		if (!(result = s_whenAllDataHasBeenSubmittedFromApplicationThread.Initialize(Concurrency::EventType::ResetAutomaticallyAfterBeingSignaled)))
@@ -243,6 +277,18 @@ eae6320::cResult eae6320::Graphics::CleanUp()
 	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = 0;
 	{
 		const auto localResult = s_constantBuffer_perFrame.CleanUp();
+		if (!localResult)
+		{
+			EAE6320_ASSERT(false);
+			if (result)
+			{
+				result = localResult;
+			}
+		}
+	}
+
+	{
+		const auto localResult = s_constantBuffer_perDrawCall.CleanUp();
 		if (!localResult)
 		{
 			EAE6320_ASSERT(false);

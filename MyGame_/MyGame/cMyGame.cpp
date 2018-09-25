@@ -5,7 +5,6 @@
 #include <Engine/Graphics/Graphics.h>
 #include <Engine/Asserts/Asserts.h>
 #include <Engine/UserInput/UserInput.h>
-#include <Engine/Graphics/cCamera.h>
 
 // Inherited Implementation
 //=========================
@@ -63,11 +62,17 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 		}
 	}
 	UpdateCameraPosition();
+	m_GameObjects[0].m_RigidBody.velocity = Math::sVector(0, 0, 0);
+	if (UserInput::IsKeyPressed(UserInput::KeyCodes::F3))
+	{
+		m_GameObjects[0].m_RigidBody.velocity.x = -10.0f;
+	}
 }
 
 void eae6320::cMyGame::UpdateSimulationBasedOnTime(const float i_elapsedSecondCount_sinceLastUpdate)
 {
 	m_Camera.m_CameraRigidBody.Update(i_elapsedSecondCount_sinceLastUpdate);
+	m_GameObjects[0].m_RigidBody.Update(i_elapsedSecondCount_sinceLastUpdate);
 }
 
 void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_systemTime, const float i_elapsedSecondCount_sinceLastSimulationUpdate)
@@ -85,12 +90,17 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 	m_EffectsAndMeshes[1].m_RenderEffect = s_Effect2;
 	m_EffectsAndMeshes[1].m_RenderMesh = s_Mesh2;
 
+	m_GameObjects[0].m_EffectMeshPairForRigidBody = m_EffectsAndMeshes[0];
+	m_GameObjects[1].m_EffectMeshPairForRigidBody = m_EffectsAndMeshes[1];
+
 	//eae6320::Graphics::SetCameraDataToRender(eae6320::Math::cMatrix_transformation::CreateWorldToCameraTransform(m_Camera.m_CameraRigidBody.orientation, m_Camera.m_CameraRigidBody.position),
 	//	eae6320::Math::cMatrix_transformation::CreateCameraToProjectedTransform_perspective(0.745f, 4/3, 0.1f, 100));
 
 	eae6320::Graphics::SetCameraToRender(m_Camera);
 
-	eae6320::Graphics::SetEffectsAndMeshesToRender(m_EffectsAndMeshes, m_NumberOfMeshesToRender);
+	//eae6320::Graphics::SetEffectsAndMeshesToRender(m_EffectsAndMeshes, m_NumberOfMeshesToRender);
+
+	eae6320::Graphics::SetGameObjectsToRender(m_GameObjects, m_NumberOfMeshesToRender);
 }
 
 // Initialization / Clean Up
@@ -105,6 +115,10 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 
 	
 	m_Camera.m_CameraRigidBody.position = Math::sVector(0, 0, 10);
+
+	m_GameObjects[0].m_RigidBody.position = Math::sVector(0, 0, 0);
+
+	m_GameObjects[1].m_RigidBody.position = Math::sVector(1, 0, 0);
 
 	eae6320::Graphics::VertexFormats::sMesh vertexData[5];
 	{

@@ -41,7 +41,8 @@ void main(
 		// This will be done in a future assignment.
 		// For now, however, local space is treated as if it is world space.
 		float4 vertexPosition_local = float4( i_vertexPosition_local, 1.0 );
-		vertexPosition_world = vertexPosition_local;
+		//vertexPosition_world = vertexPosition_local;
+		vertexPosition_world = mul(g_transform_localToWorld, vertexPosition_local);
 	}
 	// Calculate the position of this vertex projected onto the display
 	{
@@ -81,7 +82,8 @@ void main()
 		// This will be done in a future assignment.
 		// For now, however, local space is treated as if it is world space.
 		vec4 vertexPosition_local = vec4( i_vertexPosition_local, 1.0 );
-		vertexPosition_world = vertexPosition_local;
+		/*vertexPosition_world = vertexPosition_local;*/
+		vec4 vertexPosition_world = g_transform_localToWorld * vertexPosition_local;
 	}
 	// Calculate the position of this vertex projected onto the display
 	{

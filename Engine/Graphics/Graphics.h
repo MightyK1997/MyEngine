@@ -19,6 +19,10 @@
 
 namespace eae6320
 {
+	namespace Physics
+	{
+		class cGameObject;
+	}
 	namespace Graphics
 	{
 		//Color Struct
@@ -96,6 +100,8 @@ namespace eae6320
 
 		void SetCameraDataToRender(eae6320::Math::cMatrix_transformation i_WorldToCameraMatrix, eae6320::Math::cMatrix_transformation i_CameraToProjectedMatrix);
 		void SetCameraToRender(eae6320::Graphics::cCamera i_Camera);
+
+		void  SetGameObjectsToRender(eae6320::Physics::cGameObject i_GameObjects[m_maxNumberofMeshesAndEffects], unsigned int i_NumberOfEffectsAndMeshesToRender);
 
 	}
 }

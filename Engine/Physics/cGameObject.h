@@ -12,10 +12,9 @@ namespace eae6320
 	{
 		class cGameObject
 		{
-		private:
+		public:
 			sRigidBodyState m_RigidBody;
-			Graphics::cMesh m_GameObjectMesh;
-			Graphics::cEffect m_GameObjectEffect;
+			Graphics::sEffectsAndMeshesToRender m_EffectMeshPairForRigidBody;
 		};
 	}
 }

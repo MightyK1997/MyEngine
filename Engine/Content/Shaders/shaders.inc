@@ -32,6 +32,11 @@
 	float2 g_padding;
 };
 
+cbuffer g_constantBuffer_perDrawCall : register( b2 )
+{
+  float4x4 g_transform_localToWorld;
+};
+
 
 #elif defined( EAE6320_PLATFORM_GL )
 
@@ -48,6 +53,11 @@
 	float g_elapsedSecondCount_simulationTime;
 	// For vec4 alignment
 	vec2 g_padding;
+};
+
+layout( std140, binding = 2 ) uniform g_constantBuffer_perdrawCall
+{
+  mat4 g_transform_localToWorld;
 };
 
 #endif

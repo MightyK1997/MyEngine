@@ -11,6 +11,8 @@
 #include <Engine/Graphics/cEffect.h>
 #include <Engine/Application/cbApplication.h>
 #include <Engine/Results/Results.h>
+#include <Engine/Graphics/cCamera.h>
+#include <Engine/Physics/cGameObject.h>
 
 #if defined( EAE6320_PLATFORM_WINDOWS )
 	#include "Resource Files/Resource.h"
@@ -87,6 +89,7 @@ namespace eae6320
 		eae6320::Graphics::cMesh* s_Mesh2;
 		eae6320::Graphics::sEffectsAndMeshesToRender m_EffectsAndMeshes[2];
 		eae6320::Graphics::cCamera m_Camera;
+		eae6320::Physics::cGameObject m_GameObjects[2];
 		bool isEffectSwapped = false;
 
 	public:
