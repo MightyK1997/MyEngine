@@ -88,8 +88,12 @@ namespace eae6320
 		eae6320::Graphics::sEffectsAndMeshesToRender m_EffectsAndMeshes[2];
 		eae6320::Graphics::cCamera m_Camera;
 		bool isEffectSwapped = false;
+
 	public:
 		int m_NumberOfMeshesToRender;
+
+	private:
+		void UpdateCameraPosition();
 	};
 }
 

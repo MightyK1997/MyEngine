@@ -94,7 +94,9 @@ namespace eae6320
 
 		void SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender i_EffectsAndMeshes[eae6320::Graphics::m_maxNumberofMeshesAndEffects], unsigned int i_NumberOfEffectsAndMeshesToRender);
 
-		void SetCameraToRender(eae6320::Math::cMatrix_transformation i_WorldToCameraMatrix, eae6320::Math::cMatrix_transformation i_CameraToProjectedMatrix);
+		void SetCameraDataToRender(eae6320::Math::cMatrix_transformation i_WorldToCameraMatrix, eae6320::Math::cMatrix_transformation i_CameraToProjectedMatrix);
+		void SetCameraToRender(eae6320::Graphics::cCamera i_Camera);
+
 	}
 }
 

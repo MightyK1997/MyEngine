@@ -90,12 +90,20 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender i_
 	//size_t structSize = sizeof(sDataRequiredToRenderAFrame);
 }
 
-void eae6320::Graphics::SetCameraToRender(eae6320::Math::cMatrix_transformation i_WorldToCameraMatrix, eae6320::Math::cMatrix_transformation i_CameraToProjectedMatrix)
+void eae6320::Graphics::SetCameraDataToRender(eae6320::Math::cMatrix_transformation i_WorldToCameraMatrix, eae6320::Math::cMatrix_transformation i_CameraToProjectedMatrix)
 {
 	EAE6320_ASSERT(s_dataBeingSubmittedByApplicationThread);
 	auto& constDataBuffer = s_dataBeingSubmittedByApplicationThread->constantData_perFrame;
 	constDataBuffer.g_transform_worldToCamera = i_WorldToCameraMatrix;
 	constDataBuffer.g_transform_cameraToProjected = i_CameraToProjectedMatrix;
+}
+
+void eae6320::Graphics::SetCameraToRender(eae6320::Graphics::cCamera i_Camera)
+{
+	EAE6320_ASSERT(s_dataBeingSubmittedByApplicationThread);
+	auto& constDataBuffer = s_dataBeingSubmittedByApplicationThread->constantData_perFrame;
+	constDataBuffer.g_transform_worldToCamera = eae6320::Math::cMatrix_transformation::CreateWorldToCameraTransform(i_Camera.m_CameraRigidBody.orientation, i_Camera.m_CameraRigidBody.position);
+	constDataBuffer.g_transform_cameraToProjected = eae6320::Math::cMatrix_transformation::CreateCameraToProjectedTransform_perspective(0.745f, 4 / 3, 0.1f, 100);
 }
 
 void eae6320::Graphics::RenderFrame()

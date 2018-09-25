@@ -13,6 +13,28 @@
 // Run
 //----
 
+void eae6320::cMyGame::UpdateCameraPosition()
+{
+	m_Camera.m_CameraRigidBody.velocity = Math::sVector(0, 0, 0);
+
+	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Down))
+	{
+		m_Camera.m_CameraRigidBody.velocity.z = 10.0f;
+	}
+	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Up))
+	{
+		m_Camera.m_CameraRigidBody.velocity.z = -10.0f;
+	}
+	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Right))
+	{
+		m_Camera.m_CameraRigidBody.velocity.x = 10.0f;
+	}
+	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Left))
+	{
+		m_Camera.m_CameraRigidBody.velocity.x = -10.0f;
+	}
+}
+
 void eae6320::cMyGame::UpdateBasedOnInput()
 {
 	// Is the user pressing the ESC key?
@@ -40,26 +62,7 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 			isEffectSwapped = false;
 		}
 	}
-
-	m_Camera.m_CameraRigidBody.velocity = Math::sVector(0, 0, 0);
-
-	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Down))
-	{
-		m_Camera.m_CameraRigidBody.velocity.z = 10.0f;
-	}
-	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Up))
-	{
-		m_Camera.m_CameraRigidBody.velocity.z = -10.0f;
-	}
-	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Right))
-	{
-		m_Camera.m_CameraRigidBody.velocity.x = 10.0f;
-	}
-	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Left))
-	{
-		m_Camera.m_CameraRigidBody.velocity.x = -10.0f;
-	}
-
+	UpdateCameraPosition();
 }
 
 void eae6320::cMyGame::UpdateSimulationBasedOnTime(const float i_elapsedSecondCount_sinceLastUpdate)
@@ -82,8 +85,10 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 	m_EffectsAndMeshes[1].m_RenderEffect = s_Effect2;
 	m_EffectsAndMeshes[1].m_RenderMesh = s_Mesh2;
 
-	eae6320::Graphics::SetCameraToRender(eae6320::Math::cMatrix_transformation::CreateWorldToCameraTransform(m_Camera.m_CameraRigidBody.orientation, m_Camera.m_CameraRigidBody.position),
-		eae6320::Math::cMatrix_transformation::CreateCameraToProjectedTransform_perspective(0.745f, 4/3, 0.1f, 100));
+	//eae6320::Graphics::SetCameraDataToRender(eae6320::Math::cMatrix_transformation::CreateWorldToCameraTransform(m_Camera.m_CameraRigidBody.orientation, m_Camera.m_CameraRigidBody.position),
+	//	eae6320::Math::cMatrix_transformation::CreateCameraToProjectedTransform_perspective(0.745f, 4/3, 0.1f, 100));
+
+	eae6320::Graphics::SetCameraToRender(m_Camera);
 
 	eae6320::Graphics::SetEffectsAndMeshesToRender(m_EffectsAndMeshes, m_NumberOfMeshesToRender);
 }
