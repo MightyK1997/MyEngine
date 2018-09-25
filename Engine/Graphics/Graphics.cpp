@@ -85,6 +85,14 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender i_
 	size_t structSize = sizeof(sDataRequiredToRenderAFrame);
 }
 
+void eae6320::Graphics::SetCameraToRender(eae6320::Math::cMatrix_transformation i_WorldToCameraMatrix, eae6320::Math::cMatrix_transformation i_CameraToProjectedMatrix)
+{
+	EAE6320_ASSERT(s_dataBeingSubmittedByApplicationThread);
+	auto& constDataBuffer = s_dataBeingSubmittedByApplicationThread->constantData_perFrame;
+	constDataBuffer.g_transform_worldToCamera = i_WorldToCameraMatrix;
+	constDataBuffer.g_transform_cameraToProjected = i_CameraToProjectedMatrix;
+}
+
 void eae6320::Graphics::RenderFrame()
 {
 	// Wait for the application loop to submit data to be rendered
