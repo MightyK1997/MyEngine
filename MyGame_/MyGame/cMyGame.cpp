@@ -40,10 +40,31 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 			isEffectSwapped = false;
 		}
 	}
+
+	m_Camera.m_CameraRigidBody.velocity = Math::sVector(0, 0, 0);
+
+	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Down))
+	{
+		m_Camera.m_CameraRigidBody.velocity.z = 10.0f;
+	}
+	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Up))
+	{
+		m_Camera.m_CameraRigidBody.velocity.z = -10.0f;
+	}
+	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Right))
+	{
+		m_Camera.m_CameraRigidBody.velocity.x = 10.0f;
+	}
+	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Left))
+	{
+		m_Camera.m_CameraRigidBody.velocity.x = -10.0f;
+	}
+
 }
 
 void eae6320::cMyGame::UpdateSimulationBasedOnTime(const float i_elapsedSecondCount_sinceLastUpdate)
 {
+	m_Camera.m_CameraRigidBody.Update(i_elapsedSecondCount_sinceLastUpdate);
 }
 
 void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_systemTime, const float i_elapsedSecondCount_sinceLastSimulationUpdate)
