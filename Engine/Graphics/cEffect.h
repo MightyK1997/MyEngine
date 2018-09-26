@@ -29,11 +29,19 @@ namespace eae6320
 			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()
 			EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cEffect)
 			void Bind();
+			static cResult CreateEffect(std::string i_vertexShaderLocation, std::string i_fragmentShaderLocation, RenderStates::eRenderState i_TypeOfRender, cEffect*& o_Effect)
+			{
+				cResult result = Results::Success;
+				o_Effect = new cEffect();
+				result = o_Effect->Initialize(i_vertexShaderLocation, i_fragmentShaderLocation, i_TypeOfRender);
+				return result;
+			}
+
 			static cResult CreateEffect(std::string i_vertexShaderLocation, std::string i_fragmentShaderLocation, cEffect*& o_Effect)
 			{
 				cResult result = Results::Success;
 				o_Effect = new cEffect();
-				result = o_Effect->Initialize(i_vertexShaderLocation, i_fragmentShaderLocation);
+				result = o_Effect->Initialize(i_vertexShaderLocation, i_fragmentShaderLocation, 0);
 				return result;
 			}
 		private:
@@ -42,7 +50,7 @@ namespace eae6320
 			{
 				Shutdown();
 			}
-			cResult Initialize(std::string i_vertexShaderLocation, std::string i_fragmentShaderLocation);
+			cResult Initialize(std::string i_vertexShaderLocation, std::string i_fragmentShaderLocation, uint8_t i_TypeOfRender);
 			cResult Shutdown();
 #ifdef EAE6320_PLATFORM_D3D
 			eae6320::Graphics::cShader::Handle m_vertexShader;

@@ -70,35 +70,21 @@ void eae6320::Graphics::SetBackBufferValue(eae6320::Graphics::sColor i_BackBuffe
 }
 
 //This function gets called from the game to set the meshes and effects to render
-void eae6320::Graphics::SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender i_EffectsAndMeshes[eae6320::Graphics::m_maxNumberofMeshesAndEffects], unsigned int i_NumberOfEffectsAndMeshesToRender)
+void eae6320::Graphics::SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender i_EffectsAndMeshes[eae6320::Graphics::m_maxNumberofMeshesAndEffects], eae6320::Math::cMatrix_transformation i_LocaltoWorldTransforms[m_maxNumberofMeshesAndEffects], unsigned int i_NumberOfEffectsAndMeshesToRender)
 {
 	EAE6320_ASSERT(i_NumberOfEffectsAndMeshesToRender < m_maxNumberofMeshesAndEffects);
 	auto& meshesAndEffects = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
 	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = i_NumberOfEffectsAndMeshesToRender;
 	auto m_allMeshes = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
+	auto m_allDrawCallConstants = s_dataBeingSubmittedByApplicationThread->constantData_perDrawCall;
 
 	for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
 	{
 		meshesAndEffects[i] = i_EffectsAndMeshes[i];
+		m_allDrawCallConstants[i].g_transform_localToWorld = i_LocaltoWorldTransforms[i];
 		meshesAndEffects[i].m_RenderEffect->IncrementReferenceCount();
 		meshesAndEffects[i].m_RenderMesh->IncrementReferenceCount();
 	}
-	//size_t somesize = sizeof(eae6320::Graphics::ConstantBufferFormats::sPerFrame);
-	//somesize = sizeof(eae6320::Graphics::sColor);
-	//somesize = sizeof(eae6320::Graphics::sEffectsAndMeshesToRender);
-	//somesize = sizeof(unsigned int);
-
-	//size_t meshSize = sizeof(cMesh);
-	//size_t effectSize = sizeof(cEffect);
-	//size_t structSize = sizeof(sDataRequiredToRenderAFrame);
-}
-
-void eae6320::Graphics::SetCameraDataToRender(eae6320::Math::cMatrix_transformation i_WorldToCameraMatrix, eae6320::Math::cMatrix_transformation i_CameraToProjectedMatrix)
-{
-	EAE6320_ASSERT(s_dataBeingSubmittedByApplicationThread);
-	auto& constDataBuffer = s_dataBeingSubmittedByApplicationThread->constantData_perFrame;
-	constDataBuffer.g_transform_worldToCamera = i_WorldToCameraMatrix;
-	constDataBuffer.g_transform_cameraToProjected = i_CameraToProjectedMatrix;
 }
 
 void eae6320::Graphics::SetCameraToRender(eae6320::Graphics::cCamera* i_Camera, const float i_secondCountToExtrapolate)
@@ -107,41 +93,7 @@ void eae6320::Graphics::SetCameraToRender(eae6320::Graphics::cCamera* i_Camera, 
 	auto& constDataBuffer = s_dataBeingSubmittedByApplicationThread->constantData_perFrame;
 	constDataBuffer.g_transform_worldToCamera = eae6320::Math::cMatrix_transformation::CreateWorldToCameraTransform(
 		i_Camera->PredictFutureOrientation(i_secondCountToExtrapolate), i_Camera->PredictFuturePosition(i_secondCountToExtrapolate));
-	constDataBuffer.g_transform_cameraToProjected = eae6320::Math::cMatrix_transformation::CreateCameraToProjectedTransform_perspective(0.745f, 4 / 3, 0.1f, 100);
-}
-
-void eae6320::Graphics::SetGameObjectsToRender(eae6320::Physics::cGameObject i_GameObjects[eae6320::Graphics::m_maxNumberofMeshesAndEffects], unsigned int i_NumberOfEffectsAndMeshesToRender)
-{
-	EAE6320_ASSERT(i_NumberOfEffectsAndMeshesToRender < m_maxNumberofMeshesAndEffects);
-	auto& meshesAndEffects = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
-	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = i_NumberOfEffectsAndMeshesToRender;
-	auto m_allMeshes = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
-	auto m_allDrawCallConstants = s_dataBeingSubmittedByApplicationThread->constantData_perDrawCall;
-
-	for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
-	{
-		meshesAndEffects[i] = i_GameObjects[i].GetMeshEffectPair();
-		m_allDrawCallConstants[i].g_transform_localToWorld = eae6320::Math::cMatrix_transformation(i_GameObjects[i].GetGameObjectRotation(), i_GameObjects[i].GetGameObjectPosition());
-		meshesAndEffects[i].m_RenderEffect->IncrementReferenceCount();
-		meshesAndEffects[i].m_RenderMesh->IncrementReferenceCount();
-	}
-}
-
-void eae6320::Graphics::SetGameObjectsToRender(eae6320::Physics::cGameObject* i_GameObjects[eae6320::Graphics::m_maxNumberofMeshesAndEffects], unsigned int i_NumberOfEffectsAndMeshesToRender, const float i_secondCountToExtrapolate)
-{
-	EAE6320_ASSERT(i_NumberOfEffectsAndMeshesToRender < m_maxNumberofMeshesAndEffects);
-	auto& meshesAndEffects = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
-	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = i_NumberOfEffectsAndMeshesToRender;
-	auto m_allMeshes = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
-	auto m_allDrawCallConstants = s_dataBeingSubmittedByApplicationThread->constantData_perDrawCall;
-
-	for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
-	{
-		meshesAndEffects[i] = i_GameObjects[i]->GetMeshEffectPair();
-		m_allDrawCallConstants[i].g_transform_localToWorld = eae6320::Math::cMatrix_transformation(i_GameObjects[i]->PredictFutureOrientation(i_secondCountToExtrapolate), i_GameObjects[i]->PredictFuturePosition(i_secondCountToExtrapolate));
-		meshesAndEffects[i].m_RenderEffect->IncrementReferenceCount();
-		meshesAndEffects[i].m_RenderMesh->IncrementReferenceCount();
-	}
+	constDataBuffer.g_transform_cameraToProjected = eae6320::Math::cMatrix_transformation::CreateCameraToProjectedTransform_perspective(0.745f, 1, 0.1f, 100);
 }
 
 void eae6320::Graphics::RenderFrame()
@@ -201,7 +153,6 @@ void eae6320::Graphics::RenderFrame()
 			}
 
 		}
-		//s_dataBeingRenderedByRenderThread->m_MeshesAndEffects = nullptr;
 		s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender = 0;
 	}
 }
