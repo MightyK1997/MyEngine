@@ -48,6 +48,16 @@ eae6320::Math::cQuaternion eae6320::Graphics::cCamera::GetCameraRotation()
 	return m_CameraRigidBody.orientation;
 }
 
+eae6320::Math::sVector eae6320::Graphics::cCamera::PredictFuturePosition(const float i_secondCountToExtrapolate) const
+{
+	return m_CameraRigidBody.PredictFuturePosition(i_secondCountToExtrapolate);
+}
+
+eae6320::Math::cQuaternion eae6320::Graphics::cCamera::PredictFutureOrientation(const float i_secondCountToExtrapolate) const
+{
+	return m_CameraRigidBody.PredictFutureOrientation(i_secondCountToExtrapolate);
+}
+
 void eae6320::Graphics::cCamera::Update(const float i_elapsedSecondCount_sinceLastUpdate)
 {
 	m_CameraRigidBody.Update(i_elapsedSecondCount_sinceLastUpdate);

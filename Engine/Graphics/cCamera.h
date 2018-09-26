@@ -25,6 +25,9 @@ namespace eae6320
 			Math::sVector GetCameraPosition();
 			Math::cQuaternion GetCameraRotation();
 
+			Math::sVector PredictFuturePosition(const float i_secondCountToExtrapolate) const;
+			Math::cQuaternion PredictFutureOrientation(const float i_secondCountToExtrapolate) const;
+
 			void Update(const float i_elapsedSecondCount_sinceLastUpdate);
 			
 		private:

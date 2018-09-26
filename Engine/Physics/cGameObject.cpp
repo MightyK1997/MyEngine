@@ -100,3 +100,13 @@ void eae6320::Physics::cGameObject::UpdateGameObject(const float i_elapsedSecond
 {
 	m_RigidBody.Update(i_elapsedSecondCount_sinceLastUpdate);
 }
+
+eae6320::Math::sVector eae6320::Physics::cGameObject::PredictFuturePosition(const float i_secondCountToExtrapolate) const
+{
+	return m_RigidBody.PredictFuturePosition(i_secondCountToExtrapolate);
+}
+
+eae6320::Math::cQuaternion eae6320::Physics::cGameObject::PredictFutureOrientation(const float i_secondCountToExtrapolate) const
+{
+	return m_RigidBody.PredictFutureOrientation(i_secondCountToExtrapolate);
+}

@@ -99,11 +99,11 @@ namespace eae6320
 		void SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender i_EffectsAndMeshes[eae6320::Graphics::m_maxNumberofMeshesAndEffects], unsigned int i_NumberOfEffectsAndMeshesToRender);
 
 		void SetCameraDataToRender(eae6320::Math::cMatrix_transformation i_WorldToCameraMatrix, eae6320::Math::cMatrix_transformation i_CameraToProjectedMatrix);
-		void SetCameraToRender(eae6320::Graphics::cCamera* i_Camera);
+		void SetCameraToRender(eae6320::Graphics::cCamera* i_Camera, const float i_secondCountToExtrapolate);
 
 		void  SetGameObjectsToRender(eae6320::Physics::cGameObject i_GameObjects[m_maxNumberofMeshesAndEffects], unsigned int i_NumberOfEffectsAndMeshesToRender);
 
-		void  SetGameObjectsToRender(eae6320::Physics::cGameObject* i_GameObjects[m_maxNumberofMeshesAndEffects], unsigned int i_NumberOfEffectsAndMeshesToRender);
+		void  SetGameObjectsToRender(eae6320::Physics::cGameObject* i_GameObjects[m_maxNumberofMeshesAndEffects], unsigned int i_NumberOfEffectsAndMeshesToRender, const float i_secondCountToExtrapolate);
 
 	}
 }

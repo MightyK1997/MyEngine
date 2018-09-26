@@ -35,6 +35,8 @@ namespace eae6320
 			Graphics::cEffect* GetGameObjectEffet();
 			Graphics::sEffectsAndMeshesToRender GetMeshEffectPair();
 			void UpdateGameObject(const float i_elapsedSecondCount_sinceLastUpdate);
+			Math::sVector PredictFuturePosition(const float i_secondCountToExtrapolate) const;
+			Math::cQuaternion PredictFutureOrientation(const float i_secondCountToExtrapolate) const;
 		public:
 		private:
 			EAE6320_ASSETS_DECLAREREFERENCECOUNT()

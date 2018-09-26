@@ -95,14 +95,9 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 	m_GameObjects[1]->SetGameObjectEffect(m_EffectsAndMeshes[1].m_RenderEffect);
 	m_GameObjects[1]->SetGameObjectMesh(m_EffectsAndMeshes[1].m_RenderMesh);
 
-	//eae6320::Graphics::SetCameraDataToRender(eae6320::Math::cMatrix_transformation::CreateWorldToCameraTransform(m_Camera.m_CameraRigidBody.orientation, m_Camera.m_CameraRigidBody.position),
-	//	eae6320::Math::cMatrix_transformation::CreateCameraToProjectedTransform_perspective(0.745f, 4/3, 0.1f, 100));
+	eae6320::Graphics::SetCameraToRender(m_Camera, i_elapsedSecondCount_sinceLastSimulationUpdate);
 
-	eae6320::Graphics::SetCameraToRender(m_Camera);
-
-	//eae6320::Graphics::SetEffectsAndMeshesToRender(m_EffectsAndMeshes, m_NumberOfMeshesToRender);
-
-	eae6320::Graphics::SetGameObjectsToRender(m_GameObjects, m_NumberOfMeshesToRender);
+	eae6320::Graphics::SetGameObjectsToRender(m_GameObjects, m_NumberOfMeshesToRender, i_elapsedSecondCount_sinceLastSimulationUpdate);
 }
 
 // Initialization / Clean Up
