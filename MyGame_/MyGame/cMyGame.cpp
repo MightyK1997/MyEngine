@@ -179,7 +179,7 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 	eae6320::Physics::cGameObject::CreateGameObject(m_GameObjects[0]);
 	eae6320::Physics::cGameObject::CreateGameObject(m_GameObjects[1]);
 
-	m_GameObjects[0]->SetGameObjectPosition(Math::sVector(0, 0, 0));
+	m_GameObjects[0]->SetGameObjectPosition(Math::sVector(1, 0, 0));
 
 	m_GameObjects[1]->SetGameObjectPosition(Math::sVector(0, 0, 0));
 
@@ -265,20 +265,17 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 		//indexData2[11].indexValue = 6;
 	}
 
-	eae6320::Graphics::VertexFormats::sIndex indexData3[12];
+	eae6320::Graphics::VertexFormats::sIndex indexData3[9];
 	{
-		indexData3[0].indexValue = 0;
-		indexData3[1].indexValue = 1;
-		indexData3[2].indexValue = 2;
-		indexData3[3].indexValue = 0;
-		indexData3[4].indexValue = 2;
+		indexData3[0].indexValue = 1;
+		indexData3[1].indexValue = 0;
+		indexData3[2].indexValue = 3;
+		indexData3[3].indexValue = 4;
+		indexData3[4].indexValue = 1;
 		indexData3[5].indexValue = 3;
-		indexData3[6].indexValue = 3;
-		indexData3[7].indexValue = 4;
-		indexData3[8].indexValue = 5;
-		indexData3[9].indexValue = 7;
-		indexData3[10].indexValue = 2;
-		indexData3[11].indexValue = 6;
+		indexData3[6].indexValue = 0;
+		indexData3[7].indexValue = 1;
+		indexData3[8].indexValue = 2;
 	}
 	if (!(eae6320::Graphics::cEffect::CreateEffect(m_vertShader1Location, m_fragShader1Location, eae6320::Graphics::RenderStates::DepthBuffering, s_Effect)))
 	{
@@ -305,7 +302,7 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 		EAE6320_ASSERT(false);
 		//goto OnExit;
 	}
-	if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData2, indexData3, 12, s_Mesh3)))
+	if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData, indexData3, 9, s_Mesh3)))
 	{
 		EAE6320_ASSERT(false);
 		//goto OnExit;
