@@ -14,23 +14,23 @@
 
 void eae6320::cMyGame::UpdateCameraPosition()
 {
-	m_Camera.m_CameraRigidBody.velocity = Math::sVector(0, 0, 0);
+	m_Camera->SetCameraVelocity(Math::sVector(0, 0, 0));
 
 	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Down))
 	{
-		m_Camera.m_CameraRigidBody.velocity.z = 10.0f;
+		m_Camera->SetCameraVelocity(Math::sVector(0, 0, 10.0f));
 	}
 	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Up))
 	{
-		m_Camera.m_CameraRigidBody.velocity.z = -10.0f;
+		m_Camera->SetCameraVelocity(Math::sVector(0, 0, -10.0f));
 	}
 	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Right))
 	{
-		m_Camera.m_CameraRigidBody.velocity.x = 10.0f;
+		m_Camera->SetCameraVelocity(Math::sVector(10.0f, 0, 0));
 	}
 	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Left))
 	{
-		m_Camera.m_CameraRigidBody.velocity.x = -10.0f;
+		m_Camera->SetCameraVelocity(Math::sVector(-10.0f, 0, 0));
 	}
 }
 
@@ -71,7 +71,7 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 
 void eae6320::cMyGame::UpdateSimulationBasedOnTime(const float i_elapsedSecondCount_sinceLastUpdate)
 {
-	m_Camera.m_CameraRigidBody.Update(i_elapsedSecondCount_sinceLastUpdate);
+	m_Camera->Update(i_elapsedSecondCount_sinceLastUpdate);
 	m_GameObjects[0]->UpdateGameObject(i_elapsedSecondCount_sinceLastUpdate);
 }
 
@@ -115,8 +115,9 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 	std::string m_vertShader2Location = "data/Shaders/Vertex/standard.shader";
 	std::string m_fragShader2Location = "data/Shaders/Fragment/standard.shader";
 
+	eae6320::Graphics::cCamera::CreateCamera(m_Camera);
 
-	m_Camera.m_CameraRigidBody.position = Math::sVector(0, 0, 10);
+	m_Camera->SetCameraPosition(Math::sVector(0, 0, 10));
 
 	eae6320::Physics::cGameObject::CreateGameObject(m_GameObjects[0]);
 	eae6320::Physics::cGameObject::CreateGameObject(m_GameObjects[1]);
@@ -242,5 +243,6 @@ eae6320::cResult eae6320::cMyGame::CleanUp()
 	{
 		m_GameObjects[i]->DecrementReferenceCount();
 	}
+	m_Camera->DecrementReferenceCount();
 	return Results::Success;
 }
