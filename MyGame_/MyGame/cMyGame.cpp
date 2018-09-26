@@ -59,6 +59,7 @@ void eae6320::cMyGame::UpdateGameobjectPosition()
 	}
 
 //GO2
+	//m_GameObjects[1]->SetGameObjectVelocity(Math::sVector(0, 0, 0));
 	if (UserInput::IsKeyPressed('I'))
 	{
 		m_GameObjects[1]->SetGameObjectVelocity(Math::sVector(0, 10.0f, 0.0f));
@@ -128,7 +129,10 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 void eae6320::cMyGame::UpdateSimulationBasedOnTime(const float i_elapsedSecondCount_sinceLastUpdate)
 {
 	m_Camera->Update(i_elapsedSecondCount_sinceLastUpdate);
-	m_GameObjects[0]->UpdateGameObject(i_elapsedSecondCount_sinceLastUpdate);
+	for (int i = 0; i < m_NumberOfGameObjects; i++)
+	{
+		m_GameObjects[i]->UpdateGameObject(i_elapsedSecondCount_sinceLastUpdate);
+	}
 }
 
 void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_systemTime, const float i_elapsedSecondCount_sinceLastSimulationUpdate)
