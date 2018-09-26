@@ -103,6 +103,8 @@ namespace eae6320
 
 		void  SetGameObjectsToRender(eae6320::Physics::cGameObject i_GameObjects[m_maxNumberofMeshesAndEffects], unsigned int i_NumberOfEffectsAndMeshesToRender);
 
+		void  SetGameObjectsToRender(eae6320::Physics::cGameObject* i_GameObjects[m_maxNumberofMeshesAndEffects], unsigned int i_NumberOfEffectsAndMeshesToRender);
+
 	}
 }
 

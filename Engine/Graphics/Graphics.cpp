@@ -119,8 +119,25 @@ void eae6320::Graphics::SetGameObjectsToRender(eae6320::Physics::cGameObject i_G
 
 	for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
 	{
-		meshesAndEffects[i] = i_GameObjects[i].m_EffectMeshPairForRigidBody;
-		m_allDrawCallConstants[i].g_transform_localToWorld = eae6320::Math::cMatrix_transformation(i_GameObjects[i].m_RigidBody.orientation, i_GameObjects[i].m_RigidBody.position);
+		meshesAndEffects[i] = i_GameObjects[i].GetMeshEffectPair();
+		m_allDrawCallConstants[i].g_transform_localToWorld = eae6320::Math::cMatrix_transformation(i_GameObjects[i].GetGameObjectRotation(), i_GameObjects[i].GetGameObjectPosition());
+		meshesAndEffects[i].m_RenderEffect->IncrementReferenceCount();
+		meshesAndEffects[i].m_RenderMesh->IncrementReferenceCount();
+	}
+}
+
+void eae6320::Graphics::SetGameObjectsToRender(eae6320::Physics::cGameObject* i_GameObjects[eae6320::Graphics::m_maxNumberofMeshesAndEffects], unsigned int i_NumberOfEffectsAndMeshesToRender)
+{
+	EAE6320_ASSERT(i_NumberOfEffectsAndMeshesToRender < m_maxNumberofMeshesAndEffects);
+	auto& meshesAndEffects = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
+	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = i_NumberOfEffectsAndMeshesToRender;
+	auto m_allMeshes = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
+	auto m_allDrawCallConstants = s_dataBeingSubmittedByApplicationThread->constantData_perDrawCall;
+
+	for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
+	{
+		meshesAndEffects[i] = i_GameObjects[i]->GetMeshEffectPair();
+		m_allDrawCallConstants[i].g_transform_localToWorld = eae6320::Math::cMatrix_transformation(i_GameObjects[i]->GetGameObjectRotation(), i_GameObjects[i]->GetGameObjectPosition());
 		meshesAndEffects[i].m_RenderEffect->IncrementReferenceCount();
 		meshesAndEffects[i].m_RenderMesh->IncrementReferenceCount();
 	}

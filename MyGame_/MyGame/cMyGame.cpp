@@ -37,11 +37,11 @@ void eae6320::cMyGame::UpdateCameraPosition()
 void eae6320::cMyGame::UpdateBasedOnInput()
 {
 	// Is the user pressing the ESC key?
-	if ( UserInput::IsKeyPressed( UserInput::KeyCodes::Escape ) )
+	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Escape))
 	{
 		// Exit the application
-		const auto result = Exit( EXIT_SUCCESS );
-		EAE6320_ASSERT( result );
+		const auto result = Exit(EXIT_SUCCESS);
+		EAE6320_ASSERT(result);
 	}
 	Application::cbApplication::SetSimulationRate(UserInput::IsKeyPressed(UserInput::KeyCodes::Shift) ? 0.5f : 1.0f);
 	m_NumberOfMeshesToRender = UserInput::IsKeyPressed(UserInput::KeyCodes::F1) ? 1 : 2;
@@ -62,17 +62,17 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 		}
 	}
 	UpdateCameraPosition();
-	m_GameObjects[0].m_RigidBody.velocity = Math::sVector(0, 0, 0);
+	m_GameObjects[0]->SetGameObjectVelocity(Math::sVector(0, 0, 0));
 	if (UserInput::IsKeyPressed(UserInput::KeyCodes::F3))
 	{
-		m_GameObjects[0].m_RigidBody.velocity.x = -10.0f;
+		m_GameObjects[0]->SetGameObjectVelocity(Math::sVector(-10.0f, 0, 0));
 	}
 }
 
 void eae6320::cMyGame::UpdateSimulationBasedOnTime(const float i_elapsedSecondCount_sinceLastUpdate)
 {
 	m_Camera.m_CameraRigidBody.Update(i_elapsedSecondCount_sinceLastUpdate);
-	m_GameObjects[0].m_RigidBody.Update(i_elapsedSecondCount_sinceLastUpdate);
+	m_GameObjects[0]->UpdateGameObject(i_elapsedSecondCount_sinceLastUpdate);
 }
 
 void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_systemTime, const float i_elapsedSecondCount_sinceLastSimulationUpdate)
@@ -90,8 +90,10 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 	m_EffectsAndMeshes[1].m_RenderEffect = s_Effect2;
 	m_EffectsAndMeshes[1].m_RenderMesh = s_Mesh2;
 
-	m_GameObjects[0].m_EffectMeshPairForRigidBody = m_EffectsAndMeshes[0];
-	m_GameObjects[1].m_EffectMeshPairForRigidBody = m_EffectsAndMeshes[1];
+	m_GameObjects[0]->SetGameObjectEffect(m_EffectsAndMeshes[0].m_RenderEffect);
+	m_GameObjects[0]->SetGameObjectMesh(m_EffectsAndMeshes[0].m_RenderMesh);
+	m_GameObjects[1]->SetGameObjectEffect(m_EffectsAndMeshes[1].m_RenderEffect);
+	m_GameObjects[1]->SetGameObjectMesh(m_EffectsAndMeshes[1].m_RenderMesh);
 
 	//eae6320::Graphics::SetCameraDataToRender(eae6320::Math::cMatrix_transformation::CreateWorldToCameraTransform(m_Camera.m_CameraRigidBody.orientation, m_Camera.m_CameraRigidBody.position),
 	//	eae6320::Math::cMatrix_transformation::CreateCameraToProjectedTransform_perspective(0.745f, 4/3, 0.1f, 100));
@@ -113,12 +115,15 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 	std::string m_vertShader2Location = "data/Shaders/Vertex/standard.shader";
 	std::string m_fragShader2Location = "data/Shaders/Fragment/standard.shader";
 
-	
+
 	m_Camera.m_CameraRigidBody.position = Math::sVector(0, 0, 10);
 
-	m_GameObjects[0].m_RigidBody.position = Math::sVector(0, 0, 0);
+	eae6320::Physics::cGameObject::CreateGameObject(m_GameObjects[0]);
+	eae6320::Physics::cGameObject::CreateGameObject(m_GameObjects[1]);
 
-	m_GameObjects[1].m_RigidBody.position = Math::sVector(1, 0, 0);
+	m_GameObjects[0]->SetGameObjectPosition(Math::sVector(0, 0, 0));
+
+	m_GameObjects[1]->SetGameObjectPosition(Math::sVector(1, 0, 0));
 
 	eae6320::Graphics::VertexFormats::sMesh vertexData[5];
 	{
@@ -233,5 +238,9 @@ eae6320::cResult eae6320::cMyGame::CleanUp()
 	s_Effect2->DecrementReferenceCount();
 	s_Mesh->DecrementReferenceCount();
 	s_Mesh2->DecrementReferenceCount();
+	for (int i = 0; i < 2; i++)
+	{
+		m_GameObjects[i]->DecrementReferenceCount();
+	}
 	return Results::Success;
 }
