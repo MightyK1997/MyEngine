@@ -11,6 +11,8 @@
 #include <Engine/Graphics/cEffect.h>
 #include <Engine/Application/cbApplication.h>
 #include <Engine/Results/Results.h>
+#include <Engine/Graphics/cCamera.h>
+#include <Engine/Physics/cGameObject.h>
 
 #if defined( EAE6320_PLATFORM_WINDOWS )
 	#include "Resource Files/Resource.h"
@@ -72,7 +74,7 @@ namespace eae6320
 		//----
 
 		virtual void UpdateBasedOnInput() override;
-		virtual void UpdateSimulationBasedOnInput() override;
+		virtual void UpdateSimulationBasedOnTime(const float i_elapsedSecondCount_sinceLastUpdate)override;
 		virtual void SubmitDataToBeRendered(const float i_elapsedSecondCount_systemTime, const float i_elapsedSecondCount_sinceLastSimulationUpdate) override;
 
 		// Initialization / Clean Up
@@ -81,14 +83,27 @@ namespace eae6320
 		virtual cResult Initialize() override;
 		virtual cResult CleanUp() override;
 	private:
+		static const unsigned int m_NumberOfGameObjects = 2;
+		bool isEffectSwapped = false;
+		bool isMeshSwapped = false;
 		eae6320::Graphics::cEffect* s_Effect;
 		eae6320::Graphics::cEffect* s_Effect2;
+		eae6320::Graphics::cEffect* s_Effect3;
 		eae6320::Graphics::cMesh* s_Mesh;
 		eae6320::Graphics::cMesh* s_Mesh2;
-		eae6320::Graphics::sEffectsAndMeshesToRender m_EffectsAndMeshes[2];
-		bool isEffectSwapped = false;
+		eae6320::Graphics::cMesh* s_Mesh3;
+		eae6320::Graphics::sEffectsAndMeshesToRender m_EffectsAndMeshes[m_NumberOfGameObjects];
+		eae6320::Graphics::cCamera* m_Camera;
+		eae6320::Physics::cGameObject* m_GameObjects[m_NumberOfGameObjects];
+		eae6320::Math::cMatrix_transformation m_GameObjectLocalToWorldTransforms[m_NumberOfGameObjects];
+
+
 	public:
 		int m_NumberOfMeshesToRender;
+
+	private:
+		void UpdateCameraPosition();
+		void UpdateGameobjectPosition();
 	};
 }
 

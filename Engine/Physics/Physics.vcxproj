@@ -19,9 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cGameObject.cpp" />
     <ClCompile Include="sRigidBodyState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cGameObject.h" />
     <ClInclude Include="sRigidBodyState.h" />
   </ItemGroup>
   <ItemGroup>

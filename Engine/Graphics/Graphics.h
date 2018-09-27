@@ -9,6 +9,7 @@
 #include "cConstantBuffer.h"
 #include "ConstantBufferFormats.h"
 #include <Engine/Results/Results.h>
+#include "cCamera.h"
 #if defined( EAE6320_PLATFORM_WINDOWS )
 	#include <Engine/Windows/Includes.h>
 #endif
@@ -18,6 +19,10 @@
 
 namespace eae6320
 {
+	namespace Physics
+	{
+		class cGameObject;
+	}
 	namespace Graphics
 	{
 		//Color Struct
@@ -91,7 +96,11 @@ namespace eae6320
 
 		void SetBackBufferValue(sColor i_BackBuffer);
 
-		void SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender* i_EffectsAndMeshes, unsigned int i_NumberOfEffectsAndMeshesToRender);
+		void SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender i_EffectsAndMeshes[eae6320::Graphics::m_maxNumberofMeshesAndEffects], eae6320::Math::cMatrix_transformation i_LocaltoWorldTransforms[m_maxNumberofMeshesAndEffects],
+			unsigned int i_NumberOfEffectsAndMeshesToRender);
+
+		void SetCameraToRender(eae6320::Graphics::cCamera* i_Camera, const float i_secondCountToExtrapolate);
+
 	}
 }
 

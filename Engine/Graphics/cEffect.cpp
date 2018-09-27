@@ -4,7 +4,7 @@ namespace eae6320
 {
 	namespace Graphics
 	{
-		cResult cEffect::Initialize(std::string i_vertexShaderLocation, std::string i_fragmentShaderLocation)
+		cResult cEffect::Initialize(std::string i_vertexShaderLocation, std::string i_fragmentShaderLocation, uint8_t i_TypeOfRender)
 		{
 			auto result = eae6320::Results::Success;
 
@@ -20,9 +20,9 @@ namespace eae6320
 				EAE6320_ASSERT(false);
 				goto OnExit;
 			}
+			//Changing this to enable depth buffering and other state from the game, defaults to 0 if nothing is passed
 			{
-				constexpr uint8_t defaultRenderState = 0;
-				if (!(result = s_renderState.Initialize(defaultRenderState)))
+				if (!(result = s_renderState.Initialize(i_TypeOfRender)))
 				{
 					EAE6320_ASSERT(false);
 					goto OnExit;
