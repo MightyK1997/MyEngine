@@ -110,3 +110,8 @@ eae6320::Math::cQuaternion eae6320::Physics::cGameObject::PredictFutureOrientati
 {
 	return m_RigidBody.PredictFutureOrientation(i_secondCountToExtrapolate);
 }
+
+eae6320::Math::cMatrix_transformation eae6320::Physics::cGameObject::GetLocalToWorldTransformation(const float i_secondCountToExtrapolate)
+{
+	return eae6320::Math::cMatrix_transformation(m_RigidBody.PredictFutureOrientation(i_secondCountToExtrapolate), m_RigidBody.PredictFuturePosition(i_secondCountToExtrapolate));
+}

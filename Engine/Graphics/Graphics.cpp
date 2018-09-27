@@ -85,6 +85,8 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender i_
 		meshesAndEffects[i].m_RenderEffect->IncrementReferenceCount();
 		meshesAndEffects[i].m_RenderMesh->IncrementReferenceCount();
 	}
+	size_t someOtherSize = sizeof(eae6320::Graphics::ConstantBufferFormats::sPerDrawCall);
+	size_t someValue = sizeof(s_dataRequiredToRenderAFrame);
 }
 
 void eae6320::Graphics::SetCameraToRender(eae6320::Graphics::cCamera* i_Camera, const float i_secondCountToExtrapolate)
