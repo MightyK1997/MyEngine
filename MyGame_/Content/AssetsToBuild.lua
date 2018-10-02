@@ -12,6 +12,8 @@ return
 		{ path = "Shaders/Vertex/vertexInputLayout.shader", arguments = { "vertex" } },
 	},
 	meshes = {
-	"Meshes/Buffers.txt",
+	"Meshes/Mesh1.txt",
+	"Meshes/Mesh2.txt",
+	"Meshes/Mesh3.txt",
 	},
 }

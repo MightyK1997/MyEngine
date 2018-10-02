@@ -110,7 +110,7 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 	{
 		if (!isMeshSwapped)
 		{
-			std::swap(s_Mesh, s_Mesh3);
+			std::swap(mesh1Handle, mesh3Handle);
 			isMeshSwapped = true;
 		}
 	}
@@ -118,7 +118,7 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 	{
 		if (isMeshSwapped)
 		{
-			std::swap(s_Mesh, s_Mesh3);
+			std::swap(mesh1Handle, mesh3Handle);
 			isMeshSwapped = false;
 		}
 	}
@@ -148,13 +148,12 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 
 
 	m_GameObjects[0]->SetGameObjectEffect(s_Effect);
-	eae6320::Graphics::cMesh* temp = eae6320::Graphics::cMesh::s_Manager.Get(mesh1Handle);
 	m_GameObjects[0]->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(mesh1Handle));
-	//m_GameObjects[1]->SetGameObjectEffect(s_Effect2);
-	//m_GameObjects[1]->SetGameObjectMesh(s_Mesh2);
+	m_GameObjects[1]->SetGameObjectEffect(s_Effect2);
+	m_GameObjects[1]->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(mesh2Handle));
 
 	m_EffectsAndMeshes[0] = m_GameObjects[0]->GetMeshEffectPair();
-	//m_EffectsAndMeshes[1] = m_GameObjects[1]->GetMeshEffectPair();
+	m_EffectsAndMeshes[1] = m_GameObjects[1]->GetMeshEffectPair();
 
 	for (size_t i = 0; i < m_NumberOfGameObjects; i++)
 	{
@@ -187,37 +186,6 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 
 	m_GameObjects[1]->SetGameObjectPosition(Math::sVector(0, 0, 0));
 
-	eae6320::Graphics::VertexFormats::sMesh vertexData[5];
-	{
-		vertexData[0].x = 0.0f;
-		vertexData[0].y = 0.5f;
-		vertexData[0].z = 0.0f;
-
-		vertexData[1].x = 1.0f;
-		vertexData[1].y = 0.5f;
-		vertexData[1].z = 0.0f;
-
-		vertexData[2].x = 0.5f;
-		vertexData[2].y = 1.0f;
-		vertexData[2].z = 0.0f;
-
-		vertexData[3].x = 0.0f;
-		vertexData[3].y = -0.5f;
-		vertexData[3].z = 0.0f;
-
-		vertexData[4].x = 1.0f;
-		vertexData[4].y = -0.5f;
-		vertexData[4].z = 0.0f;
-	}
-	eae6320::Graphics::VertexFormats::sIndex indexData[6];
-	{
-		indexData[0].indexValue = 1;
-		indexData[1].indexValue = 0;
-		indexData[2].indexValue = 3;
-		indexData[3].indexValue = 4;
-		indexData[4].indexValue = 1;
-		indexData[5].indexValue = 3;
-	}
 	eae6320::Graphics::VertexFormats::sMesh vertexData2[8];
 	{
 		vertexData2[0].x = -0.5f;
@@ -282,9 +250,13 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 		indexData3[8].indexValue = 2;
 	}
 
-	std::string fname = "data/Meshes/Buffers.txt";
-
+	std::string fname = "data/Meshes/Mesh1.txt";
 	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh1Handle);
+	fname = "data/Meshes/Mesh2.txt";
+	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh2Handle);
+	fname = "data/Meshes/Mesh3.txt";
+	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh3Handle);
+
 
 	if (!(eae6320::Graphics::cEffect::CreateEffect(m_vertShader1Location, m_fragShader1Location, eae6320::Graphics::RenderStates::DepthBuffering, s_Effect)))
 	{
@@ -301,21 +273,6 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 		EAE6320_ASSERT(false);
 		//goto OnExit;
 	}
-	//if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData, indexData, 6, s_Mesh)))
-	//{
-	//	EAE6320_ASSERT(false);
-	//	//goto OnExit;
-	//}
-	//if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData2, indexData2, 3, s_Mesh2)))
-	//{
-	//	EAE6320_ASSERT(false);
-	//	//goto OnExit;
-	//}
-	//if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData, indexData3, 9, s_Mesh3)))
-	//{
-	//	EAE6320_ASSERT(false);
-	//	//goto OnExit;
-	//}
 	return Results::Success;
 }
 
@@ -325,9 +282,8 @@ eae6320::cResult eae6320::cMyGame::CleanUp()
 	s_Effect2->DecrementReferenceCount();
 	s_Effect3->DecrementReferenceCount();
 	eae6320::Graphics::cMesh::s_Manager.Release(mesh1Handle);
-	//s_Mesh->DecrementReferenceCount();
-	//s_Mesh2->DecrementReferenceCount();
-	//s_Mesh3->DecrementReferenceCount();
+	eae6320::Graphics::cMesh::s_Manager.Release(mesh2Handle);
+	eae6320::Graphics::cMesh::s_Manager.Release(mesh3Handle);
 	for (int i = 0; i < m_NumberOfGameObjects; i++)
 	{
 		m_GameObjects[i]->DecrementReferenceCount();
