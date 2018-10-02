@@ -166,6 +166,7 @@
     <ClCompile Include="cCamera.cpp" />
     <ClCompile Include="cConstantBuffer.cpp" />
     <ClCompile Include="cEffect.cpp" />
+    <ClCompile Include="cMesh.cpp" />
     <ClCompile Include="cRenderState.cpp" />
     <ClCompile Include="cShader.cpp" />
     <ClCompile Include="Direct3D\cConstantBuffer.d3d.cpp">

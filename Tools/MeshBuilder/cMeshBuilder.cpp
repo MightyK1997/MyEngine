@@ -6,7 +6,7 @@ eae6320::cResult eae6320::Assets::cMeshBuilder::Build(const std::vector<std::str
 {
 	cResult result = Results::Success;
 	std::string m_errorString;
-	result = eae6320::Platform::CopyFileW(m_path_source, m_path_target, false, true, &m_errorString);
+	result = eae6320::Platform::CopyFile(m_path_source, m_path_target, false, true, &m_errorString);
 	if (!result)
 	{
 		OutputErrorMessageWithFileInfo(m_path_source, m_errorString.c_str());

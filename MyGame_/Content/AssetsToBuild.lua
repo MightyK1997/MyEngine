@@ -11,4 +11,7 @@ return
 		{ path = "Shaders/Fragment/AnimatedShader.shader", arguments = { "fragment" } },
 		{ path = "Shaders/Vertex/vertexInputLayout.shader", arguments = { "vertex" } },
 	},
+	meshes = {
+	"Meshes/Buffers.txt",
+	},
 }

@@ -89,7 +89,7 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 		EAE6320_ASSERT(result);
 	}
 	Application::cbApplication::SetSimulationRate(UserInput::IsKeyPressed(UserInput::KeyCodes::Shift) ? 0.5f : 1.0f);
-	m_NumberOfMeshesToRender = UserInput::IsKeyPressed(UserInput::KeyCodes::F1) ? 1 : 2;
+	m_NumberOfMeshesToRender = UserInput::IsKeyPressed(UserInput::KeyCodes::F1) ? 1 : m_NumberOfGameObjects;
 	if (UserInput::IsKeyPressed(UserInput::KeyCodes::F2))
 	{
 		if (!isEffectSwapped)
@@ -148,12 +148,13 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 
 
 	m_GameObjects[0]->SetGameObjectEffect(s_Effect);
-	m_GameObjects[0]->SetGameObjectMesh(s_Mesh);
-	m_GameObjects[1]->SetGameObjectEffect(s_Effect2);
-	m_GameObjects[1]->SetGameObjectMesh(s_Mesh2);
+	eae6320::Graphics::cMesh* temp = eae6320::Graphics::cMesh::s_Manager.Get(mesh1Handle);
+	m_GameObjects[0]->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(mesh1Handle));
+	//m_GameObjects[1]->SetGameObjectEffect(s_Effect2);
+	//m_GameObjects[1]->SetGameObjectMesh(s_Mesh2);
 
 	m_EffectsAndMeshes[0] = m_GameObjects[0]->GetMeshEffectPair();
-	m_EffectsAndMeshes[1] = m_GameObjects[1]->GetMeshEffectPair();
+	//m_EffectsAndMeshes[1] = m_GameObjects[1]->GetMeshEffectPair();
 
 	for (size_t i = 0; i < m_NumberOfGameObjects; i++)
 	{
@@ -280,6 +281,11 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 		indexData3[7].indexValue = 1;
 		indexData3[8].indexValue = 2;
 	}
+
+	std::string fname = "data/Meshes/Buffers.txt";
+
+	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh1Handle);
+
 	if (!(eae6320::Graphics::cEffect::CreateEffect(m_vertShader1Location, m_fragShader1Location, eae6320::Graphics::RenderStates::DepthBuffering, s_Effect)))
 	{
 		EAE6320_ASSERT(false);
@@ -295,21 +301,21 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 		EAE6320_ASSERT(false);
 		//goto OnExit;
 	}
-	if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData, indexData, 6, s_Mesh)))
-	{
-		EAE6320_ASSERT(false);
-		//goto OnExit;
-	}
-	if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData2, indexData2, 3, s_Mesh2)))
-	{
-		EAE6320_ASSERT(false);
-		//goto OnExit;
-	}
-	if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData, indexData3, 9, s_Mesh3)))
-	{
-		EAE6320_ASSERT(false);
-		//goto OnExit;
-	}
+	//if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData, indexData, 6, s_Mesh)))
+	//{
+	//	EAE6320_ASSERT(false);
+	//	//goto OnExit;
+	//}
+	//if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData2, indexData2, 3, s_Mesh2)))
+	//{
+	//	EAE6320_ASSERT(false);
+	//	//goto OnExit;
+	//}
+	//if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData, indexData3, 9, s_Mesh3)))
+	//{
+	//	EAE6320_ASSERT(false);
+	//	//goto OnExit;
+	//}
 	return Results::Success;
 }
 
@@ -317,10 +323,11 @@ eae6320::cResult eae6320::cMyGame::CleanUp()
 {
 	s_Effect->DecrementReferenceCount();
 	s_Effect2->DecrementReferenceCount();
-	s_Mesh->DecrementReferenceCount();
-	s_Mesh2->DecrementReferenceCount();
 	s_Effect3->DecrementReferenceCount();
-	s_Mesh3->DecrementReferenceCount();
+	eae6320::Graphics::cMesh::s_Manager.Release(mesh1Handle);
+	//s_Mesh->DecrementReferenceCount();
+	//s_Mesh2->DecrementReferenceCount();
+	//s_Mesh3->DecrementReferenceCount();
 	for (int i = 0; i < m_NumberOfGameObjects; i++)
 	{
 		m_GameObjects[i]->DecrementReferenceCount();
