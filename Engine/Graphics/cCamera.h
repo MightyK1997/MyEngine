@@ -21,9 +21,11 @@ namespace eae6320
 			void SetCameraRotation(Math::cQuaternion i_InputRotation);
 			void SetCameraVelocity(Math::sVector i_InputVelocity);
 			void SetCameraAcceleration(Math::sVector i_InputAcceleration);
+			void SetAngularSpeed(const float i_AngularSpeed);
 
 			Math::sVector GetCameraPosition();
 			Math::cQuaternion GetCameraRotation();
+			float GetAngularSpeed();
 
 			Math::sVector PredictFuturePosition(const float i_secondCountToExtrapolate) const;
 			Math::cQuaternion PredictFutureOrientation(const float i_secondCountToExtrapolate) const;

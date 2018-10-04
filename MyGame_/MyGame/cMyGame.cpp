@@ -15,6 +15,7 @@
 void eae6320::cMyGame::UpdateCameraPosition()
 {
 	m_Camera->SetCameraVelocity(Math::sVector(0, 0, 0));
+	m_Camera->SetAngularSpeed(0.0f);
 
 	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Down))
 	{
@@ -31,6 +32,22 @@ void eae6320::cMyGame::UpdateCameraPosition()
 	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Left))
 	{
 		m_Camera->SetCameraVelocity(Math::sVector(-10.0f, 0, 0));
+	}
+	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Control))
+	{
+		m_Camera->SetCameraVelocity(Math::sVector(0, 10.0f, 0));
+	}
+	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Alt))
+	{
+		m_Camera->SetCameraVelocity(Math::sVector(0, -10.0f, 0));
+	}
+	if (UserInput::IsKeyPressed('Z'))
+	{
+		m_Camera->SetAngularSpeed(1.0f);
+	}
+	if (UserInput::IsKeyPressed('X'))
+	{
+		m_Camera->SetAngularSpeed(-1.0f);
 	}
 }
 
@@ -185,70 +202,6 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 	m_GameObjects[0]->SetGameObjectPosition(Math::sVector(1, 0, 0));
 
 	m_GameObjects[1]->SetGameObjectPosition(Math::sVector(0, 0, 0));
-
-	eae6320::Graphics::VertexFormats::sMesh vertexData2[8];
-	{
-		vertexData2[0].x = -0.5f;
-		vertexData2[0].y = -0.5f;
-		vertexData2[0].z = 0.0f;
-
-		vertexData2[1].x = -0.25f;
-		vertexData2[1].y = -0.5f;
-		vertexData2[1].z = 0.0f;
-
-		vertexData2[2].x = -0.25f;
-		vertexData2[2].y = 0.25f;
-		vertexData2[2].z = 0.0f;
-
-		vertexData2[3].x = -0.5f;
-		vertexData2[3].y = 0.25f;
-		vertexData2[3].z = 0.0f;
-
-		vertexData2[4].x = -0.5f;
-		vertexData2[4].y = 0.75f;
-		vertexData2[4].z = 0.0f;
-
-		vertexData2[5].x = -0.75f;
-		vertexData2[5].y = 0.75f;
-		vertexData2[5].z = 0.0f;
-
-		vertexData2[6].x = 0.0f;
-		vertexData2[6].y = 0.75f;
-		vertexData2[6].z = 0.0f;
-
-		vertexData2[7].x = -0.25f;
-		vertexData2[7].y = 0.75f;
-		vertexData2[7].z = 0.0f;
-
-	}
-	eae6320::Graphics::VertexFormats::sIndex indexData2[3];
-	{
-		indexData2[0].indexValue = 0;
-		indexData2[1].indexValue = 1;
-		indexData2[2].indexValue = 2;
-		//indexData2[3].indexValue = 0;
-		//indexData2[4].indexValue = 2;
-		//indexData2[5].indexValue = 3;
-		//indexData2[6].indexValue = 3;
-		//indexData2[7].indexValue = 4;
-		//indexData2[8].indexValue = 5;
-		//indexData2[9].indexValue = 7;
-		//indexData2[10].indexValue = 2;
-		//indexData2[11].indexValue = 6;
-	}
-
-	eae6320::Graphics::VertexFormats::sIndex indexData3[9];
-	{
-		indexData3[0].indexValue = 1;
-		indexData3[1].indexValue = 0;
-		indexData3[2].indexValue = 3;
-		indexData3[3].indexValue = 4;
-		indexData3[4].indexValue = 1;
-		indexData3[5].indexValue = 3;
-		indexData3[6].indexValue = 0;
-		indexData3[7].indexValue = 1;
-		indexData3[8].indexValue = 2;
-	}
 
 	std::string fname = "data/Meshes/Mesh1.txt";
 	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh1Handle);
