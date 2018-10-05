@@ -96,7 +96,10 @@ namespace eae6320
 		eae6320::Graphics::cCamera* m_Camera;
 		eae6320::Physics::cGameObject* m_GameObjects[m_NumberOfGameObjects];
 		eae6320::Math::cMatrix_transformation m_GameObjectLocalToWorldTransforms[m_NumberOfGameObjects];
-
+		//Mesh Handles
+		eae6320::Graphics::cMesh::Handle mesh1Handle;
+		eae6320::Graphics::cMesh::Handle mesh2Handle;
+		eae6320::Graphics::cMesh::Handle mesh3Handle;
 
 	public:
 		int m_NumberOfMeshesToRender;

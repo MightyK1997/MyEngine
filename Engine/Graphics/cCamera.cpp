@@ -38,6 +38,11 @@ void eae6320::Graphics::cCamera::SetCameraAcceleration(Math::sVector i_InputAcce
 	m_CameraRigidBody.acceleration = i_InputAcceleration;
 }
 
+void eae6320::Graphics::cCamera::SetAngularSpeed(const float i_AngularSpeed)
+{
+	m_CameraRigidBody.angularSpeed = i_AngularSpeed;
+}
+
 eae6320::Math::sVector eae6320::Graphics::cCamera::GetCameraPosition()
 {
 	return m_CameraRigidBody.position;
@@ -46,6 +51,11 @@ eae6320::Math::sVector eae6320::Graphics::cCamera::GetCameraPosition()
 eae6320::Math::cQuaternion eae6320::Graphics::cCamera::GetCameraRotation()
 {
 	return m_CameraRigidBody.orientation;
+}
+
+float eae6320::Graphics::cCamera::GetAngularSpeed()
+{
+	return m_CameraRigidBody.angularSpeed;
 }
 
 eae6320::Math::sVector eae6320::Graphics::cCamera::PredictFuturePosition(const float i_secondCountToExtrapolate) const

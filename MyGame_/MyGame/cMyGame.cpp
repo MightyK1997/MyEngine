@@ -15,6 +15,7 @@
 void eae6320::cMyGame::UpdateCameraPosition()
 {
 	m_Camera->SetCameraVelocity(Math::sVector(0, 0, 0));
+	m_Camera->SetAngularSpeed(0.0f);
 
 	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Down))
 	{
@@ -31,6 +32,22 @@ void eae6320::cMyGame::UpdateCameraPosition()
 	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Left))
 	{
 		m_Camera->SetCameraVelocity(Math::sVector(-10.0f, 0, 0));
+	}
+	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Control))
+	{
+		m_Camera->SetCameraVelocity(Math::sVector(0, 10.0f, 0));
+	}
+	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Alt))
+	{
+		m_Camera->SetCameraVelocity(Math::sVector(0, -10.0f, 0));
+	}
+	if (UserInput::IsKeyPressed('Z'))
+	{
+		m_Camera->SetAngularSpeed(1.0f);
+	}
+	if (UserInput::IsKeyPressed('X'))
+	{
+		m_Camera->SetAngularSpeed(-1.0f);
 	}
 }
 
@@ -89,7 +106,7 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 		EAE6320_ASSERT(result);
 	}
 	Application::cbApplication::SetSimulationRate(UserInput::IsKeyPressed(UserInput::KeyCodes::Shift) ? 0.5f : 1.0f);
-	m_NumberOfMeshesToRender = UserInput::IsKeyPressed(UserInput::KeyCodes::F1) ? 1 : 2;
+	m_NumberOfMeshesToRender = UserInput::IsKeyPressed(UserInput::KeyCodes::F1) ? 1 : m_NumberOfGameObjects;
 	if (UserInput::IsKeyPressed(UserInput::KeyCodes::F2))
 	{
 		if (!isEffectSwapped)
@@ -110,7 +127,7 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 	{
 		if (!isMeshSwapped)
 		{
-			std::swap(s_Mesh, s_Mesh3);
+			std::swap(mesh1Handle, mesh3Handle);
 			isMeshSwapped = true;
 		}
 	}
@@ -118,7 +135,7 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 	{
 		if (isMeshSwapped)
 		{
-			std::swap(s_Mesh, s_Mesh3);
+			std::swap(mesh1Handle, mesh3Handle);
 			isMeshSwapped = false;
 		}
 	}
@@ -148,9 +165,9 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 
 
 	m_GameObjects[0]->SetGameObjectEffect(s_Effect);
-	m_GameObjects[0]->SetGameObjectMesh(s_Mesh);
+	m_GameObjects[0]->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(mesh1Handle));
 	m_GameObjects[1]->SetGameObjectEffect(s_Effect2);
-	m_GameObjects[1]->SetGameObjectMesh(s_Mesh2);
+	m_GameObjects[1]->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(mesh2Handle));
 
 	m_EffectsAndMeshes[0] = m_GameObjects[0]->GetMeshEffectPair();
 	m_EffectsAndMeshes[1] = m_GameObjects[1]->GetMeshEffectPair();
@@ -186,100 +203,14 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 
 	m_GameObjects[1]->SetGameObjectPosition(Math::sVector(0, 0, 0));
 
-	eae6320::Graphics::VertexFormats::sMesh vertexData[5];
-	{
-		vertexData[0].x = 0.0f;
-		vertexData[0].y = 0.5f;
-		vertexData[0].z = 0.0f;
+	std::string fname = "data/Meshes/Mesh1.txt";
+	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh1Handle);
+	fname = "data/Meshes/Mesh2.txt";
+	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh2Handle);
+	fname = "data/Meshes/Mesh3.txt";
+	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh3Handle);
 
-		vertexData[1].x = 1.0f;
-		vertexData[1].y = 0.5f;
-		vertexData[1].z = 0.0f;
 
-		vertexData[2].x = 0.5f;
-		vertexData[2].y = 1.0f;
-		vertexData[2].z = 0.0f;
-
-		vertexData[3].x = 0.0f;
-		vertexData[3].y = -0.5f;
-		vertexData[3].z = 0.0f;
-
-		vertexData[4].x = 1.0f;
-		vertexData[4].y = -0.5f;
-		vertexData[4].z = 0.0f;
-	}
-	eae6320::Graphics::VertexFormats::sIndex indexData[6];
-	{
-		indexData[0].indexValue = 1;
-		indexData[1].indexValue = 0;
-		indexData[2].indexValue = 3;
-		indexData[3].indexValue = 4;
-		indexData[4].indexValue = 1;
-		indexData[5].indexValue = 3;
-	}
-	eae6320::Graphics::VertexFormats::sMesh vertexData2[8];
-	{
-		vertexData2[0].x = -0.5f;
-		vertexData2[0].y = -0.5f;
-		vertexData2[0].z = 0.0f;
-
-		vertexData2[1].x = -0.25f;
-		vertexData2[1].y = -0.5f;
-		vertexData2[1].z = 0.0f;
-
-		vertexData2[2].x = -0.25f;
-		vertexData2[2].y = 0.25f;
-		vertexData2[2].z = 0.0f;
-
-		vertexData2[3].x = -0.5f;
-		vertexData2[3].y = 0.25f;
-		vertexData2[3].z = 0.0f;
-
-		vertexData2[4].x = -0.5f;
-		vertexData2[4].y = 0.75f;
-		vertexData2[4].z = 0.0f;
-
-		vertexData2[5].x = -0.75f;
-		vertexData2[5].y = 0.75f;
-		vertexData2[5].z = 0.0f;
-
-		vertexData2[6].x = 0.0f;
-		vertexData2[6].y = 0.75f;
-		vertexData2[6].z = 0.0f;
-
-		vertexData2[7].x = -0.25f;
-		vertexData2[7].y = 0.75f;
-		vertexData2[7].z = 0.0f;
-
-	}
-	eae6320::Graphics::VertexFormats::sIndex indexData2[3];
-	{
-		indexData2[0].indexValue = 0;
-		indexData2[1].indexValue = 1;
-		indexData2[2].indexValue = 2;
-		//indexData2[3].indexValue = 0;
-		//indexData2[4].indexValue = 2;
-		//indexData2[5].indexValue = 3;
-		//indexData2[6].indexValue = 3;
-		//indexData2[7].indexValue = 4;
-		//indexData2[8].indexValue = 5;
-		//indexData2[9].indexValue = 7;
-		//indexData2[10].indexValue = 2;
-		//indexData2[11].indexValue = 6;
-	}
-
-	eae6320::Graphics::VertexFormats::sIndex indexData3[9];
-	{
-		indexData3[0].indexValue = 1;
-		indexData3[1].indexValue = 0;
-		indexData3[2].indexValue = 3;
-		indexData3[3].indexValue = 4;
-		indexData3[4].indexValue = 1;
-		indexData3[5].indexValue = 3;
-		indexData3[6].indexValue = 0;
-		indexData3[7].indexValue = 1;
-		indexData3[8].indexValue = 2;
-	}
 	if (!(eae6320::Graphics::cEffect::CreateEffect(m_vertShader1Location, m_fragShader1Location, eae6320::Graphics::RenderStates::DepthBuffering, s_Effect)))
 	{
 		EAE6320_ASSERT(false);
@@ -295,21 +226,6 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 		EAE6320_ASSERT(false);
 		//goto OnExit;
 	}
-	if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData, indexData, 6, s_Mesh)))
-	{
-		EAE6320_ASSERT(false);
-		//goto OnExit;
-	}
-	if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData2, indexData2, 3, s_Mesh2)))
-	{
-		EAE6320_ASSERT(false);
-		//goto OnExit;
-	}
-	if (!(eae6320::Graphics::cMesh::CreateMesh(vertexData, indexData3, 9, s_Mesh3)))
-	{
-		EAE6320_ASSERT(false);
-		//goto OnExit;
-	}
 	return Results::Success;
 }
 
@@ -317,10 +233,10 @@ eae6320::cResult eae6320::cMyGame::CleanUp()
 {
 	s_Effect->DecrementReferenceCount();
 	s_Effect2->DecrementReferenceCount();
-	s_Mesh->DecrementReferenceCount();
-	s_Mesh2->DecrementReferenceCount();
 	s_Effect3->DecrementReferenceCount();
-	s_Mesh3->DecrementReferenceCount();
+	eae6320::Graphics::cMesh::s_Manager.Release(mesh1Handle);
+	eae6320::Graphics::cMesh::s_Manager.Release(mesh2Handle);
+	eae6320::Graphics::cMesh::s_Manager.Release(mesh3Handle);
 	for (int i = 0; i < m_NumberOfGameObjects; i++)
 	{
 		m_GameObjects[i]->DecrementReferenceCount();
