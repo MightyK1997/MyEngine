@@ -795,7 +795,27 @@ namespace
 			fout << "return" "\n"
 				"{" "\n";
 			{
-				//EAE6320_TODO	// Write out the data using your mesh file format
+				// Write out the data using your mesh file format
+
+				fout << "VertexBuffer = " "\n" "{" "\n";
+				//VertexBuffer Data goes in here
+				for (int i = 0; i < i_vertexArray.size(); i++)
+				{
+					fout << "{" "\n";
+					fout << "--" << "Index Position = " << i_indexArray[i] << "\n";
+					fout << "Position = " "{" << i_vertexArray[i].vertex.x << "," << i_vertexArray[i].vertex.y << "," << i_vertexArray[i].vertex.z << "}" "," "\n";
+					fout << "Color = " "{" << i_vertexArray[i].vertex.r << "," << i_vertexArray[i].vertex.g << "," << i_vertexArray[i].vertex.b << "," << i_vertexArray[i].vertex.a << "}" "," "\n";
+					fout << "}" "," "\n";
+				}
+				fout << "}," "\n";
+				fout<< "IndexBuffer = " "\n" "{" "\n";
+				//IndexBuffer data goes in here
+				for (int i = 0; i < i_indexArray.size(); i++)
+				{
+					fout << i_indexArray[i] << ",";
+				}
+				fout << "}" "," "\n";
+
 			}
 			// Close table
 			fout << "}" "\n";

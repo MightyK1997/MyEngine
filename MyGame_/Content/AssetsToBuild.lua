@@ -15,5 +15,6 @@ return
 	"Meshes/Mesh1.txt",
 	"Meshes/Mesh2.txt",
 	"Meshes/Mesh3.txt",
+	"Meshes/TestMesh.txt",
 	},
 }

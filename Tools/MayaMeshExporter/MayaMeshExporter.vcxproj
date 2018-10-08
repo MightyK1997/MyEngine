@@ -55,12 +55,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>eae6320_OWNBY_JOHN-PAUL_mesh_DEBUG</TargetName>
+    <TargetName>eae6320_UPADHYAYULA_SAI_mesh_DEBUG</TargetName>
     <TargetExt>.mll</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>eae6320_OWNBY_JOHN-PAUL_mesh</TargetName>
+    <TargetName>eae6320_UPADHYAYULA_SAI_mesh</TargetName>
     <TargetExt>.mll</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

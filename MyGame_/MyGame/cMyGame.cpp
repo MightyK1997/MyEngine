@@ -203,7 +203,7 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 
 	m_GameObjects[1]->SetGameObjectPosition(Math::sVector(0, 0, 0));
 
-	std::string fname = "data/Meshes/Mesh1.txt";
+	std::string fname = "data/Meshes/TestMesh.txt";
 	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh1Handle);
 	fname = "data/Meshes/Mesh2.txt";
 	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh2Handle);
