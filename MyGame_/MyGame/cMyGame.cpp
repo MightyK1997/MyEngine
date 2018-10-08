@@ -188,7 +188,7 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 eae6320::cResult eae6320::cMyGame::Initialize()
 {
 	std::string m_vertShader1Location = "data/Shaders/Vertex/standard.shader";
-	std::string m_fragShader1Location = "data/Shaders/Fragment/animatedshader.shader";
+	std::string m_fragShader1Location = "data/Shaders/Fragment/standard.shader";
 	std::string m_vertShader2Location = "data/Shaders/Vertex/standard.shader";
 	std::string m_fragShader2Location = "data/Shaders/Fragment/standard.shader";
 

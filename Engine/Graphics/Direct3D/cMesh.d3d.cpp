@@ -37,7 +37,8 @@ namespace eae6320
 					// (by using so-called "semantic" names so that, for example,
 					// "POSITION" here matches with "POSITION" in shader code).
 					// Note that OpenGL uses arbitrarily assignable number IDs to do the same thing.
-					constexpr unsigned int vertexElementCount = 1;
+					// Adding "COLOR"
+					constexpr unsigned int vertexElementCount = 2;
 					D3D11_INPUT_ELEMENT_DESC layoutDescription[vertexElementCount] = {};
 					{
 						// Slot 0
@@ -56,6 +57,20 @@ namespace eae6320
 							positionElement.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 							positionElement.InstanceDataStepRate = 0;	// (Must be zero for per-vertex data)
 						}
+						//For Color
+						{
+							auto& positionElement = layoutDescription[1];
+
+							positionElement.SemanticName = "COLOR";
+							positionElement.SemanticIndex = 0;	// (Semantics without modifying indices at the end can always use zero)
+							positionElement.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+							positionElement.InputSlot = 0;
+							positionElement.AlignedByteOffset = offsetof(eae6320::Graphics::VertexFormats::sMesh, r);
+							positionElement.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+							positionElement.InstanceDataStepRate = 0;	// (Must be zero for per-vertex data)
+						}
+
+
 					}
 
 					const auto d3dResult = direct3dDevice->CreateInputLayout(layoutDescription, vertexElementCount,

@@ -56,6 +56,7 @@ eae6320::cResult LoadVertexData(lua_State& i_LuaState, eae6320::Graphics::Vertex
 		}
 		lua_pop(&i_LuaState, 1);
 	}
+	i = 0;
 	constexpr auto* const key2 = "Color";
 	lua_pushstring(&i_LuaState, key2);
 	lua_gettable(&i_LuaState, -2);
@@ -64,6 +65,23 @@ eae6320::cResult LoadVertexData(lua_State& i_LuaState, eae6320::Graphics::Vertex
 		lua_pushnil(&i_LuaState);
 		while (lua_next(&i_LuaState, -2))
 		{
+			if (i == 0)
+			{
+				io_mesh->r = static_cast<uint8_t>(lua_tonumber(&i_LuaState, -1)) * 255;
+			}
+			else if (i == 1)
+			{
+				io_mesh->g = static_cast<uint8_t>(lua_tonumber(&i_LuaState, -1)) * 255;
+			}
+			else if (i == 2)
+			{
+				io_mesh->b = static_cast<uint8_t>(lua_tonumber(&i_LuaState, -1)) * 255;
+			}
+			else if (i == 3)
+			{
+				io_mesh->a = static_cast<uint8_t>(lua_tonumber(&i_LuaState, -1)) * 255;
+			}
+			i++;
 			lua_pop(&i_LuaState, 1);
 		}
 		lua_pop(&i_LuaState, 1);
