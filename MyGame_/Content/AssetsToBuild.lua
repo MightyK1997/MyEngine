@@ -17,6 +17,7 @@ return
 	"Meshes/Mesh3.txt",
 	"Meshes/TestMesh.txt",
 	"Meshes/ChairMesh.txt",
-	"Meshes/TransparentDonut.txt"
+	"Meshes/TransparentDonut.txt",
+	"Meshes/Plane.txt",
 	},
 }
