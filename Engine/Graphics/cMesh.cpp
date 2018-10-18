@@ -67,6 +67,7 @@ eae6320::cResult LoadVertexData(lua_State& i_LuaState, eae6320::Graphics::Vertex
 		{
 			if (i == 0)
 			{
+				float value = static_cast<float>(lua_tonumber(&i_LuaState, -1));
 				io_mesh->r = static_cast<uint8_t>(lua_tonumber(&i_LuaState, -1)) * 255;
 			}
 			else if (i == 1)

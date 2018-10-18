@@ -167,8 +167,8 @@ namespace eae6320
 				{
 					constexpr GLuint vertexElementLocation = 1;
 					constexpr GLint elementCount = 4;
-					constexpr GLboolean notNormalized = GL_FALSE;	// The given floats should be used as-is
-					glVertexAttribPointer(vertexElementLocation, elementCount, GL_UNSIGNED_BYTE, notNormalized, stride,
+					constexpr GLboolean normalized = GL_TRUE;	// The given floats should be used as-is
+					glVertexAttribPointer(vertexElementLocation, elementCount, GL_UNSIGNED_BYTE, normalized, stride,
 						reinterpret_cast<GLvoid*>(offsetof(eae6320::Graphics::VertexFormats::sMesh, r)));
 					const auto errorCode = glGetError();
 					if (errorCode == GL_NO_ERROR)
