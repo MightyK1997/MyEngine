@@ -74,8 +74,8 @@ layout( location = 0 ) in vec3 i_vertexPosition_local;
 
 //Color
 
-layout(location = 1)in vec4 i_vertexColor_local;
-layout(location = 0)out vec4 o_vertexColor;
+layout(location = 1)in vec4 i_color;
+layout(location = 0)out vec4 o_color;
 
 // Output
 //=======
@@ -104,7 +104,7 @@ void main()
 		vec4 vertexPosition_camera = g_transform_worldToCamera * vertexPosition_world;
 		// Project the vertex from camera space into projected space
 		gl_Position = g_transform_cameraToProjected * vertexPosition_camera;
-		o_vertexColor = i_vertexColor_local;
+		o_color = i_color;
 	}
 }
 

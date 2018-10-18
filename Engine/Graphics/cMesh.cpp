@@ -95,29 +95,6 @@ eae6320::cResult LoadTableValues(lua_State& i_LuaState)
 {
 	auto result = eae6320::Results::Success;
 
-	const auto* const key = "VertexBuffer";
-	lua_pushstring(&i_LuaState, key);
-	lua_gettable(&i_LuaState, -2);
-	unsigned int i = 0;
-	if (lua_istable(&i_LuaState, -1))
-	{
-		m_NumberOfVertices = lua_rawlen(&i_LuaState, -1);
-		if (m_NumberOfVertices != 0)
-		{
-			m_TempMesh = new eae6320::Graphics::VertexFormats::sMesh[m_NumberOfVertices];
-		}
-		lua_pushnil(&i_LuaState);
-		while (lua_next(&i_LuaState, -2))
-		{
-			if (!(result = LoadVertexData(i_LuaState, &m_TempMesh[i])))
-			{
-				return result;
-			}
-			i++;
-			lua_pop(&i_LuaState, 1);
-		}
-		lua_pop(&i_LuaState, 1);
-	}
 	const auto* const key2 = "IndexBuffer";
 	lua_pushstring(&i_LuaState, key2);
 	lua_gettable(&i_LuaState, -2);
@@ -131,6 +108,30 @@ eae6320::cResult LoadTableValues(lua_State& i_LuaState)
 		if (!(result = LoadIndexBuffer(i_LuaState)))
 		{
 			return result;
+		}
+		lua_pop(&i_LuaState, 1);
+	}
+
+	const auto* const key = "VertexBuffer";
+	lua_pushstring(&i_LuaState, key);
+	lua_gettable(&i_LuaState, -2);
+	unsigned int i = 0;
+	if (lua_istable(&i_LuaState, -1))
+	{
+		m_NumberOfVertices = lua_rawlen(&i_LuaState, -1);
+		if (m_NumberOfVertices != 0)
+		{
+			m_TempMesh = new eae6320::Graphics::VertexFormats::sMesh[m_NumberOfIndices];
+		}
+		lua_pushnil(&i_LuaState);
+		while (lua_next(&i_LuaState, -2))
+		{
+			if (!(result = LoadVertexData(i_LuaState, &m_TempMesh[i])))
+			{
+				return result;
+			}
+			i++;
+			lua_pop(&i_LuaState, 1);
 		}
 		lua_pop(&i_LuaState, 1);
 	}

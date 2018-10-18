@@ -42,7 +42,7 @@ void main(
 out vec4 o_color;
 
 //Vertex Colors
-layout(location = 1) in vec4 i_color;
+layout(location = 0) in vec4 i_color;
 
 // Entry Point
 //============
