@@ -207,8 +207,8 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh1Handle);
 	fname = "data/Meshes/Plane.txt";
 	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh2Handle);
-	fname = "data/Meshes/ChairMesh.txt";
-	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh3Handle);
+	//fname = "data/Meshes/ChairMesh.txt";
+	//eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh3Handle);
 
 
 	if (!(eae6320::Graphics::cEffect::CreateEffect(m_vertShader1Location, m_fragShader1Location, eae6320::Graphics::RenderStates::DepthBuffering, s_Effect)))

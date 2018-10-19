@@ -10,8 +10,8 @@ namespace
 {
 	eae6320::Graphics::VertexFormats::sMesh* m_TempMesh;
 	eae6320::Graphics::VertexFormats::sIndex* m_TempIndex;
-	size_t m_NumberOfVertices;
-	size_t m_NumberOfIndices;
+	uint16_t m_NumberOfVertices;
+	uint16_t m_NumberOfIndices;
 }
 
 
@@ -104,7 +104,7 @@ eae6320::cResult LoadTableValues(lua_State& i_LuaState)
 	lua_gettable(&i_LuaState, -2);
 	if (lua_istable(&i_LuaState, -1))
 	{
-		m_NumberOfIndices = lua_rawlen(&i_LuaState, -1);
+		m_NumberOfIndices = (uint16_t)lua_rawlen(&i_LuaState, -1);
 		if (m_NumberOfIndices != 0)
 		{
 			m_TempIndex = new eae6320::Graphics::VertexFormats::sIndex[m_NumberOfIndices];
@@ -122,7 +122,7 @@ eae6320::cResult LoadTableValues(lua_State& i_LuaState)
 	unsigned int i = 0;
 	if (lua_istable(&i_LuaState, -1))
 	{
-		m_NumberOfVertices = lua_rawlen(&i_LuaState, -1);
+		m_NumberOfVertices = (uint16_t)lua_rawlen(&i_LuaState, -1);
 		if (m_NumberOfVertices != 0)
 		{
 			m_TempMesh = new eae6320::Graphics::VertexFormats::sMesh[m_NumberOfIndices];
@@ -217,9 +217,9 @@ eae6320::cResult eae6320::Assets::cMeshBuilder::Build(const std::vector<std::str
 	//Writing to file
 	FILE * fptr;
 	fptr = fopen(m_path_target, "wb");
-	fwrite(&m_NumberOfIndices, sizeof(size_t), 1, fptr);
-	fwrite(&m_NumberOfVertices, sizeof(size_t), 1, fptr);
-	fwrite(m_TempIndex, sizeof(uint16_t), sizeof(uint16_t) * m_NumberOfIndices, fptr);
+	fwrite(&m_NumberOfIndices, sizeof(uint16_t), 1, fptr);
+	fwrite(&m_NumberOfVertices, sizeof(uint16_t), 1, fptr);
+	fwrite(m_TempIndex, sizeof(eae6320::Graphics::VertexFormats::sIndex), sizeof(eae6320::Graphics::VertexFormats::sIndex) * m_NumberOfIndices, fptr);
 	fwrite(m_TempMesh, sizeof(eae6320::Graphics::VertexFormats::sMesh), sizeof(eae6320::Graphics::VertexFormats::sMesh) * m_NumberOfVertices, fptr);
 	fclose(fptr);
 	return result;
