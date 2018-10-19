@@ -20,5 +20,7 @@ return
 	"Meshes/TransparentDonut.txt",
 	"Meshes/Plane.txt",
 	"Meshes/Arcade.txt",
+	"Meshes/Can.txt",
+	"Meshes/Lambo.txt",
 	},
 }

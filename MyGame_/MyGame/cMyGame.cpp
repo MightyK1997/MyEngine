@@ -203,7 +203,7 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 
 	m_GameObjects[1]->SetGameObjectPosition(Math::sVector(0, -1, 0));
 
-	std::string fname = "data/Meshes/TransparentDonut.meshbinary";
+	std::string fname = "data/Meshes/Can.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh1Handle);
 	fname = "data/Meshes/Plane.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh2Handle);
