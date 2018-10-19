@@ -37,11 +37,11 @@ namespace eae6320
 			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()
 			EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cMesh)
 			void Draw();
-			static cResult CreateMesh(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, eae6320::Graphics::VertexFormats::sIndex* i_inputIndex, unsigned int i_IndexCount, cMesh*& o_Mesh)
+			static cResult CreateMesh(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, eae6320::Graphics::VertexFormats::sIndex* i_inputIndex, unsigned int i_IndexCount, unsigned int i_VertexCount, cMesh*& o_Mesh)
 			{
 				cResult result = Results::Success;
 				o_Mesh = new cMesh();
-				result = o_Mesh->Initialize(i_inputMesh, i_inputIndex, i_IndexCount);
+				result = o_Mesh->Initialize(i_inputMesh, i_inputIndex, i_IndexCount, i_VertexCount);
 				return result;
 			}
 		private:
@@ -50,7 +50,7 @@ namespace eae6320
 			{
 				Shutdown();
 			}
-			cResult Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, eae6320::Graphics::VertexFormats::sIndex* i_inputIndex, unsigned int i_triangleCount);
+			cResult Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, eae6320::Graphics::VertexFormats::sIndex* i_inputIndex, unsigned int i_IndexCount, unsigned int i_VertexCount);
 			cResult Shutdown();
 			unsigned int indexCount;
 			EAE6320_ASSETS_DECLAREREFERENCECOUNT()

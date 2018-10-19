@@ -5,7 +5,7 @@ namespace eae6320
 {
 	namespace Graphics
 	{
-		cResult cMesh::Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, eae6320::Graphics::VertexFormats::sIndex* i_inputIndex, unsigned int i_IndexCount)
+		cResult cMesh::Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, eae6320::Graphics::VertexFormats::sIndex* i_inputIndex, unsigned int i_IndexCount, unsigned int i_VertexCount)
 		{
 			indexCount = i_IndexCount;
 			auto result = eae6320::Results::Success;
@@ -65,7 +65,7 @@ namespace eae6320
 			}
 			// Assign the data to the Vertex buffer
 			{
-				const auto bufferSize = indexCount * sizeof(*i_inputMesh);
+				const auto bufferSize = i_VertexCount * sizeof(*i_inputMesh);
 				EAE6320_ASSERT(bufferSize < (uint64_t(1u) << (sizeof(GLsizeiptr) * 8)));
 				glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(bufferSize), reinterpret_cast<GLvoid*>(i_inputMesh),
 					// In our class we won't ever read from the buffer

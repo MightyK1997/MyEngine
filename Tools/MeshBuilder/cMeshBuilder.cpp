@@ -219,8 +219,18 @@ eae6320::cResult eae6320::Assets::cMeshBuilder::Build(const std::vector<std::str
 	fptr = fopen(m_path_target, "w+b");
 	fwrite(&m_NumberOfIndices, sizeof(uint16_t), 1, fptr);
 	fwrite(&m_NumberOfVertices, sizeof(uint16_t), 1, fptr);
+	//Moving the swap code for D3D here.
+#ifdef EAE6320_PLATFORM_D3D
+	for (unsigned int i = 0; i < m_NumberOfIndices; i++)
+	{
+		if ((i % 3) == 0)
+		{
+			std::swap(m_TempIndex[i + 1], m_TempIndex[i + 2]);
+		}
+	}
+#endif
 	fwrite(m_TempIndex, sizeof(eae6320::Graphics::VertexFormats::sIndex), (m_NumberOfIndices), fptr);
-	fwrite(m_TempMesh, sizeof(eae6320::Graphics::VertexFormats::sMesh),(m_NumberOfIndices), fptr);
+	fwrite(m_TempMesh, sizeof(eae6320::Graphics::VertexFormats::sMesh),(m_NumberOfVertices), fptr);
 	fclose(fptr);
 	return result;
 }

@@ -6,19 +6,10 @@ namespace eae6320
 {
 	namespace Graphics
 	{
-		cResult cMesh::Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, eae6320::Graphics::VertexFormats::sIndex* i_inputIndex, unsigned int i_IndexCount)
+		cResult cMesh::Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, eae6320::Graphics::VertexFormats::sIndex* i_inputIndex, unsigned int i_IndexCount, unsigned int i_VertexCount)
 		{
 			indexCount = i_IndexCount;
 			auto result = eae6320::Results::Success;
-			for (unsigned int i = 0; i < indexCount; i++)
-			{
-				if ((i % 3) == 0 )
-				{
-					std::swap(i_inputIndex[i + 1], i_inputIndex[i + 2]);
-				}
-			}
-			//std::reverse(&i_inputIndex[0], &i_inputIndex[vertexCount]);
-
 			auto* const direct3dDevice = eae6320::Graphics::sContext::g_context.direct3dDevice;
 			EAE6320_ASSERT(direct3dDevice);
 
@@ -95,7 +86,7 @@ namespace eae6320
 			{
 				D3D11_BUFFER_DESC bufferDescription{};
 				{
-					const auto bufferSize = indexCount * sizeof(eae6320::Graphics::VertexFormats::sMesh);
+					const auto bufferSize = i_VertexCount * sizeof(eae6320::Graphics::VertexFormats::sMesh);
 					EAE6320_ASSERT(bufferSize < (uint64_t(1u) << (sizeof(bufferDescription.ByteWidth) * 8)));
 					bufferDescription.ByteWidth = static_cast<unsigned int>(bufferSize);
 					bufferDescription.Usage = D3D11_USAGE_IMMUTABLE;	// In our class the buffer will never change after it's been created
