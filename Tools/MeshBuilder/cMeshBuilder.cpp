@@ -216,11 +216,11 @@ eae6320::cResult eae6320::Assets::cMeshBuilder::Build(const std::vector<std::str
 	if (!result) { OutputErrorMessageWithFileInfo(m_path_source, "Error Reading file"); }
 	//Writing to file
 	FILE * fptr;
-	fptr = fopen(m_path_target, "wb");
+	fptr = fopen(m_path_target, "w+b");
 	fwrite(&m_NumberOfIndices, sizeof(uint16_t), 1, fptr);
 	fwrite(&m_NumberOfVertices, sizeof(uint16_t), 1, fptr);
-	fwrite(m_TempIndex, sizeof(eae6320::Graphics::VertexFormats::sIndex), sizeof(eae6320::Graphics::VertexFormats::sIndex) * m_NumberOfIndices, fptr);
-	fwrite(m_TempMesh, sizeof(eae6320::Graphics::VertexFormats::sMesh), sizeof(eae6320::Graphics::VertexFormats::sMesh) * m_NumberOfVertices, fptr);
+	fwrite(m_TempIndex, sizeof(eae6320::Graphics::VertexFormats::sIndex), (m_NumberOfIndices), fptr);
+	fwrite(m_TempMesh, sizeof(eae6320::Graphics::VertexFormats::sMesh),(m_NumberOfIndices), fptr);
 	fclose(fptr);
 	return result;
 }
