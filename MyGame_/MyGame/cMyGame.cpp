@@ -188,7 +188,7 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 eae6320::cResult eae6320::cMyGame::Initialize()
 {
 	std::string m_vertShader1Location = "data/Shaders/Vertex/standard.shader";
-	std::string m_fragShader1Location = "data/Shaders/Fragment/animatedshader.shader";
+	std::string m_fragShader1Location = "data/Shaders/Fragment/standard.shader";
 	std::string m_vertShader2Location = "data/Shaders/Vertex/standard.shader";
 	std::string m_fragShader2Location = "data/Shaders/Fragment/standard.shader";
 
@@ -201,13 +201,13 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 
 	m_GameObjects[0]->SetGameObjectPosition(Math::sVector(1, 0, 0));
 
-	m_GameObjects[1]->SetGameObjectPosition(Math::sVector(0, 0, 0));
+	m_GameObjects[1]->SetGameObjectPosition(Math::sVector(0, -1, 0));
 
-	std::string fname = "data/Meshes/Mesh1.txt";
+	std::string fname = "data/Meshes/TransparentDonut.txt";
 	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh1Handle);
-	fname = "data/Meshes/Mesh2.txt";
+	fname = "data/Meshes/Plane.txt";
 	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh2Handle);
-	fname = "data/Meshes/Mesh3.txt";
+	fname = "data/Meshes/ChairMesh.txt";
 	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh3Handle);
 
 

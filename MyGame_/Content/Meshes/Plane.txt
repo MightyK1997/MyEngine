@@ -1,0 +1,31 @@
+
+
+return
+{
+VertexBuffer = 
+{
+{
+--Index Position = 0
+Position = {-0.884036,-1.96296e-16,0.884036},
+Color = {1,0,0,1},
+},
+{
+--Index Position = 1
+Position = {0.884036,-1.96296e-16,0.884036},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 2
+Position = {-0.884036,1.96296e-16,-0.884036},
+Color = {0,0,1,1},
+},
+{
+--Index Position = 2
+Position = {0.884036,1.96296e-16,-0.884036},
+Color = {1,1,1,1},
+},
+},
+IndexBuffer = 
+{
+0,1,2,2,1,3,},
+}

@@ -162,6 +162,37 @@ namespace eae6320
 						goto OnExit;
 					}
 				}
+				//Color(1)
+				//4 uint8_t = 32 bytes
+				{
+					constexpr GLuint vertexElementLocation = 1;
+					constexpr GLint elementCount = 4;
+					constexpr GLboolean normalized = GL_TRUE;	// The given floats should be used as-is
+					glVertexAttribPointer(vertexElementLocation, elementCount, GL_UNSIGNED_BYTE, normalized, stride,
+						reinterpret_cast<GLvoid*>(offsetof(eae6320::Graphics::VertexFormats::sMesh, r)));
+					const auto errorCode = glGetError();
+					if (errorCode == GL_NO_ERROR)
+					{
+						glEnableVertexAttribArray(vertexElementLocation);
+						const GLenum errorCode = glGetError();
+						if (errorCode != GL_NO_ERROR)
+						{
+							result = eae6320::Results::Failure;
+							EAE6320_ASSERTF(false, reinterpret_cast<const char*>(gluErrorString(errorCode)));
+							eae6320::Logging::OutputError("OpenGL failed to enable the POSITION vertex attribute at location %u: %s",
+								vertexElementLocation, reinterpret_cast<const char*>(gluErrorString(errorCode)));
+							goto OnExit;
+						}
+					}
+					else
+					{
+						result = eae6320::Results::Failure;
+						EAE6320_ASSERTF(false, reinterpret_cast<const char*>(gluErrorString(errorCode)));
+						eae6320::Logging::OutputError("OpenGL failed to set the POSITION vertex attribute at location %u: %s",
+							vertexElementLocation, reinterpret_cast<const char*>(gluErrorString(errorCode)));
+						goto OnExit;
+					}
+				}
 			}
 
 		OnExit:
