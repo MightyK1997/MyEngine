@@ -1,0 +1,20 @@
+return
+{
+	VertexBuffer = 
+	{
+			{
+				Position = {0,0.5,0},
+				Color = {0,0,0,0},
+			},
+			{
+				Position = {1,0.5,0},
+				Color = {0,0,0,0},
+			},
+			{
+				Position = {0.5,1,0},
+				Color = {0,0,0,0},
+			},
+	},
+	IndexBuffer = 
+		{1,0,3},
+}

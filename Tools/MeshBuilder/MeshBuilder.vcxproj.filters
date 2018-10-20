@@ -1,11 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="sRigidBodyState.cpp" />
-    <ClCompile Include="cGameObject.cpp" />
+    <ClInclude Include="cMeshBuilder.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sRigidBodyState.h" />
-    <ClInclude Include="cGameObject.h" />
+    <ClCompile Include="cMeshBuilder.cpp" />
+    <ClCompile Include="MeshBuilder.cpp" />
   </ItemGroup>
 </Project>

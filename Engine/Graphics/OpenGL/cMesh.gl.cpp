@@ -5,8 +5,9 @@ namespace eae6320
 {
 	namespace Graphics
 	{
-		cResult cMesh::Initialize()
+		cResult cMesh::Initialize(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, eae6320::Graphics::VertexFormats::sIndex* i_inputIndex, unsigned int i_IndexCount, unsigned int i_VertexCount)
 		{
+			indexCount = i_IndexCount;
 			auto result = eae6320::Results::Success;
 			// Create a vertex array object and make it active
 			{
@@ -62,12 +63,55 @@ namespace eae6320
 					goto OnExit;
 				}
 			}
-			// Assign the data to the buffer
+			// Assign the data to the Vertex buffer
 			{
-
-				const auto bufferSize = vertexCount * sizeof(*vertexData);
+				const auto bufferSize = i_VertexCount * sizeof(*i_inputMesh);
 				EAE6320_ASSERT(bufferSize < (uint64_t(1u) << (sizeof(GLsizeiptr) * 8)));
-				glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(bufferSize), reinterpret_cast<GLvoid*>(vertexData),
+				glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(bufferSize), reinterpret_cast<GLvoid*>(i_inputMesh),
+					// In our class we won't ever read from the buffer
+					GL_STATIC_DRAW);
+				const auto errorCode = glGetError();
+				if (errorCode != GL_NO_ERROR)
+				{
+					result = eae6320::Results::Failure;
+					EAE6320_ASSERTF(false, reinterpret_cast<const char*>(gluErrorString(errorCode)));
+					eae6320::Logging::OutputError("OpenGL failed to allocate the vertex buffer: %s",
+						reinterpret_cast<const char*>(gluErrorString(errorCode)));
+					goto OnExit;
+				}
+			}
+			// Create a Index buffer object and make it active
+			{
+				constexpr GLsizei bufferCount = 1;
+				glGenBuffers(bufferCount, &m_indexBufferId);
+				const auto errorCode = glGetError();
+				if (errorCode == GL_NO_ERROR)
+				{
+					glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBufferId);
+					const auto errorCode = glGetError();
+					if (errorCode != GL_NO_ERROR)
+					{
+						result = eae6320::Results::Failure;
+						EAE6320_ASSERTF(false, reinterpret_cast<const char*>(gluErrorString(errorCode)));
+						eae6320::Logging::OutputError("OpenGL failed to bind a new vertex buffer: %s",
+							reinterpret_cast<const char*>(gluErrorString(errorCode)));
+						goto OnExit;
+					}
+				}
+				else
+				{
+					result = eae6320::Results::Failure;
+					EAE6320_ASSERTF(false, reinterpret_cast<const char*>(gluErrorString(errorCode)));
+					eae6320::Logging::OutputError("OpenGL failed to get an unused vertex buffer ID: %s",
+						reinterpret_cast<const char*>(gluErrorString(errorCode)));
+					goto OnExit;
+				}
+			}
+			// Assign the data to the Index buffer
+			{
+				const auto bufferSize = indexCount * sizeof(*i_inputIndex);
+				EAE6320_ASSERT(bufferSize < (uint64_t(1u) << (sizeof(GLsizeiptr) * 8)));
+				glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(bufferSize), reinterpret_cast<GLvoid*>(i_inputIndex),
 					// In our class we won't ever read from the buffer
 					GL_STATIC_DRAW);
 				const auto errorCode = glGetError();
@@ -118,6 +162,37 @@ namespace eae6320
 						goto OnExit;
 					}
 				}
+				//Color(1)
+				//4 uint8_t = 32 bytes
+				{
+					constexpr GLuint vertexElementLocation = 1;
+					constexpr GLint elementCount = 4;
+					constexpr GLboolean normalized = GL_TRUE;	// The given floats should be used as-is
+					glVertexAttribPointer(vertexElementLocation, elementCount, GL_UNSIGNED_BYTE, normalized, stride,
+						reinterpret_cast<GLvoid*>(offsetof(eae6320::Graphics::VertexFormats::sMesh, r)));
+					const auto errorCode = glGetError();
+					if (errorCode == GL_NO_ERROR)
+					{
+						glEnableVertexAttribArray(vertexElementLocation);
+						const GLenum errorCode = glGetError();
+						if (errorCode != GL_NO_ERROR)
+						{
+							result = eae6320::Results::Failure;
+							EAE6320_ASSERTF(false, reinterpret_cast<const char*>(gluErrorString(errorCode)));
+							eae6320::Logging::OutputError("OpenGL failed to enable the POSITION vertex attribute at location %u: %s",
+								vertexElementLocation, reinterpret_cast<const char*>(gluErrorString(errorCode)));
+							goto OnExit;
+						}
+					}
+					else
+					{
+						result = eae6320::Results::Failure;
+						EAE6320_ASSERTF(false, reinterpret_cast<const char*>(gluErrorString(errorCode)));
+						eae6320::Logging::OutputError("OpenGL failed to set the POSITION vertex attribute at location %u: %s",
+							vertexElementLocation, reinterpret_cast<const char*>(gluErrorString(errorCode)));
+						goto OnExit;
+					}
+				}
 			}
 
 		OnExit:
@@ -138,12 +213,16 @@ namespace eae6320
 				// (meaning that every primitive is a triangle and will be defined by three vertices)
 				constexpr GLenum mode = GL_TRIANGLES;
 				// It's possible to start rendering primitives in the middle of the stream
-				constexpr GLint indexOfFirstVertexToRender = 0;
-				// As of this comment we are only drawing a single triangle
-				// (you will have to update this code in future assignments!)
 
-				//Changing vertexCountToRender to vertexCount
-				glDrawArrays(mode, indexOfFirstVertexToRender, vertexCount);
+				//Updating this for using index buffers
+				const GLvoid* const offset = 0;
+				glDrawElements(mode, static_cast<GLsizei>(indexCount), GL_UNSIGNED_SHORT, offset);
+				//constexpr GLint indexOfFirstVertexToRender = 0;
+				//// As of this comment we are only drawing a single triangle
+				//// (you will have to update this code in future assignments!)
+
+				////Changing vertexCountToRender to vertexCount
+				//glDrawArrays(mode, indexOfFirstVertexToRender, vertexCount);
 				EAE6320_ASSERT(glGetError() == GL_NO_ERROR);
 			}
 		}
@@ -199,6 +278,23 @@ namespace eae6320
 						reinterpret_cast<const char*>(gluErrorString(errorCode)));
 				}
 				m_vertexBufferId = 0;
+			}
+			if (m_indexBufferId != 0)
+			{
+				constexpr GLsizei bufferCount = 1;
+				glDeleteBuffers(bufferCount, &m_indexBufferId);
+				const auto errorCode = glGetError();
+				if (errorCode != GL_NO_ERROR)
+				{
+					if (result)
+					{
+						result = Results::Failure;
+					}
+					EAE6320_ASSERTF(false, reinterpret_cast<const char*>(gluErrorString(errorCode)));
+					Logging::OutputError("OpenGL failed to delete the Index buffer: %s",
+						reinterpret_cast<const char*>(gluErrorString(errorCode)));
+				}
+				m_indexBufferId = 0;
 			}
 			return result;
 		} 
