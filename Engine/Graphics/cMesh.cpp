@@ -1,6 +1,7 @@
 #include "cMesh.h"
 #include <External/Lua/Includes.h>
 
+#include "../Time/Time.h"
 #include "../Platform/Platform.h"
 
 eae6320::Assets::cManager<eae6320::Graphics::cMesh> eae6320::Graphics::cMesh::s_Manager;
@@ -18,6 +19,7 @@ eae6320::cResult LoadFile(const char* const i_FileName)
 	auto result = eae6320::Results::Success;
 	eae6320::Platform::sDataFromFile dataFromFile;
 	std::string errorMessage;
+	double initialNumberOfSeconds = eae6320::Time::ConvertTicksToSeconds(eae6320::Time::GetCurrentSystemTimeTickCount());
 	result = eae6320::Platform::LoadBinaryFile(i_FileName, dataFromFile, &errorMessage);
 	uintptr_t offset = reinterpret_cast<uintptr_t>(dataFromFile.data);
 	const uintptr_t finalOffset = offset + dataFromFile.size;
@@ -28,6 +30,9 @@ eae6320::cResult LoadFile(const char* const i_FileName)
 	m_TempIndex = reinterpret_cast<eae6320::Graphics::VertexFormats::sIndex*>(offset);
 	offset += (sizeof(eae6320::Graphics::VertexFormats::sIndex) * m_NumberOfIndices);
 	m_TempMesh = reinterpret_cast<eae6320::Graphics::VertexFormats::sMesh*>(offset);
+	double finalSecondsCount = eae6320::Time::ConvertTicksToSeconds(eae6320::Time::GetCurrentSystemTimeTickCount());
+	std::string outMessage = "Time taken to load" + std::string(i_FileName) + std::to_string(finalSecondsCount - initialNumberOfSeconds);
+	eae6320::Logging::OutputMessage(outMessage.c_str());
 	return result;
 }
 
