@@ -271,12 +271,13 @@ NewAssetTypeInfo( "shaders",
 
 NewAssetTypeInfo( "meshes",
 	{
-		--ConvertSourceRelativePathToBuiltRelativePath = function( i_sourceRelativePath )
-			-- Change the source file extension to the binary version
-			--local relativeDirectory, file = i_sourceRelativePath:match( "(.-)([^/\\]+)$" )
-			--local fileName, extensionWithPeriod = file:match( "([^%.]+)(.*)" )
-			--return relativeDirectory .. fileName .. extensionWithPeriod
-		--end,
+		ConvertSourceRelativePathToBuiltRelativePath = function( i_sourceRelativePath )
+			 --Change the source file extension to the binary version
+			local relativeDirectory, file = i_sourceRelativePath:match( "(.-)([^/\\]+)$" )
+			local fileName = file:match( "([^%.]+)" )
+			local binaryFileExtensionWithPeriod = ".meshbinary"
+			return relativeDirectory .. fileName .. binaryFileExtensionWithPeriod
+		end,
 		GetBuilderRelativePath = function()
 			return "MeshBuilder.exe"
 		end
