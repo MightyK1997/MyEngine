@@ -23,4 +23,8 @@ return
 	"Meshes/Can.txt",
 	"Meshes/Lambo.txt",
 	},
+
+	effects = {
+		"Effects/Effect1.Effect"
+	}
 }

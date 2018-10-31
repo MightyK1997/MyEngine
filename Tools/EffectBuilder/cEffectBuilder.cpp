@@ -8,7 +8,8 @@ namespace
 {
 	std::string m_VertexShaderLocation;
 	std::string m_FragmentShaderLocation;
-	uint8_t m_RenderStateValue;
+	uint8_t m_RenderStateValue = 0;
+	std::string m_TempRenderState;
 }
 
 eae6320::cResult LoadTableValues(lua_State& i_LuaState)
@@ -18,10 +19,11 @@ eae6320::cResult LoadTableValues(lua_State& i_LuaState)
 	const auto* const key = "Effect";
 	lua_pushstring(&i_LuaState, key);
 	lua_gettable(&i_LuaState, -2);
-	if (lua_istable(&i_LuaState, -2))
+	if (lua_istable(&i_LuaState, -1))
 	{
 		auto* key2 = "VertexShaderLocation";
 		lua_pushstring(&i_LuaState, key2);
+		lua_gettable(&i_LuaState, -2);
 		if (lua_isstring(&i_LuaState, -1))
 		{
 			m_VertexShaderLocation = lua_tostring(&i_LuaState, -1);
@@ -30,6 +32,7 @@ eae6320::cResult LoadTableValues(lua_State& i_LuaState)
 
 		key2 = "FragmentShaderLocation";
 		lua_pushstring(&i_LuaState, key2);
+		lua_gettable(&i_LuaState, -2);
 		if (lua_isstring(&i_LuaState, -1))
 		{
 			m_FragmentShaderLocation = lua_tostring(&i_LuaState, -1);
@@ -38,16 +41,28 @@ eae6320::cResult LoadTableValues(lua_State& i_LuaState)
 
 		key2 = "RenderState";
 		lua_pushstring(&i_LuaState, key2);
+		lua_gettable(&i_LuaState, -2);
 		if (lua_isstring(&i_LuaState, -1))
 		{
-			auto renderState = lua_tostring(&i_LuaState, -1);
-			if (renderState == "AlphaTransparency") m_RenderStateValue = 0;
-			else if (renderState == "DepthBuffering") m_RenderStateValue = 1;
-			else if (renderState == "DrawBothTriangleSides") m_RenderStateValue = 2;
+			m_TempRenderState = lua_tostring(&i_LuaState, -1);
+			if (m_TempRenderState == "AlphaTransparency")
+			{
+				m_RenderStateValue = 0;
+			}
+			else if (m_TempRenderState == "DepthBuffering")
+			{
+				m_RenderStateValue = 1;
+			}
+			else if (m_TempRenderState == "DrawBothTriangleSides")
+			{
+				m_RenderStateValue = 2;
+			}
 		}
 		lua_pop(&i_LuaState, 1);
 		lua_pop(&i_LuaState, 1);
 	}
+
+	return result;
 }
 
 
@@ -120,10 +135,24 @@ eae6320::cResult eae6320::Assets::cEffectBuilder::Build(const std::vector<std::s
 {
 	cResult result = Results::Success;
 	std::string m_ErrorString;
+
+	result = LoadFile(m_path_source);
 	if (!result) { OutputErrorMessageWithFileInfo(m_path_source, "Error Reading file"); }
+
 	FILE* fptr;
 
+	size_t length = m_VertexShaderLocation.length();
+
+	m_VertexShaderLocation = "data/" + m_VertexShaderLocation;
+	m_FragmentShaderLocation = "data/" + m_FragmentShaderLocation;
+
 	fptr = fopen(m_path_target, "w+b");
-	fwrite(&m_RenderStateValue, sizeof(uint8_t), 1);
-	fwrite()
+	fwrite(&m_RenderStateValue, sizeof(uint8_t), 1, fptr);
+	fwrite(&length, sizeof(uint8_t), 1, fptr);
+	fwrite(m_VertexShaderLocation.c_str(), m_VertexShaderLocation.length(), 1, fptr);
+	fwrite("\0", sizeof(uint8_t), 1, fptr);
+	fwrite(m_FragmentShaderLocation.c_str(), m_FragmentShaderLocation.length(), 1, fptr);
+	fwrite("\0", sizeof(uint8_t), 1, fptr);
+	fclose(fptr);
+	return result;
 }

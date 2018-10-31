@@ -289,18 +289,15 @@ NewAssetTypeInfo("effects",
 	RegisterReferencedAssets = function ( i_sourceRelativePath )
 		local sourceAbsolutePath = FindSourceContentAbsolutePathFromRelativePath(i_sourceRelativePath)
 		if DoesFileExist(sourceAbsolutePath) then
-		 local effect = dofile(sourceAbsolutePath)
-		 if type(effect) == "table" then
-			RegisterAssetToBeBuilt(effect["VertexShaderLocation"], "shaders", {"vertex"})
-			RegisterAssetToBeBuilt(effect["FragmentShaderLocation"], "shaders", {"fragment"})
+		 local ret = dofile(sourceAbsolutePath)
+		 if type(ret) == "table" then
+		   local Effect = ret["Effect"]
+			RegisterAssetToBeBuilt(Effect["VertexShaderLocation"], "shaders", {"vertex"})
+			RegisterAssetToBeBuilt(Effect["FragmentShaderLocation"], "shaders", {"fragment"})
 		 end
 		end
 end
-}
-)
-NewAssetTypeInfo( "effects",
-	{
-		ConvertSourceRelativePathToBuiltRelativePath = function( i_sourceRelativePath )
+ConvertSourceRelativePathToBuiltRelativePath = function( i_sourceRelativePath )
 			 --Change the source file extension to the binary version
 			local relativeDirectory, file = i_sourceRelativePath:match( "(.-)([^/\\]+)$" )
 			local fileName = file:match( "([^%.]+)" )
@@ -310,7 +307,7 @@ NewAssetTypeInfo( "effects",
 		GetBuilderRelativePath = function()
 			return "EffectBuilder.exe"
 		end
-	}
+}
 )
 
 
