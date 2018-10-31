@@ -1,5 +1,4 @@
 #include "cMesh.h"
-#include <External/Lua/Includes.h>
 
 #include "../Time/Time.h"
 #include "../Platform/Platform.h"

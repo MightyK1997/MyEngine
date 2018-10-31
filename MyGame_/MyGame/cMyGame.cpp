@@ -107,22 +107,22 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 	}
 	Application::cbApplication::SetSimulationRate(UserInput::IsKeyPressed(UserInput::KeyCodes::Shift) ? 0.5f : 1.0f);
 	m_NumberOfMeshesToRender = UserInput::IsKeyPressed(UserInput::KeyCodes::F1) ? 1 : m_NumberOfGameObjects;
-	if (UserInput::IsKeyPressed(UserInput::KeyCodes::F2))
-	{
-		if (!isEffectSwapped)
-		{
-			std::swap(s_Effect, s_Effect2);
-			isEffectSwapped = true;
-		}
-	}
-	else
-	{
-		if (isEffectSwapped)
-		{
-			std::swap(s_Effect, s_Effect2);
-			isEffectSwapped = false;
-		}
-	}
+	//if (UserInput::IsKeyPressed(UserInput::KeyCodes::F2))
+	//{
+	//	if (!isEffectSwapped)
+	//	{
+	//		std::swap(s_Effect, s_Effect2);
+	//		isEffectSwapped = true;
+	//	}
+	//}
+	//else
+	//{
+	//	if (isEffectSwapped)
+	//	{
+	//		std::swap(s_Effect, s_Effect2);
+	//		isEffectSwapped = false;
+	//	}
+	//}
 	if (UserInput::IsKeyPressed(UserInput::KeyCodes::F3))
 	{
 		if (!isMeshSwapped)
@@ -164,9 +164,9 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 		});
 
 
-	m_GameObjects[0]->SetGameObjectEffect(s_Effect);
+	m_GameObjects[0]->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
 	m_GameObjects[0]->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(mesh1Handle));
-	m_GameObjects[1]->SetGameObjectEffect(s_Effect2);
+	m_GameObjects[1]->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
 	m_GameObjects[1]->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(mesh2Handle));
 
 	m_EffectsAndMeshes[0] = m_GameObjects[0]->GetMeshEffectPair();
@@ -187,11 +187,6 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 
 eae6320::cResult eae6320::cMyGame::Initialize()
 {
-	std::string m_vertShader1Location = "data/Shaders/Vertex/standard.shader";
-	std::string m_fragShader1Location = "data/Shaders/Fragment/standard.shader";
-	std::string m_vertShader2Location = "data/Shaders/Vertex/standard.shader";
-	std::string m_fragShader2Location = "data/Shaders/Fragment/standard.shader";
-
 	eae6320::Graphics::cCamera::CreateCamera(m_Camera);
 
 	m_Camera->SetCameraPosition(Math::sVector(0, 0, 10));
@@ -210,30 +205,14 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 	fname = "data/Meshes/ChairMesh.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh3Handle);
 
-
-	if (!(eae6320::Graphics::cEffect::CreateEffect(m_vertShader1Location, m_fragShader1Location, eae6320::Graphics::RenderStates::DepthBuffering, s_Effect)))
-	{
-		EAE6320_ASSERT(false);
-		//goto OnExit;
-	}
-	if (!(eae6320::Graphics::cEffect::CreateEffect(m_vertShader2Location, m_fragShader2Location, eae6320::Graphics::RenderStates::DepthBuffering, s_Effect2)))
-	{
-		EAE6320_ASSERT(false);
-		//goto OnExit;
-	}
-	if (!(eae6320::Graphics::cEffect::CreateEffect(m_vertShader2Location, m_fragShader2Location, eae6320::Graphics::RenderStates::DepthBuffering, s_Effect3)))
-	{
-		EAE6320_ASSERT(false);
-		//goto OnExit;
-	}
+	std::string effectPath = "data/Effects/Effect1.effectbinary";
+	eae6320::Graphics::cEffect::s_Manager.Load(effectPath.c_str(), effect1Handle);
 	return Results::Success;
 }
 
 eae6320::cResult eae6320::cMyGame::CleanUp()
 {
-	s_Effect->DecrementReferenceCount();
-	s_Effect2->DecrementReferenceCount();
-	s_Effect3->DecrementReferenceCount();
+	eae6320::Graphics::cEffect::s_Manager.Release(effect1Handle);
 	eae6320::Graphics::cMesh::s_Manager.Release(mesh1Handle);
 	eae6320::Graphics::cMesh::s_Manager.Release(mesh2Handle);
 	eae6320::Graphics::cMesh::s_Manager.Release(mesh3Handle);

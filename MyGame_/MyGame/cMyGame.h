@@ -101,6 +101,10 @@ namespace eae6320
 		eae6320::Graphics::cMesh::Handle mesh2Handle;
 		eae6320::Graphics::cMesh::Handle mesh3Handle;
 
+		//Effect Handle
+		eae6320::Graphics::cEffect::Handle effect1Handle;
+		eae6320::Graphics::cEffect::Handle effect2Handle;
+
 	public:
 		int m_NumberOfMeshesToRender;
 

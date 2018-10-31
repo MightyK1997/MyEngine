@@ -141,10 +141,10 @@ eae6320::cResult eae6320::Assets::cEffectBuilder::Build(const std::vector<std::s
 
 	FILE* fptr;
 
-	size_t length = m_VertexShaderLocation.length();
-
 	m_VertexShaderLocation = "data/" + m_VertexShaderLocation;
 	m_FragmentShaderLocation = "data/" + m_FragmentShaderLocation;
+
+	size_t length = m_VertexShaderLocation.length();
 
 	fptr = fopen(m_path_target, "w+b");
 	fwrite(&m_RenderStateValue, sizeof(uint8_t), 1, fptr);

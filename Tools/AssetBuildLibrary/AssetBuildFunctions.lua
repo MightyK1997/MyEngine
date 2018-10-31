@@ -296,7 +296,7 @@ NewAssetTypeInfo("effects",
 			RegisterAssetToBeBuilt(Effect["FragmentShaderLocation"], "shaders", {"fragment"})
 		 end
 		end
-end
+end,
 ConvertSourceRelativePathToBuiltRelativePath = function( i_sourceRelativePath )
 			 --Change the source file extension to the binary version
 			local relativeDirectory, file = i_sourceRelativePath:match( "(.-)([^/\\]+)$" )
