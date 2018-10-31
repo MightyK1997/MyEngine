@@ -1,0 +1,9 @@
+return
+{
+Effect = 
+{
+VertexShaderLocation = "Shaders/Vertex/standard.shader",
+FragmentShaderLocation = "Shaders/Fragment/standard.shader",
+RenderState = "DepthBuffering",
+},
+}

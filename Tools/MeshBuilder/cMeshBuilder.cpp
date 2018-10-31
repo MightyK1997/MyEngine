@@ -190,7 +190,7 @@ eae6320::cResult LoadFile(const char* const i_FileName)
 			{
 				result = eae6320::Results::InvalidFile;
 				std::string err = "Asset files must return a single table (instead of " + returnedValueCount;
-				eae6320::Logging::OutputError(err.c_str());
+				eae6320::Assets::OutputErrorMessage(err.c_str());
 				// Pop every value that was returned
 				lua_pop(luaState, returnedValueCount);
 			}
@@ -198,7 +198,7 @@ eae6320::cResult LoadFile(const char* const i_FileName)
 		else
 		{
 			result = eae6320::Results::InvalidFile;
-			eae6320::Logging::OutputError(lua_tostring(luaState, -1));
+			eae6320::Assets::OutputErrorMessage(lua_tostring(luaState, -1));
 			// Pop the error message
 			lua_pop(luaState, 1);
 		}
