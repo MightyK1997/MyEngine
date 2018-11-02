@@ -19,6 +19,8 @@
 #include <Engine/Assets/ReferenceCountedAssets.h>
 #include <utility>
 
+#include "sContext.h"
+
 namespace eae6320
 {
 	namespace Graphics
@@ -26,10 +28,16 @@ namespace eae6320
 		class cEffect
 		{
 		public:
+
+			using Handle = Assets::cHandle<cEffect>;
+			static Assets::cManager<cEffect> s_Manager;
+
+			static cResult Load(const char* const i_FilePath, cEffect*& o_Effect);
+
 			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()
 			EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cEffect)
 			void Bind();
-			static cResult CreateEffect(std::string i_vertexShaderLocation, std::string i_fragmentShaderLocation, RenderStates::eRenderState i_TypeOfRender, cEffect*& o_Effect)
+			static cResult CreateEffect(std::string i_vertexShaderLocation, std::string i_fragmentShaderLocation, uint8_t i_TypeOfRender, cEffect*& o_Effect)
 			{
 				cResult result = Results::Success;
 				o_Effect = new cEffect();

@@ -4,13 +4,6 @@
 
 return
 {
-	shaders =
-	{
-		{ path = "Shaders/Vertex/standard.shader", arguments = { "vertex" } },
-		{ path = "Shaders/Fragment/standard.shader", arguments = { "fragment" } },
-		{ path = "Shaders/Fragment/AnimatedShader.shader", arguments = { "fragment" } },
-		{ path = "Shaders/Vertex/vertexInputLayout.shader", arguments = { "vertex" } },
-	},
 	meshes = {
 	"Meshes/Mesh1.txt",
 	"Meshes/Mesh2.txt",
@@ -23,4 +16,9 @@ return
 	"Meshes/Can.txt",
 	"Meshes/Lambo.txt",
 	},
+
+	effects = {
+		"Effects/Effect1.Effect",
+		"Effects/Effect2.Effect",
+	}
 }

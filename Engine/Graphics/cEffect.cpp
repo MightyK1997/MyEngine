@@ -1,5 +1,9 @@
 #include "cEffect.h"
 
+#include "../Platform/Platform.h"
+
+eae6320::Assets::cManager<eae6320::Graphics::cEffect> eae6320::Graphics::cEffect::s_Manager;
+
 namespace eae6320
 {
 	namespace Graphics
@@ -76,6 +80,33 @@ namespace eae6320
 					}
 				}
 			}
+			return result;
+		}
+
+		//Load data from file
+		cResult cEffect::Load(const char* const i_FileName, cEffect*& o_Effect)
+		{
+			cResult result = Results::Success;
+			cEffect* outputEffect = nullptr;
+
+			eae6320::Platform::sDataFromFile dataFromFile;
+			std::string errorMessage;
+			result = eae6320::Platform::LoadBinaryFile(i_FileName, dataFromFile, &errorMessage);
+			uintptr_t offset = reinterpret_cast<uintptr_t>(dataFromFile.data);
+			const uintptr_t finalOffset = offset + dataFromFile.size;
+
+			uint8_t renderState = *reinterpret_cast<uint8_t*>(offset);
+			offset += sizeof(uint8_t);
+			uint8_t lengthOfVertexPath = *reinterpret_cast<uint8_t*>(offset);
+			offset += sizeof(uint8_t);
+			char* pathToVertexShader = reinterpret_cast<char*>(offset);
+			offset += lengthOfVertexPath + 1;
+			char* pathToFragmentShader = reinterpret_cast<char*>(offset);
+
+			result = CreateEffect(std::string(pathToVertexShader), std::string(pathToFragmentShader), renderState, outputEffect);
+
+			o_Effect = outputEffect;
+
 			return result;
 		}
 	}
