@@ -1,11 +1,12 @@
 #pragma once
 
 #include <cstdint>
-
-#include "Engine/Math/sVector.h"
+//#include "Engine/Math/sVector.h"
 //Need to include windows.h before including XInput.h
 #include "../Windows/Includes.h"
 #include <Xinput.h>
+
+#include "Engine/Results/Results.h"
 
 namespace eae6320
 {
@@ -35,18 +36,15 @@ namespace eae6320
 				RIGHT_STICK
 			};
 
-			struct ControllerState
-			{
-				XINPUT_STATE state;
-			};
-
 			bool IsKeyPressed(ControllerKeyCodes i_KeyCode);
 			float GetDeflection(ControllerKeyCodes i_KeyCode);
-			ControllerState g_Controllers[XUSER_MAX_COUNT];
-			void SetVibrationEffects(float i_LowFrequencySpeed, float i_HighFrequencySpeed);
-			void SetVibrationEffects(float i_Speed);
+			
+			void SetVibrationEffects(uint16_t i_LowFrequencySpeed, uint16_t i_HighFrequencySpeed);
+			void SetVibrationEffects(uint16_t i_Speed);
 
-			void Initialize();
+			uint8_t GetNumberOfConnectedControllers();
+
+			eae6320::cResult Initialize();
 			void Update();
 		}
 	}

@@ -4,15 +4,41 @@
 namespace
 {
 	uint8_t g_NumberOfConnectedControllers = 0;
+	float g_elapsedTime;
+
+	struct ControllerState
+	{
+		XINPUT_STATE state;
+	};
+	ControllerState g_Controllers[XUSER_MAX_COUNT];
+}
+
+//Check For new controllers
+void CheckForNewControllers()
+{
+	DWORD dwResult;
+	for (DWORD i = 0; i < XUSER_MAX_COUNT; i++)
+	{
+		XINPUT_STATE state;
+		ZeroMemory(&state, sizeof(XINPUT_STATE));
+
+		dwResult = XInputGetState(i, &state);
+		if (dwResult == ERROR_SUCCESS)
+		{
+			g_NumberOfConnectedControllers++;
+		}
+	}
 }
 
 bool eae6320::UserInput::ControllerInput::IsKeyPressed(ControllerKeyCodes i_KeyCode)
 {
+	Update();
 	return (g_Controllers[0].state.Gamepad.wButtons & i_KeyCode) != 0;
 }
 
 float eae6320::UserInput::ControllerInput::GetDeflection(ControllerKeyCodes i_KeyCode)
 {
+	Update();
 	XINPUT_STATE state = g_Controllers[0].state;
 	if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_TRIGGER) || (i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_TRIGGER))
 	{
@@ -116,9 +142,10 @@ float eae6320::UserInput::ControllerInput::GetDeflection(ControllerKeyCodes i_Ke
 			return normalizedMagnitude;
 		}
 	}
+	return 0;
 }
 
-void eae6320::UserInput::ControllerInput::SetVibrationEffects(float i_LowFrequencySpeed, float i_HighFrequencySpeed)
+void eae6320::UserInput::ControllerInput::SetVibrationEffects(uint16_t i_LowFrequencySpeed, uint16_t i_HighFrequencySpeed)
 {
 	XINPUT_VIBRATION vib;
 	ZeroMemory(&vib, sizeof(XINPUT_VIBRATION));
@@ -127,7 +154,7 @@ void eae6320::UserInput::ControllerInput::SetVibrationEffects(float i_LowFrequen
 	XInputSetState(0, &vib);
 }
 
-void eae6320::UserInput::ControllerInput::SetVibrationEffects(float i_Speed)
+void eae6320::UserInput::ControllerInput::SetVibrationEffects(uint16_t i_Speed)
 {
 	XINPUT_VIBRATION vib;
 	ZeroMemory(&vib, sizeof(XINPUT_VIBRATION));
@@ -136,31 +163,37 @@ void eae6320::UserInput::ControllerInput::SetVibrationEffects(float i_Speed)
 	XInputSetState(0, &vib);
 }
 
-
-
-void eae6320::UserInput::ControllerInput::Initialize()
+uint8_t eae6320::UserInput::ControllerInput::GetNumberOfConnectedControllers()
 {
-	DWORD dwResult;
-	for (DWORD i = 0; i < XUSER_MAX_COUNT; i++)
-	{
-		XINPUT_STATE state;
-		ZeroMemory(&state, sizeof(XINPUT_STATE));
-
-		dwResult = XInputGetState(i, &state);
-		if (dwResult == ERROR_SUCCESS)
-		{
-			g_NumberOfConnectedControllers++;
-			if (g_Controllers[i].state.dwPacketNumber != state.dwPacketNumber)
-			{
-				g_Controllers[i].state = state;
-			}
-		}
-	}
+	return g_NumberOfConnectedControllers;
 }
+
+//eae6320::cResult eae6320::UserInput::ControllerInput::Initialize()
+//{
+//	eae6320::cResult result = eae6320::Results::Success;
+//	CheckForNewControllers();
+//	DWORD dwResult;
+//	for (DWORD i = 0; i < g_NumberOfConnectedControllers; i++)
+//	{
+//		XINPUT_STATE state;
+//		ZeroMemory(&state, sizeof(XINPUT_STATE));
+//		dwResult = XInputGetState(i, &state);
+//		if (dwResult == ERROR_SUCCESS)
+//		{
+//			g_Controllers[i].state = state;
+//		}
+//		else
+//		{
+//			result = eae6320::Results::Failure;
+//		}
+//	}
+//	return result;
+//}
 
 void eae6320::UserInput::ControllerInput::Update()
 {
 	DWORD dwResult;
+	CheckForNewControllers();
 	for (DWORD i = 0; i < g_NumberOfConnectedControllers; i++)
 	{
 		XINPUT_STATE state;
@@ -169,10 +202,10 @@ void eae6320::UserInput::ControllerInput::Update()
 		dwResult = XInputGetState(i, &state);
 		if (dwResult == ERROR_SUCCESS)
 		{
-			if (g_Controllers[i].state.dwPacketNumber != state.dwPacketNumber)
-			{
+			//if (g_Controllers[i].state.dwPacketNumber != state.dwPacketNumber)
+			//{
 				g_Controllers[i].state = state;
-			}
+			//}
 		}
 	}
 }

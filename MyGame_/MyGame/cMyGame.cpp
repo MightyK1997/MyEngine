@@ -5,6 +5,7 @@
 #include <Engine/Graphics/Graphics.h>
 #include <Engine/Asserts/Asserts.h>
 #include <Engine/UserInput/UserInput.h>
+#include <Engine/ControllerInput/ControllerInput.h>
 
 // Inherited Implementation
 //=========================
@@ -49,6 +50,11 @@ void eae6320::cMyGame::UpdateCameraPosition()
 	{
 		m_Camera->SetAngularSpeed(-1.0f);
 	}
+	if (UserInput::ControllerInput::IsKeyPressed(UserInput::ControllerInput::ControllerKeyCodes::A))
+	{
+		m_Camera->SetCameraVelocity(Math::sVector(0, 0, 10.0f));
+	}
+
 }
 
 void eae6320::cMyGame::UpdateGameobjectPosition()
