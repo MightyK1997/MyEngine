@@ -1,5 +1,11 @@
 #pragma once
 
+#include <cstdint>
+
+#include "Engine/Math/sVector.h"
+//Need to include windows.h before including XInput.h
+#include "../Windows/Includes.h"
+#include <Xinput.h>
 
 namespace eae6320
 {
@@ -29,7 +35,19 @@ namespace eae6320
 				RIGHT_STICK
 			};
 
-			bool isKeyPressed(ControllerKeyCodes i_KeyCode);
+			struct ControllerState
+			{
+				XINPUT_STATE state;
+			};
+
+			bool IsKeyPressed(ControllerKeyCodes i_KeyCode);
+			float GetDeflection(ControllerKeyCodes i_KeyCode);
+			ControllerState g_Controllers[XUSER_MAX_COUNT];
+			void SetVibrationEffects(float i_LowFrequencySpeed, float i_HighFrequencySpeed);
+			void SetVibrationEffects(float i_Speed);
+
+			void Initialize();
+			void Update();
 		}
 	}
 }
