@@ -33,7 +33,23 @@ void CheckForNewControllers()
 bool eae6320::UserInput::ControllerInput::IsKeyPressed(ControllerKeyCodes i_KeyCode)
 {
 	Update();
-	return (g_Controllers[0].state.Gamepad.wButtons & i_KeyCode) != 0;
+	XINPUT_STATE state = g_Controllers[0].state;
+	if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_TRIGGER) || (i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_TRIGGER))
+	{
+		if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_TRIGGER))
+		{
+			return state.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD;
+		}
+		else if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_TRIGGER))
+		{
+			return state.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD;
+		}
+	}
+	else
+	{
+		return (state.Gamepad.wButtons & i_KeyCode) != 0;
+	}
+	return false;
 }
 
 float eae6320::UserInput::ControllerInput::GetDeflection(ControllerKeyCodes i_KeyCode)

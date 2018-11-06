@@ -3,7 +3,8 @@
 #include <cstdint>
 //#include "Engine/Math/sVector.h"
 //Need to include windows.h before including XInput.h
-#include "../Windows/Includes.h"
+#include <Windows.h>
+#include "ExternalLibraries.h"
 #include <Xinput.h>
 
 #include "Engine/Results/Results.h"

@@ -13,6 +13,8 @@
 // Run
 //----
 
+using namespace eae6320::UserInput::ControllerInput;
+
 void eae6320::cMyGame::UpdateCameraPosition()
 {
 	m_Camera->SetCameraVelocity(Math::sVector(0, 0, 0));
@@ -50,9 +52,17 @@ void eae6320::cMyGame::UpdateCameraPosition()
 	{
 		m_Camera->SetAngularSpeed(-1.0f);
 	}
-	if (UserInput::ControllerInput::IsKeyPressed(UserInput::ControllerInput::ControllerKeyCodes::A))
+	if (GetDeflection(ControllerKeyCodes::LEFT_STICK) != 0)
 	{
-		m_Camera->SetCameraVelocity(Math::sVector(0, 0, 10.0f));
+		m_Camera->SetAngularSpeed(GetDeflection(ControllerKeyCodes::LEFT_STICK));
+	}
+	if (IsKeyPressed(ControllerKeyCodes::RIGHT_TRIGGER))
+	{
+		m_Camera->SetCameraVelocity(Math::sVector(0, GetDeflection(ControllerKeyCodes::RIGHT_TRIGGER), 0));
+	}
+	if (IsKeyPressed(ControllerKeyCodes::LEFT_TRIGGER))
+	{
+		m_Camera->SetCameraVelocity(Math::sVector(0, -GetDeflection(ControllerKeyCodes::LEFT_TRIGGER), 0));
 	}
 
 }
