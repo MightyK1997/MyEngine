@@ -1,10 +1,7 @@
 #pragma once
 
 #include <cstdint>
-//Need to include windows.h before including XInput.h
-#include <Windows.h>
 #include "ExternalLibraries.h"
-#include <Xinput.h>
 #include "Engine/Math/sVector.h"
 #include "Engine/Results/Results.h"
 
@@ -46,20 +43,34 @@ namespace eae6320
 			//void SetVibrationEffects(uint16_t i_Speed);
 
 
-			//For Multiple Controllers
+			//All functions have a default parameter for controller number set to 0
+			//Which can be set to values between 0 and 3
+
+			//Check if a key or trigger is pressed.
 			bool IsKeyPressed(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber = 0);
+			//Get the actual magnitude of trigger deflection.
+			//Returns only the magnitude and not the x and y axis values if used for sticks.
 			float GetTriggerDeflection(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber = 0);
+			//Get the normalized magnitude between 0.0 and 1.0 of trigger deflection.
+			//Returns only the normalized magnitude and not the x and y axis values if used for sticks.
 			float GetNormalizedTriggerDeflection(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber = 0);
+
+			//Get the magnitude of deflection in the X and Y axis for the sticks.
 			eae6320::Math::sVector GetStickDeflection(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber = 0);
+			//Get the normalized magnitude between 0.0 and 1.0 of deflection in the X and Y axis for the sticks.
 			eae6320::Math::sVector GetNormalizedStickDeflection(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber = 0);
+
+			//Set the individual rotation speed for each of the motors in the controller. 
 			void SetVibrationEffects(uint16_t i_LowFrequencySpeed, uint16_t i_HighFrequencySpeed, uint8_t i_ControllerNumber = 0);
+
+			//Set the same speed to both the motors in the controller.
 			void SetVibrationEffects(uint16_t i_Speed, uint8_t i_ControllerNumber = 0);
 
 
 
 			//Other Functions
 			uint8_t GetNumberOfConnectedControllers();
-			void Update();
+			eae6320::cResult Update();
 		}
 	}
 }
