@@ -1,15 +1,19 @@
 #include "ControllerInput.h"
-
+#include "Engine/Time/Time.h"
 #include <cmath>
 namespace
 {
 	uint8_t g_NumberOfConnectedControllers = 0;
+	bool g_bIsCalledFirstTime = true;
 	float g_elapsedTime;
 
 	struct ControllerState
 	{
 		XINPUT_STATE state;
 	};
+
+	uint64_t g_PreviousTickCount;
+
 	ControllerState g_Controllers[XUSER_MAX_COUNT];
 }
 
@@ -449,8 +453,15 @@ eae6320::cResult eae6320::UserInput::ControllerInput::Update()
 {
 	eae6320::cResult result = eae6320::Results::Success;
 	DWORD dwResult;
-	CheckForNewControllers();
+	if (g_bIsCalledFirstTime || (g_elapsedTime >= 5))
+	{
+		if (g_bIsCalledFirstTime) { g_bIsCalledFirstTime = false; }
+		CheckForNewControllers();
+		g_elapsedTime = 0.f;
+	}
 	if (g_NumberOfConnectedControllers == 0) { return eae6320::Results::Failure; }
+	g_elapsedTime += static_cast<float>(eae6320::Time::ConvertTicksToSeconds(eae6320::Time::GetCurrentSystemTimeTickCount() - g_PreviousTickCount));
+	g_PreviousTickCount = eae6320::Time::GetCurrentSystemTimeTickCount();
 	for (DWORD i = 0; i < g_NumberOfConnectedControllers; i++)
 	{
 		XINPUT_STATE state;

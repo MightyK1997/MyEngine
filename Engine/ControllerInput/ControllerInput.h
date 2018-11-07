@@ -48,15 +48,18 @@ namespace eae6320
 
 			//Check if a key or trigger is pressed.
 			bool IsKeyPressed(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber = 0);
+
 			//Get the actual magnitude of trigger deflection.
 			//Returns only the magnitude and not the x and y axis values if used for sticks.
 			float GetTriggerDeflection(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber = 0);
+
 			//Get the normalized magnitude between 0.0 and 1.0 of trigger deflection.
 			//Returns only the normalized magnitude and not the x and y axis values if used for sticks.
 			float GetNormalizedTriggerDeflection(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber = 0);
 
 			//Get the magnitude of deflection in the X and Y axis for the sticks.
 			eae6320::Math::sVector GetStickDeflection(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber = 0);
+
 			//Get the normalized magnitude between 0.0 and 1.0 of deflection in the X and Y axis for the sticks.
 			eae6320::Math::sVector GetNormalizedStickDeflection(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber = 0);
 

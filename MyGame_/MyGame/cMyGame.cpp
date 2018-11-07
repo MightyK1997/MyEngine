@@ -52,17 +52,17 @@ void eae6320::cMyGame::UpdateCameraPosition()
 	{
 		m_Camera->SetAngularSpeed(-1.0f);
 	}
-	if (GetDeflection(ControllerKeyCodes::LEFT_STICK) != 0)
+	if (GetTriggerDeflection(ControllerKeyCodes::LEFT_STICK) != 0)
 	{
-		m_Camera->SetAngularSpeed(GetDeflection(ControllerKeyCodes::LEFT_STICK));
+		m_Camera->SetAngularSpeed(GetTriggerDeflection(ControllerKeyCodes::LEFT_STICK));
 	}
 	if (IsKeyPressed(ControllerKeyCodes::RIGHT_TRIGGER))
 	{
-		m_Camera->SetCameraVelocity(Math::sVector(0, GetDeflection(ControllerKeyCodes::RIGHT_TRIGGER), 0));
+		m_Camera->SetCameraVelocity(Math::sVector(0, GetTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER), 0));
 	}
 	if (IsKeyPressed(ControllerKeyCodes::LEFT_TRIGGER))
 	{
-		m_Camera->SetCameraVelocity(Math::sVector(0, -GetDeflection(ControllerKeyCodes::LEFT_TRIGGER), 0));
+		m_Camera->SetCameraVelocity(Math::sVector(0, -GetTriggerDeflection(ControllerKeyCodes::LEFT_TRIGGER), 0));
 	}
 
 }
