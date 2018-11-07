@@ -1,12 +1,11 @@
 #pragma once
 
 #include <cstdint>
-//#include "Engine/Math/sVector.h"
 //Need to include windows.h before including XInput.h
 #include <Windows.h>
 #include "ExternalLibraries.h"
 #include <Xinput.h>
-
+#include "Engine/Math/sVector.h"
 #include "Engine/Results/Results.h"
 
 namespace eae6320
@@ -37,15 +36,29 @@ namespace eae6320
 				RIGHT_STICK
 			};
 
-			bool IsKeyPressed(ControllerKeyCodes i_KeyCode);
-			float GetDeflection(ControllerKeyCodes i_KeyCode);
-			
-			void SetVibrationEffects(uint16_t i_LowFrequencySpeed, uint16_t i_HighFrequencySpeed);
-			void SetVibrationEffects(uint16_t i_Speed);
+			////For a single Controller
+			//bool IsKeyPressed(ControllerKeyCodes i_KeyCode);
+			//float GetTriggerDeflection(ControllerKeyCodes i_KeyCode);
+			//float GetNormalizedTriggerDeflection(ControllerKeyCodes i_KeyCode);
+			//eae6320::Math::sVector GetStickDeflection(ControllerKeyCodes i_KeyCode);
+			//eae6320::Math::sVector GetNormalizedStickDeflection(ControllerKeyCodes i_KeyCode);
+			//void SetVibrationEffects(uint16_t i_LowFrequencySpeed, uint16_t i_HighFrequencySpeed);
+			//void SetVibrationEffects(uint16_t i_Speed);
 
+
+			//For Multiple Controllers
+			bool IsKeyPressed(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber = 0);
+			float GetTriggerDeflection(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber = 0);
+			float GetNormalizedTriggerDeflection(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber = 0);
+			eae6320::Math::sVector GetStickDeflection(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber = 0);
+			eae6320::Math::sVector GetNormalizedStickDeflection(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber = 0);
+			void SetVibrationEffects(uint16_t i_LowFrequencySpeed, uint16_t i_HighFrequencySpeed, uint8_t i_ControllerNumber = 0);
+			void SetVibrationEffects(uint16_t i_Speed, uint8_t i_ControllerNumber = 0);
+
+
+
+			//Other Functions
 			uint8_t GetNumberOfConnectedControllers();
-
-			eae6320::cResult Initialize();
 			void Update();
 		}
 	}
