@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <functional>
 #include "ExternalLibraries.h"
 #include "Engine/Math/sVector.h"
 #include "Engine/Results/Results.h"
@@ -69,11 +70,12 @@ namespace eae6320
 			//Set the same speed to both the motors in the controller.
 			void SetVibrationEffects(uint16_t i_Speed, uint8_t i_ControllerNumber = 0);
 
-
+			//Register Functions for callback
+			void RegisterFunctionForCallback(ControllerKeyCodes i_KeyCode, std::function<void()> i_CallbackFunction, uint8_t i_ControllerNumber = 0);
 
 			//Other Functions
 			uint8_t GetNumberOfConnectedControllers();
-			eae6320::cResult Update();
+			eae6320::cResult Update(float i_InputTime);
 		}
 	}
 }

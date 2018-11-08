@@ -111,6 +111,7 @@ namespace eae6320
 	private:
 		void UpdateCameraPosition();
 		void UpdateGameobjectPosition();
+		void Test();
 	};
 }
 

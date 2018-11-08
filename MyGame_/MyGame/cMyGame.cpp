@@ -52,17 +52,17 @@ void eae6320::cMyGame::UpdateCameraPosition()
 	{
 		m_Camera->SetAngularSpeed(-1.0f);
 	}
-	if (GetTriggerDeflection(ControllerKeyCodes::LEFT_STICK) != 0)
+	if (GetNormalizedTriggerDeflection(ControllerKeyCodes::LEFT_STICK, 1) != 0)
 	{
-		m_Camera->SetAngularSpeed(GetTriggerDeflection(ControllerKeyCodes::LEFT_STICK));
+		m_Camera->SetAngularSpeed(GetNormalizedStickDeflection(ControllerKeyCodes::LEFT_STICK, 1).x);
 	}
 	if (IsKeyPressed(ControllerKeyCodes::RIGHT_TRIGGER))
 	{
-		m_Camera->SetCameraVelocity(Math::sVector(0, GetTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER), 0));
+		m_Camera->SetCameraVelocity(Math::sVector(0, GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER), 0));
 	}
 	if (IsKeyPressed(ControllerKeyCodes::LEFT_TRIGGER))
 	{
-		m_Camera->SetCameraVelocity(Math::sVector(0, -GetTriggerDeflection(ControllerKeyCodes::LEFT_TRIGGER), 0));
+		m_Camera->SetCameraVelocity(Math::sVector(0, -GetNormalizedTriggerDeflection(ControllerKeyCodes::LEFT_TRIGGER), 0));
 	}
 
 }
@@ -109,6 +109,11 @@ void eae6320::cMyGame::UpdateGameobjectPosition()
 	{
 		m_GameObjects[1]->SetGameObjectVelocity(Math::sVector(10.0f, 0, 0));
 	}
+}
+
+void eae6320::cMyGame::Test()
+{
+	std::swap(mesh1Handle, mesh3Handle);
 }
 
 
@@ -204,6 +209,8 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 eae6320::cResult eae6320::cMyGame::Initialize()
 {
 	eae6320::Graphics::cCamera::CreateCamera(m_Camera);
+
+	RegisterFunctionForCallback(ControllerKeyCodes::A, std::bind(&eae6320::cMyGame::Test, this));
 
 	m_Camera->SetCameraPosition(Math::sVector(0, 0, 10));
 

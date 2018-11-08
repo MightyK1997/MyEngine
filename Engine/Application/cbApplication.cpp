@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <Engine/Asserts/Asserts.h>
+#include <Engine/ControllerInput/ControllerInput.h>
 #include <Engine/Graphics/Graphics.h>
 #include <Engine/Logging/Logging.h>
 #include <Engine/Time/Time.h>
@@ -163,6 +164,10 @@ void eae6320::Application::cbApplication::UpdateUntilExit()
 		{
 			UpdateBasedOnTime( static_cast<float>( Time::ConvertTicksToSeconds( tickCount_systemTime_elapsedSinceLastLoop ) ) );
 			UpdateBasedOnInput();
+		}
+		//Call the controller update to check for keypresses to perform callback.
+		{
+			UserInput::ControllerInput::Update(static_cast<float>(Time::ConvertTicksToSeconds(tickCount_systemTime_elapsedSinceLastLoop)));
 		}
 		// Update the simulation
 		{
