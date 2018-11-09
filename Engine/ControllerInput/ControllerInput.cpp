@@ -465,6 +465,12 @@ uint8_t eae6320::UserInput::ControllerInput::GetNumberOfConnectedControllers()
 	return g_NumberOfConnectedControllers;
 }
 
+eae6320::cResult eae6320::UserInput::ControllerInput::Initialize()
+{
+
+	return eae6320::cResult();
+}
+
 eae6320::cResult eae6320::UserInput::ControllerInput::Update(float i_InputTime)
 {
 	eae6320::cResult result = eae6320::Results::Success;
@@ -502,4 +508,9 @@ eae6320::cResult eae6320::UserInput::ControllerInput::Update(float i_InputTime)
 		}
 	}
 	return result;
+}
+
+eae6320::cResult eae6320::UserInput::ControllerInput::CleanUp()
+{
+	return eae6320::cResult();
 }

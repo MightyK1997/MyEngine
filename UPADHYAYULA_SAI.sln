@@ -108,6 +108,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EffectBuilder", "Tools\Effe
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ControllerInput", "Engine\ControllerInput\ControllerInput.vcxproj", "{44F5810E-36A8-4571-8A74-8202E256763D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sound", "Engine\Sound\Sound.vcxproj", "{0619A00B-4235-41D7-92D5-B58346D524A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -372,6 +374,14 @@ Global
 		{44F5810E-36A8-4571-8A74-8202E256763D}.Release|x64.Build.0 = Release|x64
 		{44F5810E-36A8-4571-8A74-8202E256763D}.Release|x86.ActiveCfg = Release|Win32
 		{44F5810E-36A8-4571-8A74-8202E256763D}.Release|x86.Build.0 = Release|Win32
+		{0619A00B-4235-41D7-92D5-B58346D524A9}.Debug|x64.ActiveCfg = Debug|x64
+		{0619A00B-4235-41D7-92D5-B58346D524A9}.Debug|x64.Build.0 = Debug|x64
+		{0619A00B-4235-41D7-92D5-B58346D524A9}.Debug|x86.ActiveCfg = Debug|Win32
+		{0619A00B-4235-41D7-92D5-B58346D524A9}.Debug|x86.Build.0 = Debug|Win32
+		{0619A00B-4235-41D7-92D5-B58346D524A9}.Release|x64.ActiveCfg = Release|x64
+		{0619A00B-4235-41D7-92D5-B58346D524A9}.Release|x64.Build.0 = Release|x64
+		{0619A00B-4235-41D7-92D5-B58346D524A9}.Release|x86.ActiveCfg = Release|Win32
+		{0619A00B-4235-41D7-92D5-B58346D524A9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -410,6 +420,7 @@ Global
 		{29932845-9B7B-4E7D-9194-AD4EE1A035C7} = {31B05C03-4BB2-4A0D-B621-B41DA6B0F57E}
 		{1D370A0F-8FEF-4B01-A71A-B9CDE16FF6C6} = {31B05C03-4BB2-4A0D-B621-B41DA6B0F57E}
 		{44F5810E-36A8-4571-8A74-8202E256763D} = {E5C51EF7-81D3-4030-A4CE-0D2D666CEF4F}
+		{0619A00B-4235-41D7-92D5-B58346D524A9} = {E5C51EF7-81D3-4030-A4CE-0D2D666CEF4F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A89F366F-0B7F-464F-90A8-A4828B273298}

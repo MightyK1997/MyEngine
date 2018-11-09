@@ -34,14 +34,14 @@ namespace eae6320
 				RIGHT_STICK
 			};
 
-			////For a single Controller
-			//bool IsKeyPressed(ControllerKeyCodes i_KeyCode);
-			//float GetTriggerDeflection(ControllerKeyCodes i_KeyCode);
-			//float GetNormalizedTriggerDeflection(ControllerKeyCodes i_KeyCode);
-			//eae6320::Math::sVector GetStickDeflection(ControllerKeyCodes i_KeyCode);
-			//eae6320::Math::sVector GetNormalizedStickDeflection(ControllerKeyCodes i_KeyCode);
-			//void SetVibrationEffects(uint16_t i_LowFrequencySpeed, uint16_t i_HighFrequencySpeed);
-			//void SetVibrationEffects(uint16_t i_Speed);
+			//Initialize
+			eae6320::cResult Initialize();
+
+			//Update
+			eae6320::cResult Update(float i_InputTime);	
+
+			//Cleanup
+			eae6320::cResult CleanUp();
 
 
 			//All functions have a default parameter for controller number set to 0
@@ -75,7 +75,6 @@ namespace eae6320
 
 			//Other Functions
 			uint8_t GetNumberOfConnectedControllers();
-			eae6320::cResult Update(float i_InputTime);
 		}
 	}
 }
