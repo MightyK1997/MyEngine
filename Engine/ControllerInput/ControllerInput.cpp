@@ -466,6 +466,11 @@ void eae6320::UserInput::ControllerInput::RegisterFunctionForCallback(Controller
 	g_FunctionLookupTable[i_ControllerNumber] = temp;
 }
 
+eae6320::cResult eae6320::UserInput::ControllerInput::RemoveFunctionFromCallback(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber)
+{
+	return (g_FunctionLookupTable[i_ControllerNumber].erase(i_KeyCode)) > 0 ? Results::Success : Results::Failure;
+}
+
 uint8_t eae6320::UserInput::ControllerInput::GetNumberOfConnectedControllers()
 {
 	return g_NumberOfConnectedControllers;
@@ -477,7 +482,6 @@ eae6320::cResult eae6320::UserInput::ControllerInput::Initialize()
 	if ((!g_UpdateThreadHandle) && !g_IsThreadRunning)
 	{
 		g_UpdateThreadHandle = CreateThread(NULL, 0, Update, NULL, 0, &g_UpdateThreadID);
-		// eae6320::Logging::OutputMessage(reinterpret_cast<char*>(g_UpdateThreadID));
 		if (g_UpdateThreadHandle)
 		{
 			g_IsThreadRunning = true;
@@ -496,7 +500,6 @@ eae6320::cResult eae6320::UserInput::ControllerInput::Initialize()
 
 DWORD __stdcall eae6320::UserInput::ControllerInput::Update(LPVOID i_InParameter)
 {
-	eae6320::Logging::OutputMessage("Executing Thread");
 	DWORD dwResult = 0;
 	while (g_IsThreadRunning)
 	{

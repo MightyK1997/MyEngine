@@ -119,7 +119,7 @@ void eae6320::cMyGame::Test()
 
 void eae6320::cMyGame::Test(int a)
 {
-
+	RemoveFunctionFromCallback(ControllerKeyCodes::A);
 }
 
 
