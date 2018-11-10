@@ -1,6 +1,7 @@
 #include "ControllerInput.h"
 #include <cmath>
 #include <map>
+#include <future>
 #include "Engine/Time/Time.h"
 #include "Engine/Logging/Logging.h"
 namespace
@@ -47,8 +48,8 @@ void CallCallbackFunction(eae6320::UserInput::ControllerInput::ControllerKeyCode
 {
 	if (g_FunctionLookupTable[i_ControllerNumber][i_KeyCode])
 	{
-		g_FunctionLookupTable[i_ControllerNumber][i_KeyCode]();
-		g_FunctionLookupTable[i_ControllerNumber].erase(i_KeyCode);
+		std::async(g_FunctionLookupTable[i_ControllerNumber][i_KeyCode]);
+		//g_FunctionLookupTable[i_ControllerNumber].erase(i_KeyCode);
 	}
 }
 
@@ -506,7 +507,7 @@ DWORD __stdcall eae6320::UserInput::ControllerInput::Update(LPVOID i_InParameter
 			g_PreviousTickCount = eae6320::Time::GetCurrentSystemTimeTickCount();
 			g_elapsedTime = 0.f;
 		}
-		if (g_NumberOfConnectedControllers == 0) { return eae6320::Results::Failure; }
+		if (g_NumberOfConnectedControllers == 0) { dwResult = 1; }
 		g_elapsedTime += static_cast<float>(eae6320::Time::ConvertTicksToSeconds(eae6320::Time::GetCurrentSystemTimeTickCount() - g_PreviousTickCount));
 		g_PreviousTickCount = eae6320::Time::GetCurrentSystemTimeTickCount();
 		for (DWORD i = 0; i < g_NumberOfConnectedControllers; i++)
@@ -521,7 +522,7 @@ DWORD __stdcall eae6320::UserInput::ControllerInput::Update(LPVOID i_InParameter
 			}
 		}
 
-		for (uint8_t i = 0; i < 4; i++)
+		for (uint8_t i = 0; i < g_NumberOfConnectedControllers; i++)
 		{
 			auto temp = g_FunctionLookupTable[i];
 			for (auto& x : temp)
@@ -536,11 +537,12 @@ DWORD __stdcall eae6320::UserInput::ControllerInput::Update(LPVOID i_InParameter
 eae6320::cResult eae6320::UserInput::ControllerInput::CleanUp()
 {
 	g_IsThreadRunning = false;
-	/*DWORD exitCode;
+	DWORD exitCode;
 	GetExitCodeThread(g_UpdateThreadHandle, &exitCode);
 	while (exitCode == STILL_ACTIVE)
 	{
-		return Results::Failure;
-	}*/
+		Sleep(10);
+		GetExitCodeThread(g_UpdateThreadHandle, &exitCode);
+	}
 	return Results::Success;
 }
