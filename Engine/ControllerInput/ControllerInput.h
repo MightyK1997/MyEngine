@@ -38,7 +38,7 @@ namespace eae6320
 			eae6320::cResult Initialize();
 
 			//Update
-			eae6320::cResult Update(float i_InputTime);	
+			DWORD WINAPI Update(LPVOID i_InParameter);
 
 			//Cleanup
 			eae6320::cResult CleanUp();

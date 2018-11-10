@@ -160,10 +160,10 @@ void eae6320::Application::cbApplication::UpdateUntilExit()
 			tickCount_toSimulate_elapsedSinceLastLoop =
 				static_cast<uint64_t>( static_cast<float>( tickCount_systemTime_elapsedSinceLastLoop ) * m_simulationRate );
 		}
-		//Call the controller update to check for keypresses to perform callback.
-		{
-			UserInput::ControllerInput::Update(static_cast<float>(Time::ConvertTicksToSeconds(tickCount_systemTime_elapsedSinceLastLoop)));
-		}
+		////Call the controller update to check for keypresses to perform callback.
+		//{
+		//	UserInput::ControllerInput::Update(static_cast<float>(Time::ConvertTicksToSeconds(tickCount_systemTime_elapsedSinceLastLoop)));
+		//}
 		// Update any application state that isn't part of the simulation
 		{
 			UpdateBasedOnTime( static_cast<float>( Time::ConvertTicksToSeconds( tickCount_systemTime_elapsedSinceLastLoop ) ) );
@@ -293,6 +293,11 @@ eae6320::cResult eae6320::Application::cbApplication::Initialize_all( const sEnt
 	else
 	{
 		EAE6320_ASSERT( false );
+		goto OnExit;
+	}
+	if (!(result = UserInput::ControllerInput::Initialize()))
+	{
+		EAE6320_ASSERT(false);
 		goto OnExit;
 	}
 	// Initialize the new application instance with entry point parameters
@@ -428,6 +433,17 @@ eae6320::cResult eae6320::Application::cbApplication::CleanUp_all()
 		{
 			EAE6320_ASSERT( false );
 			if ( result )
+			{
+				result = localResult;
+			}
+		}
+	}
+	{
+		const auto localResult = UserInput::ControllerInput::CleanUp();
+		if (!localResult)
+		{
+			EAE6320_ASSERT(false);
+			if (result)
 			{
 				result = localResult;
 			}

@@ -2,6 +2,7 @@
 #include <cmath>
 #include <map>
 #include "Engine/Time/Time.h"
+#include "Engine/Logging/Logging.h"
 namespace
 {
 	uint8_t g_NumberOfConnectedControllers = 0;
@@ -15,8 +16,12 @@ namespace
 	ControllerState g_Controllers[XUSER_MAX_COUNT];
 
 	//For Function callback
-
 	std::map<uint8_t, std::map < eae6320::UserInput::ControllerInput::ControllerKeyCodes, std::function<void()>>> g_FunctionLookupTable;
+
+	//Threading Variables
+	HANDLE g_UpdateThreadHandle = NULL;
+	DWORD g_UpdateThreadID;
+	bool g_IsThreadRunning = false;
 }
 
 //Check For new controllers
@@ -467,50 +472,75 @@ uint8_t eae6320::UserInput::ControllerInput::GetNumberOfConnectedControllers()
 
 eae6320::cResult eae6320::UserInput::ControllerInput::Initialize()
 {
-
-	return eae6320::cResult();
-}
-
-eae6320::cResult eae6320::UserInput::ControllerInput::Update(float i_InputTime)
-{
-	eae6320::cResult result = eae6320::Results::Success;
-	DWORD dwResult;
-	if (g_bIsCalledFirstTime || (g_elapsedTime >= 5))
+	eae6320::cResult result = Results::Success;
+	if ((!g_UpdateThreadHandle) && !g_IsThreadRunning)
 	{
-		if (g_bIsCalledFirstTime) { g_bIsCalledFirstTime = false; }
-		CheckForNewControllers();
-		g_elapsedTime = 0.f;
-	}
-	if (g_NumberOfConnectedControllers == 0) { return eae6320::Results::Failure; }
-	g_elapsedTime += i_InputTime;
-	for (DWORD i = 0; i < g_NumberOfConnectedControllers; i++)
-	{
-		XINPUT_STATE state;
-		ZeroMemory(&state, sizeof(XINPUT_STATE));
-
-		dwResult = XInputGetState(i, &state);
-		if (dwResult == ERROR_SUCCESS)
+		g_UpdateThreadHandle = CreateThread(NULL, 0, Update, NULL, 0, &g_UpdateThreadID);
+		// eae6320::Logging::OutputMessage(reinterpret_cast<char*>(g_UpdateThreadID));
+		if (g_UpdateThreadHandle)
 		{
-			g_Controllers[i].state = state;
+			g_IsThreadRunning = true;
 		}
 		else
 		{
-			result = eae6320::Results::Failure;
+			result = Results::Failure;
 		}
 	}
-	
-	for (uint8_t i = 0; i < 4; i++)
+	else
 	{
-		auto temp = g_FunctionLookupTable[i];
-		for (auto& x : temp)
-		{
-			IsKeyPressed(x.first, i);
-		}
+		result = Results::Failure;
 	}
 	return result;
 }
 
+DWORD __stdcall eae6320::UserInput::ControllerInput::Update(LPVOID i_InParameter)
+{
+	eae6320::Logging::OutputMessage("Executing Thread");
+	DWORD dwResult = 0;
+	while (g_IsThreadRunning)
+	{
+		if (g_bIsCalledFirstTime || (g_elapsedTime >= 5))
+		{
+			if (g_bIsCalledFirstTime) { g_bIsCalledFirstTime = false; }
+			CheckForNewControllers();
+			g_PreviousTickCount = eae6320::Time::GetCurrentSystemTimeTickCount();
+			g_elapsedTime = 0.f;
+		}
+		if (g_NumberOfConnectedControllers == 0) { return eae6320::Results::Failure; }
+		g_elapsedTime += static_cast<float>(eae6320::Time::ConvertTicksToSeconds(eae6320::Time::GetCurrentSystemTimeTickCount() - g_PreviousTickCount));
+		g_PreviousTickCount = eae6320::Time::GetCurrentSystemTimeTickCount();
+		for (DWORD i = 0; i < g_NumberOfConnectedControllers; i++)
+		{
+			XINPUT_STATE state;
+			ZeroMemory(&state, sizeof(XINPUT_STATE));
+
+			dwResult = XInputGetState(i, &state);
+			if (dwResult == ERROR_SUCCESS)
+			{
+				g_Controllers[i].state = state;
+			}
+		}
+
+		for (uint8_t i = 0; i < 4; i++)
+		{
+			auto temp = g_FunctionLookupTable[i];
+			for (auto& x : temp)
+			{
+				IsKeyPressed(x.first, i);
+			}
+		}
+	}
+	return dwResult;
+}
+
 eae6320::cResult eae6320::UserInput::ControllerInput::CleanUp()
 {
-	return eae6320::cResult();
+	g_IsThreadRunning = false;
+	/*DWORD exitCode;
+	GetExitCodeThread(g_UpdateThreadHandle, &exitCode);
+	while (exitCode == STILL_ACTIVE)
+	{
+		return Results::Failure;
+	}*/
+	return Results::Success;
 }
