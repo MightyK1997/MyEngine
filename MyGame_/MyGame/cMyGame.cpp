@@ -6,6 +6,7 @@
 #include <Engine/Asserts/Asserts.h>
 #include <Engine/UserInput/UserInput.h>
 #include <Engine/ControllerInput/ControllerInput.h>
+#include <Engine/Sound/Sound.h>
 
 // Inherited Implementation
 //=========================
@@ -73,7 +74,7 @@ void eae6320::cMyGame::UpdateGameobjectPosition()
 	{
 		m_GameObjects[i]->SetGameObjectVelocity(Math::sVector(0, 0, 0));
 	}
-//GO1
+	//GO1
 	if (UserInput::IsKeyPressed('W'))
 	{
 		m_GameObjects[0]->SetGameObjectVelocity(Math::sVector(0, 10.0f, 0.0f));
@@ -84,15 +85,15 @@ void eae6320::cMyGame::UpdateGameobjectPosition()
 	}
 	if (UserInput::IsKeyPressed('S'))
 	{
-		m_GameObjects[0]->SetGameObjectVelocity(Math::sVector(0,-10.0f,0));
+		m_GameObjects[0]->SetGameObjectVelocity(Math::sVector(0, -10.0f, 0));
 	}
 	if (UserInput::IsKeyPressed('D'))
 	{
-		m_GameObjects[0]->SetGameObjectVelocity(Math::sVector(10.0f,0,0));
+		m_GameObjects[0]->SetGameObjectVelocity(Math::sVector(10.0f, 0, 0));
 	}
 
-//GO2
-	//m_GameObjects[1]->SetGameObjectVelocity(Math::sVector(0, 0, 0));
+	//GO2
+		//m_GameObjects[1]->SetGameObjectVelocity(Math::sVector(0, 0, 0));
 	if (UserInput::IsKeyPressed('I'))
 	{
 		m_GameObjects[1]->SetGameObjectVelocity(Math::sVector(0, 10.0f, 0.0f));
@@ -114,6 +115,11 @@ void eae6320::cMyGame::UpdateGameobjectPosition()
 void eae6320::cMyGame::Test()
 {
 	std::swap(mesh1Handle, mesh3Handle);
+}
+
+void eae6320::cMyGame::Test(int a)
+{
+
 }
 
 
@@ -210,7 +216,7 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 {
 	eae6320::Graphics::cCamera::CreateCamera(m_Camera);
 
-	RegisterFunctionForCallback(ControllerKeyCodes::A, std::bind(&eae6320::cMyGame::Test, this));
+	RegisterFunctionForCallback(ControllerKeyCodes::A, [this] {return Test(10); });
 
 	m_Camera->SetCameraPosition(Math::sVector(0, 0, 10));
 
@@ -227,6 +233,8 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh2Handle);
 	fname = "data/Meshes/ChairMesh.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh3Handle);
+
+	eae6320::audio::PlayAudio("C:/Users/gslc/source/repos/UPADHYAYULA_SAI/temp/x64/Debug/MyGame_/Windows Logon.wav");
 
 	std::string effectPath = "data/Effects/Effect1.effectbinary";
 	eae6320::Graphics::cEffect::s_Manager.Load(effectPath.c_str(), effect1Handle);

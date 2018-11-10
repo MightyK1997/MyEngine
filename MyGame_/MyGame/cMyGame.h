@@ -112,6 +112,7 @@ namespace eae6320
 		void UpdateCameraPosition();
 		void UpdateGameobjectPosition();
 		void Test();
+		void Test(int);
 	};
 }
 
