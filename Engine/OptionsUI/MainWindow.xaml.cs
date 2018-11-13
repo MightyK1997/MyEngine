@@ -48,14 +48,6 @@ namespace Launcher
             List<ControllerKeyCodes> m_AllButtonsList =
                 Enum.GetValues(typeof(ControllerKeyCodes)).Cast<ControllerKeyCodes>().ToList();
 
-            cbxA.ItemsSource = m_AllButtonsList;
-            cbxA.SelectedIndex = 10;
-            cbxB.ItemsSource = m_AllButtonsList;
-            cbxB.SelectedIndex = 11;
-            cbxX.ItemsSource = m_AllButtonsList;
-            cbxX.SelectedIndex = 12;
-            cbxY.ItemsSource = m_AllButtonsList;
-            cbxY.SelectedIndex = 13;
             cbxDUp.ItemsSource = m_AllButtonsList;
             cbxDUp.SelectedIndex = 0;
             cbxDDown.ItemsSource = m_AllButtonsList;
@@ -76,6 +68,14 @@ namespace Launcher
             cbxLB.SelectedIndex = 8;
             cbxRB.ItemsSource = m_AllButtonsList;
             cbxRB.SelectedIndex = 9;
+            cbxA.ItemsSource = m_AllButtonsList;
+            cbxA.SelectedIndex = 10;
+            cbxB.ItemsSource = m_AllButtonsList;
+            cbxB.SelectedIndex = 11;
+            cbxX.ItemsSource = m_AllButtonsList;
+            cbxX.SelectedIndex = 12;
+            cbxY.ItemsSource = m_AllButtonsList;
+            cbxY.SelectedIndex = 13;
         }
 
         private void btnOkbutton_Click(object sender, RoutedEventArgs e)
@@ -111,6 +111,15 @@ namespace Launcher
 
         private void btnCancelButton_Click(object sender, RoutedEventArgs e)
         {
+            gameProcess.StartInfo.FileName = "MyGame.exe";
+            if (gameProcess.Start())
+            {
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Cannot Start game", "Error", MessageBoxButton.OK);
+            }
             this.Close();
         }
     }

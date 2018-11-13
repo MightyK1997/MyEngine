@@ -23,7 +23,7 @@ namespace
 	//For Function callback
 	std::map<uint8_t, std::map < eae6320::UserInput::ControllerInput::ControllerKeyCodes, std::function<void()>>> g_FunctionLookupTable;
 
-	std::map<eae6320::UserInput::ControllerInput::ControllerKeyCodes, uint16_t> g_KeyMapping;
+	std::map<uint8_t, std::map<eae6320::UserInput::ControllerInput::ControllerKeyCodes, uint16_t>> g_KeyMapping;
 
 	//Threading Variables
 	HANDLE g_UpdateThreadHandle = NULL;
@@ -40,6 +40,7 @@ namespace
 	eae6320::cResult InitializeIfNecessary();
 	eae6320::cResult LoadUserSettingsIntoLuaTable(lua_State& io_luaState);
 	eae6320::cResult PopulateUserSettingsFromLuaTable(lua_State& io_luaState);
+	eae6320::cResult PopulateMapValuesForIndividualControllers(lua_State& io_luaState, uint8_t i_ControllerNumber);
 
 	// Called if Lua panics
 	// (e.g. when an unhandled error is thrown)
@@ -48,6 +49,7 @@ namespace
 
 namespace
 {
+	int g_DefinedControllersInSettings = 0;
 	uint16_t GetValueForKeyCode(std::string);
 	void InitializeDefaultValues();
 }
@@ -106,7 +108,7 @@ bool eae6320::UserInput::ControllerInput::IsKeyPressed(ControllerKeyCodes i_KeyC
 		}
 		else
 		{
-			if ((state.Gamepad.wButtons & g_KeyMapping[i_KeyCode]) != 0)
+			if ((state.Gamepad.wButtons & g_KeyMapping[i_ControllerNumber][i_KeyCode]) != 0)
 			{
 				CallCallbackFunction(i_KeyCode, i_ControllerNumber);
 				return true;
@@ -644,20 +646,23 @@ namespace
 
 	void InitializeDefaultValues()
 	{
-		g_KeyMapping[eae6320::UserInput::ControllerInput::A] = 0x1000;
-		g_KeyMapping[eae6320::UserInput::ControllerInput::B] = 0x2000;
-		g_KeyMapping[eae6320::UserInput::ControllerInput::X] = 0x4000;
-		g_KeyMapping[eae6320::UserInput::ControllerInput::Y] = 0x8000;
-		g_KeyMapping[eae6320::UserInput::ControllerInput::DPAD_UP] = 0x0001;
-		g_KeyMapping[eae6320::UserInput::ControllerInput::DPAD_DOWN] = 0x0002;
-		g_KeyMapping[eae6320::UserInput::ControllerInput::DPAD_LEFT] = 0x0004;
-		g_KeyMapping[eae6320::UserInput::ControllerInput::DPAD_RIGHT] = 0x0008;
-		g_KeyMapping[eae6320::UserInput::ControllerInput::START] = 0x0010;
-		g_KeyMapping[eae6320::UserInput::ControllerInput::BACK] = 0x0020;
-		g_KeyMapping[eae6320::UserInput::ControllerInput::LEFT_THUMB] = 0x0040;
-		g_KeyMapping[eae6320::UserInput::ControllerInput::RIGHT_THUMB] = 0x0080;
-		g_KeyMapping[eae6320::UserInput::ControllerInput::LEFT_SHOULDER] = 0x0100;
-		g_KeyMapping[eae6320::UserInput::ControllerInput::RIGHT_SHOULDER] = 0x0200;
+		for (uint8_t i = 0; i < 4 - g_DefinedControllersInSettings; i++)
+		{
+			g_KeyMapping[i][eae6320::UserInput::ControllerInput::DPAD_UP] = 0x0001;
+			g_KeyMapping[i][eae6320::UserInput::ControllerInput::DPAD_DOWN] = 0x0002;
+			g_KeyMapping[i][eae6320::UserInput::ControllerInput::DPAD_LEFT] = 0x0004;
+			g_KeyMapping[i][eae6320::UserInput::ControllerInput::DPAD_RIGHT] = 0x0008;
+			g_KeyMapping[i][eae6320::UserInput::ControllerInput::START] = 0x0010;
+			g_KeyMapping[i][eae6320::UserInput::ControllerInput::BACK] = 0x0020;
+			g_KeyMapping[i][eae6320::UserInput::ControllerInput::LEFT_THUMB] = 0x0040;
+			g_KeyMapping[i][eae6320::UserInput::ControllerInput::RIGHT_THUMB] = 0x0080;
+			g_KeyMapping[i][eae6320::UserInput::ControllerInput::LEFT_SHOULDER] = 0x0100;
+			g_KeyMapping[i][eae6320::UserInput::ControllerInput::RIGHT_SHOULDER] = 0x0200;
+			g_KeyMapping[i][eae6320::UserInput::ControllerInput::A] = 0x1000;
+			g_KeyMapping[i][eae6320::UserInput::ControllerInput::B] = 0x2000;
+			g_KeyMapping[i][eae6320::UserInput::ControllerInput::X] = 0x4000;
+			g_KeyMapping[i][eae6320::UserInput::ControllerInput::Y] = 0x8000;
+		}
 	}
 }
 
@@ -678,6 +683,56 @@ namespace
 			return eae6320::Results::OutOfMemory;
 		}
 
+		{
+			const char* key = "controller1";
+			lua_pushstring(&io_luaState, key);
+			lua_gettable(&io_luaState, -2);
+			if (lua_istable(&io_luaState, -1))
+			{
+				PopulateMapValuesForIndividualControllers(io_luaState, 0);
+				g_DefinedControllersInSettings++;
+			}
+			lua_pop(&io_luaState, 1);
+		}
+		{
+			const char* key = "controller2";
+			lua_pushstring(&io_luaState, key);
+			lua_gettable(&io_luaState, -2);
+			if (lua_istable(&io_luaState, -1))
+			{
+				PopulateMapValuesForIndividualControllers(io_luaState, 1);
+				g_DefinedControllersInSettings++;
+			}
+			lua_pop(&io_luaState, 1);
+		}
+		{
+			const char* key = "controller3";
+			lua_pushstring(&io_luaState, key);
+			lua_gettable(&io_luaState, -2);
+			if (lua_istable(&io_luaState, -1))
+			{
+				PopulateMapValuesForIndividualControllers(io_luaState, 2);
+				g_DefinedControllersInSettings++;
+			}
+			lua_pop(&io_luaState, 1);
+		}
+		{
+			const char* key = "controller4";
+			lua_pushstring(&io_luaState, key);
+			lua_gettable(&io_luaState, -2);
+			if (lua_istable(&io_luaState, -1))
+			{
+				PopulateMapValuesForIndividualControllers(io_luaState, 3);
+				g_DefinedControllersInSettings++;
+			}
+			lua_pop(&io_luaState, 1);
+		}
+		InitializeDefaultValues();
+		return result;
+	}
+
+	eae6320::cResult PopulateMapValuesForIndividualControllers(lua_State& io_luaState, uint8_t i_ControllerNumber)
+	{
 		// A
 		{
 			const char* key_width = "A";
@@ -688,7 +743,7 @@ namespace
 			{
 				auto newCode = lua_tostring(&io_luaState, -1);
 				uint16_t temp = GetValueForKeyCode(newCode);
-				g_KeyMapping[eae6320::UserInput::ControllerInput::A] = temp;
+				g_KeyMapping[i_ControllerNumber][eae6320::UserInput::ControllerInput::A] = temp;
 			}
 			lua_pop(&io_luaState, 1);
 		}
@@ -702,7 +757,7 @@ namespace
 			{
 				auto newCode = lua_tostring(&io_luaState, -1);
 				uint16_t temp = GetValueForKeyCode(newCode);
-				g_KeyMapping[eae6320::UserInput::ControllerInput::B] = temp;
+				g_KeyMapping[i_ControllerNumber][eae6320::UserInput::ControllerInput::B] = temp;
 			}
 			lua_pop(&io_luaState, 1);
 		}
@@ -716,7 +771,7 @@ namespace
 			{
 				auto newCode = lua_tostring(&io_luaState, -1);
 				uint16_t temp = GetValueForKeyCode(newCode);
-				g_KeyMapping[eae6320::UserInput::ControllerInput::X] = temp;
+				g_KeyMapping[i_ControllerNumber][eae6320::UserInput::ControllerInput::X] = temp;
 			}
 			lua_pop(&io_luaState, 1);
 		}
@@ -730,7 +785,7 @@ namespace
 			{
 				auto newCode = lua_tostring(&io_luaState, -1);
 				uint16_t temp = GetValueForKeyCode(newCode);
-				g_KeyMapping[eae6320::UserInput::ControllerInput::Y] = temp;
+				g_KeyMapping[i_ControllerNumber][eae6320::UserInput::ControllerInput::Y] = temp;
 			}
 			lua_pop(&io_luaState, 1);
 		}
@@ -744,7 +799,7 @@ namespace
 			{
 				auto newCode = lua_tostring(&io_luaState, -1);
 				uint16_t temp = GetValueForKeyCode(newCode);
-				g_KeyMapping[eae6320::UserInput::ControllerInput::DPAD_UP] = temp;
+				g_KeyMapping[i_ControllerNumber][eae6320::UserInput::ControllerInput::DPAD_UP] = temp;
 			}
 			lua_pop(&io_luaState, 1);
 		}
@@ -758,7 +813,7 @@ namespace
 			{
 				auto newCode = lua_tostring(&io_luaState, -1);
 				uint16_t temp = GetValueForKeyCode(newCode);
-				g_KeyMapping[eae6320::UserInput::ControllerInput::DPAD_DOWN] = temp;
+				g_KeyMapping[i_ControllerNumber][eae6320::UserInput::ControllerInput::DPAD_DOWN] = temp;
 			}
 			lua_pop(&io_luaState, 1);
 		}
@@ -772,7 +827,7 @@ namespace
 			{
 				auto newCode = lua_tostring(&io_luaState, -1);
 				uint16_t temp = GetValueForKeyCode(newCode);
-				g_KeyMapping[eae6320::UserInput::ControllerInput::DPAD_LEFT] = temp;
+				g_KeyMapping[i_ControllerNumber][eae6320::UserInput::ControllerInput::DPAD_LEFT] = temp;
 			}
 			lua_pop(&io_luaState, 1);
 		}
@@ -786,7 +841,7 @@ namespace
 			{
 				auto newCode = lua_tostring(&io_luaState, -1);
 				uint16_t temp = GetValueForKeyCode(newCode);
-				g_KeyMapping[eae6320::UserInput::ControllerInput::DPAD_RIGHT] = temp;
+				g_KeyMapping[i_ControllerNumber][eae6320::UserInput::ControllerInput::DPAD_RIGHT] = temp;
 			}
 			lua_pop(&io_luaState, 1);
 		}
@@ -800,7 +855,7 @@ namespace
 			{
 				auto newCode = lua_tostring(&io_luaState, -1);
 				uint16_t temp = GetValueForKeyCode(newCode);
-				g_KeyMapping[eae6320::UserInput::ControllerInput::START] = temp;
+				g_KeyMapping[i_ControllerNumber][eae6320::UserInput::ControllerInput::START] = temp;
 			}
 			lua_pop(&io_luaState, 1);
 		}
@@ -814,7 +869,7 @@ namespace
 			{
 				auto newCode = lua_tostring(&io_luaState, -1);
 				uint16_t temp = GetValueForKeyCode(newCode);
-				g_KeyMapping[eae6320::UserInput::ControllerInput::BACK] = temp;
+				g_KeyMapping[i_ControllerNumber][eae6320::UserInput::ControllerInput::BACK] = temp;
 			}
 			lua_pop(&io_luaState, 1);
 		}
@@ -828,7 +883,7 @@ namespace
 			{
 				auto newCode = lua_tostring(&io_luaState, -1);
 				uint16_t temp = GetValueForKeyCode(newCode);
-				g_KeyMapping[eae6320::UserInput::ControllerInput::LEFT_THUMB] = temp;
+				g_KeyMapping[i_ControllerNumber][eae6320::UserInput::ControllerInput::LEFT_THUMB] = temp;
 			}
 			lua_pop(&io_luaState, 1);
 		}
@@ -842,7 +897,7 @@ namespace
 			{
 				auto newCode = lua_tostring(&io_luaState, -1);
 				uint16_t temp = GetValueForKeyCode(newCode);
-				g_KeyMapping[eae6320::UserInput::ControllerInput::RIGHT_THUMB] = temp;
+				g_KeyMapping[i_ControllerNumber][eae6320::UserInput::ControllerInput::RIGHT_THUMB] = temp;
 			}
 			lua_pop(&io_luaState, 1);
 		}
@@ -856,7 +911,7 @@ namespace
 			{
 				auto newCode = lua_tostring(&io_luaState, -1);
 				uint16_t temp = GetValueForKeyCode(newCode);
-				g_KeyMapping[eae6320::UserInput::ControllerInput::LEFT_SHOULDER] = temp;
+				g_KeyMapping[i_ControllerNumber][eae6320::UserInput::ControllerInput::LEFT_SHOULDER] = temp;
 			}
 			lua_pop(&io_luaState, 1);
 		}
@@ -870,11 +925,11 @@ namespace
 			{
 				auto newCode = lua_tostring(&io_luaState, -1);
 				uint16_t temp = GetValueForKeyCode(newCode);
-				g_KeyMapping[eae6320::UserInput::ControllerInput::RIGHT_SHOULDER] = temp;
+				g_KeyMapping[i_ControllerNumber][eae6320::UserInput::ControllerInput::RIGHT_SHOULDER] = temp;
 			}
 			lua_pop(&io_luaState, 1);
 		}
-		return result;
+		return eae6320::Results::Success;
 	}
 
 	int OnLuaPanic(lua_State* io_luaState) noexcept
