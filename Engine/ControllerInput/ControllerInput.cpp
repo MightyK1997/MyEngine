@@ -646,7 +646,7 @@ namespace
 
 	void InitializeDefaultValues()
 	{
-		for (uint8_t i = 0; i < 4 - g_DefinedControllersInSettings; i++)
+		for (uint8_t i = g_DefinedControllersInSettings; i < 4; i++)
 		{
 			g_KeyMapping[i][eae6320::UserInput::ControllerInput::DPAD_UP] = 0x0001;
 			g_KeyMapping[i][eae6320::UserInput::ControllerInput::DPAD_DOWN] = 0x0002;
