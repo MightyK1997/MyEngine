@@ -8,6 +8,7 @@
 #include <Engine/Platform/Platform.h>
 #include <Engine/ScopeCleanUp/cScopeCleanUp.h>
 #include <External/Lua/Includes.h>
+#include <Engine/Concurrency/cThread.h>
 namespace
 {
 	uint8_t g_NumberOfConnectedControllers = 0;
@@ -26,9 +27,9 @@ namespace
 	std::map<uint8_t, std::map<eae6320::UserInput::ControllerInput::ControllerKeyCodes, uint16_t>> g_KeyMapping;
 
 	//Threading Variables
-	HANDLE g_UpdateThreadHandle = NULL;
-	DWORD g_UpdateThreadID;
 	bool g_IsThreadRunning = false;
+	eae6320::Concurrency::cThread g_UpdateThread;
+
 
 	//To load data from LUA
 	constexpr auto* const s_userSettingsFileName = "settings.ini";
@@ -78,7 +79,6 @@ void CallCallbackFunction(eae6320::UserInput::ControllerInput::ControllerKeyCode
 	if (g_FunctionLookupTable[i_ControllerNumber][i_KeyCode])
 	{
 		std::async(g_FunctionLookupTable[i_ControllerNumber][i_KeyCode]);
-		//g_FunctionLookupTable[i_ControllerNumber].erase(i_KeyCode);
 	}
 }
 
@@ -130,27 +130,13 @@ float eae6320::UserInput::ControllerInput::GetTriggerDeflection(ControllerKeyCod
 			{
 				float def = state.Gamepad.bLeftTrigger;
 
-				if (def > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
-				{
-					return def - XINPUT_GAMEPAD_TRIGGER_THRESHOLD;
-				}
-				else
-				{
-					return 0;
-				}
+				return (def > XINPUT_GAMEPAD_TRIGGER_THRESHOLD) ? def - XINPUT_GAMEPAD_TRIGGER_THRESHOLD : 0;
 			}
 			else if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_TRIGGER))
 			{
 				float def = state.Gamepad.bRightTrigger;
 
-				if (def > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
-				{
-					return def - XINPUT_GAMEPAD_TRIGGER_THRESHOLD;
-				}
-				else
-				{
-					return 0;
-				}
+				return (def > XINPUT_GAMEPAD_TRIGGER_THRESHOLD) ? def - XINPUT_GAMEPAD_TRIGGER_THRESHOLD : 0;
 			}
 		}
 		else if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_STICK) || (i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_STICK))
@@ -509,16 +495,12 @@ eae6320::cResult eae6320::UserInput::ControllerInput::Initialize()
 {
 	eae6320::cResult result = Results::Success;
 	InitializeIfNecessary();
-	if ((!g_UpdateThreadHandle) && !g_IsThreadRunning)
+	if (!g_IsThreadRunning)
 	{
-		g_UpdateThreadHandle = CreateThread(NULL, 0, Update, NULL, 0, &g_UpdateThreadID);
-		if (g_UpdateThreadHandle)
+		result = g_UpdateThread.Start(Update);
+		if (result)
 		{
 			g_IsThreadRunning = true;
-		}
-		else
-		{
-			result = Results::Failure;
 		}
 	}
 	else
@@ -570,13 +552,7 @@ DWORD __stdcall eae6320::UserInput::ControllerInput::Update(LPVOID i_InParameter
 eae6320::cResult eae6320::UserInput::ControllerInput::CleanUp()
 {
 	g_IsThreadRunning = false;
-	DWORD exitCode;
-	GetExitCodeThread(g_UpdateThreadHandle, &exitCode);
-	while (exitCode == STILL_ACTIVE)
-	{
-		Sleep(10);
-		GetExitCodeThread(g_UpdateThreadHandle, &exitCode);
-	}
+	eae6320::Concurrency::WaitForThreadToStop(g_UpdateThread);
 	return Results::Success;
 }
 
