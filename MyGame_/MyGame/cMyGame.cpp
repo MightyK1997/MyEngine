@@ -216,7 +216,7 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 { 
 	eae6320::Graphics::cCamera::CreateCamera(m_Camera);
 
-	RegisterFunctionForCallback(ControllerKeyCodes::A, [this] {return Test(10); });
+	RegisterFunctionForCallback(ControllerKeyCodes::A, [this] {return Test(10); }, 1);
 
 	m_Camera->SetCameraPosition(Math::sVector(0, 0, 10));
 

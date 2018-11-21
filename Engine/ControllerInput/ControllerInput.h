@@ -38,7 +38,7 @@ namespace eae6320
 			eae6320::cResult Initialize();
 
 			//Update
-			DWORD WINAPI Update(LPVOID i_InParameter);
+			eae6320::cResult Update(LPVOID i_InParameter);
 
 			//Cleanup
 			eae6320::cResult CleanUp();

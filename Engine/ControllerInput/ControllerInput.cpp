@@ -520,9 +520,10 @@ eae6320::cResult eae6320::UserInput::ControllerInput::Initialize()
 	return result;
 }
 
-DWORD __stdcall eae6320::UserInput::ControllerInput::Update(LPVOID i_InParameter)
+eae6320::cResult eae6320::UserInput::ControllerInput::Update(LPVOID i_InParameter)
 {
 	DWORD dwResult = 0;
+	eae6320::cResult result = eae6320::Results::Success;
 	while (g_IsThreadRunning)
 	{
 		if (g_bIsCalledFirstTime || (g_elapsedTime >= 5))
@@ -556,7 +557,7 @@ DWORD __stdcall eae6320::UserInput::ControllerInput::Update(LPVOID i_InParameter
 			}
 		}
 	}
-	return dwResult;
+	return result;
 }
 
 eae6320::cResult eae6320::UserInput::ControllerInput::CleanUp()
