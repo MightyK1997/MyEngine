@@ -41,6 +41,12 @@
         <ComboBox x:Name="cbxRTS" HorizontalAlignment="Left" Margin="84.415,63,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1"/>
         <ComboBox x:Name="cbxLB" HorizontalAlignment="Left" Margin="84.415,90,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1"/>
         <ComboBox x:Name="cbxRB" HorizontalAlignment="Left" Margin="84.415,117,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1"/>
+        <Label x:Name="lblLeftStickDZone" Content="Left Stick Dead Zone" Grid.Column="1" HorizontalAlignment="Left" Margin="0.4,143,0,0" VerticalAlignment="Top" Width="121" Height="26"/>
+        <Label x:Name="lblRightStickDZone" Content="Right Stick Dead Zone" Grid.Column="1" HorizontalAlignment="Left" Margin="0.4,171,0,0" VerticalAlignment="Top" Width="128" Height="26"/>
+        <Label x:Name="lblTriggerDZone" Content="Trigger Dead Zone" Grid.Column="1" HorizontalAlignment="Left" Margin="0.4,199,0,0" VerticalAlignment="Top" Width="121" Height="26"/>
+        <TextBox x:Name="tbxLeftStickDeadZone" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="128.4,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58"/>
+        <TextBox x:Name="tbxRightStickDeadZone" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="128.4,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58"/>
+        <TextBox x:Name="tbxTriggerDeadZone" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="128.4,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58"/>
         <!--<Label x:Name="lblControllerID" Content="Controller ID" HorizontalAlignment="Left" Margin="86,5,0,0" VerticalAlignment="Top"/>-->
         <!--<ComboBox x:Name="cbxControllerID" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="193,8,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbxControllerID_SelectionChanged"/>-->
 

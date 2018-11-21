@@ -53,7 +53,7 @@ void eae6320::cMyGame::UpdateCameraPosition()
 	{
 		m_Camera->SetAngularSpeed(-1.0f);
 	}
-	if (GetNormalizedTriggerDeflection(ControllerKeyCodes::LEFT_STICK, 0) != 0)
+	if (GetNormalizedStickDeflection(ControllerKeyCodes::LEFT_STICK, 0).x != 0)
 	{
 		m_Camera->SetAngularSpeed(GetNormalizedStickDeflection(ControllerKeyCodes::LEFT_STICK, 0).x);
 	}
@@ -202,7 +202,7 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 	for (size_t i = 0; i < m_NumberOfGameObjects; i++)
 	{
 		m_GameObjectLocalToWorldTransforms[i] = m_GameObjects[i]->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate);
-	}
+	 }
 
 	eae6320::Graphics::SetCameraToRender(m_Camera, i_elapsedSecondCount_sinceLastSimulationUpdate);
 

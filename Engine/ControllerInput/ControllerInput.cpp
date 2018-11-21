@@ -26,6 +26,8 @@ namespace
 
 	std::map<uint8_t, std::map<eae6320::UserInput::ControllerInput::ControllerKeyCodes, uint16_t>> g_KeyMapping;
 
+	std::map<uint8_t, std::vector<uint16_t>> g_DeadZones;
+
 	//Threading Variables
 	bool g_IsThreadRunning = false;
 	eae6320::Concurrency::cThread g_UpdateThread;
@@ -61,6 +63,9 @@ namespace
 
 namespace
 {
+	uint16_t g_LeftStickDeadZone = 0;
+	uint16_t g_RightStickDeadZone = 0;
+	uint16_t g_TriggerDeadZone = 0;
 	eae6320::cResult LoadValuesFromBinary();
 }
 
@@ -134,90 +139,19 @@ float eae6320::UserInput::ControllerInput::GetTriggerDeflection(ControllerKeyCod
 		XINPUT_STATE state = g_Controllers[i_ControllerNumber].state;
 		if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_TRIGGER) || (i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_TRIGGER))
 		{
+			auto threshold = g_DeadZones[i_ControllerNumber][2] > 0 ? g_DeadZones[i_ControllerNumber][2] : XINPUT_GAMEPAD_TRIGGER_THRESHOLD;
 			//Check for deadzones
 			if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_TRIGGER))
 			{
 				float def = state.Gamepad.bLeftTrigger;
 
-				return (def > XINPUT_GAMEPAD_TRIGGER_THRESHOLD) ? def - XINPUT_GAMEPAD_TRIGGER_THRESHOLD : 0;
+				return (def > threshold) ? def - threshold : 0;
 			}
 			else if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_TRIGGER))
 			{
 				float def = state.Gamepad.bRightTrigger;
 
-				return (def > XINPUT_GAMEPAD_TRIGGER_THRESHOLD) ? def - XINPUT_GAMEPAD_TRIGGER_THRESHOLD : 0;
-			}
-		}
-		else if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_STICK) || (i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_STICK))
-		{
-			//Check for deadzones
-			if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_STICK))
-			{
-				float LX = state.Gamepad.sThumbLX;
-				float LY = state.Gamepad.sThumbLY;
-
-				//determine how far the controller is pushed
-				float magnitude = sqrt(LX*LX + LY * LY);
-
-				//determine the direction the controller is pushed
-				float normalizedLX = LX / magnitude;
-				float normalizedLY = LY / magnitude;
-
-				float normalizedMagnitude = 0;
-
-				//check if the controller is outside a circular dead zone
-				if (magnitude > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
-				{
-					//clip the magnitude at its expected maximum value
-					if (magnitude > 32767) magnitude = 32767;
-
-					//adjust magnitude relative to the end of the dead zone
-					magnitude -= XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE;
-
-					//optionally normalize the magnitude with respect to its expected range
-					//giving a magnitude value of 0.0 to 1.0
-					normalizedMagnitude = magnitude / (32767 - XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE);
-				}
-				else //if the controller is in the deadzone zero out the magnitude
-				{
-					magnitude = 0.0;
-					normalizedMagnitude = 0.0;
-				}
-				return magnitude;
-			}
-			else if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_STICK))
-			{
-				float RX = state.Gamepad.sThumbRX;
-				float RY = state.Gamepad.sThumbRY;
-
-				//determine how far the controller is pushed
-				float magnitude = sqrt(RX*RX + RY * RY);
-
-				//determine the direction the controller is pushed
-				float normalizedRX = RX / magnitude;
-				float normalizedRY = RY / magnitude;
-
-				float normalizedMagnitude = 0;
-
-				//check if the controller is outside a circular dead zone
-				if (magnitude > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
-				{
-					//clip the magnitude at its expected maximum value
-					if (magnitude > 32767) magnitude = 32767;
-
-					//adjust magnitude relative to the end of the dead zone
-					magnitude -= XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE;
-
-					//optionally normalize the magnitude with respect to its expected range
-					//giving a magnitude value of 0.0 to 1.0
-					normalizedMagnitude = magnitude / (32767 - XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE);
-				}
-				else //if the controller is in the deadzone zero out the magnitude
-				{
-					magnitude = 0.0;
-					normalizedMagnitude = 0.0;
-				}
-				return magnitude;
+				return (def > threshold) ? def - threshold : 0;
 			}
 		}
 	}
@@ -226,10 +160,10 @@ float eae6320::UserInput::ControllerInput::GetTriggerDeflection(ControllerKeyCod
 
 float eae6320::UserInput::ControllerInput::GetNormalizedTriggerDeflection(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber)
 {
-
 	if (i_ControllerNumber >= 0 && i_ControllerNumber < 4)
 	{
 		XINPUT_STATE state = g_Controllers[i_ControllerNumber].state;
+		auto threshold = g_DeadZones[i_ControllerNumber][2] > 0 ? g_DeadZones[i_ControllerNumber][2] : XINPUT_GAMEPAD_TRIGGER_THRESHOLD;
 		if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_TRIGGER) || (i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_TRIGGER))
 		{
 			//Check for deadzones
@@ -237,103 +171,16 @@ float eae6320::UserInput::ControllerInput::GetNormalizedTriggerDeflection(Contro
 			{
 				float def = state.Gamepad.bLeftTrigger;
 
-				if (def > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
-				{
-					return (def - XINPUT_GAMEPAD_TRIGGER_THRESHOLD) / (255 - XINPUT_GAMEPAD_TRIGGER_THRESHOLD);
-				}
-				else
-				{
-					return 0;
-				}
+				return (def > threshold) ? (def - threshold) / (255 - threshold) : 0;
 			}
 			else if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_TRIGGER))
 			{
 				float def = state.Gamepad.bRightTrigger;
 
-				if (def > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
-				{
-					return (def - XINPUT_GAMEPAD_TRIGGER_THRESHOLD) / (255 - XINPUT_GAMEPAD_TRIGGER_THRESHOLD);
-				}
-				else
-				{
-					return 0;
-				}
-			}
-		}
-		else if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_STICK) || (i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_STICK))
-		{
-			//Check for deadzones
-			if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_STICK))
-			{
-				float LX = state.Gamepad.sThumbLX;
-				float LY = state.Gamepad.sThumbLY;
-
-				//determine how far the controller is pushed
-				float magnitude = sqrt(LX*LX + LY * LY);
-
-				//determine the direction the controller is pushed
-				float normalizedLX = LX / magnitude;
-				float normalizedLY = LY / magnitude;
-
-				float normalizedMagnitude = 0;
-
-				//check if the controller is outside a circular dead zone
-				if (magnitude > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
-				{
-					//clip the magnitude at its expected maximum value
-					if (magnitude > 32767) magnitude = 32767;
-
-					//adjust magnitude relative to the end of the dead zone
-					magnitude -= XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE;
-
-					//optionally normalize the magnitude with respect to its expected range
-					//giving a magnitude value of 0.0 to 1.0
-					normalizedMagnitude = magnitude / (32767 - XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE);
-				}
-				else //if the controller is in the deadzone zero out the magnitude
-				{
-					magnitude = 0.0;
-					normalizedMagnitude = 0.0;
-				}
-				return normalizedMagnitude;
-			}
-			else if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_STICK))
-			{
-				float RX = state.Gamepad.sThumbRX;
-				float RY = state.Gamepad.sThumbRY;
-
-				//determine how far the controller is pushed
-				float magnitude = sqrt(RX*RX + RY * RY);
-
-				//determine the direction the controller is pushed
-				float normalizedRX = RX / magnitude;
-				float normalizedRY = RY / magnitude;
-
-				float normalizedMagnitude = 0;
-
-				//check if the controller is outside a circular dead zone
-				if (magnitude > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
-				{
-					//clip the magnitude at its expected maximum value
-					if (magnitude > 32767) magnitude = 32767;
-
-					//adjust magnitude relative to the end of the dead zone
-					magnitude -= XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE;
-
-					//optionally normalize the magnitude with respect to its expected range
-					//giving a magnitude value of 0.0 to 1.0
-					normalizedMagnitude = magnitude / (32767 - XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE);
-				}
-				else //if the controller is in the deadzone zero out the magnitude
-				{
-					magnitude = 0.0;
-					normalizedMagnitude = 0.0;
-				}
-				return normalizedMagnitude;
+				return (def > threshold) ? (def - threshold) / (255 - threshold) : 0;
 			}
 		}
 	}
-
 	return 0;
 }
 
@@ -347,6 +194,7 @@ eae6320::Math::sVector eae6320::UserInput::ControllerInput::GetStickDeflection(C
 			//Check for deadzones
 			if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_STICK))
 			{
+				auto threshold = g_DeadZones[i_ControllerNumber][0] > 0 ? g_DeadZones[i_ControllerNumber][0] : XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE;
 				float LX = state.Gamepad.sThumbLX;
 				float LY = state.Gamepad.sThumbLY;
 
@@ -360,17 +208,17 @@ eae6320::Math::sVector eae6320::UserInput::ControllerInput::GetStickDeflection(C
 				float normalizedMagnitude = 0;
 
 				//check if the controller is outside a circular dead zone
-				if (magnitude > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
+				if (magnitude > threshold)
 				{
 					//clip the magnitude at its expected maximum value
 					if (magnitude > 32767) magnitude = 32767;
 
 					//adjust magnitude relative to the end of the dead zone
-					magnitude -= XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE;
+					magnitude -= threshold;
 
 					//optionally normalize the magnitude with respect to its expected range
 					//giving a magnitude value of 0.0 to 1.0
-					normalizedMagnitude = magnitude / (32767 - XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE);
+					normalizedMagnitude = magnitude / (32767 - threshold);
 				}
 				else //if the controller is in the deadzone zero out the magnitude
 				{
@@ -381,6 +229,7 @@ eae6320::Math::sVector eae6320::UserInput::ControllerInput::GetStickDeflection(C
 			}
 			else if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_STICK))
 			{
+				auto threshold = g_DeadZones[i_ControllerNumber][1] > 0 ? g_DeadZones[i_ControllerNumber][1] : XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE;
 				float RX = state.Gamepad.sThumbRX;
 				float RY = state.Gamepad.sThumbRY;
 
@@ -394,17 +243,17 @@ eae6320::Math::sVector eae6320::UserInput::ControllerInput::GetStickDeflection(C
 				float normalizedMagnitude = 0;
 
 				//check if the controller is outside a circular dead zone
-				if (magnitude > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
+				if (magnitude > threshold)
 				{
 					//clip the magnitude at its expected maximum value
 					if (magnitude > 32767) magnitude = 32767;
 
 					//adjust magnitude relative to the end of the dead zone
-					magnitude -= XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE;
+					magnitude -= threshold;
 
 					//optionally normalize the magnitude with respect to its expected range
 					//giving a magnitude value of 0.0 to 1.0
-					normalizedMagnitude = magnitude / (32767 - XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE);
+					normalizedMagnitude = magnitude / (32767 - threshold);
 				}
 				else //if the controller is in the deadzone zero out the magnitude
 				{
@@ -652,7 +501,6 @@ namespace
 		}
 	}
 }
-
 
 namespace
 {
@@ -913,6 +761,51 @@ namespace
 				auto newCode = lua_tostring(&io_luaState, -1);
 				uint16_t temp = GetValueForKeyCode(newCode);
 				g_KeyMapping[i_ControllerNumber][eae6320::UserInput::ControllerInput::RIGHT_SHOULDER] = temp;
+			}
+			lua_pop(&io_luaState, 1);
+		}
+		//Left Stick Dead Zone
+		{
+			const char* key_width = "LeftStickDeadZone";
+
+			lua_pushstring(&io_luaState, key_width);
+			lua_gettable(&io_luaState, -2);
+			if (lua_isstring(&io_luaState, -1))
+			{
+				if (!(lua_tonumber(&io_luaState, -1) > 65535))
+				{
+					g_DeadZones[i_ControllerNumber].push_back(static_cast<uint16_t>(lua_tonumber(&io_luaState, -1)));
+				}
+			}
+			lua_pop(&io_luaState, 1);
+		}
+		//Right Stick Dead Zone
+		{
+			const char* key_width = "RightStickDeadZone";
+
+			lua_pushstring(&io_luaState, key_width);
+			lua_gettable(&io_luaState, -2);
+			if (lua_isstring(&io_luaState, -1))
+			{
+				if (!(lua_tonumber(&io_luaState, -1) > 65535))
+				{
+					g_DeadZones[i_ControllerNumber].push_back(static_cast<uint16_t>(lua_tonumber(&io_luaState, -1)));
+				}
+			}
+			lua_pop(&io_luaState, 1);
+		}
+		//Trigger Dead Zone
+		{
+			const char* key_width = "TriggerDeadZone";
+
+			lua_pushstring(&io_luaState, key_width);
+			lua_gettable(&io_luaState, -2);
+			if (lua_isstring(&io_luaState, -1))
+			{
+				if (!(lua_tonumber(&io_luaState, -1) > 255))
+				{
+					g_DeadZones[i_ControllerNumber].push_back(static_cast<uint16_t>(lua_tonumber(&io_luaState, -1)));
+				}
 			}
 			lua_pop(&io_luaState, 1);
 		}
@@ -1193,6 +1086,39 @@ namespace
 			offset += sizeof(uint16_t);
 			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::Y] = *reinterpret_cast<uint16_t*>(offset);
 			offset += sizeof(uint16_t);
+			if (!(*reinterpret_cast<uint8_t*>(offset) == 0))
+			{
+				offset += sizeof(uint8_t);
+				g_DeadZones[0].push_back(*reinterpret_cast<uint16_t*>(offset));
+				offset += sizeof(uint16_t);
+			}
+			else
+			{
+				g_DeadZones[0].push_back(0);
+				offset += sizeof(uint8_t);
+			}
+			if (!(*reinterpret_cast<uint8_t*>(offset) == 0))
+			{
+				offset += sizeof(uint8_t);
+				g_DeadZones[0].push_back(*reinterpret_cast<uint16_t*>(offset));
+				offset += sizeof(uint16_t);
+			}
+			else
+			{
+				g_DeadZones[0].push_back(0);
+				offset += sizeof(uint8_t);
+			}
+			if (!(*reinterpret_cast<uint8_t*>(offset) == 0))
+			{
+				offset += sizeof(uint8_t);
+				g_DeadZones[0].push_back(*reinterpret_cast<uint16_t*>(offset));
+				offset += sizeof(uint16_t);
+			}
+			else
+			{
+				g_DeadZones[0].push_back(0);
+				offset += sizeof(uint8_t);
+			}
 			g_DefinedControllersInSettings = 1;
 		}
 		else
