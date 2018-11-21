@@ -381,7 +381,10 @@ eae6320::cResult eae6320::UserInput::ControllerInput::Update(LPVOID i_InParamete
 			dwResult = XInputGetState(i, &state);
 			if (dwResult == ERROR_SUCCESS)
 			{
-				g_Controllers[i].state = state;
+				if (!(g_Controllers[i].state.dwPacketNumber == state.dwPacketNumber))
+				{
+					g_Controllers[i].state = state;
+				}
 			}
 		}
 
@@ -1050,6 +1053,7 @@ namespace
 			{
 				if (*(reinterpret_cast<uint8_t*>(offset)) == i)
 				{
+					offset += sizeof(uint8_t);
 					g_KeyMapping[i][eae6320::UserInput::ControllerInput::ControllerKeyCodes::DPAD_UP] = *reinterpret_cast<uint16_t*>(offset);
 					offset += sizeof(uint16_t);
 					g_KeyMapping[i][eae6320::UserInput::ControllerInput::ControllerKeyCodes::DPAD_DOWN] = *reinterpret_cast<uint16_t*>(offset);
