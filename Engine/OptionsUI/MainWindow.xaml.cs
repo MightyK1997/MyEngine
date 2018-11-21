@@ -25,6 +25,9 @@ namespace Launcher
     {
         private const string fileName = "data/controllerSettings.dat";
         Process gameProcess = new Process();
+        private List<ControllerKeyCodes> m_AllButtonsList;
+
+        private Dictionary<int, List<UInt16>> m_DataDictionary;
         public enum ControllerKeyCodes
         {
             DPAD_UP = 0x0001,
@@ -45,9 +48,18 @@ namespace Launcher
         public MainWindow()
         {
             InitializeComponent();
-            List<ControllerKeyCodes> m_AllButtonsList =
-                Enum.GetValues(typeof(ControllerKeyCodes)).Cast<ControllerKeyCodes>().ToList();
+            m_AllButtonsList = Enum.GetValues(typeof(ControllerKeyCodes)).Cast<ControllerKeyCodes>().ToList();
+            m_DataDictionary = new Dictionary<int, List<UInt16>>();
+            m_DataDictionary.Add(0, new List<UInt16>());
+            //m_DataDictionary.Add(1, new List<UInt16>());
+            //m_DataDictionary.Add(2, new List<UInt16>());
+            //m_DataDictionary.Add(3, new List<UInt16>());
+            //cbxControllerID.SelectedIndex = 0;
+            SetDefaultValues();
+        }
 
+        private void SetDefaultValues()
+        {
             cbxDUp.ItemsSource = m_AllButtonsList;
             cbxDUp.SelectedIndex = 0;
             cbxDDown.ItemsSource = m_AllButtonsList;
@@ -82,20 +94,25 @@ namespace Launcher
         {
             using (BinaryWriter writer= new BinaryWriter(File.Open(fileName, FileMode.Create)))
             {
-                writer.Write(Convert.ToInt32(Enum.Parse(typeof(ControllerKeyCodes), cbxDUp.SelectedItem.ToString())));
-                writer.Write(Convert.ToInt32(Enum.Parse(typeof(ControllerKeyCodes), cbxDDown.SelectedItem.ToString())));
-                writer.Write(Convert.ToInt32(Enum.Parse(typeof(ControllerKeyCodes), cbxDLeft.SelectedItem.ToString())));
-                writer.Write(Convert.ToInt32(Enum.Parse(typeof(ControllerKeyCodes), cbxDRight.SelectedItem.ToString())));
-                writer.Write(Convert.ToInt32(Enum.Parse(typeof(ControllerKeyCodes), cbxStart.SelectedItem.ToString())));
-                writer.Write(Convert.ToInt32(Enum.Parse(typeof(ControllerKeyCodes), cbxBack.SelectedItem.ToString())));
-                writer.Write(Convert.ToInt32(Enum.Parse(typeof(ControllerKeyCodes), cbxLTS.SelectedItem.ToString())));
-                writer.Write(Convert.ToInt32(Enum.Parse(typeof(ControllerKeyCodes), cbxRTS.SelectedItem.ToString())));
-                writer.Write(Convert.ToInt32(Enum.Parse(typeof(ControllerKeyCodes), cbxLB.SelectedItem.ToString())));
-                writer.Write(Convert.ToInt32(Enum.Parse(typeof(ControllerKeyCodes), cbxRB.SelectedItem.ToString())));
-                writer.Write(Convert.ToInt32(Enum.Parse(typeof(ControllerKeyCodes), cbxA.SelectedItem.ToString())));
-                writer.Write(Convert.ToInt32(Enum.Parse(typeof(ControllerKeyCodes), cbxB.SelectedItem.ToString())));
-                writer.Write(Convert.ToInt32(Enum.Parse(typeof(ControllerKeyCodes), cbxX.SelectedItem.ToString())));
-                writer.Write(Convert.ToInt32(Enum.Parse(typeof(ControllerKeyCodes), cbxY.SelectedItem.ToString())));
+                m_DataDictionary[0].Add(Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxDUp.SelectedItem.ToString())));
+                m_DataDictionary[0].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxDDown.SelectedItem.ToString()))));
+                m_DataDictionary[0].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxDLeft.SelectedItem.ToString()))));
+                m_DataDictionary[0].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxDRight.SelectedItem.ToString()))));
+                m_DataDictionary[0].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxStart.SelectedItem.ToString()))));
+                m_DataDictionary[0].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxBack.SelectedItem.ToString()))));
+                m_DataDictionary[0].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxLTS.SelectedItem.ToString()))));
+                m_DataDictionary[0].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxRTS.SelectedItem.ToString()))));
+                m_DataDictionary[0].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxLB.SelectedItem.ToString()))));
+                m_DataDictionary[0].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxRB.SelectedItem.ToString()))));
+                m_DataDictionary[0].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxA.SelectedItem.ToString()))));
+                m_DataDictionary[0].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxB.SelectedItem.ToString()))));
+                m_DataDictionary[0].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxX.SelectedItem.ToString()))));
+                m_DataDictionary[0].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxY.SelectedItem.ToString()))));
+
+                foreach (var item in m_DataDictionary[0])
+                {
+                    writer.Write(item);
+                }
             }
 
             gameProcess.StartInfo.FileName = "MyGame.exe";
@@ -122,5 +139,45 @@ namespace Launcher
             }
             this.Close();
         }
+
+        //private void cbxControllerID_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    int cId = (sender as ComboBox).SelectedIndex;
+        //    if (!(m_DataDictionary[cId].Count > 0))
+        //    {
+        //        m_DataDictionary[cId].Add(Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxDUp.SelectedItem.ToString())));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxDDown.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxDLeft.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxDRight.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxStart.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxBack.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxLTS.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxRTS.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxLB.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxRB.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxA.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxB.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxX.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxY.SelectedItem.ToString()))));
+        //    }
+        //    else
+        //    {
+        //        m_DataDictionary[cId].Clear();
+        //        m_DataDictionary[cId].Add(Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxDUp.SelectedItem.ToString())));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxDDown.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxDLeft.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxDRight.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxStart.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxBack.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxLTS.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxRTS.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxLB.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxRB.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxA.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxB.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxX.SelectedItem.ToString()))));
+        //        m_DataDictionary[cId].Add((Convert.ToUInt16(Enum.Parse(typeof(ControllerKeyCodes), cbxY.SelectedItem.ToString()))));
+        //    }
+        //}
     }
 }

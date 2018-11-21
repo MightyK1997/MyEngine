@@ -32,7 +32,7 @@ namespace eae6320
 		{
 		public:
 			HRESULT SetFormat(WAVEFORMATEX*);
-			HRESULT LoadData(UINT32&, BYTE*&, DWORD*);
+			HRESULT LoadData(UINT32, BYTE*&, DWORD*);
 			HRESULT OpenFile(const char* i_FileName);
 
 		private:

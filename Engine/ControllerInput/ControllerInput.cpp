@@ -34,6 +34,9 @@ namespace
 	//To load data from LUA
 	constexpr auto* const s_userSettingsFileName = "settings.ini";
 	jmp_buf s_jumpBuffer;
+
+	//To load data from binary file.
+	constexpr auto* const s_controllerSettingsFileName = "data/controllerSettings.dat";
 }
 
 namespace
@@ -53,6 +56,12 @@ namespace
 	int g_DefinedControllersInSettings = 0;
 	uint16_t GetValueForKeyCode(std::string);
 	void InitializeDefaultValues();
+	eae6320::cResult LoadControllerSettings();
+}
+
+namespace
+{
+	eae6320::cResult LoadValuesFromBinary();
 }
 
 //Check For new controllers
@@ -494,9 +503,10 @@ uint8_t eae6320::UserInput::ControllerInput::GetNumberOfConnectedControllers()
 eae6320::cResult eae6320::UserInput::ControllerInput::Initialize()
 {
 	eae6320::cResult result = Results::Success;
-	InitializeIfNecessary();
+	LoadControllerSettings();
 	if (!g_IsThreadRunning)
 	{
+		g_IsThreadRunning = true;
 		result = g_UpdateThread.Start(Update);
 		if (result)
 		{
@@ -1140,6 +1150,97 @@ namespace
 				" because of an unhandled Lua error");
 		}
 
+		return result;
+	}
+}
+
+namespace
+{
+	eae6320::cResult LoadValuesFromBinary()
+	{
+		eae6320::cResult result = eae6320::Results::Success;
+		eae6320::Platform::sDataFromFile dataFromFile;
+		if (eae6320::Platform::LoadBinaryFile(s_controllerSettingsFileName, dataFromFile))
+		{
+			uintptr_t offset = reinterpret_cast<uintptr_t>(dataFromFile.data);
+			uintptr_t maxOffset = offset + dataFromFile.size;
+			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::DPAD_UP] = *reinterpret_cast<uint16_t*>(offset);
+			offset += sizeof(uint16_t);
+			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::DPAD_DOWN] = *reinterpret_cast<uint16_t*>(offset);
+			offset += sizeof(uint16_t);
+			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::DPAD_LEFT] = *reinterpret_cast<uint16_t*>(offset);
+			offset += sizeof(uint16_t);
+			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::DPAD_RIGHT] = *reinterpret_cast<uint16_t*>(offset);
+			offset += sizeof(uint16_t);
+			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::START] = *reinterpret_cast<uint16_t*>(offset);
+			offset += sizeof(uint16_t);
+			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::BACK] = *reinterpret_cast<uint16_t*>(offset);
+			offset += sizeof(uint16_t);
+			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_THUMB] = *reinterpret_cast<uint16_t*>(offset);
+			offset += sizeof(uint16_t);
+			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_THUMB] = *reinterpret_cast<uint16_t*>(offset);
+			offset += sizeof(uint16_t);
+			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_SHOULDER] = *reinterpret_cast<uint16_t*>(offset);
+			offset += sizeof(uint16_t);
+			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_SHOULDER] = *reinterpret_cast<uint16_t*>(offset);
+			offset += sizeof(uint16_t);
+			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::A] = *reinterpret_cast<uint16_t*>(offset);
+			offset += sizeof(uint16_t);
+			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::B] = *reinterpret_cast<uint16_t*>(offset);
+			offset += sizeof(uint16_t);
+			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::X] = *reinterpret_cast<uint16_t*>(offset);
+			offset += sizeof(uint16_t);
+			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::Y] = *reinterpret_cast<uint16_t*>(offset);
+			offset += sizeof(uint16_t);
+			g_DefinedControllersInSettings = 1;
+		}
+		else
+		{
+			result = eae6320::Results::Failure;
+		}
+		return result;
+	}
+}
+
+namespace
+{
+	eae6320::cResult LoadControllerSettings()
+	{
+		eae6320::cResult result = eae6320::Results::Success;
+		if ((eae6320::Platform::DoesFileExist(s_controllerSettingsFileName)) || (eae6320::Platform::DoesFileExist(s_userSettingsFileName)))
+		{
+			if ((eae6320::Platform::DoesFileExist(s_controllerSettingsFileName)) && (eae6320::Platform::DoesFileExist(s_userSettingsFileName)))
+			{
+				uint64_t lastWriteBinary;
+				uint64_t lastWriteLua;
+				result = eae6320::Platform::GetLastWriteTime(s_controllerSettingsFileName, lastWriteBinary);
+				result = eae6320::Platform::GetLastWriteTime(s_userSettingsFileName, lastWriteLua);
+				if (lastWriteBinary > lastWriteLua)
+				{
+					result = LoadValuesFromBinary();
+				}
+				else
+				{
+					result = InitializeIfNecessary();
+				}
+			}
+			else if (eae6320::Platform::DoesFileExist(s_controllerSettingsFileName))
+			{
+				result = LoadValuesFromBinary();
+			}
+			else if (eae6320::Platform::DoesFileExist(s_userSettingsFileName))
+			{
+				result = InitializeIfNecessary();
+			}
+		}
+		else
+		{
+			InitializeDefaultValues();
+		}
+		if (!result)
+		{
+			InitializeDefaultValues();
+		}
 		return result;
 	}
 }

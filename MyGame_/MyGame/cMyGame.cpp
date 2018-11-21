@@ -53,9 +53,9 @@ void eae6320::cMyGame::UpdateCameraPosition()
 	{
 		m_Camera->SetAngularSpeed(-1.0f);
 	}
-	if (GetNormalizedTriggerDeflection(ControllerKeyCodes::LEFT_STICK, 1) != 0)
+	if (GetNormalizedTriggerDeflection(ControllerKeyCodes::LEFT_STICK, 0) != 0)
 	{
-		m_Camera->SetAngularSpeed(GetNormalizedStickDeflection(ControllerKeyCodes::LEFT_STICK, 1).x);
+		m_Camera->SetAngularSpeed(GetNormalizedStickDeflection(ControllerKeyCodes::LEFT_STICK, 0).x);
 	}
 	if (IsKeyPressed(ControllerKeyCodes::RIGHT_TRIGGER))
 	{
@@ -213,7 +213,7 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 //--------------------------
 
 eae6320::cResult eae6320::cMyGame::Initialize()
-{
+{ 
 	eae6320::Graphics::cCamera::CreateCamera(m_Camera);
 
 	RegisterFunctionForCallback(ControllerKeyCodes::A, [this] {return Test(10); });
@@ -234,7 +234,7 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 	fname = "data/Meshes/ChairMesh.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh3Handle);
 
-	eae6320::audio::PlayAudio("C:/Users/gslc/source/repos/UPADHYAYULA_SAI/temp/x64/Debug/MyGame_/Windows Logon.wav");
+	eae6320::audio::PlayAudio("Windows Logon.wav");
 
 	std::string effectPath = "data/Effects/Effect1.effectbinary";
 	eae6320::Graphics::cEffect::s_Manager.Load(effectPath.c_str(), effect1Handle);

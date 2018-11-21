@@ -5,6 +5,8 @@
 namespace
 {
 	uint32_t g_numberofframes;
+	uintptr_t dataOffset;
+	uintptr_t finalOffset;
 }
 
 //-----------------------------------------------------------
@@ -149,14 +151,16 @@ HRESULT eae6320::audio::MyAudioSource::SetFormat(WAVEFORMATEX *i_WaveFormat)
 	return NOERROR;
 }
 
-HRESULT eae6320::audio::MyAudioSource::LoadData(UINT32& o_NumberOfAudioFrames, BYTE*& o_Data, DWORD* o_flags)
+HRESULT eae6320::audio::MyAudioSource::LoadData(UINT32 NumberOfAudioFrames, BYTE*& o_Data, DWORD* o_flags)
 {
-	g_numberofframes += 5;
-	uintptr_t offset = reinterpret_cast<uintptr_t>(data.data);
-	o_NumberOfAudioFrames = g_numberofframes;
-	o_Data = reinterpret_cast<BYTE*>(offset * data.numChannels * data.sampleRate);
-	offset += g_numberofframes;
-	return NOERROR;
+	if (finalOffset >= dataOffset + NumberOfAudioFrames * 4)
+	{
+		memcpy(o_Data, reinterpret_cast<void*>(dataOffset), NumberOfAudioFrames * 4);
+		dataOffset += NumberOfAudioFrames *4;
+		o_flags = 0;
+		return NOERROR;
+	}
+	return E_FAIL;
 }
 
 HRESULT eae6320::audio::MyAudioSource::OpenFile(const char * i_FileName)
@@ -168,7 +172,7 @@ HRESULT eae6320::audio::MyAudioSource::OpenFile(const char * i_FileName)
 	if (eae6320::Platform::LoadBinaryFile(i_FileName, fileData, &errorMessage))
 	{
 		uintptr_t offset = reinterpret_cast<uintptr_t>(fileData.data);
-		const uintptr_t finalOffset = offset + fileData.size;
+		finalOffset = offset + fileData.size;
 		wavData.chunckID = reinterpret_cast<char*>(offset);
 		offset += 4;
 		wavData.chunkSize = *reinterpret_cast<uint32_t*>(offset);
@@ -196,6 +200,7 @@ HRESULT eae6320::audio::MyAudioSource::OpenFile(const char * i_FileName)
 		wavData.subChunk2Size = *reinterpret_cast<uint32_t*>(offset);
 		offset += sizeof(uint32_t);
 		wavData.data = reinterpret_cast<void*>(offset);
+		dataOffset = reinterpret_cast<uintptr_t>(wavData.data);
 		data = wavData;
 	}
 	else
