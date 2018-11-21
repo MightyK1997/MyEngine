@@ -74,7 +74,10 @@ namespace eae6320
 			void RegisterFunctionForCallback(ControllerKeyCodes i_KeyCode, std::function<void()> i_CallbackFunction, uint8_t i_ControllerNumber = 0);
 
 			//Unregister function from callback
-			eae6320::cResult RemoveFunctionFromCallback(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber = 0);
+			eae6320::cResult RemoveKeyFromCallback(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber = 0);
+
+			//Unregister all functions associated with a key.
+			//eae6320::cResult RemoveFunctionFromCallback(std::function<void()> i_CallbackFunction, uint8_t i_ControllerNumber = 0);
 
 			//Other Functions
 			uint8_t GetNumberOfConnectedControllers();

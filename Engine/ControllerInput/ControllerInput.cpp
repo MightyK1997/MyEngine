@@ -59,6 +59,8 @@ namespace
 	uint16_t GetValueForKeyCode(std::string);
 	void InitializeDefaultValues();
 	eae6320::cResult LoadControllerSettings();
+	//template<typename T, typename... U>
+	//size_t GetAddress(std::function<T(U...)> f);
 }
 
 namespace
@@ -139,7 +141,7 @@ bool eae6320::UserInput::ControllerInput::IsKeyPressed(ControllerKeyCodes i_KeyC
 
 float eae6320::UserInput::ControllerInput::GetTriggerDeflection(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber)
 {
-	if (i_ControllerNumber >= 0 && i_ControllerNumber < 4)
+	if ((i_ControllerNumber >= 0 && i_ControllerNumber < 4) && g_NumberOfConnectedControllers > 0)
 	{
 		XINPUT_STATE state = g_Controllers[i_ControllerNumber].state;
 		if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_TRIGGER) || (i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_TRIGGER))
@@ -165,7 +167,7 @@ float eae6320::UserInput::ControllerInput::GetTriggerDeflection(ControllerKeyCod
 
 float eae6320::UserInput::ControllerInput::GetNormalizedTriggerDeflection(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber)
 {
-	if (i_ControllerNumber >= 0 && i_ControllerNumber < 4)
+	if ((i_ControllerNumber >= 0 && i_ControllerNumber < 4) && g_NumberOfConnectedControllers > 0)
 	{
 		XINPUT_STATE state = g_Controllers[i_ControllerNumber].state;
 		auto threshold = g_DeadZones[i_ControllerNumber][2] > 0 ? g_DeadZones[i_ControllerNumber][2] : XINPUT_GAMEPAD_TRIGGER_THRESHOLD;
@@ -191,7 +193,7 @@ float eae6320::UserInput::ControllerInput::GetNormalizedTriggerDeflection(Contro
 
 eae6320::Math::sVector eae6320::UserInput::ControllerInput::GetStickDeflection(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber)
 {
-	if (i_ControllerNumber >= 0 && i_ControllerNumber < 4)
+	if ((i_ControllerNumber >= 0 && i_ControllerNumber < 4) && g_NumberOfConnectedControllers > 0)
 	{
 		XINPUT_STATE state = g_Controllers[i_ControllerNumber].state;
 		if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_STICK) || (i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_STICK))
@@ -244,7 +246,7 @@ eae6320::Math::sVector eae6320::UserInput::ControllerInput::GetStickDeflection(C
 
 eae6320::Math::sVector eae6320::UserInput::ControllerInput::GetNormalizedStickDeflection(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber)
 {
-	if (i_ControllerNumber >= 0 && i_ControllerNumber < 4)
+	if ((i_ControllerNumber >= 0 && i_ControllerNumber < 4) && g_NumberOfConnectedControllers > 0)
 	{
 		XINPUT_STATE state = g_Controllers[i_ControllerNumber].state;
 		if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_STICK) || (i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_STICK))
@@ -332,7 +334,7 @@ void eae6320::UserInput::ControllerInput::RegisterFunctionForCallback(Controller
 	g_FunctionLookupTable[i_ControllerNumber].push_back(temp);
 }
 
-eae6320::cResult eae6320::UserInput::ControllerInput::RemoveFunctionFromCallback(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber)
+eae6320::cResult eae6320::UserInput::ControllerInput::RemoveKeyFromCallback(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber)
 {
 	auto result = eae6320::Results::Success;
 	for (auto& x: g_FunctionLookupTable[i_ControllerNumber])
@@ -345,6 +347,25 @@ eae6320::cResult eae6320::UserInput::ControllerInput::RemoveFunctionFromCallback
 	}
 	return result;
 }
+
+//eae6320::cResult eae6320::UserInput::ControllerInput::RemoveFunctionFromCallback(std::function<void()> i_CallbackFunction, uint8_t i_ControllerNumber)
+//{
+//	auto result = eae6320::Results::Success;
+//	for (auto& temp : g_FunctionLookupTable)
+//	{
+//		for (auto& x : temp.second)
+//		{
+//			for (auto& y : x)
+//			{
+//				if (GetAddress(y.second) == GetAddress(i_CallbackFunction))
+//				{
+//					x.erase(y.first);
+//				}
+//			}
+//		}
+//	}
+//	return result;
+//}
 
 uint8_t eae6320::UserInput::ControllerInput::GetNumberOfConnectedControllers()
 {
@@ -1189,4 +1210,10 @@ namespace
 		}
 		return result;
 	}
+	//template<typename T, typename... U>
+	//size_t GetAddress(std::function<T(U...)> f) {
+	//	typedef T(fnType)(U...);
+	//	fnType ** fnPointer = f.template target<fnType*>();
+	//	return (size_t)*fnPointer;
+	//}
 }

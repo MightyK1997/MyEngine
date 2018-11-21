@@ -115,7 +115,7 @@ void eae6320::cMyGame::UpdateGameobjectPosition()
 void eae6320::cMyGame::Test()
 {
 	std::swap(mesh1Handle, mesh3Handle);
-	RemoveFunctionFromCallback(ControllerKeyCodes::B);
+	RemoveKeyFromCallback(ControllerKeyCodes::B);
 }
 
 void eae6320::cMyGame::Test(bool a)
@@ -207,6 +207,9 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 
 	RegisterFunctionForCallback(ControllerKeyCodes::A, [this] {return Test(false); }, 0);
 	RegisterFunctionForCallback(ControllerKeyCodes::B, [this] {return Test(); }, 0);
+	RegisterFunctionForCallback(ControllerKeyCodes::B, [this] {return Test(); }, 0);
+
+	Test();
 
 	m_Camera->SetCameraPosition(Math::sVector(0, 0, 10));
 
