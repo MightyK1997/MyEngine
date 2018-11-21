@@ -115,11 +115,12 @@ void eae6320::cMyGame::UpdateGameobjectPosition()
 void eae6320::cMyGame::Test()
 {
 	std::swap(mesh1Handle, mesh3Handle);
+	RemoveFunctionFromCallback(ControllerKeyCodes::B);
 }
 
-void eae6320::cMyGame::Test(int a)
+void eae6320::cMyGame::Test(bool a)
 {
-	RemoveFunctionFromCallback(ControllerKeyCodes::A);
+		isPaused = !isPaused;
 }
 
 
@@ -134,22 +135,7 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 	}
 	Application::cbApplication::SetSimulationRate(UserInput::IsKeyPressed(UserInput::KeyCodes::Shift) ? 0.5f : 1.0f);
 	m_NumberOfMeshesToRender = UserInput::IsKeyPressed(UserInput::KeyCodes::F1) ? 1 : m_NumberOfGameObjects;
-	//if (UserInput::IsKeyPressed(UserInput::KeyCodes::F2))
-	//{
-	//	if (!isEffectSwapped)
-	//	{
-	//		std::swap(s_Effect, s_Effect2);
-	//		isEffectSwapped = true;
-	//	}
-	//}
-	//else
-	//{
-	//	if (isEffectSwapped)
-	//	{
-	//		std::swap(s_Effect, s_Effect2);
-	//		isEffectSwapped = false;
-	//	}
-	//}
+
 	if (UserInput::IsKeyPressed(UserInput::KeyCodes::F3))
 	{
 		if (!isMeshSwapped)
@@ -182,13 +168,16 @@ void eae6320::cMyGame::UpdateSimulationBasedOnTime(const float i_elapsedSecondCo
 void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_systemTime, const float i_elapsedSecondCount_sinceLastSimulationUpdate)
 {
 	//Submit The value of Backbuffer
-	eae6320::Graphics::SetBackBufferValue(eae6320::Graphics::sColor
-		{
-			abs(sin(i_elapsedSecondCount_systemTime)),
-			abs(cos(i_elapsedSecondCount_systemTime)) ,
-			abs(cos(i_elapsedSecondCount_systemTime)) ,
-			1
-		});
+	if (!isPaused)
+	{
+		eae6320::Graphics::SetBackBufferValue(eae6320::Graphics::sColor
+			{
+				abs(sin(i_elapsedSecondCount_systemTime)),
+				abs(cos(i_elapsedSecondCount_systemTime)) ,
+				abs(cos(i_elapsedSecondCount_systemTime)) ,
+				1
+			});
+	}
 
 
 	m_GameObjects[0]->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
@@ -216,7 +205,8 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 { 
 	eae6320::Graphics::cCamera::CreateCamera(m_Camera);
 
-	RegisterFunctionForCallback(ControllerKeyCodes::A, [this] {return Test(10); }, 1);
+	RegisterFunctionForCallback(ControllerKeyCodes::A, [this] {return Test(false); }, 0);
+	RegisterFunctionForCallback(ControllerKeyCodes::B, [this] {return Test(); }, 0);
 
 	m_Camera->SetCameraPosition(Math::sVector(0, 0, 10));
 

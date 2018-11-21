@@ -22,7 +22,7 @@ namespace
 	ControllerState g_Controllers[XUSER_MAX_COUNT];
 
 	//For Function callback
-	std::map<uint8_t, std::map < eae6320::UserInput::ControllerInput::ControllerKeyCodes, std::function<void()>>> g_FunctionLookupTable;
+	std::map<uint8_t, std::vector<std::map < eae6320::UserInput::ControllerInput::ControllerKeyCodes, std::function<void()>>>> g_FunctionLookupTable;
 
 	std::map<uint8_t, std::map<eae6320::UserInput::ControllerInput::ControllerKeyCodes, uint16_t>> g_KeyMapping;
 
@@ -90,9 +90,14 @@ void CheckForNewControllers()
 
 void CallCallbackFunction(eae6320::UserInput::ControllerInput::ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber = 0)
 {
-	if (g_FunctionLookupTable[i_ControllerNumber][i_KeyCode])
+	auto temp = g_FunctionLookupTable[i_ControllerNumber];
+
+	for (auto&x:temp)
 	{
-		std::async(g_FunctionLookupTable[i_ControllerNumber][i_KeyCode]);
+		if (x[i_KeyCode])
+		{
+			std::async(x[i_KeyCode]);
+		}
 	}
 }
 
@@ -324,12 +329,21 @@ void eae6320::UserInput::ControllerInput::RegisterFunctionForCallback(Controller
 {
 	std::map < eae6320::UserInput::ControllerInput::ControllerKeyCodes, std::function<void()>> temp;
 	temp[i_KeyCode] = i_CallbackFunction;
-	g_FunctionLookupTable[i_ControllerNumber] = temp;
+	g_FunctionLookupTable[i_ControllerNumber].push_back(temp);
 }
 
 eae6320::cResult eae6320::UserInput::ControllerInput::RemoveFunctionFromCallback(ControllerKeyCodes i_KeyCode, uint8_t i_ControllerNumber)
 {
-	return (g_FunctionLookupTable[i_ControllerNumber].erase(i_KeyCode)) > 0 ? Results::Success : Results::Failure;
+	auto result = eae6320::Results::Success;
+	for (auto& x: g_FunctionLookupTable[i_ControllerNumber])
+	{
+		auto it = x.find(i_KeyCode);
+		if (it != x.end())
+		{
+			x.erase(it);
+		}
+	}
+	return result;
 }
 
 uint8_t eae6320::UserInput::ControllerInput::GetNumberOfConnectedControllers()
@@ -393,7 +407,10 @@ eae6320::cResult eae6320::UserInput::ControllerInput::Update(LPVOID i_InParamete
 			auto temp = g_FunctionLookupTable[i];
 			for (auto& x : temp)
 			{
-				IsKeyPressed(x.first, i);
+				for (auto& y:x )
+				{
+					IsKeyPressed(y.first, i);
+				}
 			}
 		}
 	}

@@ -86,6 +86,7 @@ namespace eae6320
 		static const unsigned int m_NumberOfGameObjects = 2;
 		bool isEffectSwapped = false;
 		bool isMeshSwapped = false;
+		bool isPaused = false;
 		eae6320::Graphics::cEffect* s_Effect;
 		eae6320::Graphics::cEffect* s_Effect2;
 		eae6320::Graphics::cEffect* s_Effect3;
@@ -112,7 +113,7 @@ namespace eae6320
 		void UpdateCameraPosition();
 		void UpdateGameobjectPosition();
 		void Test();
-		void Test(int);
+		void Test(bool);
 	};
 }
 
