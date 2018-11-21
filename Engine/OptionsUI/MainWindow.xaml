@@ -47,8 +47,8 @@
         <TextBox x:Name="tbxLeftStickDeadZone" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="128.4,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58"/>
         <TextBox x:Name="tbxRightStickDeadZone" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="128.4,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58"/>
         <TextBox x:Name="tbxTriggerDeadZone" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="128.4,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58"/>
-        <!--<Label x:Name="lblControllerID" Content="Controller ID" HorizontalAlignment="Left" Margin="86,5,0,0" VerticalAlignment="Top"/>-->
-        <!--<ComboBox x:Name="cbxControllerID" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="193,8,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbxControllerID_SelectionChanged"/>-->
+        <Label x:Name="lblControllerID" Content="Controller ID" HorizontalAlignment="Left" Margin="86,5,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbxControllerID" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="193,8,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="cbxControllerID_SelectionChanged"/>
 
     </Grid>
 </Window>

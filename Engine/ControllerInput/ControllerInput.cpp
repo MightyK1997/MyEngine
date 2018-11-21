@@ -201,31 +201,15 @@ eae6320::Math::sVector eae6320::UserInput::ControllerInput::GetStickDeflection(C
 				//determine how far the controller is pushed
 				float magnitude = sqrt(LX*LX + LY * LY);
 
-				//determine the direction the controller is pushed
-				float normalizedLX = LX / magnitude;
-				float normalizedLY = LY / magnitude;
-
-				float normalizedMagnitude = 0;
-
 				//check if the controller is outside a circular dead zone
 				if (magnitude > threshold)
 				{
-					//clip the magnitude at its expected maximum value
-					if (magnitude > 32767) magnitude = 32767;
-
-					//adjust magnitude relative to the end of the dead zone
-					magnitude -= threshold;
-
-					//optionally normalize the magnitude with respect to its expected range
-					//giving a magnitude value of 0.0 to 1.0
-					normalizedMagnitude = magnitude / (32767 - threshold);
+					return eae6320::Math::sVector(LX, LY, 0);
 				}
 				else //if the controller is in the deadzone zero out the magnitude
 				{
-					magnitude = 0.0;
-					normalizedMagnitude = 0.0;
+					return eae6320::Math::sVector(0, 0, 0);
 				}
-				return eae6320::Math::sVector(LX, LY, 0);
 			}
 			else if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_STICK))
 			{
@@ -236,31 +220,16 @@ eae6320::Math::sVector eae6320::UserInput::ControllerInput::GetStickDeflection(C
 				//determine how far the controller is pushed
 				float magnitude = sqrt(RX*RX + RY * RY);
 
-				//determine the direction the controller is pushed
-				float normalizedRX = RX / magnitude;
-				float normalizedRY = RY / magnitude;
-
-				float normalizedMagnitude = 0;
-
 				//check if the controller is outside a circular dead zone
 				if (magnitude > threshold)
 				{
-					//clip the magnitude at its expected maximum value
-					if (magnitude > 32767) magnitude = 32767;
-
-					//adjust magnitude relative to the end of the dead zone
-					magnitude -= threshold;
-
-					//optionally normalize the magnitude with respect to its expected range
-					//giving a magnitude value of 0.0 to 1.0
-					normalizedMagnitude = magnitude / (32767 - threshold);
+					return eae6320::Math::sVector(RX, RY, 0);
 				}
 				else //if the controller is in the deadzone zero out the magnitude
 				{
-					magnitude = 0.0;
-					normalizedMagnitude = 0.0;
+					return eae6320::Math::sVector(0, 0, 0);
 				}
-				return eae6320::Math::sVector(RX, RY, 0);
+				
 			}
 		}
 	}
@@ -278,6 +247,7 @@ eae6320::Math::sVector eae6320::UserInput::ControllerInput::GetNormalizedStickDe
 			//Check for deadzones
 			if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_STICK))
 			{
+				auto threshold = g_DeadZones[i_ControllerNumber][0] > 0 ? g_DeadZones[i_ControllerNumber][0] : XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE;
 				float LX = state.Gamepad.sThumbLX;
 				float LY = state.Gamepad.sThumbLY;
 
@@ -287,10 +257,20 @@ eae6320::Math::sVector eae6320::UserInput::ControllerInput::GetNormalizedStickDe
 				//determine the direction the controller is pushed
 				float normalizedLX = LX / magnitude;
 				float normalizedLY = LY / magnitude;
-				return eae6320::Math::sVector(normalizedLX, normalizedLY, 0);
+
+				if (magnitude > threshold)
+				{
+					return eae6320::Math::sVector(normalizedLX, normalizedLY, 0);
+				}
+				else
+				{
+					return eae6320::Math::sVector(0, 0, 0);
+				}
+				
 			}
 			else if ((i_KeyCode == eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_STICK))
 			{
+				auto threshold = g_DeadZones[i_ControllerNumber][0] > 0 ? g_DeadZones[i_ControllerNumber][0] : XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE;
 				float RX = state.Gamepad.sThumbRX;
 				float RY = state.Gamepad.sThumbRY;
 
@@ -300,7 +280,15 @@ eae6320::Math::sVector eae6320::UserInput::ControllerInput::GetNormalizedStickDe
 				//determine the direction the controller is pushed
 				float normalizedRX = RX / magnitude;
 				float normalizedRY = RY / magnitude;
-				return eae6320::Math::sVector(normalizedRX, normalizedRY, 0);
+
+				if (magnitude > threshold)
+				{
+					return eae6320::Math::sVector(normalizedRX, normalizedRY, 0);
+				}
+				else
+				{
+					return eae6320::Math::sVector(0, 0, 0);
+				}
 			}
 		}
 	}
@@ -482,7 +470,7 @@ namespace
 
 	void InitializeDefaultValues()
 	{
-		for (uint8_t i = g_DefinedControllersInSettings; i < 4; i++)
+		for (uint8_t i = g_DefinedControllersInSettings; i < g_NumberOfConnectedControllers; i++)
 		{
 			g_KeyMapping[i][eae6320::UserInput::ControllerInput::DPAD_UP] = 0x0001;
 			g_KeyMapping[i][eae6320::UserInput::ControllerInput::DPAD_DOWN] = 0x0002;
@@ -1058,68 +1046,74 @@ namespace
 		{
 			uintptr_t offset = reinterpret_cast<uintptr_t>(dataFromFile.data);
 			uintptr_t maxOffset = offset + dataFromFile.size;
-			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::DPAD_UP] = *reinterpret_cast<uint16_t*>(offset);
-			offset += sizeof(uint16_t);
-			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::DPAD_DOWN] = *reinterpret_cast<uint16_t*>(offset);
-			offset += sizeof(uint16_t);
-			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::DPAD_LEFT] = *reinterpret_cast<uint16_t*>(offset);
-			offset += sizeof(uint16_t);
-			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::DPAD_RIGHT] = *reinterpret_cast<uint16_t*>(offset);
-			offset += sizeof(uint16_t);
-			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::START] = *reinterpret_cast<uint16_t*>(offset);
-			offset += sizeof(uint16_t);
-			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::BACK] = *reinterpret_cast<uint16_t*>(offset);
-			offset += sizeof(uint16_t);
-			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_THUMB] = *reinterpret_cast<uint16_t*>(offset);
-			offset += sizeof(uint16_t);
-			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_THUMB] = *reinterpret_cast<uint16_t*>(offset);
-			offset += sizeof(uint16_t);
-			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_SHOULDER] = *reinterpret_cast<uint16_t*>(offset);
-			offset += sizeof(uint16_t);
-			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_SHOULDER] = *reinterpret_cast<uint16_t*>(offset);
-			offset += sizeof(uint16_t);
-			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::A] = *reinterpret_cast<uint16_t*>(offset);
-			offset += sizeof(uint16_t);
-			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::B] = *reinterpret_cast<uint16_t*>(offset);
-			offset += sizeof(uint16_t);
-			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::X] = *reinterpret_cast<uint16_t*>(offset);
-			offset += sizeof(uint16_t);
-			g_KeyMapping[0][eae6320::UserInput::ControllerInput::ControllerKeyCodes::Y] = *reinterpret_cast<uint16_t*>(offset);
-			offset += sizeof(uint16_t);
-			if (!(*reinterpret_cast<uint8_t*>(offset) == 0))
+			for (uint8_t i = 0; i < 4; i++)
 			{
-				offset += sizeof(uint8_t);
-				g_DeadZones[0].push_back(*reinterpret_cast<uint16_t*>(offset));
-				offset += sizeof(uint16_t);
+				if (*(reinterpret_cast<uint8_t*>(offset)) == i)
+				{
+					g_KeyMapping[i][eae6320::UserInput::ControllerInput::ControllerKeyCodes::DPAD_UP] = *reinterpret_cast<uint16_t*>(offset);
+					offset += sizeof(uint16_t);
+					g_KeyMapping[i][eae6320::UserInput::ControllerInput::ControllerKeyCodes::DPAD_DOWN] = *reinterpret_cast<uint16_t*>(offset);
+					offset += sizeof(uint16_t);
+					g_KeyMapping[i][eae6320::UserInput::ControllerInput::ControllerKeyCodes::DPAD_LEFT] = *reinterpret_cast<uint16_t*>(offset);
+					offset += sizeof(uint16_t);
+					g_KeyMapping[i][eae6320::UserInput::ControllerInput::ControllerKeyCodes::DPAD_RIGHT] = *reinterpret_cast<uint16_t*>(offset);
+					offset += sizeof(uint16_t);
+					g_KeyMapping[i][eae6320::UserInput::ControllerInput::ControllerKeyCodes::START] = *reinterpret_cast<uint16_t*>(offset);
+					offset += sizeof(uint16_t);
+					g_KeyMapping[i][eae6320::UserInput::ControllerInput::ControllerKeyCodes::BACK] = *reinterpret_cast<uint16_t*>(offset);
+					offset += sizeof(uint16_t);
+					g_KeyMapping[i][eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_THUMB] = *reinterpret_cast<uint16_t*>(offset);
+					offset += sizeof(uint16_t);
+					g_KeyMapping[i][eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_THUMB] = *reinterpret_cast<uint16_t*>(offset);
+					offset += sizeof(uint16_t);
+					g_KeyMapping[i][eae6320::UserInput::ControllerInput::ControllerKeyCodes::LEFT_SHOULDER] = *reinterpret_cast<uint16_t*>(offset);
+					offset += sizeof(uint16_t);
+					g_KeyMapping[i][eae6320::UserInput::ControllerInput::ControllerKeyCodes::RIGHT_SHOULDER] = *reinterpret_cast<uint16_t*>(offset);
+					offset += sizeof(uint16_t);
+					g_KeyMapping[i][eae6320::UserInput::ControllerInput::ControllerKeyCodes::A] = *reinterpret_cast<uint16_t*>(offset);
+					offset += sizeof(uint16_t);
+					g_KeyMapping[i][eae6320::UserInput::ControllerInput::ControllerKeyCodes::B] = *reinterpret_cast<uint16_t*>(offset);
+					offset += sizeof(uint16_t);
+					g_KeyMapping[i][eae6320::UserInput::ControllerInput::ControllerKeyCodes::X] = *reinterpret_cast<uint16_t*>(offset);
+					offset += sizeof(uint16_t);
+					g_KeyMapping[i][eae6320::UserInput::ControllerInput::ControllerKeyCodes::Y] = *reinterpret_cast<uint16_t*>(offset);
+					offset += sizeof(uint16_t);
+					if (!(*reinterpret_cast<uint16_t*>(offset) == 0))
+					{
+						offset += sizeof(uint16_t);
+						g_DeadZones[i].push_back(*reinterpret_cast<uint16_t*>(offset));
+						offset += sizeof(uint16_t);
+					}
+					else
+					{
+						g_DeadZones[i].push_back(0);
+						offset += sizeof(uint16_t);
+					}
+					if (!(*reinterpret_cast<uint16_t*>(offset) == 0))
+					{
+						offset += sizeof(uint16_t);
+						g_DeadZones[i].push_back(*reinterpret_cast<uint16_t*>(offset));
+						offset += sizeof(uint16_t);
+					}
+					else
+					{
+						g_DeadZones[i].push_back(0);
+						offset += sizeof(uint16_t);
+					}
+					if (!(*reinterpret_cast<uint16_t*>(offset) == 0))
+					{
+						offset += sizeof(uint16_t);
+						g_DeadZones[i].push_back(*reinterpret_cast<uint16_t*>(offset));
+						offset += sizeof(uint16_t);
+					}
+					else
+					{
+						g_DeadZones[i].push_back(0);
+						offset += sizeof(uint16_t);
+					}
+					g_DefinedControllersInSettings++;
+				}
 			}
-			else
-			{
-				g_DeadZones[0].push_back(0);
-				offset += sizeof(uint8_t);
-			}
-			if (!(*reinterpret_cast<uint8_t*>(offset) == 0))
-			{
-				offset += sizeof(uint8_t);
-				g_DeadZones[0].push_back(*reinterpret_cast<uint16_t*>(offset));
-				offset += sizeof(uint16_t);
-			}
-			else
-			{
-				g_DeadZones[0].push_back(0);
-				offset += sizeof(uint8_t);
-			}
-			if (!(*reinterpret_cast<uint8_t*>(offset) == 0))
-			{
-				offset += sizeof(uint8_t);
-				g_DeadZones[0].push_back(*reinterpret_cast<uint16_t*>(offset));
-				offset += sizeof(uint16_t);
-			}
-			else
-			{
-				g_DeadZones[0].push_back(0);
-				offset += sizeof(uint8_t);
-			}
-			g_DefinedControllersInSettings = 1;
 		}
 		else
 		{
