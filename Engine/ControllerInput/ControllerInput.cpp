@@ -354,6 +354,7 @@ uint8_t eae6320::UserInput::ControllerInput::GetNumberOfConnectedControllers()
 eae6320::cResult eae6320::UserInput::ControllerInput::Initialize()
 {
 	eae6320::cResult result = Results::Success;
+	CheckForNewControllers();
 	LoadControllerSettings();
 	if (!g_IsThreadRunning)
 	{
@@ -506,6 +507,9 @@ namespace
 			g_KeyMapping[i][eae6320::UserInput::ControllerInput::B] = 0x2000;
 			g_KeyMapping[i][eae6320::UserInput::ControllerInput::X] = 0x4000;
 			g_KeyMapping[i][eae6320::UserInput::ControllerInput::Y] = 0x8000;
+			g_DeadZones[i].push_back(0);
+			g_DeadZones[i].push_back(0);
+			g_DeadZones[i].push_back(0);
 		}
 	}
 }

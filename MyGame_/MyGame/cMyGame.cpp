@@ -224,8 +224,6 @@ eae6320::cResult eae6320::cMyGame::Initialize()
 	fname = "data/Meshes/ChairMesh.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fname.c_str(), mesh3Handle);
 
-	eae6320::audio::PlayAudio("Windows Logon.wav");
-
 	std::string effectPath = "data/Effects/Effect1.effectbinary";
 	eae6320::Graphics::cEffect::s_Manager.Load(effectPath.c_str(), effect1Handle);
 	return Results::Success;
