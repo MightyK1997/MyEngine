@@ -5,12 +5,16 @@
 #include <Engine/Graphics/Graphics.h>
 #include <Engine/Asserts/Asserts.h>
 #include <Engine/UserInput/UserInput.h>
+#include <Engine/ControllerInput/ControllerInput.h>
+#include <Engine/Sound/Sound.h>
 
 // Inherited Implementation
 //=========================
 
 // Run
 //----
+
+using namespace eae6320::UserInput::ControllerInput;
 
 void eae6320::cMyGame::UpdateCameraPosition()
 {
@@ -49,6 +53,19 @@ void eae6320::cMyGame::UpdateCameraPosition()
 	{
 		m_Camera->SetAngularSpeed(-1.0f);
 	}
+	if (GetNormalizedStickDeflection(ControllerKeyCodes::LEFT_STICK, 0).x != 0)
+	{
+		m_Camera->SetAngularSpeed(GetNormalizedStickDeflection(ControllerKeyCodes::LEFT_STICK, 0).x);
+	}
+	if (IsKeyPressed(ControllerKeyCodes::RIGHT_TRIGGER))
+	{
+		m_Camera->SetCameraVelocity(Math::sVector(0, GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER), 0));
+	}
+	if (IsKeyPressed(ControllerKeyCodes::LEFT_TRIGGER))
+	{
+		m_Camera->SetCameraVelocity(Math::sVector(0, -GetNormalizedTriggerDeflection(ControllerKeyCodes::LEFT_TRIGGER), 0));
+	}
+
 }
 
 void eae6320::cMyGame::UpdateGameobjectPosition()
@@ -57,7 +74,7 @@ void eae6320::cMyGame::UpdateGameobjectPosition()
 	{
 		m_GameObjects[i]->SetGameObjectVelocity(Math::sVector(0, 0, 0));
 	}
-//GO1
+	//GO1
 	if (UserInput::IsKeyPressed('W'))
 	{
 		m_GameObjects[0]->SetGameObjectVelocity(Math::sVector(0, 10.0f, 0.0f));
@@ -68,15 +85,15 @@ void eae6320::cMyGame::UpdateGameobjectPosition()
 	}
 	if (UserInput::IsKeyPressed('S'))
 	{
-		m_GameObjects[0]->SetGameObjectVelocity(Math::sVector(0,-10.0f,0));
+		m_GameObjects[0]->SetGameObjectVelocity(Math::sVector(0, -10.0f, 0));
 	}
 	if (UserInput::IsKeyPressed('D'))
 	{
-		m_GameObjects[0]->SetGameObjectVelocity(Math::sVector(10.0f,0,0));
+		m_GameObjects[0]->SetGameObjectVelocity(Math::sVector(10.0f, 0, 0));
 	}
 
-//GO2
-	//m_GameObjects[1]->SetGameObjectVelocity(Math::sVector(0, 0, 0));
+	//GO2
+		//m_GameObjects[1]->SetGameObjectVelocity(Math::sVector(0, 0, 0));
 	if (UserInput::IsKeyPressed('I'))
 	{
 		m_GameObjects[1]->SetGameObjectVelocity(Math::sVector(0, 10.0f, 0.0f));
@@ -95,6 +112,17 @@ void eae6320::cMyGame::UpdateGameobjectPosition()
 	}
 }
 
+void eae6320::cMyGame::Test()
+{
+	std::swap(mesh1Handle, mesh3Handle);
+	RemoveKeyFromCallback(ControllerKeyCodes::B);
+}
+
+void eae6320::cMyGame::Test(bool a)
+{
+		isPaused = !isPaused;
+}
+
 
 void eae6320::cMyGame::UpdateBasedOnInput()
 {
@@ -107,22 +135,7 @@ void eae6320::cMyGame::UpdateBasedOnInput()
 	}
 	Application::cbApplication::SetSimulationRate(UserInput::IsKeyPressed(UserInput::KeyCodes::Shift) ? 0.5f : 1.0f);
 	m_NumberOfMeshesToRender = UserInput::IsKeyPressed(UserInput::KeyCodes::F1) ? 1 : m_NumberOfGameObjects;
-	//if (UserInput::IsKeyPressed(UserInput::KeyCodes::F2))
-	//{
-	//	if (!isEffectSwapped)
-	//	{
-	//		std::swap(s_Effect, s_Effect2);
-	//		isEffectSwapped = true;
-	//	}
-	//}
-	//else
-	//{
-	//	if (isEffectSwapped)
-	//	{
-	//		std::swap(s_Effect, s_Effect2);
-	//		isEffectSwapped = false;
-	//	}
-	//}
+
 	if (UserInput::IsKeyPressed(UserInput::KeyCodes::F3))
 	{
 		if (!isMeshSwapped)
@@ -155,13 +168,16 @@ void eae6320::cMyGame::UpdateSimulationBasedOnTime(const float i_elapsedSecondCo
 void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_systemTime, const float i_elapsedSecondCount_sinceLastSimulationUpdate)
 {
 	//Submit The value of Backbuffer
-	eae6320::Graphics::SetBackBufferValue(eae6320::Graphics::sColor
-		{
-			abs(sin(i_elapsedSecondCount_systemTime)),
-			abs(cos(i_elapsedSecondCount_systemTime)) ,
-			abs(cos(i_elapsedSecondCount_systemTime)) ,
-			1
-		});
+	if (!isPaused)
+	{
+		eae6320::Graphics::SetBackBufferValue(eae6320::Graphics::sColor
+			{
+				abs(sin(i_elapsedSecondCount_systemTime)),
+				abs(cos(i_elapsedSecondCount_systemTime)) ,
+				abs(cos(i_elapsedSecondCount_systemTime)) ,
+				1
+			});
+	}
 
 
 	m_GameObjects[0]->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
@@ -175,7 +191,7 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 	for (size_t i = 0; i < m_NumberOfGameObjects; i++)
 	{
 		m_GameObjectLocalToWorldTransforms[i] = m_GameObjects[i]->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate);
-	}
+	 }
 
 	eae6320::Graphics::SetCameraToRender(m_Camera, i_elapsedSecondCount_sinceLastSimulationUpdate);
 
@@ -186,8 +202,14 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 //--------------------------
 
 eae6320::cResult eae6320::cMyGame::Initialize()
-{
+{ 
 	eae6320::Graphics::cCamera::CreateCamera(m_Camera);
+
+	RegisterFunctionForCallback(ControllerKeyCodes::A, [this] {return Test(false); }, 0);
+	RegisterFunctionForCallback(ControllerKeyCodes::B, [this] {return Test(); }, 0);
+	RegisterFunctionForCallback(ControllerKeyCodes::B, [this] {return Test(); }, 0);
+
+	Test();
 
 	m_Camera->SetCameraPosition(Math::sVector(0, 0, 10));
 
