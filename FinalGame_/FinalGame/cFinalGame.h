@@ -7,9 +7,11 @@
 
 // Includes
 //=========
-
+#include <Engine/Graphics/cMesh.h>
+#include <Engine/Graphics/cEffect.h>
 #include <Engine/Application/cbApplication.h>
 #include <Engine/Results/Results.h>
+#include <Engine/Physics/cGameObject.h>
 
 #if defined( EAE6320_PLATFORM_WINDOWS )
 	#include "Resource Files/Resource.h"
@@ -77,6 +79,30 @@ namespace eae6320
 
 		virtual cResult Initialize() override;
 		virtual cResult CleanUp() override;
+
+
+
+	private:
+		//Mesh Handles
+		eae6320::Graphics::cMesh::Handle mesh1Handle;
+		eae6320::Graphics::cMesh::Handle mesh2Handle;
+		eae6320::Graphics::cMesh::Handle mesh3Handle;
+
+		//Effect Handle
+		eae6320::Graphics::cEffect::Handle effect1Handle;
+		eae6320::Graphics::cEffect::Handle effect2Handle;
+
+
+		//Cameras
+		eae6320::Graphics::cCamera* m_TopDownCamera;
+		eae6320::Graphics::cCamera* m_InCarCamera;
+
+		std::vector<eae6320::Physics::cGameObject*> m_NPCs;
+		eae6320::Physics::cGameObject* m_Car;
+		std::vector<eae6320::Math::cMatrix_transformation> m_GameObjectLocalToWorldTransforms;
+
+	private:
+		void UpdateCarPosition();
 
 	};
 }
