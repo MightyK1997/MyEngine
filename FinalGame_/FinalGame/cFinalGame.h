@@ -73,6 +73,8 @@ namespace eae6320
 		//----
 
 		virtual void UpdateBasedOnInput() override;
+		virtual void UpdateSimulationBasedOnTime(const float i_elapsedSecondCount_sinceLastUpdate)override;
+		virtual void SubmitDataToBeRendered(const float i_elapsedSecondCount_systemTime, const float i_elapsedSecondCount_sinceLastSimulationUpdate) override;
 
 		// Initialization / Clean Up
 		//--------------------------
@@ -84,7 +86,7 @@ namespace eae6320
 
 	private:
 		//Mesh Handles
-		eae6320::Graphics::cMesh::Handle mesh1Handle;
+		eae6320::Graphics::cMesh::Handle m_PlayerCarHandle;
 		eae6320::Graphics::cMesh::Handle mesh2Handle;
 		eae6320::Graphics::cMesh::Handle mesh3Handle;
 
