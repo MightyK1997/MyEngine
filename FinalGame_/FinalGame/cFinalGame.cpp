@@ -28,8 +28,17 @@ void eae6320::cFinalGame::UpdateBasedOnInput()
 	UpdateCarPosition();
 }
 
+void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecondCount_sinceLastUpdate)
+{
+	m_TopDownCamera->Update(i_elapsedSecondCount_sinceLastUpdate);
+	m_InCarCamera->Update(i_elapsedSecondCount_sinceLastUpdate);
+	m_Car->UpdateGameObject(i_elapsedSecondCount_sinceLastUpdate);
+}
+
 void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_systemTime, const float i_elapsedSecondCount_sinceLastSimulationUpdate)
 {
+	eae6320::Graphics::SetCameraToRender(m_TopDownCamera, i_elapsedSecondCount_sinceLastSimulationUpdate);
+	eae6320::Graphics::SetEffectsAndMeshesToRender(&(m_Car->GetMeshEffectPair()), &(m_Car->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate)), 1);
 }
 
 // Initialization / Clean Up
