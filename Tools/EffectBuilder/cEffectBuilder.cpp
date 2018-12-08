@@ -8,6 +8,7 @@ namespace
 {
 	std::string m_VertexShaderLocation;
 	std::string m_FragmentShaderLocation;
+	std::string m_VertexInputLayoutShaderLocation;
 	uint8_t m_RenderStateValue = 0;
 	std::string m_TempRenderState;
 }
@@ -38,6 +39,16 @@ eae6320::cResult LoadTableValues(lua_State& i_LuaState)
 			m_FragmentShaderLocation = lua_tostring(&i_LuaState, -1);
 		}
 		lua_pop(&i_LuaState, 1);
+
+		key2 = "VertexInputLayoutShaderLocation";
+		lua_pushstring(&i_LuaState, key2);
+		lua_gettable(&i_LuaState, -2);
+		if (lua_isstring(&i_LuaState, -1))
+		{
+			m_VertexInputLayoutShaderLocation = lua_tostring(&i_LuaState, -1);
+		}
+		lua_pop(&i_LuaState, 1);
+
 
 		key2 = "RenderState";
 		lua_pushstring(&i_LuaState, key2);
@@ -143,6 +154,7 @@ eae6320::cResult eae6320::Assets::cEffectBuilder::Build(const std::vector<std::s
 
 	m_VertexShaderLocation = "data/" + m_VertexShaderLocation;
 	m_FragmentShaderLocation = "data/" + m_FragmentShaderLocation;
+	m_VertexInputLayoutShaderLocation = "data/" + m_VertexInputLayoutShaderLocation;
 
 	size_t length = m_VertexShaderLocation.length();
 
@@ -152,6 +164,8 @@ eae6320::cResult eae6320::Assets::cEffectBuilder::Build(const std::vector<std::s
 	fwrite(m_VertexShaderLocation.c_str(), m_VertexShaderLocation.length(), 1, fptr);
 	fwrite("\0", sizeof(uint8_t), 1, fptr);
 	fwrite(m_FragmentShaderLocation.c_str(), m_FragmentShaderLocation.length(), 1, fptr);
+	fwrite("\0", sizeof(uint8_t), 1, fptr);
+	fwrite(m_FragmentShaderLocation.c_str(), m_VertexInputLayoutShaderLocation.length(), 1, fptr);
 	fwrite("\0", sizeof(uint8_t), 1, fptr);
 	fclose(fptr);
 	return result;

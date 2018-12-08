@@ -294,6 +294,7 @@ NewAssetTypeInfo("effects",
 		   local Effect = ret["Effect"]
 			RegisterAssetToBeBuilt(Effect["VertexShaderLocation"], "shaders", {"vertex"})
 			RegisterAssetToBeBuilt(Effect["FragmentShaderLocation"], "shaders", {"fragment"})
+			RegisterAssetToBeBuilt(Effect["VertexInputLayoutShaderLocation"], "shaders", {"vertex"})
 		 end
 		end
 end,

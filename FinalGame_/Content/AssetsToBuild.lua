@@ -6,6 +6,8 @@ return
 {
 	meshes = {
 	"Meshes/Lambo.txt",
+	"Meshes/Mitsubishi.txt",
+	"Meshes/RaceTrack.txt",
 	},
 
 	effects = {
