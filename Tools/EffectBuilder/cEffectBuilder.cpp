@@ -58,15 +58,15 @@ eae6320::cResult LoadTableValues(lua_State& i_LuaState)
 			m_TempRenderState = lua_tostring(&i_LuaState, -1);
 			if (m_TempRenderState == "AlphaTransparency")
 			{
-				m_RenderStateValue = 0;
+				m_RenderStateValue = 1;
 			}
 			else if (m_TempRenderState == "DepthBuffering")
 			{
-				m_RenderStateValue = 1;
+				m_RenderStateValue = 2;
 			}
 			else if (m_TempRenderState == "DrawBothTriangleSides")
 			{
-				m_RenderStateValue = 2;
+				m_RenderStateValue = 4;
 			}
 		}
 		lua_pop(&i_LuaState, 1);

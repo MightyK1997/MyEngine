@@ -85,10 +85,13 @@ namespace eae6320
 
 
 	private:
+
 		//Mesh Handles
 		eae6320::Graphics::cMesh::Handle m_PlayerCarHandle;
-		eae6320::Graphics::cMesh::Handle mesh2Handle;
-		eae6320::Graphics::cMesh::Handle mesh3Handle;
+		eae6320::Graphics::cMesh::Handle m_RaceTrack;
+		eae6320::Graphics::cMesh::Handle m_TrafficLight;
+
+		std::vector<eae6320::Graphics::sEffectsAndMeshesToRender> m_EffectsAndMeshes;
 
 		//Effect Handle
 		eae6320::Graphics::cEffect::Handle effect1Handle;
@@ -101,11 +104,15 @@ namespace eae6320
 
 		std::vector<eae6320::Physics::cGameObject*> m_NPCs;
 		eae6320::Physics::cGameObject* m_Car;
+		eae6320::Physics::cGameObject* m_RaceTrackObj;
+		eae6320::Physics::cGameObject* m_TrafficLightObj;
 		std::vector<eae6320::Math::cMatrix_transformation> m_GameObjectLocalToWorldTransforms;
+
+		std::vector<eae6320::Graphics::cMesh::Handle> m_CarHandles;
 
 	private:
 		void UpdateCarPosition();
-
+		void UpdateCameraPosition();
 	};
 }
 
