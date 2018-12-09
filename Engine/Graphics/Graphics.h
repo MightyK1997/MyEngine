@@ -87,7 +87,7 @@ namespace eae6320
 		cResult Initialize( const sInitializationParameters& i_initializationParameters );
 		cResult CleanUp();
 
-		const unsigned int m_maxNumberofMeshesAndEffects = 10;
+		const unsigned int m_maxNumberofMeshesAndEffects = 100;
 
 		extern eae6320::Graphics::sEffectsAndMeshesToRender m_EffectsAndMeshes[m_maxNumberofMeshesAndEffects];
 
