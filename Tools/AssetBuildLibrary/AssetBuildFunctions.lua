@@ -293,7 +293,7 @@ NewAssetTypeInfo( "sounds",
 			return relativeDirectory .. fileName .. extensionWithPeriod
 		end,
 		GetBuilderRelativePath = function()
-			return "ShaderBuilder.exe"
+			return "AudioBuilder.exe"
 		end
 	}
 )

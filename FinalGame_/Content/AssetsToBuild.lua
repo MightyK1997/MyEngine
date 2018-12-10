@@ -19,6 +19,6 @@ return
 	},
 
 	sounds = {
-	
+		"Sounds/Alarm10.wav",
 	}
 }
