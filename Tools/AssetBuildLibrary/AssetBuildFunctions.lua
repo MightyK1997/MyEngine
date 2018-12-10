@@ -284,6 +284,20 @@ NewAssetTypeInfo( "meshes",
 	}
 )
 
+NewAssetTypeInfo( "sounds",
+	{
+		ConvertSourceRelativePathToBuiltRelativePath = function( i_sourceRelativePath )
+			-- Change the source file extension to the binary version
+			local relativeDirectory, file = i_sourceRelativePath:match( "(.-)([^/\\]+)$" )
+			local fileName, extensionWithPeriod = file:match( "([^%.]+)(.*)" )
+			return relativeDirectory .. fileName .. extensionWithPeriod
+		end,
+		GetBuilderRelativePath = function()
+			return "ShaderBuilder.exe"
+		end
+	}
+)
+
 NewAssetTypeInfo("effects",
 {
 	RegisterReferencedAssets = function ( i_sourceRelativePath )
