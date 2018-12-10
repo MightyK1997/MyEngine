@@ -27,6 +27,7 @@ namespace eae6320
 			void SetGameObjectRotation(Math::cQuaternion i_Rotation);
 			Math::sVector GetGameObjectPosition();
 			Math::cQuaternion GetGameObjectRotation();
+			Math::sVector GetGameObjectVelocity();
 			void SetGameObjectVelocity(Math::sVector i_Velocity);
 			void SetGameObjectAcceleration(Math::sVector i_Acceleration);
 			void SetGameObjectMesh(Graphics::cMesh* i_Mesh);

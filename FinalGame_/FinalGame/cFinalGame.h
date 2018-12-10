@@ -103,12 +103,13 @@ namespace eae6320
 		eae6320::Graphics::cCamera* m_TopDownCamera;
 		eae6320::Graphics::cCamera* m_InCarCamera;
 
+		eae6320::Graphics::cCamera* m_RenderingCamera;
+
 		//GameObjects
 		eae6320::Physics::cGameObject* m_Car;
 		eae6320::Physics::cGameObject* m_NPCCar;
 		eae6320::Physics::cGameObject* m_RaceTrackObj;
 		eae6320::Physics::cGameObject* m_TrafficLightObj;
-		eae6320::Physics::cGameObject* m_TreeObj;
 
 		//Lists
 		std::vector<eae6320::Physics::cGameObject*> m_TreeObjs;
@@ -121,12 +122,14 @@ namespace eae6320
 		uint8_t m_CarCount = 0;
 		bool m_IsCarMeshSwitched = false;
 		float m_CarMeshChangeTimer = 0;
+		bool m_IsCameraSwitched = false;
 
 	private:
 		void UpdateCarPosition();
 		void UpdateCameraPosition();
-
 		void UpdateMeshAndEffect();
+
+		void ResetDetails();
 	};
 }
 

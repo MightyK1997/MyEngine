@@ -69,6 +69,8 @@ void eae6320::cFinalGame::UpdateBasedOnInput()
 
 void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecondCount_sinceLastUpdate)
 {
+	static float f = 0;
+	f += i_elapsedSecondCount_sinceLastUpdate;
 	m_TopDownCamera->Update(i_elapsedSecondCount_sinceLastUpdate);
 	m_InCarCamera->Update(i_elapsedSecondCount_sinceLastUpdate);
 	m_Car->UpdateGameObject(i_elapsedSecondCount_sinceLastUpdate);
@@ -79,6 +81,22 @@ void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecon
 		{
 			m_CarMeshChangeTimer = 0.f;
 			m_IsCarMeshSwitched = false;
+		}
+	}
+	if (IsKeyPressed(ControllerKeyCodes::RIGHT_SHOULDER))
+	{
+		if (f > 0.25f)
+		{
+			if (m_IsCameraSwitched)
+			{
+				m_RenderingCamera = m_TopDownCamera;
+			}
+			else
+			{
+				m_RenderingCamera = m_InCarCamera;
+			}
+			m_IsCameraSwitched = !m_IsCameraSwitched;
+			f = 0;
 		}
 	}
 }
@@ -108,7 +126,7 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 	}
 
 
-	eae6320::Graphics::SetCameraToRender(m_TopDownCamera, i_elapsedSecondCount_sinceLastSimulationUpdate);
+	eae6320::Graphics::SetCameraToRender(m_RenderingCamera, i_elapsedSecondCount_sinceLastSimulationUpdate);
 	eae6320::Graphics::SetEffectsAndMeshesToRender(&(m_EffectsAndMeshes[0]), &(m_GameObjectLocalToWorldTransforms[0]), (uint8_t)(4 + (m_TreeObjs.size())));
 }
 
@@ -119,6 +137,8 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 {
 	eae6320::Graphics::cCamera::CreateCamera(m_TopDownCamera);
 	eae6320::Graphics::cCamera::CreateCamera(m_InCarCamera);
+
+	m_RenderingCamera = m_TopDownCamera;
 
 	eae6320::Physics::cGameObject::CreateGameObject(m_Car);
 	eae6320::Physics::cGameObject::CreateGameObject(m_NPCCar);
@@ -140,10 +160,7 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 		m_TreeObjs.push_back(temp);
 	}
 
-	m_Car->SetGameObjectPosition(Math::sVector(-4, -9.5f, -25));
-	m_NPCCar->SetGameObjectPosition(Math::sVector(4, -9.5f, -25));
-	m_RaceTrackObj->SetGameObjectPosition(Math::sVector(0, -10, -210));
-	m_TrafficLightObj->SetGameObjectPosition(Math::sVector(0, -10, -25));
+	ResetDetails();
 
 	std::string fName = "data/Meshes/Lambo.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName.c_str(), m_PlayerCarHandle);
@@ -169,15 +186,6 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 
 	UpdateMeshAndEffect();
 
-	m_TopDownCamera->SetCameraPosition(Math::sVector(-3.5f, 0.4f, -2));
-	m_TopDownCamera->SetCameraRotation(Math::cQuaternion(0.4f, Math::sVector(-1,0,0)));
-	m_InCarCamera->SetCameraPosition(Math::sVector(-4.6f, -8.1f, -25.5f));
-
-	return Results::Success;
-}
-
-eae6320::cResult eae6320::cFinalGame::CleanUp()
-{
 	return Results::Success;
 }
 
@@ -190,22 +198,33 @@ void eae6320::cFinalGame::UpdateCarPosition()
 	}
 	if (IsKeyPressed(ControllerKeyCodes::RIGHT_TRIGGER) || (UserInput::IsKeyPressed('W')))
 	{
-		float val = 10;
-		if (!(GetNumberOfConnectedControllers() == 0))
+		if (m_Car->GetGameObjectVelocity().z >= -20)
 		{
-			val = GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER);
+			float val = 10;
+			if (!(GetNumberOfConnectedControllers() == 0))
+			{
+				val = GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER) * val;
+			}
+			m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, -val));
+			m_InCarCamera->SetCameraAcceleration(Math::sVector(0, 0, -val));
+			m_Car->SetGameObjectAcceleration(Math::sVector(0, 0, -val));
 		}
-		m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, -val));
-		m_InCarCamera->SetCameraAcceleration(Math::sVector(0, 0, -val));
-		m_Car->SetGameObjectAcceleration(Math::sVector(0,0, -val));
 	}
 	if (IsKeyPressed(ControllerKeyCodes::LEFT_TRIGGER) || (UserInput::IsKeyPressed('S')))
 	{
-		m_TopDownCamera->SetCameraVelocity(Math::sVector(0, -GetNormalizedTriggerDeflection(ControllerKeyCodes::LEFT_TRIGGER), 0));
-		m_InCarCamera->SetCameraVelocity(Math::sVector(0, -GetNormalizedTriggerDeflection(ControllerKeyCodes::LEFT_TRIGGER), 0));
-		m_Car->SetGameObjectVelocity(Math::sVector(0, GetNormalizedTriggerDeflection(ControllerKeyCodes::LEFT_TRIGGER) * -10, 0));
+		if (m_Car->GetGameObjectVelocity().z <= 10)
+		{
+			float val = 10;
+			if (!(GetNumberOfConnectedControllers() == 0))
+			{
+				val = GetNormalizedTriggerDeflection(ControllerKeyCodes::LEFT_TRIGGER) * val;
+			}
+			m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, val));
+			m_InCarCamera->SetCameraAcceleration(Math::sVector(0, 0, val));
+			m_Car->SetGameObjectAcceleration(Math::sVector(0, 0, val));
+		}
 	}
-	if (UserInput::IsKeyPressed('N'))
+	if (UserInput::IsKeyPressed('N') || IsKeyPressed(ControllerKeyCodes::DPAD_UP))
 	{
 		if (!m_IsCarMeshSwitched)
 		{
@@ -214,7 +233,7 @@ void eae6320::cFinalGame::UpdateCarPosition()
 			UpdateMeshAndEffect();
 		}
 	}
-	if (UserInput::IsKeyPressed('M'))
+	if (UserInput::IsKeyPressed('M') || IsKeyPressed(ControllerKeyCodes::DPAD_DOWN))
 	{
 		if (!m_IsCarMeshSwitched)
 		{
@@ -223,6 +242,10 @@ void eae6320::cFinalGame::UpdateCarPosition()
 			m_PlayerCarHandle = m_CarHandles[m_CarHandles.size() - t];
 			UpdateMeshAndEffect();
 		}
+	}
+	if (m_Car->GetGameObjectPosition().z < -300)
+	{
+		ResetDetails();
 	}
 }
 
@@ -246,4 +269,48 @@ void eae6320::cFinalGame::UpdateMeshAndEffect()
 		treeObj->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_TreeHandle));
 		treeObj->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
 	}
+}
+
+void eae6320::cFinalGame::ResetDetails()
+{
+	m_Car->SetGameObjectPosition(Math::sVector(-4, -9.5f, -25));
+	m_NPCCar->SetGameObjectPosition(Math::sVector(4, -9.5f, -25));
+	m_RaceTrackObj->SetGameObjectPosition(Math::sVector(0, -10, -210));
+	m_TrafficLightObj->SetGameObjectPosition(Math::sVector(0, -10, -25));
+	m_TopDownCamera->SetCameraPosition(Math::sVector(-3.5f, 0.4f, -2));
+	m_TopDownCamera->SetCameraRotation(Math::cQuaternion(0.4f, Math::sVector(-1, 0, 0)));
+	m_InCarCamera->SetCameraPosition(Math::sVector(-4.6f, -8.1f, -25.5f));
+	m_Car->SetGameObjectVelocity(Math::sVector(0, 0, 0));
+	m_TopDownCamera->SetCameraVelocity(Math::sVector(0, 0, 0));
+	m_InCarCamera->SetCameraVelocity(Math::sVector(0, 0, 0));
+	m_Car->SetGameObjectAcceleration(Math::sVector(0, 0, 0));
+	m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, 0));
+	m_InCarCamera->SetCameraAcceleration(Math::sVector(0, 0, 0));
+}
+
+eae6320::cResult eae6320::cFinalGame::CleanUp()
+{
+	eae6320::Graphics::cEffect::s_Manager.Release(effect1Handle);
+	for (auto&x : m_CarHandles)
+	{
+		eae6320::Graphics::cMesh::s_Manager.Release(x);
+	}
+	eae6320::Graphics::cMesh::s_Manager.Release(m_RaceTrack);
+	eae6320::Graphics::cMesh::s_Manager.Release(m_TrafficLight);
+	eae6320::Graphics::cMesh::s_Manager.Release(m_TreeHandle);
+
+	m_Car->DecrementReferenceCount();
+	m_NPCCar->DecrementReferenceCount();
+	m_RaceTrackObj->DecrementReferenceCount();
+	m_TrafficLightObj->DecrementReferenceCount();
+
+	for (auto&x:m_TreeObjs)
+	{
+		x->DecrementReferenceCount();
+	}
+
+	m_TopDownCamera->DecrementReferenceCount();
+	m_InCarCamera->DecrementReferenceCount();
+
+	return Results::Success;
 }
