@@ -56,6 +56,27 @@
       <Project>{193bb096-cd2c-48e8-8a28-99ecc2d019ad}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Details.bin">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">copy "%(FullPath)" "$(GameInstallDir)%(Filename)%(Extension)" /y</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">copy "%(FullPath)" "$(GameInstallDir)%(Filename)%(Extension)" /y</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(GameInstallDir)%(Filename)%(Extension)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(GameInstallDir)%(Filename)%(Extension)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy "%(FullPath)" "$(GameInstallDir)%(Filename)%(Extension)" /y</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(GameInstallDir)%(Filename)%(Extension)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">copy "%(FullPath)" "$(GameInstallDir)%(Filename)%(Extension)" /y</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(GameInstallDir)%(Filename)%(Extension)</Outputs>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying Details</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying Details</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying Details</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying Details</Message>
+    </CustomBuild>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{85FB0EA2-B0BF-4DA6-B7FF-18386B59794E}</ProjectGuid>

@@ -70,6 +70,7 @@ void eae6320::cFinalGame::UpdateBasedOnInput()
 void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecondCount_sinceLastUpdate)
 {
 	static float f = 0;
+	static float startTimer = 0;
 	f += i_elapsedSecondCount_sinceLastUpdate;
 	m_TopDownCamera->Update(i_elapsedSecondCount_sinceLastUpdate);
 	m_InCarCamera->Update(i_elapsedSecondCount_sinceLastUpdate);
@@ -83,7 +84,17 @@ void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecon
 			m_IsCarMeshSwitched = false;
 		}
 	}
-	if (IsKeyPressed(ControllerKeyCodes::RIGHT_SHOULDER))
+	if (m_IsGameStarted)
+	{
+		startTimer += i_elapsedSecondCount_sinceLastUpdate;
+		if (startTimer > 2.f)
+		{
+			m_CanTakeInput = true;
+			m_IsGameStarted = false;
+			startTimer = 0;
+		}
+	}
+	if (IsKeyPressed(ControllerKeyCodes::RIGHT_SHOULDER) || UserInput::IsKeyPressed('K'))
 	{
 		if (f > 0.25f)
 		{
@@ -185,67 +196,86 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	m_NPCCarHandle = m_CarHandles[2];
 
 	UpdateMeshAndEffect();
+	GetDetailsFromFile();
+	m_PlayerCarAccelerationValue = m_AccelerationDetails[0];
+	m_NPCCarAccelerationValue = m_AccelerationDetails[1];
+	m_IsGameStarted = true;
 
 	return Results::Success;
 }
 
 void eae6320::cFinalGame::UpdateCarPosition()
 {
-	if (GetNormalizedStickDeflection(ControllerKeyCodes::RIGHT_STICK, 0).x != 0)
+	if (m_CanTakeInput)
 	{
-		m_TopDownCamera->SetAngularSpeed(GetNormalizedStickDeflection(ControllerKeyCodes::RIGHT_STICK, 0).x);
-		m_InCarCamera->SetAngularSpeed(GetNormalizedStickDeflection(ControllerKeyCodes::RIGHT_STICK, 0).x);
-	}
-	if (IsKeyPressed(ControllerKeyCodes::RIGHT_TRIGGER) || (UserInput::IsKeyPressed('W')))
-	{
-		if (m_Car->GetGameObjectVelocity().z >= -20)
+
+		if (GetNormalizedStickDeflection(ControllerKeyCodes::RIGHT_STICK, 0).x != 0)
 		{
-			float val = 10;
-			if (!(GetNumberOfConnectedControllers() == 0))
+			m_TopDownCamera->SetAngularSpeed(GetNormalizedStickDeflection(ControllerKeyCodes::RIGHT_STICK, 0).x);
+			m_InCarCamera->SetAngularSpeed(GetNormalizedStickDeflection(ControllerKeyCodes::RIGHT_STICK, 0).x);
+		}
+		if (IsKeyPressed(ControllerKeyCodes::RIGHT_TRIGGER) || (UserInput::IsKeyPressed('W')))
+		{
+			if (m_Car->GetGameObjectVelocity().z >= -20)
 			{
-				val = GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER) * val;
+				float val = m_PlayerCarAccelerationValue;
+				if (!(GetNumberOfConnectedControllers() == 0))
+				{
+					val = GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER) * m_PlayerCarAccelerationValue;
+				}
+				m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, -val));
+				m_InCarCamera->SetCameraAcceleration(Math::sVector(0, 0, -val));
+				m_Car->SetGameObjectAcceleration(Math::sVector(0, 0, -val));
 			}
-			m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, -val));
-			m_InCarCamera->SetCameraAcceleration(Math::sVector(0, 0, -val));
-			m_Car->SetGameObjectAcceleration(Math::sVector(0, 0, -val));
 		}
-	}
-	if (IsKeyPressed(ControllerKeyCodes::LEFT_TRIGGER) || (UserInput::IsKeyPressed('S')))
-	{
-		if (m_Car->GetGameObjectVelocity().z <= 10)
+		if (IsKeyPressed(ControllerKeyCodes::LEFT_TRIGGER) || (UserInput::IsKeyPressed('S')))
 		{
-			float val = 10;
-			if (!(GetNumberOfConnectedControllers() == 0))
+			if (m_Car->GetGameObjectVelocity().z <= 10)
 			{
-				val = GetNormalizedTriggerDeflection(ControllerKeyCodes::LEFT_TRIGGER) * val;
+				float val = m_PlayerCarAccelerationValue;
+				if (!(GetNumberOfConnectedControllers() == 0))
+				{
+					val = GetNormalizedTriggerDeflection(ControllerKeyCodes::LEFT_TRIGGER) * m_PlayerCarAccelerationValue;
+				}
+				m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, val));
+				m_InCarCamera->SetCameraAcceleration(Math::sVector(0, 0, val));
+				m_Car->SetGameObjectAcceleration(Math::sVector(0, 0, val));
 			}
-			m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, val));
-			m_InCarCamera->SetCameraAcceleration(Math::sVector(0, 0, val));
-			m_Car->SetGameObjectAcceleration(Math::sVector(0, 0, val));
+		}
+		if (UserInput::IsKeyPressed('N') || IsKeyPressed(ControllerKeyCodes::DPAD_UP))
+		{
+			if (!m_IsCarMeshSwitched)
+			{
+				m_CarCount = (m_CarCount + 1) % m_CarHandles.size();
+				m_PlayerCarHandle = m_CarHandles[m_CarCount];
+				UpdateMeshAndEffect();
+			}
+		}
+		if (UserInput::IsKeyPressed('M') || IsKeyPressed(ControllerKeyCodes::DPAD_DOWN))
+		{
+			if (!m_IsCarMeshSwitched)
+			{
+				auto t = (m_CarCount + 1);
+				m_CarCount = (m_CarCount + 1) % m_CarHandles.size();
+				m_PlayerCarHandle = m_CarHandles[m_CarHandles.size() - t];
+				UpdateMeshAndEffect();
+			}
 		}
 	}
-	if (UserInput::IsKeyPressed('N') || IsKeyPressed(ControllerKeyCodes::DPAD_UP))
+	if (m_IsGameFinished && (IsKeyPressed(ControllerKeyCodes::START)))
 	{
-		if (!m_IsCarMeshSwitched)
-		{
-			m_CarCount = (m_CarCount + 1) % m_CarHandles.size();
-			m_PlayerCarHandle = m_CarHandles[m_CarCount];
-			UpdateMeshAndEffect();
-		}
-	}
-	if (UserInput::IsKeyPressed('M') || IsKeyPressed(ControllerKeyCodes::DPAD_DOWN))
-	{
-		if (!m_IsCarMeshSwitched)
-		{
-			auto t = (m_CarCount + 1);
-			m_CarCount = (m_CarCount + 1) % m_CarHandles.size();
-			m_PlayerCarHandle = m_CarHandles[m_CarHandles.size() - t];
-			UpdateMeshAndEffect();
-		}
+		m_IsGameFinished = false;
+		m_IsGameStarted = true;
+		ResetDetails();
 	}
 	if (m_Car->GetGameObjectPosition().z < -300)
 	{
-		ResetDetails();
+		m_Car->SetGameObjectVelocity(Math::sVector(0, 0, 0));
+		m_TopDownCamera->SetCameraVelocity(Math::sVector(0, 0, 0));
+		m_InCarCamera->SetCameraVelocity(Math::sVector(0, 0, 0));
+		m_Car->SetGameObjectAcceleration(Math::sVector(0, 0, 0));
+		m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, 0));
+		m_InCarCamera->SetCameraAcceleration(Math::sVector(0, 0, 0));
 	}
 }
 
@@ -286,6 +316,20 @@ void eae6320::cFinalGame::ResetDetails()
 	m_Car->SetGameObjectAcceleration(Math::sVector(0, 0, 0));
 	m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, 0));
 	m_InCarCamera->SetCameraAcceleration(Math::sVector(0, 0, 0));
+}
+
+void eae6320::cFinalGame::GetDetailsFromFile()
+{
+	eae6320::Platform::sDataFromFile dataFromFile;
+	std::string errorMessage;
+	eae6320::Platform::LoadBinaryFile("Details.bin", dataFromFile, &errorMessage);
+	uintptr_t offset = reinterpret_cast<uintptr_t>(dataFromFile.data);
+	const uintptr_t finalOffset = offset + dataFromFile.size;
+	m_AccelerationDetails.push_back(*reinterpret_cast<uint8_t*>(offset));
+	offset += sizeof(uint8_t);
+	m_AccelerationDetails.push_back(*reinterpret_cast<uint8_t*>(offset));
+	offset += sizeof(uint8_t);
+	m_AccelerationDetails.push_back(*reinterpret_cast<uint8_t*>(offset));
 }
 
 eae6320::cResult eae6320::cFinalGame::CleanUp()

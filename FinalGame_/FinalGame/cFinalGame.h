@@ -116,6 +116,7 @@ namespace eae6320
 		std::vector<eae6320::Math::cMatrix_transformation> m_GameObjectLocalToWorldTransforms;
 		std::vector<eae6320::Graphics::cMesh::Handle> m_CarHandles;
 		std::vector<eae6320::Graphics::sEffectsAndMeshesToRender> m_EffectsAndMeshes;
+		std::vector<uint8_t> m_AccelerationDetails;
 
 	private:
 		//Other private variables
@@ -124,12 +125,20 @@ namespace eae6320
 		float m_CarMeshChangeTimer = 0;
 		bool m_IsCameraSwitched = false;
 
+		bool m_IsGameStarted;
+		bool m_IsGameFinished;
+		bool m_CanTakeInput;
+
+		uint8_t m_PlayerCarAccelerationValue;
+		uint8_t m_NPCCarAccelerationValue;
+
 	private:
 		void UpdateCarPosition();
 		void UpdateCameraPosition();
 		void UpdateMeshAndEffect();
 
 		void ResetDetails();
+		void GetDetailsFromFile();
 	};
 }
 
