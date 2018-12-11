@@ -75,6 +75,7 @@ void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecon
 	m_TopDownCamera->Update(i_elapsedSecondCount_sinceLastUpdate);
 	m_InCarCamera->Update(i_elapsedSecondCount_sinceLastUpdate);
 	m_Car->UpdateGameObject(i_elapsedSecondCount_sinceLastUpdate);
+	m_NPCCar->UpdateGameObject(i_elapsedSecondCount_sinceLastUpdate);
 	if (m_IsCarMeshSwitched)
 	{
 		m_CarMeshChangeTimer += i_elapsedSecondCount_sinceLastUpdate;
@@ -208,7 +209,7 @@ void eae6320::cFinalGame::UpdateCarPosition()
 {
 	if (m_CanTakeInput)
 	{
-
+		m_NPCCar->SetGameObjectAcceleration(Math::sVector(0, 0, -(float)m_NPCCarAccelerationValue));
 		if (GetNormalizedStickDeflection(ControllerKeyCodes::RIGHT_STICK, 0).x != 0)
 		{
 			m_TopDownCamera->SetAngularSpeed(GetNormalizedStickDeflection(ControllerKeyCodes::RIGHT_STICK, 0).x);
@@ -248,6 +249,7 @@ void eae6320::cFinalGame::UpdateCarPosition()
 			{
 				m_CarCount = (m_CarCount + 1) % m_CarHandles.size();
 				m_PlayerCarHandle = m_CarHandles[m_CarCount];
+				m_PlayerCarAccelerationValue = m_AccelerationDetails[m_CarCount];
 				UpdateMeshAndEffect();
 			}
 		}
@@ -258,6 +260,7 @@ void eae6320::cFinalGame::UpdateCarPosition()
 				auto t = (m_CarCount + 1);
 				m_CarCount = (m_CarCount + 1) % m_CarHandles.size();
 				m_PlayerCarHandle = m_CarHandles[m_CarHandles.size() - t];
+				m_PlayerCarAccelerationValue = m_AccelerationDetails[m_CarHandles.size() - t];
 				UpdateMeshAndEffect();
 			}
 		}
@@ -268,14 +271,16 @@ void eae6320::cFinalGame::UpdateCarPosition()
 		m_IsGameStarted = true;
 		ResetDetails();
 	}
-	if (m_Car->GetGameObjectPosition().z < -300)
+	if ((m_Car->GetGameObjectPosition().z < -300) || (m_NPCCar->GetGameObjectPosition().z < -300))
 	{
+		m_IsGameFinished = true;
+		m_CanTakeInput = false;
 		m_Car->SetGameObjectVelocity(Math::sVector(0, 0, 0));
+		m_Car->SetGameObjectAcceleration(Math::sVector(0, 0, 0));
 		m_TopDownCamera->SetCameraVelocity(Math::sVector(0, 0, 0));
 		m_InCarCamera->SetCameraVelocity(Math::sVector(0, 0, 0));
-		m_Car->SetGameObjectAcceleration(Math::sVector(0, 0, 0));
-		m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, 0));
-		m_InCarCamera->SetCameraAcceleration(Math::sVector(0, 0, 0));
+		m_NPCCar->SetGameObjectVelocity(Math::sVector(0, 0, 0));
+		m_NPCCar->SetGameObjectAcceleration(Math::sVector(0, 0, 0));
 	}
 }
 
@@ -316,6 +321,8 @@ void eae6320::cFinalGame::ResetDetails()
 	m_Car->SetGameObjectAcceleration(Math::sVector(0, 0, 0));
 	m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, 0));
 	m_InCarCamera->SetCameraAcceleration(Math::sVector(0, 0, 0));
+	m_NPCCar->SetGameObjectVelocity(Math::sVector(0, 0, 0));
+	m_NPCCar->SetGameObjectAcceleration(Math::sVector(0, 0, 0));
 }
 
 void eae6320::cFinalGame::GetDetailsFromFile()

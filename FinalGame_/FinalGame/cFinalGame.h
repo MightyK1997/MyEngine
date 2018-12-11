@@ -126,8 +126,8 @@ namespace eae6320
 		bool m_IsCameraSwitched = false;
 
 		bool m_IsGameStarted;
-		bool m_IsGameFinished;
-		bool m_CanTakeInput;
+		bool m_IsGameFinished = false;
+		bool m_CanTakeInput = false;
 
 		uint8_t m_PlayerCarAccelerationValue;
 		uint8_t m_NPCCarAccelerationValue;
