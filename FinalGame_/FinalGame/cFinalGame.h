@@ -96,6 +96,7 @@ namespace eae6320
 		eae6320::Graphics::cMesh::Handle m_PlayerScoreHandle;
 		eae6320::Graphics::cMesh::Handle m_NPCScoreHandle;
 		eae6320::Graphics::cMesh::Handle m_RestartHandle;
+		eae6320::Graphics::cMesh::Handle m_CountdownHandle;
 
 		//Effect Handle
 		eae6320::Graphics::cEffect::Handle effect1Handle;
@@ -115,6 +116,7 @@ namespace eae6320
 		eae6320::Physics::cGameObject* m_PlayerScoreObj;
 		eae6320::Physics::cGameObject* m_NPCScoreObj;
 		eae6320::Physics::cGameObject* m_RestartObj;
+		eae6320::Physics::cGameObject* m_CountdownObj;
 
 		//Lists
 		std::vector<eae6320::Physics::cGameObject*> m_TreeObjs;

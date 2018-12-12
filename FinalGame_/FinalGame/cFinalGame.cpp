@@ -87,8 +87,11 @@ void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecon
 	}
 	if (m_IsGameStarted)
 	{
+		m_CountdownObj->SetGameObjectPosition(Math::sVector(-1.5, -3, -25));
 		startTimer += i_elapsedSecondCount_sinceLastUpdate;
-		if (startTimer > 2.f)
+		m_CountdownHandle = m_ScoreHandles[(int)(3 - startTimer)];
+		m_CountdownObj->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_CountdownHandle));
+		if (startTimer > 3.f)
 		{
 			m_CanTakeInput = true;
 			m_IsGameStarted = false;
@@ -127,6 +130,8 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 	}
 	m_EffectsAndMeshes.push_back(m_NPCScoreObj->GetMeshEffectPair());
 	m_EffectsAndMeshes.push_back(m_PlayerScoreObj->GetMeshEffectPair());
+	m_EffectsAndMeshes.push_back(m_RestartObj->GetMeshEffectPair());
+	m_EffectsAndMeshes.push_back(m_CountdownObj->GetMeshEffectPair());
 
 
 	m_GameObjectLocalToWorldTransforms.clear();
@@ -140,10 +145,12 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 	}
 	m_GameObjectLocalToWorldTransforms.push_back(m_NPCScoreObj->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
 	m_GameObjectLocalToWorldTransforms.push_back(m_PlayerScoreObj->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
+	m_GameObjectLocalToWorldTransforms.push_back(m_RestartObj->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
+	m_GameObjectLocalToWorldTransforms.push_back(m_CountdownObj->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
 
 
 	eae6320::Graphics::SetCameraToRender(m_RenderingCamera, i_elapsedSecondCount_sinceLastSimulationUpdate);
-	eae6320::Graphics::SetEffectsAndMeshesToRender(&(m_EffectsAndMeshes[0]), &(m_GameObjectLocalToWorldTransforms[0]), (uint8_t)(6 + (m_TreeObjs.size())));
+	eae6320::Graphics::SetEffectsAndMeshesToRender(&(m_EffectsAndMeshes[0]), &(m_GameObjectLocalToWorldTransforms[0]), (uint8_t)(8 + (m_TreeObjs.size())));
 }
 
 // Initialization / Clean Up
@@ -162,6 +169,8 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	eae6320::Physics::cGameObject::CreateGameObject(m_TrafficLightObj);
 	eae6320::Physics::cGameObject::CreateGameObject(m_PlayerScoreObj);
 	eae6320::Physics::cGameObject::CreateGameObject(m_NPCScoreObj);
+	eae6320::Physics::cGameObject::CreateGameObject(m_RestartObj);
+	eae6320::Physics::cGameObject::CreateGameObject(m_CountdownObj);
 
 	for (size_t i = 1; i < 32; i++)
 	{
@@ -198,6 +207,8 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	eae6320::Graphics::cMesh::s_Manager.Load(fName.c_str(), m_TrafficLight);
 	fName = "data/Meshes/Tree.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName.c_str(), m_TreeHandle);
+	fName = "data/Meshes/Restart.meshbinary";
+	eae6320::Graphics::cMesh::s_Manager.Load(fName.c_str(), m_RestartHandle);
 
 	for (size_t i = 0; i < 10; i++)
 	{
@@ -213,6 +224,7 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	m_NPCScoreHandle = m_ScoreHandles[0];
 	m_PlayerCarHandle = m_CarHandles[0];
 	m_NPCCarHandle = m_CarHandles[0];
+	m_CountdownHandle = m_ScoreHandles[3];
 
 	UpdateMeshAndEffect();
 	GetDetailsFromFile();
@@ -227,6 +239,7 @@ void eae6320::cFinalGame::UpdateCarPosition()
 {
 	if (m_CanTakeInput)
 	{
+		m_CountdownObj->SetGameObjectPosition(Math::sVector(100, 100, 100));
 		if (m_NPCCar->GetGameObjectVelocity().z >= -20)
 		{
 			m_NPCCar->SetGameObjectAcceleration(Math::sVector(0, 0, -(float)m_NPCCarAccelerationValue));
@@ -310,6 +323,7 @@ void eae6320::cFinalGame::UpdateCarPosition()
 		{
 			m_NPCScore++;
 		}
+		m_RestartObj->SetGameObjectPosition(Math::sVector(-1.5, -5, m_Car->GetGameObjectPosition().z));
 		UpdateMeshAndEffect();
 		m_Car->SetGameObjectVelocity(Math::sVector(0, 0, 0));
 		m_Car->SetGameObjectAcceleration(Math::sVector(0, 0, 0));
@@ -334,6 +348,13 @@ void eae6320::cFinalGame::UpdateMeshAndEffect()
 
 	m_TrafficLightObj->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_TrafficLight));
 	m_TrafficLightObj->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
+
+	m_RestartObj->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_RestartHandle));
+	m_RestartObj->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
+
+	m_CountdownHandle = m_ScoreHandles[3];
+	m_CountdownObj->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_CountdownHandle));
+	m_CountdownObj->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
 
 	for (auto&treeObj : m_TreeObjs)
 	{
@@ -364,6 +385,8 @@ void eae6320::cFinalGame::ResetDetails()
 
 	m_PlayerScoreObj->SetGameObjectPosition(Math::sVector(-10,-3, -25));
 	m_NPCScoreObj->SetGameObjectPosition(Math::sVector(4, -3, -25));
+
+	m_RestartObj->SetGameObjectPosition(Math::sVector(100, 100, 100));
 
 	m_TopDownCamera->SetCameraPosition(Math::sVector(-3.5f, 0.4f, -2));
 	m_TopDownCamera->SetCameraRotation(Math::cQuaternion(0.4f, Math::sVector(-1, 0, 0)));
@@ -407,6 +430,7 @@ eae6320::cResult eae6320::cFinalGame::CleanUp()
 	eae6320::Graphics::cMesh::s_Manager.Release(m_RaceTrack);
 	eae6320::Graphics::cMesh::s_Manager.Release(m_TrafficLight);
 	eae6320::Graphics::cMesh::s_Manager.Release(m_TreeHandle);
+	eae6320::Graphics::cMesh::s_Manager.Release(m_RestartHandle);
 
 	m_Car->DecrementReferenceCount();
 	m_NPCCar->DecrementReferenceCount();
@@ -414,6 +438,8 @@ eae6320::cResult eae6320::cFinalGame::CleanUp()
 	m_TrafficLightObj->DecrementReferenceCount();
 	m_PlayerScoreObj->DecrementReferenceCount();
 	m_NPCScoreObj->DecrementReferenceCount();
+	m_RestartObj->DecrementReferenceCount();
+	m_CountdownObj->DecrementReferenceCount();
 
 	for (auto&x:m_TreeObjs)
 	{
