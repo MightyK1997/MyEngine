@@ -21,6 +21,7 @@ return
 	"Meshes/Numbers/Number7.txt",
 	"Meshes/Numbers/Number8.txt",
 	"Meshes/Numbers/Number9.txt",
+	"Meshes/Numbers/Number0.txt",
 	},
 
 	effects = {
