@@ -79,7 +79,7 @@ void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecon
 	if (m_IsCarMeshSwitched)
 	{
 		m_CarMeshChangeTimer += i_elapsedSecondCount_sinceLastUpdate;
-		if (m_CarMeshChangeTimer >= 2.f)
+		if (m_CarMeshChangeTimer >= 1.f)
 		{
 			m_CarMeshChangeTimer = 0.f;
 			m_IsCarMeshSwitched = false;
@@ -172,15 +172,18 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 		m_TreeObjs.push_back(temp);
 	}
 
+	m_AccelerationSound = new Engine::Sound("data/sounds/acceleration.wav");
+	m_AccelerationSound->Play();
+
 	ResetDetails();
 
-	std::string fName = "data/Meshes/Lambo.meshbinary";
-	eae6320::Graphics::cMesh::s_Manager.Load(fName.c_str(), m_PlayerCarHandle);
-	m_CarHandles.push_back(m_PlayerCarHandle);
-	fName = "data/Meshes/LP_Car1.meshbinary";
+	std::string fName = "data/Meshes/LP_Car1.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName.c_str(), m_PlayerCarHandle);
 	m_CarHandles.push_back(m_PlayerCarHandle);
 	fName = "data/Meshes/SmartCar.meshbinary";
+	eae6320::Graphics::cMesh::s_Manager.Load(fName.c_str(), m_PlayerCarHandle);
+	m_CarHandles.push_back(m_PlayerCarHandle);
+	fName = "data/Meshes/Lambo.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName.c_str(), m_PlayerCarHandle);
 	m_CarHandles.push_back(m_PlayerCarHandle);
 	fName = "data/Meshes/RaceTrack.meshbinary";
@@ -193,13 +196,13 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	std::string effectPath = "data/Effects/Effect1.effectbinary";
 	eae6320::Graphics::cEffect::s_Manager.Load(effectPath.c_str(), effect1Handle);
 
-	m_PlayerCarHandle = m_CarHandles[1];
-	m_NPCCarHandle = m_CarHandles[2];
+	m_PlayerCarHandle = m_CarHandles[0];
+	m_NPCCarHandle = m_CarHandles[0];
 
 	UpdateMeshAndEffect();
 	GetDetailsFromFile();
 	m_PlayerCarAccelerationValue = m_AccelerationDetails[0];
-	m_NPCCarAccelerationValue = m_AccelerationDetails[1];
+	m_NPCCarAccelerationValue = m_AccelerationDetails[0];
 	m_IsGameStarted = true;
 
 	return Results::Success;
@@ -209,7 +212,10 @@ void eae6320::cFinalGame::UpdateCarPosition()
 {
 	if (m_CanTakeInput)
 	{
-		m_NPCCar->SetGameObjectAcceleration(Math::sVector(0, 0, -(float)m_NPCCarAccelerationValue));
+		if (m_NPCCar->GetGameObjectVelocity().z >= -20)
+		{
+			m_NPCCar->SetGameObjectAcceleration(Math::sVector(0, 0, -(float)m_NPCCarAccelerationValue));
+		}
 		if (GetNormalizedStickDeflection(ControllerKeyCodes::RIGHT_STICK, 0).x != 0)
 		{
 			m_TopDownCamera->SetAngularSpeed(GetNormalizedStickDeflection(ControllerKeyCodes::RIGHT_STICK, 0).x);
@@ -217,11 +223,13 @@ void eae6320::cFinalGame::UpdateCarPosition()
 		}
 		if (IsKeyPressed(ControllerKeyCodes::RIGHT_TRIGGER) || (UserInput::IsKeyPressed('W')))
 		{
+			m_AccelerationSound->PlayInLoop();
 			if (m_Car->GetGameObjectVelocity().z >= -20)
 			{
 				float val = m_PlayerCarAccelerationValue;
 				if (!(GetNumberOfConnectedControllers() == 0))
 				{
+					m_AccelerationSound->SetVolume(GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER));
 					val = GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER) * m_PlayerCarAccelerationValue;
 				}
 				m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, -val));
@@ -236,6 +244,7 @@ void eae6320::cFinalGame::UpdateCarPosition()
 				float val = m_PlayerCarAccelerationValue;
 				if (!(GetNumberOfConnectedControllers() == 0))
 				{
+					m_AccelerationSound->SetVolume(-GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER));
 					val = GetNormalizedTriggerDeflection(ControllerKeyCodes::LEFT_TRIGGER) * m_PlayerCarAccelerationValue;
 				}
 				m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, val));
@@ -243,6 +252,9 @@ void eae6320::cFinalGame::UpdateCarPosition()
 				m_Car->SetGameObjectAcceleration(Math::sVector(0, 0, val));
 			}
 		}
+	}
+	if (!m_CanTakeInput)
+	{
 		if (UserInput::IsKeyPressed('N') || IsKeyPressed(ControllerKeyCodes::DPAD_UP))
 		{
 			if (!m_IsCarMeshSwitched)
@@ -323,6 +335,7 @@ void eae6320::cFinalGame::ResetDetails()
 	m_InCarCamera->SetCameraAcceleration(Math::sVector(0, 0, 0));
 	m_NPCCar->SetGameObjectVelocity(Math::sVector(0, 0, 0));
 	m_NPCCar->SetGameObjectAcceleration(Math::sVector(0, 0, 0));
+	m_AccelerationSound->Stop();
 }
 
 void eae6320::cFinalGame::GetDetailsFromFile()

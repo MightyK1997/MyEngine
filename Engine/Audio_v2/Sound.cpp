@@ -225,10 +225,9 @@ namespace Engine
 
 	void Sound::SetVolume(float i_volume)
 	{
-		for (std::vector<Engine::Channel*>::iterator it = activeChannelPointers.begin(); it != activeChannelPointers.end(); ++it)
+		for (auto& soundChannel : activeChannelPointers)
 		{
-			pChannel = *it;
-			pChannel->SetVolume(i_volume);
+			soundChannel ->SetVolume(i_volume);
 		}
 	}
 

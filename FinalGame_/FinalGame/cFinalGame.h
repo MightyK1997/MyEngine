@@ -12,6 +12,7 @@
 #include <Engine/Application/cbApplication.h>
 #include <Engine/Results/Results.h>
 #include <Engine/Physics/cGameObject.h>
+#include <Engine/Audio_v2/Sound.h>
 
 #if defined( EAE6320_PLATFORM_WINDOWS )
 	#include "Resource Files/Resource.h"
@@ -117,6 +118,9 @@ namespace eae6320
 		std::vector<eae6320::Graphics::cMesh::Handle> m_CarHandles;
 		std::vector<eae6320::Graphics::sEffectsAndMeshesToRender> m_EffectsAndMeshes;
 		std::vector<uint8_t> m_AccelerationDetails;
+
+		//Sound
+		Engine::Sound* m_AccelerationSound = nullptr;
 
 	private:
 		//Other private variables
