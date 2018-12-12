@@ -132,6 +132,7 @@ namespace eae6320
 	private:
 		//Other private variables
 		uint8_t m_CarCount = 0;
+		uint8_t m_NPCCarCount = 0;
 		bool m_IsCarMeshSwitched = false;
 		float m_CarMeshChangeTimer = 0;
 		bool m_IsCameraSwitched = false;
