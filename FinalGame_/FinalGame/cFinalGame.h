@@ -93,11 +93,12 @@ namespace eae6320
 		eae6320::Graphics::cMesh::Handle m_RaceTrack;
 		eae6320::Graphics::cMesh::Handle m_TrafficLight;
 		eae6320::Graphics::cMesh::Handle m_TreeHandle;
-
+		eae6320::Graphics::cMesh::Handle m_PlayerScoreHandle;
+		eae6320::Graphics::cMesh::Handle m_NPCScoreHandle;
+		eae6320::Graphics::cMesh::Handle m_RestartHandle;
 
 		//Effect Handle
 		eae6320::Graphics::cEffect::Handle effect1Handle;
-		eae6320::Graphics::cEffect::Handle effect2Handle;
 
 
 		//Cameras
@@ -111,11 +112,15 @@ namespace eae6320
 		eae6320::Physics::cGameObject* m_NPCCar;
 		eae6320::Physics::cGameObject* m_RaceTrackObj;
 		eae6320::Physics::cGameObject* m_TrafficLightObj;
+		eae6320::Physics::cGameObject* m_PlayerScoreObj;
+		eae6320::Physics::cGameObject* m_NPCScoreObj;
+		eae6320::Physics::cGameObject* m_RestartObj;
 
 		//Lists
 		std::vector<eae6320::Physics::cGameObject*> m_TreeObjs;
-		std::vector<eae6320::Math::cMatrix_transformation> m_GameObjectLocalToWorldTransforms;
+		std::vector<eae6320::Graphics::cMesh::Handle> m_ScoreHandles;
 		std::vector<eae6320::Graphics::cMesh::Handle> m_CarHandles;
+		std::vector<eae6320::Math::cMatrix_transformation> m_GameObjectLocalToWorldTransforms;
 		std::vector<eae6320::Graphics::sEffectsAndMeshesToRender> m_EffectsAndMeshes;
 		std::vector<uint8_t> m_AccelerationDetails;
 
@@ -135,6 +140,9 @@ namespace eae6320
 
 		uint8_t m_PlayerCarAccelerationValue;
 		uint8_t m_NPCCarAccelerationValue;
+
+		uint8_t m_PlayerScore = 0;
+		uint8_t m_NPCScore = 0;
 
 	private:
 		void UpdateCarPosition();

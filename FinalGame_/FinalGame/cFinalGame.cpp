@@ -125,6 +125,8 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 	{
 		m_EffectsAndMeshes.push_back(x->GetMeshEffectPair());
 	}
+	m_EffectsAndMeshes.push_back(m_NPCScoreObj->GetMeshEffectPair());
+	m_EffectsAndMeshes.push_back(m_PlayerScoreObj->GetMeshEffectPair());
 
 
 	m_GameObjectLocalToWorldTransforms.clear();
@@ -136,10 +138,12 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 	{
 		m_GameObjectLocalToWorldTransforms.push_back(x->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
 	}
+	m_GameObjectLocalToWorldTransforms.push_back(m_NPCScoreObj->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
+	m_GameObjectLocalToWorldTransforms.push_back(m_PlayerScoreObj->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
 
 
 	eae6320::Graphics::SetCameraToRender(m_RenderingCamera, i_elapsedSecondCount_sinceLastSimulationUpdate);
-	eae6320::Graphics::SetEffectsAndMeshesToRender(&(m_EffectsAndMeshes[0]), &(m_GameObjectLocalToWorldTransforms[0]), (uint8_t)(4 + (m_TreeObjs.size())));
+	eae6320::Graphics::SetEffectsAndMeshesToRender(&(m_EffectsAndMeshes[0]), &(m_GameObjectLocalToWorldTransforms[0]), (uint8_t)(6 + (m_TreeObjs.size())));
 }
 
 // Initialization / Clean Up
@@ -156,6 +160,8 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	eae6320::Physics::cGameObject::CreateGameObject(m_NPCCar);
 	eae6320::Physics::cGameObject::CreateGameObject(m_RaceTrackObj);
 	eae6320::Physics::cGameObject::CreateGameObject(m_TrafficLightObj);
+	eae6320::Physics::cGameObject::CreateGameObject(m_PlayerScoreObj);
+	eae6320::Physics::cGameObject::CreateGameObject(m_NPCScoreObj);
 
 	for (size_t i = 1; i < 32; i++)
 	{
@@ -193,9 +199,18 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	fName = "data/Meshes/Tree.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName.c_str(), m_TreeHandle);
 
+	for (size_t i = 0; i < 10; i++)
+	{
+		fName = "data/Meshes/Numbers/Number" + std::to_string(i) + ".meshbinary";
+		eae6320::Graphics::cMesh::s_Manager.Load(fName.c_str(), m_PlayerScoreHandle);
+		m_ScoreHandles.push_back(m_PlayerScoreHandle);
+	}
+
 	std::string effectPath = "data/Effects/Effect1.effectbinary";
 	eae6320::Graphics::cEffect::s_Manager.Load(effectPath.c_str(), effect1Handle);
 
+	m_PlayerScoreHandle = m_ScoreHandles[0];
+	m_NPCScoreHandle = m_ScoreHandles[0];
 	m_PlayerCarHandle = m_CarHandles[0];
 	m_NPCCarHandle = m_CarHandles[0];
 
@@ -283,10 +298,19 @@ void eae6320::cFinalGame::UpdateCarPosition()
 		m_IsGameStarted = true;
 		ResetDetails();
 	}
-	if ((m_Car->GetGameObjectPosition().z < -300) || (m_NPCCar->GetGameObjectPosition().z < -300))
+	if ((m_Car->GetGameObjectPosition().z < -300) || (m_NPCCar->GetGameObjectPosition().z < -300) && (!m_IsGameFinished))
 	{
 		m_IsGameFinished = true;
 		m_CanTakeInput = false;
+		if ((m_Car->GetGameObjectPosition().z < -300))
+		{
+			m_PlayerScore++;
+		}
+		else if ((m_NPCCar->GetGameObjectPosition().z < -300))
+		{
+			m_NPCScore++;
+		}
+		UpdateMeshAndEffect();
 		m_Car->SetGameObjectVelocity(Math::sVector(0, 0, 0));
 		m_Car->SetGameObjectAcceleration(Math::sVector(0, 0, 0));
 		m_TopDownCamera->SetCameraVelocity(Math::sVector(0, 0, 0));
@@ -316,6 +340,19 @@ void eae6320::cFinalGame::UpdateMeshAndEffect()
 		treeObj->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_TreeHandle));
 		treeObj->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
 	}
+	if (m_PlayerScore < 10)
+	{
+		m_PlayerScoreHandle = m_ScoreHandles[m_PlayerScore];
+		m_PlayerScoreObj->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_PlayerScoreHandle));
+		m_PlayerScoreObj->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
+	}
+	if (m_NPCScore < 10)
+	{
+		m_NPCScoreHandle = m_ScoreHandles[m_NPCScore];
+		m_NPCScoreObj->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_NPCScoreHandle));
+		m_NPCScoreObj->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
+	}
+	
 }
 
 void eae6320::cFinalGame::ResetDetails()
@@ -324,6 +361,10 @@ void eae6320::cFinalGame::ResetDetails()
 	m_NPCCar->SetGameObjectPosition(Math::sVector(4, -9.5f, -25));
 	m_RaceTrackObj->SetGameObjectPosition(Math::sVector(0, -10, -210));
 	m_TrafficLightObj->SetGameObjectPosition(Math::sVector(0, -10, -25));
+
+	m_PlayerScoreObj->SetGameObjectPosition(Math::sVector(-10,-3, -25));
+	m_NPCScoreObj->SetGameObjectPosition(Math::sVector(4, -3, -25));
+
 	m_TopDownCamera->SetCameraPosition(Math::sVector(-3.5f, 0.4f, -2));
 	m_TopDownCamera->SetCameraRotation(Math::cQuaternion(0.4f, Math::sVector(-1, 0, 0)));
 	m_InCarCamera->SetCameraPosition(Math::sVector(-4.6f, -8.1f, -25.5f));
@@ -359,6 +400,10 @@ eae6320::cResult eae6320::cFinalGame::CleanUp()
 	{
 		eae6320::Graphics::cMesh::s_Manager.Release(x);
 	}
+	for (auto&x : m_ScoreHandles)
+	{
+		eae6320::Graphics::cMesh::s_Manager.Release(x);
+	}
 	eae6320::Graphics::cMesh::s_Manager.Release(m_RaceTrack);
 	eae6320::Graphics::cMesh::s_Manager.Release(m_TrafficLight);
 	eae6320::Graphics::cMesh::s_Manager.Release(m_TreeHandle);
@@ -367,6 +412,8 @@ eae6320::cResult eae6320::cFinalGame::CleanUp()
 	m_NPCCar->DecrementReferenceCount();
 	m_RaceTrackObj->DecrementReferenceCount();
 	m_TrafficLightObj->DecrementReferenceCount();
+	m_PlayerScoreObj->DecrementReferenceCount();
+	m_NPCScoreObj->DecrementReferenceCount();
 
 	for (auto&x:m_TreeObjs)
 	{

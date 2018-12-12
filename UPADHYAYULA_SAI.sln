@@ -116,6 +116,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FinalGame", "FinalGame", "{AAB9B9A9-40C1-4E63-9E8C-146F71B4CC92}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FinalGame", "FinalGame_\FinalGame\FinalGame.vcxproj", "{85FB0EA2-B0BF-4DA6-B7FF-18386B59794E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0ADA0E07-2CDD-4670-B7DE-A8EED0515819} = {0ADA0E07-2CDD-4670-B7DE-A8EED0515819}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BuildMyGameAssets", "FinalGame_\BuildMyGameAssets\BuildMyGameAssets.vcxproj", "{0ADA0E07-2CDD-4670-B7DE-A8EED0515819}"
 	ProjectSection(ProjectDependencies) = postProject
