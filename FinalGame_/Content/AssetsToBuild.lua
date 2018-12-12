@@ -30,8 +30,7 @@ return
 	},
 
 	sounds = {
-		"Sounds/Alarm10.wav",
-		"Sounds/StartCar.wav",
-		"Sounds/acceleration.wav",
+		"Sounds/carstartgarage.wav",
+		"Sounds/bgm.wav",
 	}
 }

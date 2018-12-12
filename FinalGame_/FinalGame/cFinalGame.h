@@ -128,6 +128,7 @@ namespace eae6320
 
 		//Sound
 		Engine::Sound* m_AccelerationSound = nullptr;
+		Engine::Sound* startSound = nullptr;
 
 	private:
 		//Other private variables

@@ -1,5 +1,8 @@
 // Includes
 //=========
+#define _CRTDBG_MAP_ALLOC  
+#include <stdlib.h>  
+#include <crtdbg.h> 
 
 #include "cFinalGame.h"
 
@@ -79,7 +82,7 @@ void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecon
 	if (m_IsCarMeshSwitched)
 	{
 		m_CarMeshChangeTimer += i_elapsedSecondCount_sinceLastUpdate;
-		if (m_CarMeshChangeTimer >= 1.f)
+		if (m_CarMeshChangeTimer >= 0.25f)
 		{
 			m_CarMeshChangeTimer = 0.f;
 			m_IsCarMeshSwitched = false;
@@ -96,6 +99,7 @@ void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecon
 			m_CanTakeInput = true;
 			m_IsGameStarted = false;
 			startTimer = 0;
+			m_AccelerationSound->PlayInLoop();
 		}
 	}
 	if (IsKeyPressed(ControllerKeyCodes::RIGHT_SHOULDER) || UserInput::IsKeyPressed('K'))
@@ -187,8 +191,8 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 		m_TreeObjs.push_back(temp);
 	}
 
-	m_AccelerationSound = new Engine::Sound("data/sounds/acceleration.wav");
-	m_AccelerationSound->Play();
+	m_AccelerationSound = new Engine::Sound("data/sounds/bgm.wav");
+	startSound = new Engine::Sound("data/sounds/carstartgarage.wav");
 
 	ResetDetails();
 
@@ -239,15 +243,16 @@ void eae6320::cFinalGame::UpdateCarPosition()
 {
 	if (m_CanTakeInput)
 	{
+		//m_AccelerationSound->Play();
 		m_CountdownObj->SetGameObjectPosition(Math::sVector(100, 100, 100));
 		if (GetNumberOfConnectedControllers() > 1)
 		{
 			if (IsKeyPressed(ControllerKeyCodes::RIGHT_TRIGGER, 1))
 			{
-				m_AccelerationSound->PlayInLoop();
+				//m_AccelerationSound->PlayInLoop();
 				if (m_Car->GetGameObjectVelocity().z >= -20)
 				{
-					m_AccelerationSound->SetVolume(GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER, 1));
+					//m_AccelerationSound->SetVolume(GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER, 1));
 					float val = GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER, 1) * m_NPCCarAccelerationValue;
 					m_NPCCar->SetGameObjectAcceleration(Math::sVector(0, 0, -val));
 				}
@@ -256,7 +261,7 @@ void eae6320::cFinalGame::UpdateCarPosition()
 			{
 				if (m_Car->GetGameObjectVelocity().z <= 10)
 				{
-					m_AccelerationSound->SetVolume(-GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER, 1));
+					//m_AccelerationSound->SetVolume(-GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER, 1));
 					float val = GetNormalizedTriggerDeflection(ControllerKeyCodes::LEFT_TRIGGER, 1) * m_PlayerCarAccelerationValue;
 					m_NPCCar->SetGameObjectAcceleration(Math::sVector(0, 0, val));
 				}
@@ -276,13 +281,13 @@ void eae6320::cFinalGame::UpdateCarPosition()
 		}
 		if (IsKeyPressed(ControllerKeyCodes::RIGHT_TRIGGER) || (UserInput::IsKeyPressed('W')))
 		{
-			m_AccelerationSound->PlayInLoop();
+			//m_AccelerationSound->PlayInLoop();
 			if (m_Car->GetGameObjectVelocity().z >= -20)
 			{
 				float val = m_PlayerCarAccelerationValue;
 				if (!(GetNumberOfConnectedControllers() == 0))
 				{
-					m_AccelerationSound->SetVolume(GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER));
+					//m_AccelerationSound->SetVolume(GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER));
 					val = GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER) * m_PlayerCarAccelerationValue;
 				}
 				m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, -val));
@@ -297,7 +302,7 @@ void eae6320::cFinalGame::UpdateCarPosition()
 				float val = m_PlayerCarAccelerationValue;
 				if (!(GetNumberOfConnectedControllers() == 0))
 				{
-					m_AccelerationSound->SetVolume(-GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER));
+					//m_AccelerationSound->SetVolume(-GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER));
 					val = GetNormalizedTriggerDeflection(ControllerKeyCodes::LEFT_TRIGGER) * m_PlayerCarAccelerationValue;
 				}
 				m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, val));
@@ -449,6 +454,7 @@ void eae6320::cFinalGame::ResetDetails()
 	m_NPCCar->SetGameObjectVelocity(Math::sVector(0, 0, 0));
 	m_NPCCar->SetGameObjectAcceleration(Math::sVector(0, 0, 0));
 	m_AccelerationSound->Stop();
+	startSound->Play();
 }
 
 void eae6320::cFinalGame::GetDetailsFromFile()
