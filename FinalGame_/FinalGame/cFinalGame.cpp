@@ -249,9 +249,7 @@ void eae6320::cFinalGame::UpdateCarPosition()
 				{
 					m_AccelerationSound->SetVolume(GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER, 1));
 					float val = GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER, 1) * m_NPCCarAccelerationValue;
-					m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, -val));
-					m_InCarCamera->SetCameraAcceleration(Math::sVector(0, 0, -val));
-					m_Car->SetGameObjectAcceleration(Math::sVector(0, 0, -val));
+					m_NPCCar->SetGameObjectAcceleration(Math::sVector(0, 0, -val));
 				}
 			}
 			if (IsKeyPressed(ControllerKeyCodes::LEFT_TRIGGER, 1))
@@ -260,9 +258,7 @@ void eae6320::cFinalGame::UpdateCarPosition()
 				{
 					m_AccelerationSound->SetVolume(-GetNormalizedTriggerDeflection(ControllerKeyCodes::RIGHT_TRIGGER, 1));
 					float val = GetNormalizedTriggerDeflection(ControllerKeyCodes::LEFT_TRIGGER, 1) * m_PlayerCarAccelerationValue;
-					m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, val));
-					m_InCarCamera->SetCameraAcceleration(Math::sVector(0, 0, val));
-					m_Car->SetGameObjectAcceleration(Math::sVector(0, 0, val));
+					m_NPCCar->SetGameObjectAcceleration(Math::sVector(0, 0, val));
 				}
 			}
 		}
@@ -358,7 +354,7 @@ void eae6320::cFinalGame::UpdateCarPosition()
 			}
 		}
 	}
-	if (m_IsGameFinished && (IsKeyPressed(ControllerKeyCodes::START)))
+	if (m_IsGameFinished && (IsKeyPressed(ControllerKeyCodes::START)) || (IsKeyPressed(ControllerKeyCodes::START, 1)))
 	{
 		m_IsGameFinished = false;
 		m_IsGameStarted = true;
