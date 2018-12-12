@@ -12,6 +12,15 @@ return
 	"Meshes/LP_Car1.txt",
 	"Meshes/LP_Car2.txt",
 	"Meshes/Tree.txt",
+	"Meshes/Numbers/Number1.txt",
+	"Meshes/Numbers/Number2.txt",
+	"Meshes/Numbers/Number3.txt",
+	"Meshes/Numbers/Number4.txt",
+	"Meshes/Numbers/Number5.txt",
+	"Meshes/Numbers/Number6.txt",
+	"Meshes/Numbers/Number7.txt",
+	"Meshes/Numbers/Number8.txt",
+	"Meshes/Numbers/Number9.txt",
 	},
 
 	effects = {
