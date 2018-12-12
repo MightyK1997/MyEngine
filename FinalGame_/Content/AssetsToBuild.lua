@@ -12,6 +12,7 @@ return
 	"Meshes/LP_Car1.txt",
 	"Meshes/LP_Car2.txt",
 	"Meshes/Tree.txt",
+	"Meshes/Restart.txt",
 	"Meshes/Numbers/Number1.txt",
 	"Meshes/Numbers/Number2.txt",
 	"Meshes/Numbers/Number3.txt",
