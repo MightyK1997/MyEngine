@@ -35,6 +35,7 @@
   <ItemGroup>
     <ClCompile Include="cFinalGame.cpp" />
     <ClCompile Include="EntryPoint.cpp" />
+    <ClCompile Include="FinalGameHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Engine\Application\Application.vcxproj">

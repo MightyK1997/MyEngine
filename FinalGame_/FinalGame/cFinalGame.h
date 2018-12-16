@@ -150,7 +150,6 @@ namespace eae6320
 
 	private:
 		void UpdateCarPosition();
-		void UpdateCameraPosition();
 		void UpdateMeshAndEffect();
 
 		void ResetDetails();
