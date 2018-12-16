@@ -3,6 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FinalGame", "FinalGame", "{AAB9B9A9-40C1-4E63-9E8C-146F71B4CC92}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FinalGame", "FinalGame_\FinalGame\FinalGame.vcxproj", "{85FB0EA2-B0BF-4DA6-B7FF-18386B59794E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0ADA0E07-2CDD-4670-B7DE-A8EED0515819} = {0ADA0E07-2CDD-4670-B7DE-A8EED0515819}
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MyGame", "MyGame", "{185C3407-9DDC-4651-B5F4-763465806DB9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyGame", "MyGame_\MyGame\MyGame.vcxproj", "{70DE51B5-74FD-4E88-9879-46057D44BE17}"
@@ -112,13 +119,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sound", "Engine\Sound\Sound.vcxproj", "{0619A00B-4235-41D7-92D5-B58346D524A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptionsUI", "Engine\OptionsUI\OptionsUI.csproj", "{BA664DC1-4C70-49F4-BAF9-3F292E3F280C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FinalGame", "FinalGame", "{AAB9B9A9-40C1-4E63-9E8C-146F71B4CC92}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FinalGame", "FinalGame_\FinalGame\FinalGame.vcxproj", "{85FB0EA2-B0BF-4DA6-B7FF-18386B59794E}"
-	ProjectSection(ProjectDependencies) = postProject
-		{0ADA0E07-2CDD-4670-B7DE-A8EED0515819} = {0ADA0E07-2CDD-4670-B7DE-A8EED0515819}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BuildMyGameAssets", "FinalGame_\BuildMyGameAssets\BuildMyGameAssets.vcxproj", "{0ADA0E07-2CDD-4670-B7DE-A8EED0515819}"
 	ProjectSection(ProjectDependencies) = postProject
