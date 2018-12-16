@@ -183,7 +183,7 @@ namespace Launcher
                 }
             }
 
-            gameProcess.StartInfo.FileName = "MyGame.exe";
+            gameProcess.StartInfo.FileName = "FinalGame.exe";
             if (gameProcess.Start())
             {
                 this.Close();
@@ -196,7 +196,7 @@ namespace Launcher
 
         private void btnCancelButton_Click(object sender, RoutedEventArgs e)
         {
-            gameProcess.StartInfo.FileName = "MyGame.exe";
+            gameProcess.StartInfo.FileName = "FinalGame.exe";
             if (gameProcess.Start())
             {
                 this.Close();

@@ -191,7 +191,7 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 		m_TreeObjs.push_back(temp);
 	}
 
-	m_AccelerationSound = new Engine::Sound("data/sounds/bgm.wav");
+	m_AccelerationSound = new Engine::Sound("data/sounds/bgm2.wav");
 	startSound = new Engine::Sound("data/sounds/carstartgarage.wav");
 
 	ResetDetails();
@@ -359,7 +359,7 @@ void eae6320::cFinalGame::UpdateCarPosition()
 			}
 		}
 	}
-	if (m_IsGameFinished && (IsKeyPressed(ControllerKeyCodes::START)) || (IsKeyPressed(ControllerKeyCodes::START, 1)))
+	if (m_IsGameFinished && (IsKeyPressed(ControllerKeyCodes::START)) || (IsKeyPressed(ControllerKeyCodes::START, 1)) || (UserInput::IsKeyPressed('R')))
 	{
 		m_IsGameFinished = false;
 		m_IsGameStarted = true;
@@ -382,6 +382,8 @@ void eae6320::cFinalGame::UpdateCarPosition()
 		m_Car->SetGameObjectVelocity(Math::sVector(0, 0, 0));
 		m_Car->SetGameObjectAcceleration(Math::sVector(0, 0, 0));
 		m_TopDownCamera->SetCameraVelocity(Math::sVector(0, 0, 0));
+		m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, 0));
+		m_InCarCamera->SetCameraAcceleration(Math::sVector(0, 0, 0));
 		m_InCarCamera->SetCameraVelocity(Math::sVector(0, 0, 0));
 		m_NPCCar->SetGameObjectVelocity(Math::sVector(0, 0, 0));
 		m_NPCCar->SetGameObjectAcceleration(Math::sVector(0, 0, 0));

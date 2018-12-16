@@ -32,5 +32,6 @@ return
 	sounds = {
 		"Sounds/carstartgarage.wav",
 		"Sounds/bgm.wav",
+		"Sounds/bgm2.wav",
 	}
 }
