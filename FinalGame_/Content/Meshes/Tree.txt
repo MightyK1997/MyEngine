@@ -1,0 +1,2709 @@
+return
+{
+VertexBuffer = 
+{
+{
+--Index Position = 0
+Position = {-0.0115141,1.24175,-1.07443},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 35
+Position = {-0.0115141,1.24175,-1.07443},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 146
+Position = {-0.0115141,1.24175,-1.07443},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 2
+Position = {1.16862,1.50943,-0.154107},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 148
+Position = {1.16862,1.50943,-0.154107},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 79
+Position = {1.16862,1.50943,-0.154107},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 4
+Position = {1.16862,1.50943,-0.154107},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 256
+Position = {1.03223,1.58213,0.66306},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 7
+Position = {1.03223,1.58213,0.66306},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 5
+Position = {1.03223,1.58213,0.66306},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 10
+Position = {1.03223,1.58213,0.66306},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 106
+Position = {0.402116,1.58213,1.19178},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 7
+Position = {0.402116,1.58213,1.19178},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 256
+Position = {0.402116,1.58213,1.19178},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 259
+Position = {0.402116,1.58213,1.19178},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 8
+Position = {-0.426873,1.50943,1.18467},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 263
+Position = {-0.426873,1.50943,1.18467},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 11
+Position = {-0.426873,1.50943,1.18467},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 9
+Position = {-0.426873,1.50943,1.18467},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 14
+Position = {-1.05054,1.58213,0.66306},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 110
+Position = {-1.05054,1.58213,0.66306},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 12
+Position = {-1.05054,1.58213,0.66306},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 267
+Position = {-1.05054,1.58213,0.66306},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 15
+Position = {-1.19338,1.58213,-0.146993},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 16
+Position = {-1.19338,1.58213,-0.146993},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 268
+Position = {-1.19338,1.58213,-0.146993},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 19
+Position = {-1.19338,1.58213,-0.146993},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 19
+Position = {-0.788542,1.50943,-0.866456},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 268
+Position = {-0.788542,1.50943,-0.866456},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 271
+Position = {-0.788542,1.50943,-0.866456},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 20
+Position = {-0.788542,1.50943,-0.866456},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 278
+Position = {-0.00915837,1.58213,-1.14067},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 23
+Position = {-0.00915837,1.58213,-1.14067},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 24
+Position = {-0.00915837,1.58213,-1.14067},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 283
+Position = {-0.00915837,1.58213,-1.14067},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 28
+Position = {0.852752,0.960018,-0.966393},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 27
+Position = {0.852752,0.960018,-0.966393},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 282
+Position = {0.852752,0.960018,-0.966393},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 32
+Position = {0.852752,0.960018,-0.966393},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 30
+Position = {1.30704,0.88732,-0.175498},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 33
+Position = {1.30704,0.88732,-0.175498},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 131
+Position = {1.30704,0.88732,-0.175498},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 31
+Position = {1.30704,0.88732,-0.175498},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 286
+Position = {-0.410588,1.16905,1.1452},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 443
+Position = {-0.410588,1.16905,1.1452},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 32
+Position = {-0.410588,1.16905,1.1452},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 282
+Position = {1.15347,0.960018,0.739078},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 287
+Position = {1.15347,0.960018,0.739078},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 34
+Position = {1.15347,0.960018,0.739078},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 446
+Position = {1.15347,0.960018,0.739078},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 96
+Position = {0.447592,0.960018,1.33138},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 37
+Position = {0.447592,0.960018,1.33138},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 109
+Position = {0.447592,0.960018,1.33138},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 42
+Position = {0.447592,0.960018,1.33138},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 38
+Position = {-0.480309,0.88732,1.32427},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 98
+Position = {-0.480309,0.88732,1.32427},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 102
+Position = {-0.480309,0.88732,1.32427},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 40
+Position = {-0.480309,0.88732,1.32427},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 46
+Position = {-1.17975,0.960018,0.739078},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 233
+Position = {-1.17975,0.960018,0.739078},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 41
+Position = {-1.17975,0.960018,0.739078},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 108
+Position = {-1.17975,0.960018,0.739078},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 49
+Position = {-1.33976,0.960018,-0.168384},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 43
+Position = {-1.33976,0.960018,-0.168384},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 51
+Position = {-1.33976,0.960018,-0.168384},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 54
+Position = {-1.33976,0.960018,-0.168384},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 44
+Position = {-0.885468,0.88732,-0.973506},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 55
+Position = {-0.885468,0.88732,-0.973506},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 77
+Position = {-0.885468,0.88732,-0.973506},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 47
+Position = {-0.885468,0.88732,-0.973506},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 50
+Position = {-0.0131386,0.960018,-1.28155},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 319
+Position = {-0.0131386,0.960018,-1.28155},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 48
+Position = {-0.0131386,0.960018,-1.28155},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 117
+Position = {-0.0131386,0.960018,-1.28155},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 53
+Position = {0.0108833,5.87557,0.063243},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 49
+Position = {0.0108833,5.87557,0.063243},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 108
+Position = {0.0108833,5.87557,0.063243},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 113
+Position = {-1.0057,1.01895,0.647552},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 52
+Position = {-1.0057,1.01895,0.647552},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 121
+Position = {-1.0057,1.01895,0.647552},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 57
+Position = {0.00191956,5.87557,0.0557215},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 56
+Position = {0.00191956,5.87557,0.0557215},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 120
+Position = {0.00191956,5.87557,0.0557215},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 61
+Position = {-1.14206,1.01895,-0.125788},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 60
+Position = {-1.14206,1.01895,-0.125788},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 129
+Position = {-1.14206,1.01895,-0.125788},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 65
+Position = {-0.000112354,5.87557,0.0441979},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 61
+Position = {-0.000112354,5.87557,0.0441979},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 120
+Position = {-0.000112354,5.87557,0.0441979},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 125
+Position = {-0.755865,0.946249,-0.812964},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 64
+Position = {-0.755865,0.946249,-0.812964},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 132
+Position = {-0.755865,0.946249,-0.812964},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 68
+Position = {0.00573833,5.87557,0.0340642},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 66
+Position = {0.00573833,5.87557,0.0340642},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 71
+Position = {0.00573833,5.87557,0.0340642},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 89
+Position = {-0.0078987,1.65049,-0.933066},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 69
+Position = {-0.0078987,1.65049,-0.933066},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 133
+Position = {-0.0078987,1.65049,-0.933066},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 72
+Position = {-0.0078987,1.65049,-0.933066},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 70
+Position = {0.636976,1.65049,-0.698351},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 35
+Position = {0.636976,1.65049,-0.698351},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 0
+Position = {0.636976,1.65049,-0.698351},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 72
+Position = {0.636976,1.65049,-0.698351},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 133
+Position = {0.016734,5.87557,0.0300621},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 97
+Position = {0.016734,5.87557,0.0300621},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 73
+Position = {0.016734,5.87557,0.0300621},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 98
+Position = {0.980106,1.65049,-0.104031},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 38
+Position = {0.980106,1.65049,-0.104031},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 75
+Position = {0.980106,1.65049,-0.104031},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 80
+Position = {0.980106,1.65049,-0.104031},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 311
+Position = {0.860938,1.65049,0.571804},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 76
+Position = {0.860938,1.65049,0.571804},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 449
+Position = {0.860938,1.65049,0.571804},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 275
+Position = {0.860938,1.65049,0.571804},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 77
+Position = {0.335232,1.65049,1.01292},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 55
+Position = {0.335232,1.65049,1.01292},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 58
+Position = {0.335232,1.65049,1.01292},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 78
+Position = {0.335232,1.65049,1.01292},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 59
+Position = {-0.357469,1.5778,1.00581},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 83
+Position = {-0.357469,1.5778,1.00581},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 81
+Position = {-0.357469,1.5778,1.00581},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 86
+Position = {-0.357469,1.5778,1.00581},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 317
+Position = {-0.876736,1.65049,0.571804},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 82
+Position = {-0.876736,1.65049,0.571804},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 76
+Position = {-0.876736,1.65049,0.571804},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 275
+Position = {-0.876736,1.65049,0.571804},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 83
+Position = {-0.995904,1.65049,-0.104031},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 59
+Position = {-0.995904,1.65049,-0.104031},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 62
+Position = {-0.995904,1.65049,-0.104031},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 84
+Position = {-0.995904,1.65049,-0.104031},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 63
+Position = {-0.659213,1.5778,-0.705464},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 90
+Position = {-0.659213,1.5778,-0.705464},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 85
+Position = {-0.659213,1.5778,-0.705464},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 2
+Position = {-0.659213,1.5778,-0.705464},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 79
+Position = {0.0119782,5.05984,-0.155888},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 87
+Position = {0.0119782,5.05984,-0.155888},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 82
+Position = {0.0119782,5.05984,-0.155888},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 275
+Position = {0.0119782,5.05984,-0.155888},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 88
+Position = {0.145356,5.05984,-0.107343},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 94
+Position = {0.145356,5.05984,-0.107343},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 324
+Position = {0.145356,5.05984,-0.107343},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 89
+Position = {0.145356,5.05984,-0.107343},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 71
+Position = {0.216326,5.05984,0.0155794},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 1
+Position = {0.216326,5.05984,0.0155794},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 90
+Position = {0.216326,5.05984,0.0155794},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 63
+Position = {0.216326,5.05984,0.0155794},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 67
+Position = {0.726398,1.24175,-0.805851},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 91
+Position = {0.726398,1.24175,-0.805851},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 2
+Position = {0.726398,1.24175,-0.805851},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 85
+Position = {0.191678,5.05984,0.155361},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 92
+Position = {0.191678,5.05984,0.155361},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 87
+Position = {0.191678,5.05984,0.155361},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 275
+Position = {0.191678,5.05984,0.155361},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 93
+Position = {0.0829473,5.05984,0.246597},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 105
+Position = {0.0829473,5.05984,0.246597},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 327
+Position = {0.0829473,5.05984,0.246597},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 96
+Position = {0.0829473,5.05984,0.246597},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 446
+Position = {-0.06543,4.98714,0.239484},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 100
+Position = {-0.06543,4.98714,0.239484},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 99
+Position = {-0.06543,4.98714,0.239484},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 6
+Position = {-0.06543,4.98714,0.239484},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 107
+Position = {-0.167722,5.05984,0.155361},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 101
+Position = {-0.167722,5.05984,0.155361},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 109
+Position = {-0.167722,5.05984,0.155361},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 37
+Position = {-0.167722,5.05984,0.155361},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 103
+Position = {-0.192369,5.05984,0.0155794},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 190
+Position = {-0.192369,5.05984,0.0155794},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 290
+Position = {-0.192369,5.05984,0.0155794},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 104
+Position = {-0.192369,5.05984,0.0155794},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 92
+Position = {-0.127839,4.98714,-0.114456},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 275
+Position = {-0.127839,4.98714,-0.114456},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 106
+Position = {-0.127839,4.98714,-0.114456},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 10
+Position = {-0.127839,4.98714,-0.114456},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 111
+Position = {0.272994,4.17468,-0.260784},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 110
+Position = {0.272994,4.17468,-0.260784},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 14
+Position = {0.272994,4.17468,-0.260784},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 115
+Position = {0.272994,4.17468,-0.260784},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 112
+Position = {0.414623,4.17468,-0.0154746},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 117
+Position = {0.414623,4.17468,-0.0154746},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 48
+Position = {0.414623,4.17468,-0.0154746},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 114
+Position = {0.414623,4.17468,-0.0154746},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 13
+Position = {0.365436,4.17468,0.263481},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 119
+Position = {0.365436,4.17468,0.263481},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 116
+Position = {0.365436,4.17468,0.263481},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 121
+Position = {0.365436,4.17468,0.263481},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 52
+Position = {0.148447,4.17468,0.445556},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 118
+Position = {0.148447,4.17468,0.445556},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 17
+Position = {0.148447,4.17468,0.445556},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 123
+Position = {0.148447,4.17468,0.445556},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 119
+Position = {0.0277297,5.87557,0.0340642},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 13
+Position = {0.0277297,5.87557,0.0340642},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 18
+Position = {0.0277297,5.87557,0.0340642},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 122
+Position = {-0.141251,4.10198,0.438442},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 21
+Position = {-0.141251,4.10198,0.438442},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 127
+Position = {-0.141251,4.10198,0.438442},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 123
+Position = {-0.141251,4.10198,0.438442},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 17
+Position = {-0.3518,4.17468,0.263481},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 22
+Position = {-0.3518,4.17468,0.263481},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 124
+Position = {-0.3518,4.17468,0.263481},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 129
+Position = {-0.3518,4.17468,0.263481},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 60
+Position = {-0.400988,4.17468,-0.0154746},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 126
+Position = {-0.400988,4.17468,-0.0154746},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 25
+Position = {-0.400988,4.17468,-0.0154746},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 130
+Position = {-0.400988,4.17468,-0.0154746},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 127
+Position = {-0.265797,4.10198,-0.267897},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 21
+Position = {-0.265797,4.10198,-0.267897},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 26
+Position = {-0.265797,4.10198,-0.267897},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 128
+Position = {-0.265797,4.10198,-0.267897},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 132
+Position = {0.00681765,4.17468,-0.357664},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 64
+Position = {0.00681765,4.17468,-0.357664},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 130
+Position = {0.00681765,4.17468,-0.357664},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 25
+Position = {0.00681765,4.17468,-0.357664},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 29
+Position = {0.413807,3.19815,-0.430065},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 131
+Position = {0.413807,3.19815,-0.430065},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 33
+Position = {0.413807,3.19815,-0.430065},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 95
+Position = {0.413807,3.19815,-0.430065},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 136
+Position = {0.633392,3.19815,-0.0497345},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 295
+Position = {0.633392,3.19815,-0.0497345},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 141
+Position = {0.633392,3.19815,-0.0497345},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 138
+Position = {0.633392,3.19815,-0.0497345},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 143
+Position = {0.557131,3.19815,0.382762},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 333
+Position = {0.557131,3.19815,0.382762},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 140
+Position = {0.557131,3.19815,0.382762},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 294
+Position = {0.557131,3.19815,0.382762},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 145
+Position = {0.220708,3.19815,0.665054},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 144
+Position = {0.220708,3.19815,0.665054},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 305
+Position = {0.220708,3.19815,0.665054},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 152
+Position = {0.220708,3.19815,0.665054},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 145
+Position = {-0.224899,3.12545,0.65794},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 294
+Position = {-0.224899,3.12545,0.65794},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 299
+Position = {-0.224899,3.12545,0.65794},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 147
+Position = {-0.224899,3.12545,0.65794},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 36
+Position = {1.11903,1.01895,-0.125787},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 232
+Position = {1.11903,1.01895,-0.125787},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 148
+Position = {1.11903,1.01895,-0.125787},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 234
+Position = {-0.554882,3.19815,0.382762},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 79
+Position = {-0.554882,3.19815,0.382762},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 151
+Position = {-0.554882,3.19815,0.382762},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 309
+Position = {-0.554882,3.19815,0.382762},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 156
+Position = {-0.631143,3.19815,-0.0497346},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 153
+Position = {-0.631143,3.19815,-0.0497346},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 158
+Position = {-0.631143,3.19815,-0.0497346},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 345
+Position = {-0.631143,3.19815,-0.0497346},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 155
+Position = {-0.417998,3.12545,-0.437178},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 308
+Position = {-0.417998,3.12545,-0.437178},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 160
+Position = {-0.417998,3.12545,-0.437178},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 159
+Position = {-0.417998,3.12545,-0.437178},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 316
+Position = {0.00112434,3.19815,-0.58027},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 163
+Position = {0.00112434,3.19815,-0.58027},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 160
+Position = {0.00112434,3.19815,-0.58027},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 308
+Position = {0.00112434,3.19815,-0.58027},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 313
+Position = {0.539325,2.3277,-0.580958},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 162
+Position = {0.539325,2.3277,-0.580958},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 315
+Position = {0.539325,2.3277,-0.580958},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 167
+Position = {0.539325,2.3277,-0.580958},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 164
+Position = {0.828395,2.3277,-0.0802728},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 165
+Position = {0.828395,2.3277,-0.0802728},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 356
+Position = {0.828395,2.3277,-0.0802728},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 166
+Position = {0.828395,2.3277,-0.0802728},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 321
+Position = {0.728002,2.3277,0.489085},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 169
+Position = {0.728002,2.3277,0.489085},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 167
+Position = {0.728002,2.3277,0.489085},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 315
+Position = {0.728002,2.3277,0.489085},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 322
+Position = {0.28512,2.3277,0.860707},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 168
+Position = {0.28512,2.3277,0.860707},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 171
+Position = {0.28512,2.3277,0.860707},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 360
+Position = {0.28512,2.3277,0.860707},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 169
+Position = {-0.299461,2.255,0.853594},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 321
+Position = {-0.299461,2.255,0.853594},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 325
+Position = {-0.299461,2.255,0.853594},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 170
+Position = {-0.299461,2.255,0.853594},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 291
+Position = {-0.735903,2.3277,0.489085},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 135
+Position = {-0.735903,2.3277,0.489085},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 174
+Position = {-0.735903,2.3277,0.489085},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 177
+Position = {-0.735903,2.3277,0.489085},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 373
+Position = {0.0335804,5.87557,0.0441979},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 176
+Position = {0.0335804,5.87557,0.0441979},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 339
+Position = {0.0335804,5.87557,0.0441979},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 179
+Position = {-0.836296,2.3277,-0.0802728},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 180
+Position = {-0.836296,2.3277,-0.0802728},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 343
+Position = {-0.836296,2.3277,-0.0802728},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 183
+Position = {-0.836296,2.3277,-0.0802728},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 182
+Position = {-0.553665,2.255,-0.588071},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 185
+Position = {-0.553665,2.255,-0.588071},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 381
+Position = {-0.553665,2.255,-0.588071},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 184
+Position = {-0.553665,2.255,-0.588071},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 347
+Position = {-0.00395051,2.3277,-0.778694},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 187
+Position = {-0.00395051,2.3277,-0.778694},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 186
+Position = {-0.00395051,2.3277,-0.778694},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 192
+Position = {-0.00395051,2.3277,-0.778694},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 385
+Position = {0.0127238,5.00233,-0.28755},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 188
+Position = {0.0127238,5.00233,-0.28755},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 348
+Position = {0.0127238,5.00233,-0.28755},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 194
+Position = {0.0127238,5.00233,-0.28755},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 189
+Position = {0.224152,5.00233,-0.210597},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 104
+Position = {0.224152,5.00233,-0.210597},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 275
+Position = {0.224152,5.00233,-0.210597},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 194
+Position = {0.224152,5.00233,-0.210597},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 348
+Position = {0.330212,4.92963,-0.0228566},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 351
+Position = {0.330212,4.92963,-0.0228566},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 195
+Position = {0.330212,4.92963,-0.0228566},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 354
+Position = {0.330212,4.92963,-0.0228566},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 198
+Position = {0.29758,5.00233,0.205836},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 197
+Position = {0.29758,5.00233,0.205836},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 200
+Position = {0.29758,5.00233,0.205836},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 393
+Position = {0.29758,5.00233,0.205836},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 199
+Position = {0.125222,5.00233,0.350461},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 355
+Position = {0.125222,5.00233,0.350461},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 202
+Position = {0.125222,5.00233,0.350461},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 201
+Position = {0.125222,5.00233,0.350461},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 205
+Position = {-0.106214,4.92963,0.343348},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 397
+Position = {-0.106214,4.92963,0.343348},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 202
+Position = {-0.106214,4.92963,0.343348},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 355
+Position = {-0.106214,4.92963,0.343348},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 358
+Position = {-0.272133,5.00233,0.205836},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 203
+Position = {-0.272133,5.00233,0.205836},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 359
+Position = {-0.272133,5.00233,0.205836},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 207
+Position = {-0.272133,5.00233,0.205836},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 206
+Position = {0.982672,1.01895,0.647552},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 331
+Position = {0.982672,1.01895,0.647552},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 211
+Position = {0.982672,1.01895,0.647552},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 207
+Position = {-0.311203,5.00233,-0.0157434},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 359
+Position = {-0.311203,5.00233,-0.0157434},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 365
+Position = {-0.311203,5.00233,-0.0157434},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 210
+Position = {-0.311203,5.00233,-0.0157434},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 335
+Position = {-0.205144,4.92963,-0.21771},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 175
+Position = {-0.205144,4.92963,-0.21771},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 212
+Position = {-0.205144,4.92963,-0.21771},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 217
+Position = {-0.205144,4.92963,-0.21771},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 411
+Position = {0.00704263,4.11436,-0.51445},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 214
+Position = {0.00704263,4.11436,-0.51445},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 379
+Position = {0.00704263,4.11436,-0.51445},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 219
+Position = {0.00704263,4.11436,-0.51445},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 218
+Position = {0.367731,4.11436,-0.38317},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 383
+Position = {0.367731,4.11436,-0.38317},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 223
+Position = {0.367731,4.11436,-0.38317},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 220
+Position = {0.367731,4.11436,-0.38317},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 225
+Position = {0.55321,4.04166,-0.0578714},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 419
+Position = {0.55321,4.04166,-0.0578714},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 222
+Position = {0.55321,4.04166,-0.0578714},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 387
+Position = {0.55321,4.04166,-0.0578714},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 227
+Position = {0.492996,4.11436,0.327247},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 224
+Position = {0.492996,4.11436,0.327247},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 229
+Position = {0.492996,4.11436,0.327247},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 423
+Position = {0.492996,4.11436,0.327247},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 226
+Position = {0.198961,4.11436,0.573972},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 386
+Position = {0.198961,4.11436,0.573972},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 231
+Position = {0.198961,4.11436,0.573972},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 230
+Position = {0.198961,4.11436,0.573972},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 395
+Position = {-0.191315,4.04166,0.566858},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 238
+Position = {-0.191315,4.04166,0.566858},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 231
+Position = {-0.191315,4.04166,0.566858},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 386
+Position = {-0.191315,4.04166,0.566858},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 391
+Position = {-0.478911,4.11436,0.327247},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 232
+Position = {-0.478911,4.11436,0.327247},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 36
+Position = {-0.478911,4.11436,0.327247},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 39
+Position = {-0.478911,4.11436,0.327247},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 233
+Position = {-0.545563,4.11436,-0.0507583},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 46
+Position = {-0.545563,4.11436,-0.0507583},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 318
+Position = {-0.545563,4.11436,-0.0507583},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 234
+Position = {-0.545563,4.11436,-0.0507583},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 320
+Position = {0.0315485,5.87557,0.0557215},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 79
+Position = {0.0315485,5.87557,0.0557215},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 235
+Position = {0.0315485,5.87557,0.0557215},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 240
+Position = {-0.360085,4.04166,-0.390283},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 431
+Position = {-0.360085,4.04166,-0.390283},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 237
+Position = {-0.360085,4.04166,-0.390283},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 394
+Position = {-0.360085,4.04166,-0.390283},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 242
+Position = {0.000798423,3.13838,-0.766326},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 239
+Position = {0.000798423,3.13838,-0.766326},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 243
+Position = {0.000798423,3.13838,-0.766326},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 435
+Position = {0.000798423,3.13838,-0.766326},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 241
+Position = {0.527139,3.13838,-0.574753},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 398
+Position = {0.527139,3.13838,-0.574753},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 245
+Position = {0.527139,3.13838,-0.574753},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 242
+Position = {0.527139,3.13838,-0.574753},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 394
+Position = {0.800759,3.06568,-0.0967887},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 399
+Position = {0.800759,3.06568,-0.0967887},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 245
+Position = {0.800759,3.06568,-0.0967887},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 398
+Position = {0.800759,3.06568,-0.0967887},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 402
+Position = {0.709935,3.13838,0.461935},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 246
+Position = {0.709935,3.13838,0.461935},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 370
+Position = {0.709935,3.13838,0.461935},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 249
+Position = {0.709935,3.13838,0.461935},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 250
+Position = {0.280858,3.13838,0.821972},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 375
+Position = {0.280858,3.13838,0.821972},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 215
+Position = {0.280858,3.13838,0.821972},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 252
+Position = {0.280858,3.13838,0.821972},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 255
+Position = {-0.285701,3.06568,0.814859},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 444
+Position = {-0.285701,3.06568,0.814859},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 254
+Position = {-0.285701,3.06568,0.814859},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 417
+Position = {-0.285701,3.06568,0.814859},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 257
+Position = {-0.708338,3.13838,0.461934},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 258
+Position = {-0.708338,3.13838,0.461934},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 421
+Position = {-0.708338,3.13838,0.461934},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 261
+Position = {-0.708338,3.13838,0.461934},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 260
+Position = {-0.805602,3.13838,-0.0896756},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 263
+Position = {-0.805602,3.13838,-0.0896756},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 8
+Position = {-0.805602,3.13838,-0.0896756},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 262
+Position = {-0.805602,3.13838,-0.0896756},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 425
+Position = {-0.531981,3.06568,-0.581867},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 265
+Position = {-0.531981,3.06568,-0.581867},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 264
+Position = {-0.531981,3.06568,-0.581867},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 267
+Position = {-0.531981,3.06568,-0.581867},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 12
+Position = {0.38112,1.24175,1.15231},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 266
+Position = {0.38112,1.24175,1.15231},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 426
+Position = {0.38112,1.24175,1.15231},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 269
+Position = {-0.00481187,2.26149,-0.950159},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 269
+Position = {-0.00481187,2.26149,-0.950159},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 426
+Position = {-0.00481187,2.26149,-0.950159},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 429
+Position = {-0.00481187,2.26149,-0.950159},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 270
+Position = {0.643063,2.26149,-0.714352},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 433
+Position = {0.643063,2.26149,-0.714352},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 273
+Position = {0.643063,2.26149,-0.714352},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 272
+Position = {0.643063,2.26149,-0.714352},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 278
+Position = {0.981352,2.18879,-0.12438},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 20
+Position = {0.981352,2.18879,-0.12438},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 274
+Position = {0.981352,2.18879,-0.12438},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 434
+Position = {0.981352,2.18879,-0.12438},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 280
+Position = {0.868068,2.26149,0.561713},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 276
+Position = {0.868068,2.26149,0.561713},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 300
+Position = {0.868068,2.26149,0.561713},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 191
+Position = {0.868068,2.26149,0.561713},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 277
+Position = {0.339915,2.26149,1.00489},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 361
+Position = {0.339915,2.26149,1.00489},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 301
+Position = {0.339915,2.26149,1.00489},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 279
+Position = {0.339915,2.26149,1.00489},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 283
+Position = {-0.355979,2.18879,0.997773},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 24
+Position = {-0.355979,2.18879,0.997773},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 280
+Position = {-0.355979,2.18879,0.997773},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 434
+Position = {-0.355979,2.18879,0.997773},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 437
+Position = {-0.877692,2.26149,0.561713},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 281
+Position = {-0.877692,2.26149,0.561713},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 438
+Position = {-0.877692,2.26149,0.561713},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 285
+Position = {-0.877692,2.26149,0.561713},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 284
+Position = {-0.997414,2.26149,-0.117267},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 410
+Position = {-0.997414,2.26149,-0.117267},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 289
+Position = {-0.997414,2.26149,-0.117267},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 285
+Position = {-0.997414,2.26149,-0.117267},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 438
+Position = {-0.659127,2.18879,-0.721465},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 442
+Position = {-0.659127,2.18879,-0.721465},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 288
+Position = {-0.659127,2.18879,-0.721465},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 413
+Position = {-0.659127,2.18879,-0.721465},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 253
+Position = {0.763786,1.58213,-0.859343},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 290
+Position = {0.763786,1.58213,-0.859343},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 190
+Position = {0.763786,1.58213,-0.859343},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 296
+Position = {0.763786,1.58213,-0.859343},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 292
+Position = {0.0225847,5.87557,0.063243},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 295
+Position = {0.0225847,5.87557,0.063243},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 136
+Position = {0.0225847,5.87557,0.063243},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 297
+Position = {-0.02695,-0.00515602,-0.42422},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 191
+Position = {-0.02695,-0.00515602,-0.42422},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 300
+Position = {-0.02695,-0.00515602,-0.42422},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 298
+Position = {-0.02695,1.34424,-0.42422},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 305
+Position = {-0.02695,1.34424,-0.42422},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 144
+Position = {-0.02695,1.34424,-0.42422},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 301
+Position = {0.259989,-0.005156,-0.319782},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 361
+Position = {0.259989,-0.005156,-0.319782},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 302
+Position = {0.259989,-0.005156,-0.319782},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 303
+Position = {0.259989,1.34424,-0.319783},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 447
+Position = {0.259989,1.34424,-0.319783},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 306
+Position = {0.259989,1.34424,-0.319783},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 304
+Position = {0.412667,-0.00515595,-0.0553377},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 309
+Position = {0.412667,-0.00515595,-0.0553377},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 151
+Position = {0.412667,-0.00515595,-0.0553377},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 307
+Position = {0.412667,1.34424,-0.0553379},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 74
+Position = {0.412667,1.34424,-0.0553379},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 310
+Position = {0.412667,1.34424,-0.0553379},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 311
+Position = {0.359642,-0.00515591,0.245378},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 80
+Position = {0.359642,-0.00515591,0.245378},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 314
+Position = {0.359642,-0.00515591,0.245378},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 312
+Position = {0.359642,1.34424,0.245377},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 316
+Position = {0.359642,1.34424,0.245377},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 159
+Position = {0.359642,1.34424,0.245377},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 317
+Position = {0.125727,-0.00515587,0.441656},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 86
+Position = {0.125727,-0.00515587,0.441656},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 323
+Position = {0.125727,-0.00515587,0.441656},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 319
+Position = {0.125727,1.34424,0.441655},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 50
+Position = {0.125727,1.34424,0.441655},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 404
+Position = {0.125727,1.34424,0.441655},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 320
+Position = {-0.179627,-0.00515587,0.441656},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 406
+Position = {-0.179627,-0.00515587,0.441656},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 79
+Position = {-0.179627,-0.00515587,0.441656},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 324
+Position = {-0.179627,1.34424,0.441655},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 94
+Position = {-0.179627,1.34424,0.441655},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 328
+Position = {-0.179627,1.34424,0.441655},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 326
+Position = {-0.413542,-0.00515591,0.245378},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 291
+Position = {-0.413542,-0.00515591,0.245378},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 170
+Position = {-0.413542,-0.00515591,0.245378},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 327
+Position = {-0.413542,1.34424,0.245377},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 105
+Position = {-0.413542,1.34424,0.245377},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 293
+Position = {-0.413542,1.34424,0.245377},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 329
+Position = {-0.466566,-0.00515595,-0.0553377},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 134
+Position = {-0.466566,-0.00515595,-0.0553377},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 334
+Position = {-0.466566,-0.00515595,-0.0553377},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 330
+Position = {-0.466566,1.34424,-0.0553379},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 335
+Position = {-0.466566,1.34424,-0.0553379},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 210
+Position = {-0.466566,1.34424,-0.0553379},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 332
+Position = {-0.313889,-0.005156,-0.319782},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 172
+Position = {-0.313889,-0.005156,-0.319782},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 137
+Position = {-0.313889,-0.005156,-0.319782},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 333
+Position = {-0.313889,1.34424,-0.319783},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 143
+Position = {-0.313889,1.34424,-0.319783},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 338
+Position = {-0.313889,1.34424,-0.319783},
+Color = {0,1,0,1},
+},
+{
+--Index Position = 334
+Position = {-0.02695,0.662072,-0.299547},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 134
+Position = {-0.02695,0.662072,-0.299547},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 139
+Position = {-0.02695,0.662072,-0.299547},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 336
+Position = {-0.02695,0.662072,-0.299547},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 339
+Position = {0.179851,0.662072,-0.224278},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 176
+Position = {0.179851,0.662072,-0.224278},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 337
+Position = {0.179851,0.662072,-0.224278},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 142
+Position = {0.179851,0.662072,-0.224278},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 342
+Position = {0.289888,0.662072,-0.0336886},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 340
+Position = {0.289888,0.662072,-0.0336886},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 343
+Position = {0.289888,0.662072,-0.0336886},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 180
+Position = {0.289888,0.662072,-0.0336886},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 341
+Position = {0.251673,0.662072,0.183041},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 149
+Position = {0.251673,0.662072,0.183041},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 346
+Position = {0.251673,0.662072,0.183041},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 342
+Position = {0.251673,0.662072,0.183041},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 142
+Position = {0.0830867,0.662072,0.324502},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 150
+Position = {0.0830867,0.662072,0.324502},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 344
+Position = {0.0830867,0.662072,0.324502},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 347
+Position = {0.0830867,0.662072,0.324502},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 184
+Position = {-0.136987,0.662072,0.324502},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 345
+Position = {-0.136987,0.662072,0.324502},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 158
+Position = {-0.136987,0.662072,0.324502},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 350
+Position = {-0.136987,0.662072,0.324502},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 346
+Position = {-0.305573,0.662072,0.183041},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 149
+Position = {-0.305573,0.662072,0.183041},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 154
+Position = {-0.305573,0.662072,0.183041},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 349
+Position = {-0.305573,0.662072,0.183041},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 157
+Position = {-0.343788,0.662072,-0.0336886},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 353
+Position = {-0.343788,0.662072,-0.0336886},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 352
+Position = {-0.343788,0.662072,-0.0336886},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 354
+Position = {-0.343788,0.662072,-0.0336886},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 195
+Position = {-0.233751,0.662072,-0.224278},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 353
+Position = {-0.233751,0.662072,-0.224278},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 157
+Position = {-0.233751,0.662072,-0.224278},
+Color = {0.5882,0.2941,0,1},
+},
+{
+--Index Position = 161
+Position = {-0.233751,0.662072,-0.224278},
+Color = {0.5882,0.2941,0,1},
+},
+},
+IndexBuffer = 
+{
+0,35,146,2,148,79,4,256,7,5,10,106,7,256,259,8,263,11,9,14,110,12,267,15,16,268,19,19,268,271,20,278,23,24,283,28,27,282,32,30,33,131,31,286,443,32,282,287,34,446,96,37,109,42,38,98,102,40,46,233,41,108,49,43,51,54,44,55,77,47,50,319,48,117,53,49,108,113,52,121,57,56,120,61,60,129,65,61,120,125,64,132,68,66,71,89,69,133,72,70,35,0,72,133,97,73,98,38,75,80,311,76,449,275,77,55,58,78,59,83,81,86,317,82,76,275,83,59,62,84,63,90,85,2,79,87,82,275,88,94,324,89,71,1,90,63,67,91,2,85,92,87,275,93,105,327,96,446,100,99,6,107,101,109,37,103,190,290,104,92,275,106,10,111,110,14,115,112,117,48,114,13,119,116,121,52,118,17,123,119,13,18,122,21,127,123,17,22,124,129,60,126,25,130,127,21,26,128,132,64,130,25,29,131,33,95,136,295,141,138,143,333,140,294,145,144,305,152,145,294,299,147,36,232,148,234,79,151,309,156,153,158,345,155,308,160,159,316,163,160,308,313,162,315,167,164,165,356,166,321,169,167,315,322,168,171,360,169,321,325,170,291,135,174,177,373,176,339,179,180,343,183,182,185,381,184,347,187,186,192,385,188,348,194,189,104,275,194,348,351,195,354,198,197,200,393,199,355,202,201,205,397,202,355,358,203,359,207,206,331,211,207,359,365,210,335,175,212,217,411,214,379,219,218,383,223,220,225,419,222,387,227,224,229,423,226,386,231,230,395,238,231,386,391,232,36,39,233,46,318,234,320,79,235,240,431,237,394,242,239,243,435,241,398,245,242,394,399,245,398,402,246,370,249,250,375,215,252,255,444,254,417,257,258,421,261,260,263,8,262,425,265,264,267,12,266,426,269,269,426,429,270,433,273,272,278,20,274,434,280,276,300,191,277,361,301,279,283,24,280,434,437,281,438,285,284,410,289,285,438,442,288,413,253,290,190,296,292,295,136,297,191,300,298,305,144,301,361,302,303,447,306,304,309,151,307,74,310,311,80,314,312,316,159,317,86,323,319,50,404,320,406,79,324,94,328,326,291,170,327,105,293,329,134,334,330,335,210,332,172,137,333,143,338,334,134,139,336,339,176,337,142,342,340,343,180,341,149,346,342,142,150,344,347,184,345,158,350,346,149,154,349,157,353,352,354,195,353,157,161,356,165,357,360,171,366,362,447,303,364,331,206,367,172,332,368,208,372,369,204,209,371,375,250,372,208,173,373,177,376,374,379,214,377,178,380,378,383,218,380,178,181,381,185,384,382,387,222,385,192,388,389,193,392,390,395,230,392,193,196,393,200,396,397,205,401,400,204,369,403,370,246,405,51,43,406,45,79,407,244,247,408,248,412,409,413,288,411,217,416,412,248,213,414,417,254,415,216,420,418,421,258,419,225,424,420,216,221,422,425,262,423,229,428,427,228,432,430,433,270,431,240,436,432,228,236,435,243,439,440,244,407,441,410,284,443,286,251,444,255,3,445,6,99,448,74,307,449,363,275,450,456,498,451,539,506,452,507,458,454,501,467,456,462,498,457,510,464,458,507,511,461,454,467,462,468,498,463,514,470,464,510,515,468,474,498,469,518,476,470,514,519,474,480,498,475,522,482,476,518,523,479,473,467,480,486,498,481,526,488,482,522,527,485,479,467,486,492,498,487,530,494,488,526,531,491,485,467,493,534,499,494,530,535,496,491,467,499,534,538,500,539,451,501,496,467,504,453,508,505,502,455,508,453,459,509,460,512,512,460,465,513,466,516,516,466,471,517,472,520,520,472,477,521,478,524,524,478,483,525,484,528,528,484,489,529,490,532,532,490,495,533,497,537,536,502,505,537,497,503,},
+}

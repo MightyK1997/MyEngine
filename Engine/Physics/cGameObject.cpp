@@ -61,6 +61,11 @@ eae6320::Math::cQuaternion eae6320::Physics::cGameObject::GetGameObjectRotation(
 	return m_RigidBody.orientation;
 }
 
+eae6320::Math::sVector eae6320::Physics::cGameObject::GetGameObjectVelocity()
+{
+	return m_RigidBody.velocity;
+}
+
 void eae6320::Physics::cGameObject::SetGameObjectVelocity(Math::sVector i_Velocity)
 {
 	m_RigidBody.velocity = i_Velocity;
