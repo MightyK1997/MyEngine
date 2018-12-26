@@ -10,6 +10,7 @@
 
 #include <cstdint>
 #include "Engine/Math/sVector.h"
+#include <Engine/Windows/Includes.h>
 
 // Interface
 //==========
@@ -71,6 +72,10 @@ namespace eae6320
 				F12 = 0x7b,
 			};
 		}
+
+		//Set Input data
+
+		void SetRawInputData(LPBYTE input);
 
 		//Get Mouse coordinates corresponding to the entire screen.
 		//Also considers multiple monitors.
