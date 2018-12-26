@@ -9,6 +9,7 @@
 //=========
 
 #include <cstdint>
+#include "Engine/Math/sVector.h"
 
 // Interface
 //==========
@@ -70,6 +71,13 @@ namespace eae6320
 				F12 = 0x7b,
 			};
 		}
+
+		//Get Mouse coordinates corresponding to the entire screen.
+		//Also considers multiple monitors.
+		Math::sVector GetMouseScreenCoordinates();
+
+		//Gets the mouse coordinates only for the current selected window.
+		Math::sVector GetMouseWindowCoordinates();
 	}
 }
 

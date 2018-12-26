@@ -11,8 +11,8 @@ namespace
 #ifdef EAE6320_PLATFORM_D3D
 	// In Direct3D "views" are objects that allow a texture to be used a particular way:
 // A render target view allows a texture to have color rendered to it
-	ID3D11RenderTargetView* s_renderTargetView = nullptr;
-	// A depth/stencil view allows a texture to have depth rendered to it
+	ID3D11RenderTargetView* s_renderTargetView[2] = { nullptr, nullptr };
+	// A depth/stencil view allows a texture to have depth rendered to its
 	ID3D11DepthStencilView* s_depthStencilView = nullptr;
 #endif
 }
@@ -28,8 +28,8 @@ namespace eae6320
 #ifdef EAE6320_PLATFORM_D3D
 			if (s_renderTargetView)
 			{
-				s_renderTargetView->Release();
-				s_renderTargetView = nullptr;
+				s_renderTargetView[0]->Release();
+				s_renderTargetView[0] = nullptr;
 			}
 			if (s_depthStencilView)
 			{
@@ -75,7 +75,7 @@ namespace eae6320
 				// Black is usually used
 				/*constexpr*/ float clearColor[4] = { i_BackBufferColor.r, i_BackBufferColor.g, i_BackBufferColor.b, i_BackBufferColor.alpha };
 				//float clearColor[4] = {1,1,1,1 };
-				direct3dImmediateContext->ClearRenderTargetView(m_renderTargetView, clearColor);
+				direct3dImmediateContext->ClearRenderTargetView(m_renderTargetView[0], clearColor);
 			}
 #elif EAE6320_PLATFORM_GL
 			{
@@ -164,6 +164,8 @@ namespace eae6320
 
 		ID3D11Texture2D* backBuffer = nullptr;
 		ID3D11Texture2D* depthBuffer = nullptr;
+		ID3D11Texture2D* bufferLeft = nullptr;
+		ID3D11Texture2D* bufferRight = nullptr;
 
 		auto& g_context = eae6320::Graphics::sContext::g_context;
 		auto* const direct3dDevice = g_context.direct3dDevice;
@@ -191,7 +193,7 @@ namespace eae6320
 			// Create the view
 			{
 				constexpr D3D11_RENDER_TARGET_VIEW_DESC* const accessAllSubResources = nullptr;
-				const auto d3dResult = direct3dDevice->CreateRenderTargetView(backBuffer, accessAllSubResources, &s_renderTargetView);
+				const auto d3dResult = direct3dDevice->CreateRenderTargetView(backBuffer, accessAllSubResources, &s_renderTargetView[0]);
 				if (FAILED(d3dResult))
 				{
 					result = eae6320::Results::Failure;
@@ -252,7 +254,7 @@ namespace eae6320
 		// Bind the views
 		{
 			constexpr unsigned int renderTargetCount = 1;
-			direct3dImmediateContext->OMSetRenderTargets(renderTargetCount, &s_renderTargetView, s_depthStencilView);
+			direct3dImmediateContext->OMSetRenderTargets(renderTargetCount, &s_renderTargetView[0], s_depthStencilView);
 		}
 		// Specify that the entire render target should be visible
 		{
@@ -268,7 +270,7 @@ namespace eae6320
 			direct3dImmediateContext->RSSetViewports(viewPortCount, &viewPort);
 		}
 		m_depthStencilView = s_depthStencilView;
-		m_renderTargetView = s_renderTargetView;
+		m_renderTargetView[0] = s_renderTargetView[0];
 	OnExit:
 
 		// Regardless of success or failure the two texture resources should be released

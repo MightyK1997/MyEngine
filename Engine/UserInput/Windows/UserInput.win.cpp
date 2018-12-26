@@ -14,3 +14,9 @@ bool eae6320::UserInput::IsKeyPressed( const uint_fast8_t i_keyCode )
 	const short isKeyDownMask = ~1;
 	return ( keyState & isKeyDownMask ) != 0;
 }
+
+eae6320::Math::sVector eae6320::UserInput::GetMouseScreenCoordinates()
+{
+
+	return Math::sVector();
+}

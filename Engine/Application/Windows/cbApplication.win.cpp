@@ -252,6 +252,22 @@ LRESULT CALLBACK eae6320::Application::cbApplication::OnMessageReceivedFromWindo
 			return 0;
 		}
 		break;
+		//Checks for Input
+	case WM_INPUT:
+		{
+		uint size;
+		GetRawInputData((HRAWINPUT)lParam, RID_INPUT, NULL, &size, sizeof(RAWINPUTHEADER));
+		lpByte byte = new BYTE[size];
+		if (byte == NULL)
+		{
+			EAE6320_ASSERT(false);
+			return 0;
+		}
+
+		GetRawInputData((HRAWINPUT)lParam, RID_INPUT, byte, &size, sizeof(RAWINPUTHEADER));
+		RAWINPUT* input = reinterpret_cast<RAWINPUT*>(byte);
+		}
+		break;
 	}
 
 	// Pass any messages that weren't handled on to Windows
@@ -304,6 +320,40 @@ eae6320::cResult eae6320::Application::cbApplication::Initialize_base( const sEn
 		else
 		{
 			EAE6320_ASSERT( false );
+			goto OnExit;
+		}
+	}
+	//Registers mouse and keyboard for raw input
+	{
+		RAWINPUTDEVICE devices[2];
+
+		//Mouse
+		devices[0].usUsagePage = 0x01;
+		devices[0].usUsage = 0x02;
+		devices[0].dwFlags = 0;
+		devices[0].hwndTarget = m_mainWindow;
+
+		//Keyboard
+		devices[1].usUsagePage = 0x01;
+		devices[1].usUsage = 0x06;
+		devices[1].dwFlags = 0;
+		devices[1].hwndTarget = m_mainWindow;
+
+		if (RegisterRawInputDevices(devices, 2, sizeof(devices[0])) == false)
+		{
+
+			LPTSTR msg;
+			DWORD dw = GetLastError();
+			FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER |
+				FORMAT_MESSAGE_FROM_SYSTEM |
+				FORMAT_MESSAGE_IGNORE_INSERTS,
+				NULL,
+				dw,
+				MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+				(LPTSTR)&msg,
+				0, NULL);
+			eae6320::Logging::OutputError(reinterpret_cast<const char*>(msg));
+			EAE6320_ASSERT(false);
 			goto OnExit;
 		}
 	}
