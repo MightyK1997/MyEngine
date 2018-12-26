@@ -274,7 +274,7 @@ void eae6320::cFinalGame::UpdateCarPosition()
 	}
 	if (!m_CanTakeInput)
 	{
-		if (UserInput::IsKeyPressed('N') || IsKeyPressed(ControllerKeyCodes::DPAD_UP))
+		if (UserInput::IsKeyPressed('N') || IsKeyPressed(ControllerKeyCodes::DPAD_UP) || UserInput::IsMouseKeyDown(UserInput::KeyCodes::eMouseKeyCodes::MouseLeft))
 		{
 			if (!m_IsCarMeshSwitched)
 			{
@@ -297,26 +297,20 @@ void eae6320::cFinalGame::UpdateCarPosition()
 		}
 		if (GetNumberOfConnectedControllers() > 1)
 		{
-			if (IsKeyPressed(ControllerKeyCodes::DPAD_UP, 1))
+			if ((IsKeyPressed(ControllerKeyCodes::DPAD_UP, 1)) && (!m_IsCarMeshSwitched))
 			{
-				if (!m_IsCarMeshSwitched)
-				{
 					m_NPCCarCount = (m_NPCCarCount + 1) % m_CarHandles.size();
 					m_NPCCarHandle = m_CarHandles[m_NPCCarCount];
 					m_NPCCarAccelerationValue = m_AccelerationDetails[m_NPCCarCount];
 					UpdateMeshAndEffect();
-				}
 			}
-			if (IsKeyPressed(ControllerKeyCodes::DPAD_DOWN, 1))
+			if (IsKeyPressed(ControllerKeyCodes::DPAD_DOWN, 1) && (!m_IsCarMeshSwitched))
 			{
-				if (!m_IsCarMeshSwitched)
-				{
 					auto t = (m_NPCCarCount + 1);
 					m_NPCCarCount = (m_NPCCarCount + 1) % m_CarHandles.size();
 					m_NPCCarHandle = m_CarHandles[m_CarHandles.size() - t];
 					m_NPCCarAccelerationValue = m_AccelerationDetails[m_CarHandles.size() - t];
 					UpdateMeshAndEffect();
-				}
 			}
 		}
 	}

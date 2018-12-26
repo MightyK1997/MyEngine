@@ -71,6 +71,15 @@ namespace eae6320
 				F11 = 0x7a,
 				F12 = 0x7b,
 			};
+
+			enum eMouseKeyCodes
+			{
+				MouseLeft = 0x0001,
+				MouseRight = 0x0004,
+				MouseMiddle = 0x0010,
+				MouseExtraButton1 = 0x0020,
+				MouseExtraButton2 = 0x100
+			};
 		}
 
 		//Set Input data
@@ -83,6 +92,8 @@ namespace eae6320
 
 		//Gets the mouse coordinates only for the current selected window.
 		Math::sVector GetMouseWindowCoordinates();
+
+		bool IsMouseKeyDown(KeyCodes::eMouseKeyCodes i_KeyCode);
 	}
 }
 

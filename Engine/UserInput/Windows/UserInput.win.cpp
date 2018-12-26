@@ -13,15 +13,6 @@ namespace
 	RAWKEYBOARD keyboardData;
 }
 
-bool eae6320::UserInput::IsKeyPressed( const uint_fast8_t i_keyCode )
-{
-	/*const auto keyState = GetAsyncKeyState(i_keyCode);
-	const short isKeyDownMask = ~1;
-	return ( keyState & isKeyDownMask ) != 0;*/
-
-	return ((keyboardData.Flags == 0) && (keyboardData.VKey == i_keyCode));
-}
-
 void eae6320::UserInput::SetRawInputData(LPBYTE input)
 {
 	RAWINPUT* data = reinterpret_cast<RAWINPUT*>(input);
@@ -35,7 +26,17 @@ void eae6320::UserInput::SetRawInputData(LPBYTE input)
 	}
 }
 
+bool eae6320::UserInput::IsKeyPressed( const uint_fast8_t i_keyCode )
+{
+	return ((keyboardData.Flags == 0) && (keyboardData.VKey == i_keyCode));
+}
+
 eae6320::Math::sVector eae6320::UserInput::GetMouseScreenCoordinates()
 {
 	return Math::sVector(static_cast<float>(mouseData.lLastX), static_cast<float>(mouseData.lLastY), 0);
+}
+
+bool eae6320::UserInput::IsMouseKeyDown(KeyCodes::eMouseKeyCodes i_KeyCode)
+{
+	return ((mouseData.usButtonFlags ^ i_KeyCode) == 0);
 }
