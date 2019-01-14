@@ -14,6 +14,7 @@ namespace
 		eae6320::Graphics::ConstantBufferFormats::sPerDrawCall constantData_perDrawCall[eae6320::Graphics::m_maxNumberofMeshesAndEffects];
 		eae6320::Graphics::sColor backBufferValue_perFrame;
 		eae6320::Graphics::sEffectsAndMeshesToRender m_MeshesAndEffects[eae6320::Graphics::m_maxNumberofMeshesAndEffects];
+		uint64_t m_RenderHandles[eae6320::Graphics::m_maxNumberofMeshesAndEffects];
 		unsigned int m_NumberOfEffectsToRender;
 	};
 	eae6320::Graphics::cConstantBuffer s_constantBuffer_perDrawCall(eae6320::Graphics::ConstantBufferTypes::PerDrawCall);

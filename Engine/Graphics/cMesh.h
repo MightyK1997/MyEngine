@@ -32,7 +32,7 @@ namespace eae6320
 			using Handle = Assets::cHandle<cMesh>;
 			static Assets::cManager<cMesh> s_Manager;
 
-			static cResult Load(const char* const i_FilePath, cMesh*& o_Mesh);
+			static cResult Load(const std::string& i_FilePath, cMesh*& o_Mesh);
 
 			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()
 			EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cMesh)

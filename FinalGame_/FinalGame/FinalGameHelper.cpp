@@ -44,39 +44,51 @@ void eae6320::cFinalGame::ResetDetails()
 void eae6320::cFinalGame::UpdateMeshAndEffect()
 {
 	m_IsCarMeshSwitched = true;
+	m_Car->SetGameObjectHandles(m_PlayerCarHandle, effect1Handle);
 	m_Car->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_PlayerCarHandle));
 	m_Car->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
 
+	m_NPCCar->SetGameObjectHandles(m_NPCCarHandle, effect1Handle);
 	m_NPCCar->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_NPCCarHandle));
 	m_NPCCar->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
 
+
+	m_RaceTrackObj->SetGameObjectHandles(m_RaceTrack, effect1Handle);
 	m_RaceTrackObj->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_RaceTrack));
 	m_RaceTrackObj->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
 
+
+	m_TrafficLightObj->SetGameObjectHandles(m_TrafficLight, effect1Handle);
 	m_TrafficLightObj->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_TrafficLight));
 	m_TrafficLightObj->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
 
+
+	m_RestartObj->SetGameObjectHandles(m_RestartHandle, effect1Handle);
 	m_RestartObj->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_RestartHandle));
 	m_RestartObj->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
 
 	m_CountdownHandle = m_ScoreHandles[3];
+	m_CountdownObj->SetGameObjectHandles(m_CountdownHandle, effect1Handle);
 	m_CountdownObj->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_CountdownHandle));
 	m_CountdownObj->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
 
 	for (auto&treeObj : m_TreeObjs)
 	{
+		treeObj->SetGameObjectHandles(m_TreeHandle, effect1Handle);
 		treeObj->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_TreeHandle));
 		treeObj->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
 	}
 	if (m_PlayerScore < 10)
 	{
 		m_PlayerScoreHandle = m_ScoreHandles[m_PlayerScore];
+		m_PlayerScoreObj->SetGameObjectHandles(m_PlayerScoreHandle, effect1Handle);
 		m_PlayerScoreObj->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_PlayerScoreHandle));
 		m_PlayerScoreObj->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
 	}
 	if (m_NPCScore < 10)
 	{
 		m_NPCScoreHandle = m_ScoreHandles[m_NPCScore];
+		m_NPCScoreObj->SetGameObjectHandles(m_NPCScoreHandle, effect1Handle);
 		m_NPCScoreObj->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_NPCScoreHandle));
 		m_NPCScoreObj->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
 	}

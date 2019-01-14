@@ -98,7 +98,6 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 	m_EffectsAndMeshes.push_back(m_RestartObj->GetMeshEffectPair());
 	m_EffectsAndMeshes.push_back(m_CountdownObj->GetMeshEffectPair());
 
-
 	m_GameObjectLocalToWorldTransforms.clear();
 	m_GameObjectLocalToWorldTransforms.push_back(m_Car->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
 	m_GameObjectLocalToWorldTransforms.push_back(m_NPCCar->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
@@ -158,32 +157,32 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	ResetDetails();
 
 	std::string fName = "data/Meshes/LP_Car1.meshbinary";
-	eae6320::Graphics::cMesh::s_Manager.Load(fName.c_str(), m_PlayerCarHandle);
+	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_PlayerCarHandle);
 	m_CarHandles.push_back(m_PlayerCarHandle);
 	fName = "data/Meshes/SmartCar.meshbinary";
-	eae6320::Graphics::cMesh::s_Manager.Load(fName.c_str(), m_PlayerCarHandle);
+	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_PlayerCarHandle);
 	m_CarHandles.push_back(m_PlayerCarHandle);
 	fName = "data/Meshes/Lambo.meshbinary";
-	eae6320::Graphics::cMesh::s_Manager.Load(fName.c_str(), m_PlayerCarHandle);
+	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_PlayerCarHandle);
 	m_CarHandles.push_back(m_PlayerCarHandle);
 	fName = "data/Meshes/RaceTrack.meshbinary";
-	eae6320::Graphics::cMesh::s_Manager.Load(fName.c_str(), m_RaceTrack);
+	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_RaceTrack);
 	fName = "data/Meshes/TrafficLight.meshbinary";
-	eae6320::Graphics::cMesh::s_Manager.Load(fName.c_str(), m_TrafficLight);
+	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_TrafficLight);
 	fName = "data/Meshes/Tree.meshbinary";
-	eae6320::Graphics::cMesh::s_Manager.Load(fName.c_str(), m_TreeHandle);
+	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_TreeHandle);
 	fName = "data/Meshes/Restart.meshbinary";
-	eae6320::Graphics::cMesh::s_Manager.Load(fName.c_str(), m_RestartHandle);
+	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_RestartHandle);
 
 	for (size_t i = 0; i < 10; i++)
 	{
 		fName = "data/Meshes/Numbers/Number" + std::to_string(i) + ".meshbinary";
-		eae6320::Graphics::cMesh::s_Manager.Load(fName.c_str(), m_PlayerScoreHandle);
+		eae6320::Graphics::cMesh::s_Manager.Load(fName, m_PlayerScoreHandle);
 		m_ScoreHandles.push_back(m_PlayerScoreHandle);
 	}
 
 	std::string effectPath = "data/Effects/Effect1.effectbinary";
-	eae6320::Graphics::cEffect::s_Manager.Load(effectPath.c_str(), effect1Handle);
+	eae6320::Graphics::cEffect::s_Manager.Load(effectPath, effect1Handle);
 
 	m_PlayerScoreHandle = m_ScoreHandles[0];
 	m_NPCScoreHandle = m_ScoreHandles[0];

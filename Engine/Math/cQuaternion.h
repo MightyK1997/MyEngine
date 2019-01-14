@@ -34,6 +34,9 @@ namespace eae6320
 			//---------------
 
 			cQuaternion operator *( const cQuaternion i_rhs ) const;
+			// If only a single vector multiplication is needed then this function is the cheapest way to do it,
+			// but if more than one must be done then it is cheaper to convert the cQuaternion to a cMatrix_transformation
+			sVector operator *( const sVector i_rhs ) const;
 
 			// Inversion
 			//----------

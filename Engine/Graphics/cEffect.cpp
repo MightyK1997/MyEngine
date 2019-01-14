@@ -84,14 +84,14 @@ namespace eae6320
 		}
 
 		//Load data from file
-		cResult cEffect::Load(const char* const i_FileName, cEffect*& o_Effect)
+		cResult cEffect::Load(const std::string& i_FileName, cEffect*& o_Effect)
 		{
 			cResult result = Results::Success;
 			cEffect* outputEffect = nullptr;
 
 			eae6320::Platform::sDataFromFile dataFromFile;
 			std::string errorMessage;
-			result = eae6320::Platform::LoadBinaryFile(i_FileName, dataFromFile, &errorMessage);
+			result = eae6320::Platform::LoadBinaryFile(i_FileName.c_str(), dataFromFile, &errorMessage);
 			uintptr_t offset = reinterpret_cast<uintptr_t>(dataFromFile.data);
 			const uintptr_t finalOffset = offset + dataFromFile.size;
 
