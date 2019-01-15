@@ -39,6 +39,8 @@ namespace eae6320
 			void UpdateGameObject(float i_elapsedSecondCount_sinceLastUpdate);
 			Math::sVector PredictFuturePosition(float i_secondCountToExtrapolate) const;
 			Math::cQuaternion PredictFutureOrientation(float i_secondCountToExtrapolate) const;
+			Graphics::cMesh::Handle GetGameObjectMeshHandle() const { return m_MeshHandle; }
+			Graphics::cEffect::Handle GetGameObjectEffectHandle() const { return m_EffectHandle; }
 
 			//Get the matrix transformation
 			Math::cMatrix_transformation GetLocalToWorldTransformation(const float i_secondCountToExtrapolate);
