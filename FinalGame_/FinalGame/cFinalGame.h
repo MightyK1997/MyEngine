@@ -125,6 +125,7 @@ namespace eae6320
 		std::vector<eae6320::Math::cMatrix_transformation> m_GameObjectLocalToWorldTransforms;
 		std::vector<eae6320::Graphics::sEffectsAndMeshesToRender> m_EffectsAndMeshes;
 		std::vector<uint8_t> m_AccelerationDetails;
+		std::vector<eae6320::Physics::cGameObject*> m_ListOfGameObjects;
 
 		//Sound
 		Engine::Sound* m_AccelerationSound = nullptr;
