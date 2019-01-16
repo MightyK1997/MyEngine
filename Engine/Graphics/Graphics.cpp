@@ -39,7 +39,6 @@ namespace
 
 	//Graphics Helper 
 	eae6320::Graphics::GraphicsHelper* s_helper;
-	uint64_t currentEffectIndex = (uint64_t)1 << 56;
 }
 
 // Submission
@@ -97,6 +96,7 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 	auto& renderCommand = s_dataBeingSubmittedByApplicationThread->m_RenderHandles;
 	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = i_NumberOfGameObjectsToRender;
 	auto m_allDrawCallConstants = s_dataBeingSubmittedByApplicationThread->constantData_perDrawCall;
+	renderCommand.clear();
 	for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
 	{
 		auto e = i_GameObject[i]->GetGameObjectEffectHandle().GetIndex();
@@ -159,6 +159,7 @@ void eae6320::Graphics::RenderFrame()
 		auto& m_allMeshes = s_dataBeingRenderedByRenderThread->m_MeshesAndEffects;
 
 		auto allRenderCommands = s_dataBeingRenderedByRenderThread->m_RenderHandles;
+		uint64_t currentEffectIndex = (uint64_t)1 << 56;
 
 		//if (m_allMeshes != nullptr)
 		//{
@@ -171,11 +172,11 @@ void eae6320::Graphics::RenderFrame()
 				auto tempEffect = eae6320::Graphics::cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(a));
 				auto tempMesh = eae6320::Graphics::cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(b));
 
-				//if ((currentEffectIndex ^ a))
-				//{
+				if ((currentEffectIndex ^ a))
+				{
 					tempEffect->Bind();
 					currentEffectIndex = a;
-				//}
+				}
 				s_constantBuffer_perDrawCall.Update(&s_dataBeingRenderedByRenderThread->constantData_perDrawCall[i]);
 				tempMesh->Draw();
 			}

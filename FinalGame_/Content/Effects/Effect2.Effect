@@ -4,6 +4,7 @@ Effect =
 {
 VertexShaderLocation = "Shaders/Vertex/standard.shader",
 FragmentShaderLocation = "Shaders/Fragment/AnimatedShader.shader",
+VertexInputLayoutShaderLocation = "Shaders/Vertex/vertexInputLayout.shader",
 RenderState = "DepthBuffering",
 },
 }
