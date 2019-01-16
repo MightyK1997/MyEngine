@@ -166,7 +166,7 @@ void eae6320::Graphics::RenderFrame()
 			for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
 			{
 
-				auto a = 0x6 & (allRenderCommands[i] >> 57);
+				auto a = (allRenderCommands[i] >> 57);
 				auto b = 0xF & (allRenderCommands[i]);
 
 				auto tempEffect = eae6320::Graphics::cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(a));
@@ -188,7 +188,7 @@ void eae6320::Graphics::RenderFrame()
 		//{
 		for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
 		{
-			auto a = 0x6 & (allRenderCommands[i] >> 57);
+			auto a = (allRenderCommands[i] >> 57);
 			auto b = 0xF & (allRenderCommands[i]);
 
 			auto tempEffect = eae6320::Graphics::cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(a));
@@ -287,6 +287,18 @@ eae6320::cResult eae6320::Graphics::CleanUp()
 	//		m_allMeshes[i].m_RenderMesh->DecrementReferenceCount();
 	//	}
 	//}
+	auto allRenderCommands = s_dataBeingRenderedByRenderThread->m_RenderHandles;
+	for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
+	{
+		auto a = (allRenderCommands[i] >> 57);
+		auto b = 0xF & (allRenderCommands[i]);
+
+		auto tempEffect = eae6320::Graphics::cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(a));
+		auto tempMesh = eae6320::Graphics::cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(b));
+
+		tempEffect->DecrementReferenceCount();
+		tempMesh->DecrementReferenceCount();
+	}
 
 	//CleanUp
 	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = 0;

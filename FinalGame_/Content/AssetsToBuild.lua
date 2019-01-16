@@ -26,6 +26,7 @@ return
 	},
 
 	effects = {
+		"Effects/Effect1.Effect",
 		"Effects/Effect2.Effect",
 	},
 

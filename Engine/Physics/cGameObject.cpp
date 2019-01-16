@@ -89,8 +89,6 @@ void eae6320::Physics::cGameObject::SetGameObjectEffect(Graphics::cEffect * i_Ef
 void eae6320::Physics::cGameObject::SetGameObjectHandles(Graphics::cMesh::Handle i_MeshHandle,
 	Graphics::cEffect::Handle i_EffectHandle)
 {
-	//eae6320::Graphics::cMesh::s_Manager.UnsafeIncrementReferenceCount(i_MeshHandle.GetIndex());
-	//eae6320::Graphics::cEffect::s_Manager.UnsafeIncrementReferenceCount(i_EffectHandle.GetIndex());
 	m_MeshHandle = i_MeshHandle;
 	m_EffectHandle = i_EffectHandle;
 }

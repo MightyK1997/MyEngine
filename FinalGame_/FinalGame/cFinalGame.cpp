@@ -199,8 +199,10 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 		m_ScoreHandles.push_back(m_PlayerScoreHandle);
 	}
 
-	std::string effectPath = "data/Effects/Effect2.effectbinary";
+	std::string effectPath = "data/Effects/Effect1.effectbinary";
 	eae6320::Graphics::cEffect::s_Manager.Load(effectPath, effect1Handle);
+	effectPath = "data/Effects/Effect2.effectbinary";
+	eae6320::Graphics::cEffect::s_Manager.Load(effectPath, effect2Handle);
 
 	m_PlayerScoreHandle = m_ScoreHandles[0];
 	m_NPCScoreHandle = m_ScoreHandles[0];
@@ -365,6 +367,7 @@ void eae6320::cFinalGame::UpdateCarPosition()
 eae6320::cResult eae6320::cFinalGame::CleanUp()
 {
 	eae6320::Graphics::cEffect::s_Manager.Release(effect1Handle);
+	eae6320::Graphics::cEffect::s_Manager.Release(effect2Handle);
 	for (auto&x : m_CarHandles)
 	{
 		eae6320::Graphics::cMesh::s_Manager.Release(x);

@@ -72,11 +72,22 @@ void eae6320::cFinalGame::UpdateMeshAndEffect()
 	m_CountdownObj->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_CountdownHandle));
 	m_CountdownObj->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
 
+	int count = 0;
+
 	for (auto&treeObj : m_TreeObjs)
 	{
-		treeObj->SetGameObjectHandles(m_TreeHandle, effect1Handle);
+		if (count < 16)
+		{
+			treeObj->SetGameObjectHandles(m_TreeHandle, effect2Handle);
+			treeObj->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect2Handle));
+		}
+		else
+		{
+			treeObj->SetGameObjectHandles(m_TreeHandle, effect1Handle);
+			treeObj->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
+		}
+		count++;
 		treeObj->SetGameObjectMesh(eae6320::Graphics::cMesh::s_Manager.Get(m_TreeHandle));
-		treeObj->SetGameObjectEffect(eae6320::Graphics::cEffect::s_Manager.Get(effect1Handle));
 	}
 	if (m_PlayerScore < 10)
 	{

@@ -100,6 +100,7 @@ namespace eae6320
 
 		//Effect Handle
 		eae6320::Graphics::cEffect::Handle effect1Handle;
+		eae6320::Graphics::cEffect::Handle effect2Handle;
 
 
 		//Cameras
