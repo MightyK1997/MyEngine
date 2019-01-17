@@ -88,15 +88,7 @@ namespace eae6320
 	private:
 
 		//Mesh Handles
-		eae6320::Graphics::cMesh::Handle m_PlayerCarHandle;
-		eae6320::Graphics::cMesh::Handle m_NPCCarHandle;
-		eae6320::Graphics::cMesh::Handle m_RaceTrack;
-		eae6320::Graphics::cMesh::Handle m_TrafficLight;
 		eae6320::Graphics::cMesh::Handle m_TreeHandle;
-		eae6320::Graphics::cMesh::Handle m_PlayerScoreHandle;
-		eae6320::Graphics::cMesh::Handle m_NPCScoreHandle;
-		eae6320::Graphics::cMesh::Handle m_RestartHandle;
-		eae6320::Graphics::cMesh::Handle m_CountdownHandle;
 
 		//Effect Handle
 		eae6320::Graphics::cEffect::Handle effect1Handle;
@@ -109,53 +101,18 @@ namespace eae6320
 
 		eae6320::Graphics::cCamera* m_RenderingCamera;
 
-		//GameObjects
-		eae6320::Physics::cGameObject* m_Car;
-		eae6320::Physics::cGameObject* m_NPCCar;
-		eae6320::Physics::cGameObject* m_RaceTrackObj;
-		eae6320::Physics::cGameObject* m_TrafficLightObj;
-		eae6320::Physics::cGameObject* m_PlayerScoreObj;
-		eae6320::Physics::cGameObject* m_NPCScoreObj;
-		eae6320::Physics::cGameObject* m_RestartObj;
-		eae6320::Physics::cGameObject* m_CountdownObj;
-
 		//Lists
 		std::vector<eae6320::Physics::cGameObject*> m_TreeObjs;
-		std::vector<eae6320::Graphics::cMesh::Handle> m_ScoreHandles;
-		std::vector<eae6320::Graphics::cMesh::Handle> m_CarHandles;
 		std::vector<eae6320::Math::cMatrix_transformation> m_GameObjectLocalToWorldTransforms;
-		std::vector<eae6320::Graphics::sEffectsAndMeshesToRender> m_EffectsAndMeshes;
-		std::vector<uint8_t> m_AccelerationDetails;
 		std::vector<eae6320::Physics::cGameObject*> m_ListOfGameObjects;
-
-		//Sound
-		Engine::Sound* m_AccelerationSound = nullptr;
-		Engine::Sound* startSound = nullptr;
 
 	private:
 		//Other private variables
-		uint8_t m_CarCount = 0;
-		uint8_t m_NPCCarCount = 0;
-		bool m_IsCarMeshSwitched = false;
-		float m_CarMeshChangeTimer = 0;
 		bool m_IsCameraSwitched = false;
 
-		bool m_IsGameStarted;
-		bool m_IsGameFinished = false;
-		bool m_CanTakeInput = false;
-
-		uint8_t m_PlayerCarAccelerationValue;
-		uint8_t m_NPCCarAccelerationValue;
-
-		uint8_t m_PlayerScore = 0;
-		uint8_t m_NPCScore = 0;
-
 	private:
-		void UpdateCarPosition();
 		void UpdateMeshAndEffect();
-
 		void ResetDetails();
-		void GetDetailsFromFile();
 	};
 }
 

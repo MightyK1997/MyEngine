@@ -72,7 +72,7 @@ void eae6320::Graphics::SetBackBufferValue(eae6320::Graphics::sColor i_BackBuffe
 
 //This function gets called from the game to set the meshes and effects to render
 void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObject* i_GameObject[100],
-	eae6320::Math::cMatrix_transformation i_LocaltoWorldTransforms[100], unsigned i_NumberOfGameObjectsToRender, 
+	eae6320::Math::cMatrix_transformation i_LocaltoWorldTransforms[100], unsigned i_NumberOfGameObjectsToRender,
 	eae6320::Graphics::cCamera* i_Camera, const float i_secondCountToExtrapolate)
 {
 	EAE6320_ASSERT(i_NumberOfGameObjectsToRender < m_maxNumberofMeshesAndEffects);
@@ -97,9 +97,9 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 		tempEffect->IncrementReferenceCount();
 		tempMesh->IncrementReferenceCount();
 		uint64_t a = 0;
-		a |= ((a | static_cast<uint64_t>(i_GameObject[i]->GetGameObjectEffectHandle().GetIndex()) << 57) | (static_cast<uint64_t>(zValue * 15) << 6) | i_GameObject[i]->GetGameObjectMeshHandle().GetIndex());
+		a |= ((a | static_cast<uint64_t>(e) << 57) | (static_cast<uint64_t>(zValue * 15) << 6) | m);
 		renderCommand.push_back(a);
-	}                                    
+	}
 	std::sort(s_dataBeingSubmittedByApplicationThread->m_RenderHandles.begin(), s_dataBeingSubmittedByApplicationThread->m_RenderHandles.end());
 }
 
@@ -141,32 +141,26 @@ void eae6320::Graphics::RenderFrame()
 
 		auto allRenderCommands = s_dataBeingRenderedByRenderThread->m_RenderHandles;
 		uint64_t currentEffectIndex = (uint64_t)1 << 56;
+		for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
+		{
 
-		//if (m_allMeshes != nullptr)
-		//{
-			for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
+			auto a = (allRenderCommands[i] >> 57);
+			auto b = 0xF & (allRenderCommands[i]);
+
+			auto tempEffect = eae6320::Graphics::cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(a));
+			auto tempMesh = eae6320::Graphics::cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(b));
+
+			if ((currentEffectIndex ^ a))
 			{
-
-				auto a = (allRenderCommands[i] >> 57);
-				auto b = 0xF & (allRenderCommands[i]);
-
-				auto tempEffect = eae6320::Graphics::cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(a));
-				auto tempMesh = eae6320::Graphics::cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(b));
-
-				if ((currentEffectIndex ^ a))
-				{
-					tempEffect->Bind();
-					currentEffectIndex = a;
-				}
-				s_constantBuffer_perDrawCall.Update(&s_dataBeingRenderedByRenderThread->constantData_perDrawCall[i]);
-				tempMesh->Draw();
+				tempEffect->Bind();
+				currentEffectIndex = a;
 			}
-//		}
+			s_constantBuffer_perDrawCall.Update(&s_dataBeingRenderedByRenderThread->constantData_perDrawCall[i]);
+			tempMesh->Draw();
+		}
 		s_helper->SwapChain();
 
 		//CleanUp
-		//if (m_allMeshes != nullptr)
-		//{
 		for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
 		{
 			auto a = (allRenderCommands[i] >> 57);
@@ -178,8 +172,6 @@ void eae6320::Graphics::RenderFrame()
 			tempEffect->DecrementReferenceCount();
 			tempMesh->DecrementReferenceCount();
 		}
-
-//		}
 		s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender = 0;
 	}
 }

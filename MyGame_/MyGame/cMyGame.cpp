@@ -193,9 +193,9 @@ void eae6320::cMyGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_s
 		m_GameObjectLocalToWorldTransforms[i] = m_GameObjects[i]->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate);
 	 }
 
-	eae6320::Graphics::SetCameraToRender(m_Camera, i_elapsedSecondCount_sinceLastSimulationUpdate);
+	//eae6320::Graphics::SetCameraToRender(m_Camera, i_elapsedSecondCount_sinceLastSimulationUpdate);
 
-	eae6320::Graphics::SetEffectsAndMeshesToRender(m_EffectsAndMeshes, m_GameObjectLocalToWorldTransforms, m_NumberOfMeshesToRender);
+	//eae6320::Graphics::SetEffectsAndMeshesToRender(m_EffectsAndMeshes, m_GameObjectLocalToWorldTransforms, m_NumberOfMeshesToRender);
 }
 
 // Initialization / Clean Up
