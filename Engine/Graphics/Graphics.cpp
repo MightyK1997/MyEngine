@@ -71,28 +71,16 @@ void eae6320::Graphics::SetBackBufferValue(eae6320::Graphics::sColor i_BackBuffe
 }
 
 //This function gets called from the game to set the meshes and effects to render
-void eae6320::Graphics::SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender i_EffectsAndMeshes[eae6320::Graphics::m_maxNumberofMeshesAndEffects], eae6320::Math::cMatrix_transformation i_LocaltoWorldTransforms[m_maxNumberofMeshesAndEffects], unsigned int i_NumberOfEffectsAndMeshesToRender)
-{
-	EAE6320_ASSERT(i_NumberOfEffectsAndMeshesToRender < m_maxNumberofMeshesAndEffects);
-	auto& meshesAndEffects = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
-	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = i_NumberOfEffectsAndMeshesToRender;
-	auto m_allDrawCallConstants = s_dataBeingSubmittedByApplicationThread->constantData_perDrawCall;
-
-	for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
-	{
-		meshesAndEffects[i] = i_EffectsAndMeshes[i];
-		m_allDrawCallConstants[i].g_transform_localToWorld = i_LocaltoWorldTransforms[i];
-		meshesAndEffects[i].m_RenderEffect->IncrementReferenceCount();
-		meshesAndEffects[i].m_RenderMesh->IncrementReferenceCount();
-	}
-	size_t someOtherSize = sizeof(eae6320::Graphics::ConstantBufferFormats::sPerDrawCall);
-	size_t someValue = sizeof(s_dataRequiredToRenderAFrame);
-}
-
 void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObject* i_GameObject[100],
-	eae6320::Math::cMatrix_transformation i_LocaltoWorldTransforms[100], unsigned i_NumberOfGameObjectsToRender)
+	eae6320::Math::cMatrix_transformation i_LocaltoWorldTransforms[100], unsigned i_NumberOfGameObjectsToRender, 
+	eae6320::Graphics::cCamera* i_Camera, const float i_secondCountToExtrapolate)
 {
 	EAE6320_ASSERT(i_NumberOfGameObjectsToRender < m_maxNumberofMeshesAndEffects);
+	EAE6320_ASSERT(s_dataBeingSubmittedByApplicationThread);
+	auto& constDataBuffer = s_dataBeingSubmittedByApplicationThread->constantData_perFrame;
+	constDataBuffer.g_transform_worldToCamera = eae6320::Math::cMatrix_transformation::CreateWorldToCameraTransform(
+		i_Camera->PredictFutureOrientation(i_secondCountToExtrapolate), i_Camera->PredictFuturePosition(i_secondCountToExtrapolate));
+	constDataBuffer.g_transform_cameraToProjected = eae6320::Math::cMatrix_transformation::CreateCameraToProjectedTransform_perspective(0.745f, 1, 0.1f, 100);
 	auto& renderCommand = s_dataBeingSubmittedByApplicationThread->m_RenderHandles;
 	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = i_NumberOfGameObjectsToRender;
 	auto m_allDrawCallConstants = s_dataBeingSubmittedByApplicationThread->constantData_perDrawCall;
@@ -104,22 +92,15 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 		auto tempEffect = eae6320::Graphics::cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(e));
 		auto tempMesh = eae6320::Graphics::cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(m));
 		m_allDrawCallConstants[i].g_transform_localToWorld = i_LocaltoWorldTransforms[i];
+		auto worldToCameraPosition = constDataBuffer.g_transform_worldToCamera * i_GameObject[i]->GetGameObjectPosition();
+		auto zValue = ((worldToCameraPosition.z < 0 ? worldToCameraPosition.z : -worldToCameraPosition.z) - 0.1f) / (0.1f - 100);
 		tempEffect->IncrementReferenceCount();
 		tempMesh->IncrementReferenceCount();
 		uint64_t a = 0;
-		a |= ((a | static_cast<uint64_t>(i_GameObject[i]->GetGameObjectEffectHandle().GetIndex()) << 57) | i_GameObject[i]->GetGameObjectMeshHandle().GetIndex());
+		a |= ((a | static_cast<uint64_t>(i_GameObject[i]->GetGameObjectEffectHandle().GetIndex()) << 57) | (static_cast<uint64_t>(zValue * 15) << 6) | i_GameObject[i]->GetGameObjectMeshHandle().GetIndex());
 		renderCommand.push_back(a);
 	}                                    
 	std::sort(s_dataBeingSubmittedByApplicationThread->m_RenderHandles.begin(), s_dataBeingSubmittedByApplicationThread->m_RenderHandles.end());
-}
-
-void eae6320::Graphics::SetCameraToRender(eae6320::Graphics::cCamera* i_Camera, const float i_secondCountToExtrapolate)
-{
-	EAE6320_ASSERT(s_dataBeingSubmittedByApplicationThread);
-	auto& constDataBuffer = s_dataBeingSubmittedByApplicationThread->constantData_perFrame;
-	constDataBuffer.g_transform_worldToCamera = eae6320::Math::cMatrix_transformation::CreateWorldToCameraTransform(
-		i_Camera->PredictFutureOrientation(i_secondCountToExtrapolate), i_Camera->PredictFuturePosition(i_secondCountToExtrapolate));
-	constDataBuffer.g_transform_cameraToProjected = eae6320::Math::cMatrix_transformation::CreateCameraToProjectedTransform_perspective(0.745f, 1, 0.1f, 100);
 }
 
 void eae6320::Graphics::RenderFrame()

@@ -129,9 +129,8 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 	m_GameObjectLocalToWorldTransforms.push_back(m_RestartObj->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
 	m_GameObjectLocalToWorldTransforms.push_back(m_CountdownObj->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
 
-
-	eae6320::Graphics::SetCameraToRender(m_RenderingCamera, i_elapsedSecondCount_sinceLastSimulationUpdate);
-	eae6320::Graphics::SetEffectsAndMeshesToRender(&(m_ListOfGameObjects[0]), &(m_GameObjectLocalToWorldTransforms[0]), (uint8_t)(8 + (m_TreeObjs.size())));
+	eae6320::Graphics::SetEffectsAndMeshesToRender(&(m_ListOfGameObjects[0]), &(m_GameObjectLocalToWorldTransforms[0]), (uint8_t)(8 + (m_TreeObjs.size())),
+		m_RenderingCamera, i_elapsedSecondCount_sinceLastSimulationUpdate);
 	//eae6320::Graphics::SetEffectsAndMeshesToRender(&(m_EffectsAndMeshes[0]), &(m_GameObjectLocalToWorldTransforms[0]), (uint8_t)(8 + (m_TreeObjs.size())));
 }
 

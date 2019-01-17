@@ -96,10 +96,9 @@ namespace eae6320
 
 		void SetBackBufferValue(sColor i_BackBuffer);
 
-		void SetEffectsAndMeshesToRender(sEffectsAndMeshesToRender i_EffectsAndMeshes[eae6320::Graphics::m_maxNumberofMeshesAndEffects], eae6320::Math::cMatrix_transformation i_LocaltoWorldTransforms[m_maxNumberofMeshesAndEffects],
-			unsigned int i_NumberOfEffectsAndMeshesToRender);
-
-		void SetEffectsAndMeshesToRender(eae6320::Physics::cGameObject* i_GameObject[100], eae6320::Math::cMatrix_transformation i_LocaltoWorldTransforms[100], unsigned i_NumberOfGameObjectsToRender);
+		void SetEffectsAndMeshesToRender(eae6320::Physics::cGameObject* i_GameObject[100], 
+			eae6320::Math::cMatrix_transformation i_LocaltoWorldTransforms[100], unsigned i_NumberOfGameObjectsToRender, 
+			eae6320::Graphics::cCamera* i_Camera, const float i_secondCountToExtrapolate);
 
 		void SetCameraToRender(eae6320::Graphics::cCamera* i_Camera, const float i_secondCountToExtrapolate);
 
