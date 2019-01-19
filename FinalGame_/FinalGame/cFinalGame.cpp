@@ -27,39 +27,39 @@ void eae6320::cFinalGame::UpdateBasedOnInput()
 		const auto result = Exit(EXIT_SUCCESS);
 		EAE6320_ASSERT(result);
 	}
-	m_TopDownCamera->SetCameraVelocity(Math::sVector(0, 0, 0));
-	m_TopDownCamera->SetAngularSpeed(0.0f);
-	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Down))
+	(*m_RenderingCamera).SetCameraVelocity(Math::sVector(0, 0, 0));
+	(*m_RenderingCamera).SetAngularSpeed(0.0f);
+	if (UserInput::IsKeyPressed('S'))
 	{
-		m_TopDownCamera->SetCameraVelocity(Math::sVector(0, 0, 10.0f));
+		(*m_RenderingCamera).SetCameraVelocity(Math::sVector(0, 0, 10.0f));
 	}
-	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Up))
+	if (UserInput::IsKeyPressed('W'))
 	{
-		m_TopDownCamera->SetCameraVelocity(Math::sVector(0, 0, -10.0f));
+		(*m_RenderingCamera).SetCameraVelocity(Math::sVector(0, 0, -10.0f));
 	}
-	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Right))
+	if (UserInput::IsKeyPressed('D'))
 	{
-		m_TopDownCamera->SetCameraVelocity(Math::sVector(10.0f, 0, 0));
+		(*m_RenderingCamera).SetCameraVelocity(Math::sVector(10.0f, 0, 0));
 	}
-	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Left))
+	if (UserInput::IsKeyPressed('A'))
 	{
-		m_TopDownCamera->SetCameraVelocity(Math::sVector(-10.0f, 0, 0));
+		(*m_RenderingCamera).SetCameraVelocity(Math::sVector(-10.0f, 0, 0));
 	}
-	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Control))
+	if (UserInput::IsKeyPressed('Q'))
 	{
-		m_TopDownCamera->SetCameraVelocity(Math::sVector(0, 10.0f, 0));
+		(*m_RenderingCamera).SetCameraVelocity(Math::sVector(0, 10.0f, 0));
 	}
-	if (UserInput::IsKeyPressed(UserInput::KeyCodes::Alt))
+	if (UserInput::IsKeyPressed('E'))
 	{
-		m_TopDownCamera->SetCameraVelocity(Math::sVector(0, -10.0f, 0));
+		(*m_RenderingCamera).SetCameraVelocity(Math::sVector(0, -10.0f, 0));
 	}
 	if (UserInput::IsKeyPressed('Z'))
 	{
-		m_TopDownCamera->SetAngularSpeed(1.0f);
+		(*m_RenderingCamera).SetAngularSpeed(1.0f);
 	}
 	if (UserInput::IsKeyPressed('X'))
 	{
-		m_TopDownCamera->SetAngularSpeed(-1.0f);
+		(*m_RenderingCamera).SetAngularSpeed(-1.0f);
 	}
 }
 
@@ -117,19 +117,20 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 
 	m_RenderingCamera = m_TopDownCamera;
 
-	for (size_t i = 1; i < 32; i++)
+	for (size_t i = 1; i < 7; i++)
 	{
 		eae6320::Physics::cGameObject* temp;
 		eae6320::Physics::cGameObject::CreateGameObject(temp);
-		if (i < 16)
+		if (i <= 3)
 		{
-			temp->SetGameObjectPosition(Math::sVector(-9, -10, (i * -25.0f)));
+			temp->SetGameObjectPosition(Math::sVector(-9.0f, -10, i* -25.0f));
+			m_TreeObjs.push_back(temp);
 		}
-		else if (i > 16)
+		else
 		{
-			temp->SetGameObjectPosition(Math::sVector(9, -10, ((i - 16) * -25.0f)));
-		}
-		m_TreeObjs.push_back(temp);
+			temp->SetGameObjectPosition(Math::sVector(-9.0f, -10, (i - 2)* -10.0f));
+			m_TreeObjs.push_back(temp);
+		}		
 	}
 
 	ResetDetails();

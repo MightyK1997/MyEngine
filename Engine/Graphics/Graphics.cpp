@@ -92,15 +92,20 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 		auto tempEffect = eae6320::Graphics::cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(e));
 		auto tempMesh = eae6320::Graphics::cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(m));
 		m_allDrawCallConstants[i].g_transform_localToWorld = i_LocaltoWorldTransforms[i];
-		auto worldToCameraPosition = constDataBuffer.g_transform_worldToCamera * i_GameObject[i]->GetGameObjectPosition();
-		auto zValue = ((worldToCameraPosition.z < 0 ? worldToCameraPosition.z : -worldToCameraPosition.z) - 0.1f) / (0.1f - 100);
+		auto zValue = (constDataBuffer.g_transform_worldToCamera * i_LocaltoWorldTransforms[i]).GetTranslation().z;
+		auto matrix = constDataBuffer.g_transform_worldToCamera * i_LocaltoWorldTransforms[i];
+		zValue = (zValue - 0.1f) / (100-0.1f);
+		zValue = -zValue;
+		if (zValue > 1) zValue = 1;
+		if (zValue < 0) zValue = 0;
 		tempEffect->IncrementReferenceCount();
 		tempMesh->IncrementReferenceCount();
 		uint64_t a = 0;
-		a |= ((a | static_cast<uint64_t>(e) << 57) | (static_cast<uint64_t>(zValue * 15) << 6) | m);
+		auto temp = (static_cast<uint64_t>(zValue * 255));
+		a |= ((a | static_cast<uint64_t>(e) << 57) | (static_cast<uint64_t>(zValue * 255) << 49) | (static_cast<uint64_t>(m)<<7) | i);
 		renderCommand.push_back(a);
 	}
-	std::sort(s_dataBeingSubmittedByApplicationThread->m_RenderHandles.begin(), s_dataBeingSubmittedByApplicationThread->m_RenderHandles.end());
+	std::sort(renderCommand.begin(), renderCommand.end());
 }
 
 void eae6320::Graphics::RenderFrame()
@@ -145,7 +150,8 @@ void eae6320::Graphics::RenderFrame()
 		{
 
 			auto a = (allRenderCommands[i] >> 57);
-			auto b = 0xF & (allRenderCommands[i]);
+			auto b = 7 & (allRenderCommands[i] >> 7);
+			auto c = 7 & (allRenderCommands[i]);
 
 			auto tempEffect = eae6320::Graphics::cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(a));
 			auto tempMesh = eae6320::Graphics::cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(b));
@@ -155,7 +161,7 @@ void eae6320::Graphics::RenderFrame()
 				tempEffect->Bind();
 				currentEffectIndex = a;
 			}
-			s_constantBuffer_perDrawCall.Update(&s_dataBeingRenderedByRenderThread->constantData_perDrawCall[i]);
+			s_constantBuffer_perDrawCall.Update(&s_dataBeingRenderedByRenderThread->constantData_perDrawCall[c]);
 			tempMesh->Draw();
 		}
 		s_helper->SwapChain();
@@ -164,7 +170,7 @@ void eae6320::Graphics::RenderFrame()
 		for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
 		{
 			auto a = (allRenderCommands[i] >> 57);
-			auto b = 0xF & (allRenderCommands[i]);
+			auto b = 7 & (allRenderCommands[i] >> 7);
 
 			auto tempEffect = eae6320::Graphics::cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(a));
 			auto tempMesh = eae6320::Graphics::cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(b));
@@ -249,22 +255,11 @@ OnExit:
 eae6320::cResult eae6320::Graphics::CleanUp()
 {
 	auto result = s_helper->CleanUp();
-
-	//auto m_allMeshes = s_dataBeingSubmittedByApplicationThread->m_MeshesAndEffects;
-
-	//if (m_allMeshes != nullptr)
-	//{
-	//	for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
-	//	{
-	//		m_allMeshes[i].m_RenderEffect->DecrementReferenceCount();
-	//		m_allMeshes[i].m_RenderMesh->DecrementReferenceCount();
-	//	}
-	//}
 	auto allRenderCommands = s_dataBeingRenderedByRenderThread->m_RenderHandles;
 	for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
 	{
 		auto a = (allRenderCommands[i] >> 57);
-		auto b = 0xF & (allRenderCommands[i]);
+		auto b = 7 & (allRenderCommands[i] >> 7);
 
 		auto tempEffect = eae6320::Graphics::cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(a));
 		auto tempMesh = eae6320::Graphics::cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(b));
