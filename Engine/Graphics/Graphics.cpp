@@ -146,6 +146,7 @@ void eae6320::Graphics::RenderFrame()
 
 		auto allRenderCommands = s_dataBeingRenderedByRenderThread->m_RenderHandles;
 		uint64_t currentEffectIndex = (uint64_t)1 << 56;
+		uint64_t currentMeshIndex = (uint64_t)1 << 56;
 		for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
 		{
 
@@ -162,7 +163,15 @@ void eae6320::Graphics::RenderFrame()
 				currentEffectIndex = a;
 			}
 			s_constantBuffer_perDrawCall.Update(&s_dataBeingRenderedByRenderThread->constantData_perDrawCall[c]);
-			tempMesh->Draw();
+			if ((currentMeshIndex ^ b))
+			{
+				tempMesh->Draw(true);
+				currentMeshIndex = b;
+			}
+			else
+			{
+				tempMesh->Draw(false);
+			}
 		}
 		s_helper->SwapChain();
 
@@ -255,8 +264,8 @@ OnExit:
 eae6320::cResult eae6320::Graphics::CleanUp()
 {
 	auto result = s_helper->CleanUp();
-	auto allRenderCommands = s_dataBeingRenderedByRenderThread->m_RenderHandles;
-	for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
+	auto allRenderCommands = s_dataBeingSubmittedByApplicationThread->m_RenderHandles;
+	for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
 	{
 		auto a = (allRenderCommands[i] >> 57);
 		auto b = 7 & (allRenderCommands[i] >> 7);
@@ -264,8 +273,8 @@ eae6320::cResult eae6320::Graphics::CleanUp()
 		auto tempEffect = eae6320::Graphics::cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(a));
 		auto tempMesh = eae6320::Graphics::cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(b));
 
-		tempEffect->DecrementReferenceCount();
-		tempMesh->DecrementReferenceCount();
+		if (tempEffect) tempEffect->DecrementReferenceCount();
+		if (tempMesh) tempMesh->DecrementReferenceCount();
 	}
 
 	//CleanUp

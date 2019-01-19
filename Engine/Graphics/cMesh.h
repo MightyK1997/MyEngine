@@ -36,7 +36,7 @@ namespace eae6320
 
 			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()
 			EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cMesh)
-			void Draw();
+			void Draw(bool bindVertex);
 			static cResult CreateMesh(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, eae6320::Graphics::VertexFormats::sIndex* i_inputIndex, unsigned int i_IndexCount, unsigned int i_VertexCount, cMesh*& o_Mesh)
 			{
 				cResult result = Results::Success;

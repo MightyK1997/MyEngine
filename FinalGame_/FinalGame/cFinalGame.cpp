@@ -164,3 +164,31 @@ eae6320::cResult eae6320::cFinalGame::CleanUp()
 
 	return Results::Success;
 }
+
+void eae6320::cFinalGame::ResetDetails()
+{
+	m_TopDownCamera->SetCameraPosition(Math::sVector(0, 0, 0));
+	m_InCarCamera->SetCameraPosition(Math::sVector(-4.6f, -8.1f, -25.5f));
+	m_TopDownCamera->SetCameraVelocity(Math::sVector(0, 0, 0));
+	m_InCarCamera->SetCameraVelocity(Math::sVector(0, 0, 0));
+	m_TopDownCamera->SetCameraAcceleration(Math::sVector(0, 0, 0));
+	m_InCarCamera->SetCameraAcceleration(Math::sVector(0, 0, 0));
+}
+
+void eae6320::cFinalGame::UpdateMeshAndEffect()
+{
+
+	int count = 1;
+	for (auto&treeObj : m_TreeObjs)
+	{
+		if (count <= 3)
+		{
+			treeObj->SetGameObjectHandles(m_TreeHandle, effect2Handle);
+		}
+		else
+		{
+			treeObj->SetGameObjectHandles(m_TreeHandle, effect1Handle);
+		}
+		count++;
+	}
+}

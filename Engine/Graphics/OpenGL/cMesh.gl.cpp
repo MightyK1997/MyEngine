@@ -199,7 +199,7 @@ namespace eae6320
 
 			return result;
 		}
-		void cMesh::Draw()
+		void cMesh::Draw(bool bindVertex)
 		{
 			// Bind a specific vertex buffer to the device as a data source
 			{
