@@ -100,8 +100,8 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 		zValue = -zValue;
 		if (zValue > 1) zValue = 1;
 		if (zValue < 0) zValue = 0;
-		tempEffect->IncrementReferenceCount();
-		tempMesh->IncrementReferenceCount();
+		//tempEffect->IncrementReferenceCount();
+		//tempMesh->IncrementReferenceCount();
 		uint64_t a = 0;
 		auto temp = (static_cast<uint64_t>(zValue * 255));
 		a |= ((a | static_cast<uint64_t>(e) << 57) | (static_cast<uint64_t>(zValue * 255) << 49) | (static_cast<uint64_t>(m)<<7) | i);
@@ -154,7 +154,7 @@ void eae6320::Graphics::RenderFrame()
 			auto c = 7 & (allRenderCommands[i]);
 
 			auto tempEffect = eae6320::Graphics::cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(a));
-			auto tempMesh = eae6320::Graphics::cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(b));
+ 			auto tempMesh = eae6320::Graphics::cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(b));
 
 			if ((currentEffectIndex ^ a))
 			{
@@ -175,17 +175,6 @@ void eae6320::Graphics::RenderFrame()
 		s_helper->SwapChain();
 
 		//CleanUp
-		for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
-		{
-			auto a = (allRenderCommands[i] >> 57);
-			auto b = 7 & (allRenderCommands[i] >> 7);
-
-			auto tempEffect = eae6320::Graphics::cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(a));
-			auto tempMesh = eae6320::Graphics::cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(b));
-
-			tempEffect->DecrementReferenceCount();
-			tempMesh->DecrementReferenceCount();
-		}
 		s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender = 0;
 	}
 }
