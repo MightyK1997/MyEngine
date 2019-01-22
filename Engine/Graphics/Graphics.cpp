@@ -39,6 +39,8 @@ namespace
 
 	//Graphics Helper 
 	eae6320::Graphics::GraphicsHelper* s_helper;
+	uint64_t currentEffectIndex = (uint64_t)1 << 56;
+	uint64_t currentMeshIndex = (uint64_t)1 << 56;
 }
 
 // Submission
@@ -143,10 +145,7 @@ void eae6320::Graphics::RenderFrame()
 
 
 		auto& m_allMeshes = s_dataBeingRenderedByRenderThread->m_MeshesAndEffects;
-
 		auto allRenderCommands = s_dataBeingRenderedByRenderThread->m_RenderHandles;
-		uint64_t currentEffectIndex = (uint64_t)1 << 56;
-		uint64_t currentMeshIndex = (uint64_t)1 << 56;
 		for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
 		{
 
