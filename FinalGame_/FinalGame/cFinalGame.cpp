@@ -61,6 +61,40 @@ void eae6320::cFinalGame::UpdateBasedOnInput()
 	{
 		(*m_RenderingCamera).SetAngularSpeed(-1.0f);
 	}
+	m_TreeObjs[1]->SetGameObjectVelocity(Math::sVector(0, 0, 0));
+	//(*m_RenderingCamera).SetAngularSpeed(0.0f);
+	if (UserInput::IsKeyPressed('K'))
+	{
+		m_TreeObjs[1]->SetGameObjectVelocity(Math::sVector(0, 0, 10.0f));
+	}
+	if (UserInput::IsKeyPressed('I'))
+	{
+		m_TreeObjs[1]->SetGameObjectVelocity(Math::sVector(0, 0, -10.0f));
+	}
+	if (UserInput::IsKeyPressed('L'))
+	{
+		m_TreeObjs[1]->SetGameObjectVelocity(Math::sVector(10.0f, 0, 0));
+	}
+	if (UserInput::IsKeyPressed('J'))
+	{
+		m_TreeObjs[1]->SetGameObjectVelocity(Math::sVector(-10.0f, 0, 0));
+	}
+	if (UserInput::IsKeyPressed('U'))
+	{
+		m_TreeObjs[1]->SetGameObjectVelocity(Math::sVector(0, 10.0f, 0));
+	}
+	if (UserInput::IsKeyPressed('O'))
+	{
+		m_TreeObjs[1]->SetGameObjectVelocity(Math::sVector(0, -10.0f, 0));
+	}
+	//if (UserInput::IsKeyPressed('Z'))
+	//{
+	//	m_TreeObjs[1]->S(1.0f);
+	//}
+	//if (UserInput::IsKeyPressed('X'))
+	//{
+	//	(*m_RenderingCamera).SetAngularSpeed(-1.0f);
+	//}
 }
 
 void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecondCount_sinceLastUpdate)
@@ -70,7 +104,8 @@ void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecon
 	f += i_elapsedSecondCount_sinceLastUpdate;
 	m_TopDownCamera->Update(i_elapsedSecondCount_sinceLastUpdate);
 	m_InCarCamera->Update(i_elapsedSecondCount_sinceLastUpdate);
-	if (IsKeyPressed(ControllerKeyCodes::RIGHT_SHOULDER) || UserInput::IsKeyPressed('K'))
+	m_TreeObjs[1]->UpdateGameObject(i_elapsedSecondCount_sinceLastUpdate);
+	if (IsKeyPressed(ControllerKeyCodes::RIGHT_SHOULDER) || UserInput::IsKeyPressed('C'))
 	{
 		if (f > 0.25f)
 		{
@@ -140,7 +175,7 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 
 	std::string effectPath = "data/Effects/Effect1.effectbinary";
 	eae6320::Graphics::cEffect::s_Manager.Load(effectPath, effect1Handle);
-	effectPath = "data/Effects/Effect3Ass.effectbinary";
+	effectPath = "data/Effects/Effect4.effectbinary";
 	eae6320::Graphics::cEffect::s_Manager.Load(effectPath, effect2Handle);
 
 	UpdateMeshAndEffect();

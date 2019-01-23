@@ -15,8 +15,10 @@
 	{
 		float4 o_vertexPosition_projected : SV_POSITION;
 		float4 o_vertexPosition_local : TEXCOORD1;
+		float4 o_vertexPosition_world : TEXCOORD3;
 		float4 o_vertexColor_projected : COLOR;
 		float4 o_vertexColor_local : TEXCOORD2;
+		float4 o_vertexColor_world : TEXCOORD4;
 	};
 
 void main(
@@ -38,10 +40,10 @@ void main(
 {
 	// Output solid white
 	o_color = float4(
-		floor(sin(i_VSInput.o_vertexPosition_local.x) / cos(i_VSInput.o_vertexPosition_local.x)),
-		floor(sin(i_VSInput.o_vertexPosition_local.y) / cos(i_VSInput.o_vertexPosition_local.y)),
-		floor(sin(i_VSInput.o_vertexPosition_local.z) / cos(i_VSInput.o_vertexPosition_local.z)), 1.0)
-		* i_VSInput.o_vertexPosition_local;
+		floor(sin(i_VSInput.o_vertexPosition_world.x) / cos(i_VSInput.o_vertexPosition_world.y)),
+		floor(sin(i_VSInput.o_vertexPosition_world.y) / cos(i_VSInput.o_vertexPosition_world.z)),
+		floor(sin(i_VSInput.o_vertexPosition_world.z) / cos(i_VSInput.o_vertexPosition_world.y)), 1.0)
+		* i_VSInput.o_vertexColor_world;
 }
 
 #elif defined( EAE6320_PLATFORM_GL )
