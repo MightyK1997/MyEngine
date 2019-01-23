@@ -26,10 +26,13 @@
 	float4x4 g_transform_worldToCamera;
 	float4x4 g_transform_cameraToProjected;
 
+	float3 g_CameraPositionInWorld;
+	float g_padding0;
+
 	float g_elapsedSecondCount_systemTime;
 	float g_elapsedSecondCount_simulationTime;
 	// For float4 alignment
-	float2 g_padding;
+	float2 g_padding1;
 };
 
 cbuffer g_constantBuffer_perDrawCall : register( b2 )

@@ -53,13 +53,7 @@ void main(
 
 	)
 {
-	float s = (sin(g_elapsedSecondCount_simulationTime) + 0.5) + 1;
-	float4x4 identity = {
-		s,0,0,0,
-		0,s,0,0,
-		0,0,s,0,
-		0,0,0,1,
-	};
+	float4 color = {1,0,0,1};
 	// Transform the local vertex into world space
 	float4 vertexPosition_world;
 	{
@@ -67,7 +61,6 @@ void main(
 		// For now, however, local space is treated as if it is world space.
 		float4 vertexPosition_local = float4( i_vertexPosition_local, 1.0 );
 		//vertexPosition_world = vertexPosition_local;
-		vertexPosition_local = mul(identity, vertexPosition_local);
 		vertexPosition_world = mul(g_transform_localToWorld, vertexPosition_local);
 	}
 	// Calculate the position of this vertex projected onto the display
@@ -76,7 +69,8 @@ void main(
 		float4 vertexPosition_camera = mul( g_transform_worldToCamera, vertexPosition_world );
 		// Project the vertex from camera space into projected space
 		output.o_vertexPosition_projected = mul( g_transform_cameraToProjected, vertexPosition_camera );
-		output.o_vertexColor_projected = i_vertexColor_local;
+		const float distance = length((g_CameraPositionInWorld - (vertexPosition_world).xyz));
+		output.o_vertexColor_projected = lerp(color, i_vertexColor_local, saturate(distance/100));
 	}
 }
 

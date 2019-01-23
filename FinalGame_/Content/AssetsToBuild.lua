@@ -14,5 +14,6 @@ return
 		"Effects/Effect3.Effect",
 		"Effects/Effect4.Effect",
 		"Effects/Effect5.Effect",
+		"Effects/Effect6.Effect",
 	},
 }

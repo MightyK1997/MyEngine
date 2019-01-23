@@ -3,6 +3,7 @@
 
 #include <Engine/Results/Results.h>
 #include <Engine/Assets/ReferenceCountedAssets.h>
+#include <Engine/Math/cMatrix_transformation.h>
 
 namespace eae6320
 {
@@ -29,6 +30,7 @@ namespace eae6320
 
 			Math::sVector PredictFuturePosition(const float i_secondCountToExtrapolate) const;
 			Math::cQuaternion PredictFutureOrientation(const float i_secondCountToExtrapolate) const;
+			Math::cMatrix_transformation GetLocalToWorldTransformation(float i_secondCountToExtrapolate) const;
 
 			void Update(const float i_elapsedSecondCount_sinceLastUpdate);
 			
