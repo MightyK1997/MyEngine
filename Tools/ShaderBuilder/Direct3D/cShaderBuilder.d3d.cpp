@@ -138,7 +138,7 @@ eae6320::cResult eae6320::Assets::cShaderBuilder::Build( const Graphics::ShaderT
 		// The following can be #defined
 		// in order to create a human-readable file with the shader instructions
 		// (this can be useful during development to see how code changes affect instruction count)
-#define EAE6320_GRAPHICS_SHOULDDISASSEMBLYBECREATED
+//#define EAE6320_GRAPHICS_SHOULDDISASSEMBLYBECREATED
 #ifdef EAE6320_GRAPHICS_SHOULDDISASSEMBLYBECREATED
 		const auto path_disassembly = [i_shaderType]( const std::string& i_path_compiledShader )
 		{
