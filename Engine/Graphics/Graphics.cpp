@@ -83,7 +83,6 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 	constDataBuffer.g_transform_worldToCamera = eae6320::Math::cMatrix_transformation::CreateWorldToCameraTransform(
 		i_Camera->PredictFutureOrientation(i_secondCountToExtrapolate), i_Camera->PredictFuturePosition(i_secondCountToExtrapolate));
 	constDataBuffer.g_transform_cameraToProjected = eae6320::Math::cMatrix_transformation::CreateCameraToProjectedTransform_perspective(0.745f, 1, 0.1f, 100);
-	constDataBuffer.g_CameraPositionInWorld = i_Camera->GetCameraPosition();
 	auto& renderCommand = s_dataBeingSubmittedByApplicationThread->m_RenderHandles;
 	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = i_NumberOfGameObjectsToRender;
 	auto m_allDrawCallConstants = s_dataBeingSubmittedByApplicationThread->constantData_perDrawCall;

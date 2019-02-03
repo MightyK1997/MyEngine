@@ -64,6 +64,7 @@ namespace eae6320
 			eae6320::Graphics::cShader::Handle m_vertexShader;
 			eae6320::Graphics::cShader::Handle m_fragmentShader;
 			eae6320::Graphics::cRenderState s_renderState;
+			eae6320::Graphics::cRenderState::Handle s_renderStateHandle;
 #elif EAE6320_PLATFORM_GL
 			eae6320::Graphics::cShader::Handle m_vertexShader;
 			eae6320::Graphics::cShader::Handle m_fragmentShader;

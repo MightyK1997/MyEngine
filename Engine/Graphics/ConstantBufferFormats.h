@@ -23,7 +23,7 @@ namespace eae6320
 {
 	namespace Graphics
 	{
-		namespace ConstantBufferFormats
+		namespace ConstantBufferForm
 		{
 			struct sPerFrame
 			{
