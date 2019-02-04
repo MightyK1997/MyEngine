@@ -88,7 +88,8 @@ namespace Engine
 			}
 			float Matrix::GetDeterminant(void) const
 			{
-				float d1, d2, d3, d4;
+				//TODO : Finish the determinant Later
+				//float d1, d2, d3, d4;
 				return 0.0f;
 			}
 			Matrix Matrix::operator*(const Matrix & i_Rhs)
