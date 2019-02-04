@@ -92,6 +92,7 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 	{
 		auto e = i_GameObject[i]->GetGameObjectEffectHandle().GetIndex();
 		auto m = i_GameObject[i]->GetGameObjectMeshHandle().GetIndex();
+		m_allDrawCallConstants[i].g_transform_localToWorld = constDataBuffer.g_transform_worldToCamera * i_LocaltoWorldTransforms[i];
 		m_allDrawCallConstants[i].g_transform_localToProjected = constDataBuffer.g_transform_cameraToProjected * (constDataBuffer.g_transform_worldToCamera * i_LocaltoWorldTransforms[i]);
 		auto zValue = (constDataBuffer.g_transform_worldToCamera * i_LocaltoWorldTransforms[i]).GetTranslation().z;
 		zValue = -((zValue - 0.1f) / (100-0.1f));
