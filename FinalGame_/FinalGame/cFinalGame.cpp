@@ -181,7 +181,7 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	//Effect 5 - Changes size with time.
 	//Effect 6 - Change to red according to distance from camera.
 
-	effectPath = "data/Effects/Effect5.effectbinary";
+	effectPath = "data/Effects/Effect3.effectbinary";
 	eae6320::Graphics::cEffect::s_Manager.Load(effectPath, effect2Handle);
 
 	UpdateMeshAndEffect();
