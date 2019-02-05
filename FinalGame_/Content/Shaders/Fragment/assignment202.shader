@@ -14,10 +14,8 @@
 	struct VS_OUTPUT
 	{
 		float4 o_vertexPosition_projected : SV_POSITION;
-		float4 o_vertexPosition_local : TEXCOORD1;
 		float4 o_vertexPosition_world : TEXCOORD3;
 		float4 o_vertexColor_projected : COLOR;
-		float4 o_vertexColor_local : TEXCOORD2;
 		float4 o_vertexColor_world : TEXCOORD4;
 	};
 

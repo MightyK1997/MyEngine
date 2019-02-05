@@ -44,19 +44,20 @@ void main(
 {
 	// Transform the local vertex into world space
 	float4 vertexPosition_world;
+	float4 vertexPosition_local;
 	{
 		// This will be done in a future assignment.
 		// For now, however, local space is treated as if it is world space.
-		float4 vertexPosition_local = float4( i_vertexPosition_local, 1.0 );
+		vertexPosition_local = float4( i_vertexPosition_local, 1.0 );
 		//vertexPosition_world = vertexPosition_local;
-		vertexPosition_world = mul(g_transform_localToWorld, vertexPosition_local);
+		//vertexPosition_world = mul(g_transform_localToWorld, vertexPosition_local);
 	}
 	// Calculate the position of this vertex projected onto the display
 	{
 		// Transform the vertex from world space into camera space
-		float4 vertexPosition_camera = mul( g_transform_worldToCamera, vertexPosition_world );
+		//float4 vertexPosition_camera = mul( g_transform_worldToCamera, vertexPosition_world );
 		// Project the vertex from camera space into projected space
-		o_vertexPosition_projected = mul( g_transform_cameraToProjected, vertexPosition_camera );
+		o_vertexPosition_projected = mul( g_transform_localToProjected, vertexPosition_local);
 		o_vertexColor_projected = i_vertexColor_local;
 	}
 }
