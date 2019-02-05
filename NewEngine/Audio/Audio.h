@@ -9,6 +9,7 @@ namespace Sound
 	public:
 		Audio();
 		~Audio();
+		HRESULT PlayBuffer(const XAUDIO2_BUFFER i_Buffer, const WAVEFORMATEX* i_WaveFormat) const;
 
 	private:
 		IXAudio2* pXAudio = nullptr;

@@ -154,6 +154,11 @@
   <ItemGroup>
     <ClInclude Include="HeapManagerProxy.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NewEngine\Audio\Audio.vcxproj">
+      <Project>{089580f3-b1c0-43e2-b72e-15bca1f0ebc3}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

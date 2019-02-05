@@ -108,7 +108,7 @@ namespace Engine
 				{
 					type = lua_type(m_pLuaState, -1);
 					assert(type == LUA_TNUMBER);
-					postionFloats[someValue] = (float)lua_tonumber(m_pLuaState, -1);
+					postionFloats[someValue] = static_cast<float>(lua_tonumber(m_pLuaState, -1));
 					someValue++;
 					lua_pop(m_pLuaState, 1);
 				}
@@ -125,7 +125,7 @@ namespace Engine
 				{
 					type = lua_type(m_pLuaState, -1);
 					assert(type == LUA_TNUMBER);
-					rotationFloats[someValue] = (float)lua_tonumber(m_pLuaState, -1);
+					rotationFloats[someValue] = static_cast<float>(lua_tonumber(m_pLuaState, -1));
 
 					someValue++;
 
@@ -170,8 +170,8 @@ namespace Engine
 			//m_Sprite = CreateSprite(spriteFileLocation);
 			m_Position = Vector3(postionFloats[0], postionFloats[1], postionFloats[2]);
 			m_Rotation = Vector3(rotationFloats[0], rotationFloats[1], rotationFloats[2]);
-			m_GameObjectAABB = { Vector3(static_cast<float>(co.GetWidth() / 2), static_cast<float>(co.GetHeight() / 2), 0), Vector3(static_cast<float>(co.GetWidth() / 2), static_cast<float>(co.GetHeight() / 2), 0) };
-			m_isKinematic = temp == 0 ? true : false;
+			//m_GameObjectAABB = { Vector3(static_cast<float>(co.GetWidth() / 2), static_cast<float>(co.GetHeight() / 2), 0), Vector3(static_cast<float>(co.GetWidth() / 2), static_cast<float>(co.GetHeight() / 2), 0) };
+			m_isKinematic = temp == 0;
 			m_Name = gameObjectName;
 			m_Class = gameObjectClass;
 			//Engine::GameObject::m_allGameObjects->operator[](gameObjectName) = *m_returnGameObject;
