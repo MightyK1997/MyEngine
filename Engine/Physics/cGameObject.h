@@ -32,12 +32,15 @@ namespace eae6320
 			void SetGameObjectAcceleration(Math::sVector i_Acceleration);
 			void SetGameObjectMesh(Graphics::cMesh* i_Mesh);
 			void SetGameObjectEffect(Graphics::cEffect* i_Effect);
-			Graphics::cMesh* GetGameObjectMesh();
-			Graphics::cEffect* GetGameObjectEffet();
-			Graphics::sEffectsAndMeshesToRender GetMeshEffectPair();
-			void UpdateGameObject(const float i_elapsedSecondCount_sinceLastUpdate);
-			Math::sVector PredictFuturePosition(const float i_secondCountToExtrapolate) const;
-			Math::cQuaternion PredictFutureOrientation(const float i_secondCountToExtrapolate) const;
+			void SetGameObjectHandles(Graphics::cMesh::Handle i_MeshHandle, Graphics::cEffect::Handle i_EffectHandle);
+			Graphics::cMesh* GetGameObjectMesh() const;
+			Graphics::cEffect* GetGameObjectEffect() const;
+			Graphics::sEffectsAndMeshesToRender GetMeshEffectPair() const;
+			void UpdateGameObject(float i_elapsedSecondCount_sinceLastUpdate);
+			Math::sVector PredictFuturePosition(float i_secondCountToExtrapolate) const;
+			Math::cQuaternion PredictFutureOrientation(float i_secondCountToExtrapolate) const;
+			Graphics::cMesh::Handle GetGameObjectMeshHandle() const { return m_MeshHandle; }
+			Graphics::cEffect::Handle GetGameObjectEffectHandle() const { return m_EffectHandle; }
 
 			//Get the matrix transformation
 			Math::cMatrix_transformation GetLocalToWorldTransformation(const float i_secondCountToExtrapolate);
@@ -48,6 +51,8 @@ namespace eae6320
 			~cGameObject(){}
 			sRigidBodyState m_RigidBody;
 			Graphics::sEffectsAndMeshesToRender m_EffectMeshPairForRigidBody;
+			Graphics::cMesh::Handle m_MeshHandle;
+			Graphics::cEffect::Handle m_EffectHandle;
 		};
 	}
 }

@@ -2,8 +2,8 @@ return
 {
 Effect = 
 {
-VertexShaderLocation = "Shaders/Vertex/standard.shader",
-FragmentShaderLocation = "Shaders/Fragment/AnimatedShader.shader",
+VertexShaderLocation = "Shaders/Vertex/Assignment202.shader",
+FragmentShaderLocation = "Shaders/Fragment/Assignment202.shader",
 VertexInputLayoutShaderLocation = "Shaders/Vertex/vertexInputLayout.shader",
 RenderState = "DepthBuffering",
 },

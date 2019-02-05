@@ -32,7 +32,7 @@ namespace eae6320
 			using Handle = Assets::cHandle<cEffect>;
 			static Assets::cManager<cEffect> s_Manager;
 
-			static cResult Load(const char* const i_FilePath, cEffect*& o_Effect);
+			static cResult Load(const std::string& i_FilePath, cEffect*& o_Effect);
 
 			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()
 			EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cEffect)

@@ -36,7 +36,6 @@
   <ItemGroup>
     <ClCompile Include="cFinalGame.cpp" />
     <ClCompile Include="EntryPoint.cpp" />
-    <ClCompile Include="FinalGameHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Details.bin" />

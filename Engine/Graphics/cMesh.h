@@ -32,11 +32,11 @@ namespace eae6320
 			using Handle = Assets::cHandle<cMesh>;
 			static Assets::cManager<cMesh> s_Manager;
 
-			static cResult Load(const char* const i_FilePath, cMesh*& o_Mesh);
+			static cResult Load(const std::string& i_FilePath, cMesh*& o_Mesh);
 
 			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()
 			EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cMesh)
-			void Draw();
+			void Draw(bool bindVertex);
 			static cResult CreateMesh(eae6320::Graphics::VertexFormats::sMesh* i_inputMesh, eae6320::Graphics::VertexFormats::sIndex* i_inputIndex, unsigned int i_IndexCount, unsigned int i_VertexCount, cMesh*& o_Mesh)
 			{
 				cResult result = Results::Success;

@@ -36,11 +36,11 @@ eae6320::cResult LoadFile(const char* const i_FileName)
 }
 
 //Manager load Function
-eae6320::cResult eae6320::Graphics::cMesh::Load(const char * const i_FilePath, cMesh *& o_Mesh)
+eae6320::cResult eae6320::Graphics::cMesh::Load(const std::string& i_FilePath, cMesh *& o_Mesh)
 {
 	cResult result = Results::Success;
 	cMesh* outputMesh = nullptr;
-	if (!(result = LoadFile(i_FilePath)))
+	if (!(result = LoadFile(i_FilePath.c_str())))
 	{
 		return result;
 	}

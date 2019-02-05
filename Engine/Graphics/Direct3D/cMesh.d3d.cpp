@@ -11,6 +11,7 @@ namespace eae6320
 			indexCount = i_IndexCount;
 			auto result = eae6320::Results::Success;
 			auto* const direct3dDevice = eae6320::Graphics::sContext::g_context.direct3dDevice;
+			auto* const direct3dImmediateContext = sContext::g_context.direct3dImmediateContext;
 			EAE6320_ASSERT(direct3dDevice);
 
 			// Initialize vertex format
@@ -139,44 +140,48 @@ namespace eae6320
 				}
 			}
 
+			// Specify what kind of data the vertex buffer holds
+			{
+				// Set the layout (which defines how to interpret a single vertex)
+				{
+					EAE6320_ASSERT(m_vertexInputLayout);
+					direct3dImmediateContext->IASetInputLayout(m_vertexInputLayout);
+				}
+				// Set the topology (which defines how to interpret multiple vertices as a single "primitive";
+				// the vertex buffer was defined as a triangle list
+				// (meaning that every primitive is a triangle and will be defined by three vertices)
+				direct3dImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+			}
+
 		OnExit:
 
 			return result;
 		}
-		void cMesh::Draw()
+		void cMesh::Draw(bool bindVertex)
 		{
 			auto* const direct3dImmediateContext = sContext::g_context.direct3dImmediateContext;
 			{
-				// Bind a specific vertex buffer to the device as a data source
+				if (bindVertex)
 				{
-					EAE6320_ASSERT(m_vertexBuffer);
-					constexpr unsigned int startingSlot = 0;
-					constexpr unsigned int vertexBufferCount = 1;
-					// The "stride" defines how large a single vertex is in the stream of data
-					constexpr unsigned int bufferStride = sizeof(VertexFormats::sMesh);
-					// It's possible to start streaming data in the middle of a vertex buffer
-					constexpr unsigned int bufferOffset = 0;
-					direct3dImmediateContext->IASetVertexBuffers(startingSlot, vertexBufferCount, &m_vertexBuffer, &bufferStride, &bufferOffset);
-				}
-				// Specify what kind of data the vertex buffer holds
-				{
-					// Set the layout (which defines how to interpret a single vertex)
+					// Bind a specific vertex buffer to the device as a data source
 					{
-						EAE6320_ASSERT(m_vertexInputLayout);
-						direct3dImmediateContext->IASetInputLayout(m_vertexInputLayout);
+						EAE6320_ASSERT(m_vertexBuffer);
+						constexpr unsigned int startingSlot = 0;
+						constexpr unsigned int vertexBufferCount = 1;
+						// The "stride" defines how large a single vertex is in the stream of data
+						constexpr unsigned int bufferStride = sizeof(VertexFormats::sMesh);
+						// It's possible to start streaming data in the middle of a vertex buffer
+						constexpr unsigned int bufferOffset = 0;
+						direct3dImmediateContext->IASetVertexBuffers(startingSlot, vertexBufferCount, &m_vertexBuffer, &bufferStride, &bufferOffset);
 					}
-					// Set the topology (which defines how to interpret multiple vertices as a single "primitive";
-					// the vertex buffer was defined as a triangle list
-					// (meaning that every primitive is a triangle and will be defined by three vertices)
-					direct3dImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-				}
-				// Bind a specific Index buffer to the device as a data source
-				{
-					EAE6320_ASSERT(m_indexBuffer);
-					constexpr DXGI_FORMAT indexFormat = DXGI_FORMAT_R16_UINT;
-					// The indices start at the beginning of the buffer
-					constexpr unsigned int offset = 0;
-					direct3dImmediateContext->IASetIndexBuffer(m_indexBuffer, indexFormat, offset);
+					// Bind a specific Index buffer to the device as a data source
+					{
+						EAE6320_ASSERT(m_indexBuffer);
+						constexpr DXGI_FORMAT indexFormat = DXGI_FORMAT_R16_UINT;
+						// The indices start at the beginning of the buffer
+						constexpr unsigned int offset = 0;
+						direct3dImmediateContext->IASetIndexBuffer(m_indexBuffer, indexFormat, offset);
+					}
 				}
 				// Render triangles from the currently-bound index buffer
 				{
@@ -186,12 +191,6 @@ namespace eae6320
 					constexpr unsigned int indexOfFirstIndexToUse = 0;
 					constexpr unsigned int offsetToAddToEachIndex = 0;
 					direct3dImmediateContext->DrawIndexed(static_cast<unsigned int>(indexCount), indexOfFirstIndexToUse, offsetToAddToEachIndex);
-
-
-					//constexpr unsigned int indexOfFirstVertexToRender = 0;
-
-					////Changing vertexCountToRender to vertexCount
-					//direct3dImmediateContext->Draw(vertexCount, indexOfFirstVertexToRender);
 				}
 			}
 

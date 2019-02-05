@@ -86,37 +86,45 @@ void eae6320::Physics::cGameObject::SetGameObjectEffect(Graphics::cEffect * i_Ef
 	m_EffectMeshPairForRigidBody.m_RenderEffect = i_Effect;
 }
 
-eae6320::Graphics::cMesh * eae6320::Physics::cGameObject::GetGameObjectMesh()
+void eae6320::Physics::cGameObject::SetGameObjectHandles(Graphics::cMesh::Handle i_MeshHandle,
+	Graphics::cEffect::Handle i_EffectHandle)
+{
+	m_MeshHandle = i_MeshHandle;
+	m_EffectHandle = i_EffectHandle;
+}
+
+eae6320::Graphics::cMesh * eae6320::Physics::cGameObject::GetGameObjectMesh() const
 {
 	return m_EffectMeshPairForRigidBody.m_RenderMesh;
 }
 
-eae6320::Graphics::cEffect * eae6320::Physics::cGameObject::GetGameObjectEffet()
+eae6320::Graphics::cEffect * eae6320::Physics::cGameObject::GetGameObjectEffect() const
 {
 	return m_EffectMeshPairForRigidBody.m_RenderEffect;
 }
 
-eae6320::Graphics::sEffectsAndMeshesToRender eae6320::Physics::cGameObject::GetMeshEffectPair()
+eae6320::Graphics::sEffectsAndMeshesToRender eae6320::Physics::cGameObject::GetMeshEffectPair() const
 {
 	return m_EffectMeshPairForRigidBody;
 }
 
-void eae6320::Physics::cGameObject::UpdateGameObject(const float i_elapsedSecondCount_sinceLastUpdate)
+void eae6320::Physics::cGameObject::UpdateGameObject(float i_elapsedSecondCount_sinceLastUpdate)
 {
 	m_RigidBody.Update(i_elapsedSecondCount_sinceLastUpdate);
 }
 
-eae6320::Math::sVector eae6320::Physics::cGameObject::PredictFuturePosition(const float i_secondCountToExtrapolate) const
+eae6320::Math::sVector eae6320::Physics::cGameObject::PredictFuturePosition(float i_secondCountToExtrapolate) const
 {
 	return m_RigidBody.PredictFuturePosition(i_secondCountToExtrapolate);
 }
 
-eae6320::Math::cQuaternion eae6320::Physics::cGameObject::PredictFutureOrientation(const float i_secondCountToExtrapolate) const
+eae6320::Math::cQuaternion eae6320::Physics::cGameObject::PredictFutureOrientation(float i_secondCountToExtrapolate) const
 {
 	return m_RigidBody.PredictFutureOrientation(i_secondCountToExtrapolate);
 }
 
-eae6320::Math::cMatrix_transformation eae6320::Physics::cGameObject::GetLocalToWorldTransformation(const float i_secondCountToExtrapolate)
+eae6320::Math::cMatrix_transformation eae6320::Physics::cGameObject::GetLocalToWorldTransformation(float i_secondCountToExtrapolate)
 {
-	return eae6320::Math::cMatrix_transformation(m_RigidBody.PredictFutureOrientation(i_secondCountToExtrapolate), m_RigidBody.PredictFuturePosition(i_secondCountToExtrapolate));
+	return eae6320::Math::cMatrix_transformation(m_RigidBody.PredictFutureOrientation(i_secondCountToExtrapolate),
+	                                             m_RigidBody.PredictFuturePosition(i_secondCountToExtrapolate));
 }

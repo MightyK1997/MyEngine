@@ -72,3 +72,9 @@ void eae6320::Graphics::cCamera::Update(const float i_elapsedSecondCount_sinceLa
 {
 	m_CameraRigidBody.Update(i_elapsedSecondCount_sinceLastUpdate);
 }
+
+eae6320::Math::cMatrix_transformation eae6320::Graphics::cCamera::GetLocalToWorldTransformation(float i_secondCountToExtrapolate) const
+{
+	return eae6320::Math::cMatrix_transformation(m_CameraRigidBody.PredictFutureOrientation(i_secondCountToExtrapolate),
+		m_CameraRigidBody.PredictFuturePosition(i_secondCountToExtrapolate));
+}
