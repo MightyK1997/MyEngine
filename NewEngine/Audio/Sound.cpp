@@ -49,6 +49,14 @@ void Sound::Sound::Play(const std::string& i_SoundFilePath)
 	if (i_SoundFilePath.substr(i_SoundFilePath.find('.') + 1) != "wav")  return;
 	if (m_Audio == nullptr)	{ m_Audio = new Audio(); }
 
+	auto iterator = m_ListOfAllSources.find(i_SoundFilePath);
+	if (iterator != m_ListOfAllSources.end())
+	{
+		auto source = iterator->second;
+		m_Audio->PlayBuffer(source);
+		return;
+	}
+
 	HANDLE soundFileHandle;
 	hr = LoadFileData(i_SoundFilePath, soundFileHandle);
 	if (FAILED(hr)) return;
@@ -76,8 +84,9 @@ void Sound::Sound::Play(const std::string& i_SoundFilePath)
 	buffer.AudioBytes = dwChunkSize;
 	buffer.pAudioData = pDataBuffer;
 	buffer.Flags = XAUDIO2_END_OF_STREAM;
-	buffer.LoopCount = XAUDIO2_LOOP_INFINITE;
-	m_Audio->PlayBuffer(buffer, &fileData);
+	IXAudio2SourceVoice* source;
+	if (FAILED(hr = m_Audio->PlayBuffer(buffer, &fileData, source))) return;
+	m_ListOfAllSources.insert(std::make_pair(i_SoundFilePath, source));
 }
 
 HRESULT Sound::Sound::LoadFileData(const std::string& i_SoundFilePath, HANDLE& o_FileHandle)

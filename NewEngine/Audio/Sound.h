@@ -5,6 +5,7 @@
 
 //Engine Includes
 #include "Audio.h"
+#include <map>
 
 #define fourccRIFF 'FFIR'
 #define fourccDATA 'atad'
@@ -31,5 +32,6 @@ namespace Sound
 		Audio* m_Audio = nullptr;
 		WAVEFORMATEX fileData = { 0 };
 		XAUDIO2_BUFFER buffer = { 0 };
+		std::map<std::string, IXAudio2SourceVoice*> m_ListOfAllSources;
 	};
 }
