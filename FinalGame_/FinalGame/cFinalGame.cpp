@@ -175,7 +175,13 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 
 	std::string effectPath = "data/Effects/Effect1.effectbinary";
 	eae6320::Graphics::cEffect::s_Manager.Load(effectPath, effect1Handle);
-	effectPath = "data/Effects/Effect2.effectbinary";
+	
+	//Effect 3 - Pattern based on local position.
+	//Effect 4 - Changes pattern on object with world position.
+	//Effect 5 - Changes size with time.
+	//Effect 6 - Change to red according to distance from camera.
+
+	effectPath = "data/Effects/Effect3.effectbinary";
 	eae6320::Graphics::cEffect::s_Manager.Load(effectPath, effect2Handle);
 
 	UpdateMeshAndEffect();
