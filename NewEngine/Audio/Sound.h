@@ -20,7 +20,7 @@ namespace Sound
 	class Sound
 	{
 	public:
-		void Play(const std::string& i_SoundFilePath);
+		HRESULT Play(const std::string& i_SoundFilePath);
 
 	private:
 		HRESULT LoadFileData(const std::string& i_SoundFilePath, HANDLE& o_FileHandle);

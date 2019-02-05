@@ -43,10 +43,10 @@ std::wstring ConvertUtf8ToUtf16(const char* const i_string_utf8)
 }
 
 
-void Sound::Sound::Play(const std::string& i_SoundFilePath)
+HRESULT Sound::Sound::Play(const std::string& i_SoundFilePath)
 {
 	HRESULT hr = S_OK;
-	if (i_SoundFilePath.substr(i_SoundFilePath.find('.') + 1) != "wav")  return;
+	if (i_SoundFilePath.substr(i_SoundFilePath.find('.') + 1) != "wav")  return ERROR;
 	if (m_Audio == nullptr)	{ m_Audio = new Audio(); }
 
 	auto iterator = m_ListOfAllSources.find(i_SoundFilePath);
@@ -54,20 +54,20 @@ void Sound::Sound::Play(const std::string& i_SoundFilePath)
 	{
 		auto source = iterator->second;
 		m_Audio->PlayBuffer(source);
-		return;
+		return S_OK;
 	}
 
 	HANDLE soundFileHandle;
 	hr = LoadFileData(i_SoundFilePath, soundFileHandle);
-	if (FAILED(hr)) return;
+	if (FAILED(hr)) return hr;
 
 	DWORD dwChunkSize;
 	DWORD dwChunkPosition;
 	hr = FindDataChunk(soundFileHandle, fourccRIFF, dwChunkSize, dwChunkPosition);
-	if (FAILED(hr)) return;
+	if (FAILED(hr)) return hr;
 	DWORD fileType;
 	hr = ReadDataFromChunk(soundFileHandle, &fileType, sizeof(DWORD), dwChunkPosition);
-	if (fileType != fourccWAVE) return;
+	if (fileType != fourccWAVE) return ERROR;
 
 	//Read FMT data
 	FindDataChunk(soundFileHandle, fourccFMT, dwChunkSize, dwChunkPosition);
@@ -85,8 +85,9 @@ void Sound::Sound::Play(const std::string& i_SoundFilePath)
 	buffer.pAudioData = pDataBuffer;
 	buffer.Flags = XAUDIO2_END_OF_STREAM;
 	IXAudio2SourceVoice* source;
-	if (FAILED(hr = m_Audio->PlayBuffer(buffer, &fileData, source))) return;
+	if (FAILED(hr = m_Audio->PlayBuffer(buffer, &fileData, source))) return hr;
 	m_ListOfAllSources.insert(std::make_pair(i_SoundFilePath, source));
+	return hr;
 }
 
 HRESULT Sound::Sound::LoadFileData(const std::string& i_SoundFilePath, HANDLE& o_FileHandle)
