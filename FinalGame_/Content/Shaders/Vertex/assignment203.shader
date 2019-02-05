@@ -54,20 +54,13 @@ void main(
 	)
 {
 	float s = (sin(g_elapsedSecondCount_simulationTime) + 0.5) + 1;
-	float4x4 identity = {
-		s,0,0,0,
-		0,s,0,0,
-		0,0,s,0,
-		0,0,0,1,
-	};
 	// Transform the local vertex into world space
 	float4 vertexPosition_world;
 	{
 		// This will be done in a future assignment.
 		// For now, however, local space is treated as if it is world space.
-		float4 vertexPosition_local = float4( i_vertexPosition_local, 1.0 );
-		//vertexPosition_world = vertexPosition_local;
-		vertexPosition_local = mul(identity, vertexPosition_local);
+		float3 scaledLocalPosition = i_vertexPosition_local * s;
+		float4 vertexPosition_local = float4(scaledLocalPosition, 1.0 );
 		vertexPosition_world = mul(g_transform_localToWorld, vertexPosition_local);
 	}
 	// Calculate the position of this vertex projected onto the display
