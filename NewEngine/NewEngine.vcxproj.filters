@@ -84,6 +84,9 @@
     <ClCompile Include="Timer\Timer.cpp">
       <Filter>Source Files\Timer</Filter>
     </ClCompile>
+    <ClCompile Include="Manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MemoryAllocators\BlockAllocator.h">
@@ -112,6 +115,12 @@
     </ClInclude>
     <ClInclude Include="Timer\Timer.h">
       <Filter>Header Files\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Handle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

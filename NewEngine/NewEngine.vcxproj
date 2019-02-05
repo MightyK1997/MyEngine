@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Debug\Log.cpp" />
     <ClCompile Include="GameObject\GameObject.cpp" />
+    <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Math\Matrix\Matrix.cpp" />
     <ClCompile Include="Math\Vector\Vector2.cpp" />
     <ClCompile Include="Math\Vector\Vector3.cpp" />
@@ -32,6 +33,8 @@
   <ItemGroup>
     <ClInclude Include="Debug\Log.h" />
     <ClInclude Include="GameObject\GameObject.h" />
+    <ClInclude Include="Handle.h" />
+    <ClInclude Include="Manager.h" />
     <ClInclude Include="Math\Matrix\Matrix.h" />
     <ClInclude Include="Math\Vector\Vector2.h" />
     <ClInclude Include="Math\Vector\Vector3.h" />
