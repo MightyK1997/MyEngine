@@ -61,34 +61,41 @@ HRESULT Sound::Sound::Play(const std::string& i_SoundFilePath)
 	hr = LoadFileData(i_SoundFilePath, soundFileHandle);
 	if (FAILED(hr)) return hr;
 
-	DWORD dwChunkSize;
-	DWORD dwChunkPosition;
-	hr = FindDataChunk(soundFileHandle, fourccRIFF, dwChunkSize, dwChunkPosition);
-	if (FAILED(hr)) return hr;
-	DWORD fileType;
-	hr = ReadDataFromChunk(soundFileHandle, &fileType, sizeof(DWORD), dwChunkPosition);
-	if (fileType != fourccWAVE) return ERROR;
+	WAVEFORMATEX fileData = { 0 };
+	XAUDIO2_BUFFER buffer = { 0 };
 
-	//Read FMT data
-	FindDataChunk(soundFileHandle, fourccFMT, dwChunkSize, dwChunkPosition);
-	ReadDataFromChunk(soundFileHandle, &fileData, dwChunkSize, dwChunkPosition);
+	if (FAILED(hr = LoadFileDataIntoBuffer(soundFileHandle, buffer, fileData))) return hr;
 
-	//Read data chunk from file
-	FindDataChunk(soundFileHandle, fourccDATA, dwChunkSize, dwChunkPosition);
-	BYTE* pDataBuffer = new BYTE[dwChunkSize];
-	ReadDataFromChunk(soundFileHandle, pDataBuffer, dwChunkSize, dwChunkPosition);
-
-	auto value = *pDataBuffer;
-
-	//Populate data into xaudio buffer
-	buffer.AudioBytes = dwChunkSize;
-	buffer.pAudioData = pDataBuffer;
-	buffer.Flags = XAUDIO2_END_OF_STREAM;
 	IXAudio2SourceVoice* source;
 	if (FAILED(hr = m_Audio->PlayBuffer(buffer, &fileData, source))) return hr;
 	m_ListOfAllSources.insert(std::make_pair(i_SoundFilePath, source));
 	return hr;
 }
+
+HRESULT Sound::Sound::AddToDefaultQueue(const std::string& i_SoundFilePath)
+{
+	HRESULT hr = S_OK;
+	WAVEFORMATEX fileData = { 0 };
+	XAUDIO2_BUFFER buffer = { 0 };
+	if (m_Audio == nullptr) { m_Audio = new Audio(); }
+
+	HANDLE soundFileHandle;
+	hr = LoadFileData(i_SoundFilePath, soundFileHandle);
+	if (FAILED(hr)) return hr;
+
+	if (FAILED(hr = LoadFileDataIntoBuffer(soundFileHandle, buffer, fileData))) return hr;
+	if (FAILED(hr = m_Audio->AddAndPlayDefaultQueue(buffer)))
+		return hr;
+	return hr;
+}
+
+//Sound::Sound::~Sound()
+//{
+//	for (auto iterator : m_ListOfAllSources)
+//	{
+//		iterator.second->DestroyVoice();
+//	}
+//}
 
 HRESULT Sound::Sound::LoadFileData(const std::string& i_SoundFilePath, HANDLE& o_FileHandle)
 {
@@ -154,5 +161,34 @@ HRESULT Sound::Sound::ReadDataFromChunk(HANDLE i_FileHandle, void* i_Buffer, DWO
 	DWORD dwRead;
 	if (0 == ReadFile(i_FileHandle, i_Buffer, i_BufferSize, &dwRead, NULL))
 		hr = HRESULT_FROM_WIN32(GetLastError());
+	return hr;
+}
+
+HRESULT Sound::Sound::LoadFileDataIntoBuffer(HANDLE i_FileHandle, XAUDIO2_BUFFER& o_Buffer, WAVEFORMATEX& o_WaveFormat)
+{
+	HRESULT hr;
+	DWORD dwChunkSize;
+	DWORD dwChunkPosition;
+	hr = FindDataChunk(i_FileHandle, fourccRIFF, dwChunkSize, dwChunkPosition);
+	if (FAILED(hr)) return hr;
+	DWORD fileType;
+	hr = ReadDataFromChunk(i_FileHandle, &fileType, sizeof(DWORD), dwChunkPosition);
+	if (fileType != fourccWAVE) return ERROR;
+
+	//Read FMT data
+	FindDataChunk(i_FileHandle, fourccFMT, dwChunkSize, dwChunkPosition);
+	ReadDataFromChunk(i_FileHandle, &o_WaveFormat, dwChunkSize, dwChunkPosition);
+
+	//Read data chunk from file
+	FindDataChunk(i_FileHandle, fourccDATA, dwChunkSize, dwChunkPosition);
+	BYTE* pDataBuffer = new BYTE[dwChunkSize];
+	ReadDataFromChunk(i_FileHandle, pDataBuffer, dwChunkSize, dwChunkPosition);
+
+	auto value = *pDataBuffer;
+
+	//Populate data into xaudio buffer
+	o_Buffer.AudioBytes = dwChunkSize;
+	o_Buffer.pAudioData = pDataBuffer;
+	o_Buffer.Flags = XAUDIO2_END_OF_STREAM;
 	return hr;
 }

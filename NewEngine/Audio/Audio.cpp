@@ -6,6 +6,11 @@ Audio::Audio()
 	HRESULT hr;
 	if (FAILED(hr = XAudio2Create(&pXAudio, 0, XAUDIO2_DEFAULT_PROCESSOR))) { pXAudio = nullptr; }
 	if (FAILED(hr = pXAudio->CreateMasteringVoice(&pMasteringVoice))) { pMasteringVoice = nullptr; }
+	WAVEFORMATEX wfx = { 0 };
+	wfx.nChannels = 2;
+	wfx.nSamplesPerSec = 44000;
+	if (FAILED(hr = pXAudio->CreateSourceVoice(&pDefaultSourceVoice, &wfx))) return;
+	pDefaultSourceVoice->Start();
 }
 
 Audio::~Audio()
@@ -29,5 +34,12 @@ HRESULT Audio::PlayBuffer(IXAudio2SourceVoice* pBuffer)
 	HRESULT hr = S_OK;
 	if (FAILED(hr = pBuffer->Stop())) return hr;
 	if (FAILED(hr = pBuffer->Start())) return hr;
+	return hr;
+}
+
+HRESULT Sound::Audio::AddAndPlayDefaultQueue(const XAUDIO2_BUFFER i_Buffer)
+{
+	HRESULT hr = S_OK;
+	if (FAILED(hr = pDefaultSourceVoice->SubmitSourceBuffer(&i_Buffer))) return hr;
 	return hr;
 }

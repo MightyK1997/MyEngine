@@ -5,7 +5,7 @@
 
 //Engine Includes
 #include "Audio.h"
-#include <map>
+#include <unordered_map>
 
 #define fourccRIFF 'FFIR'
 #define fourccDATA 'atad'
@@ -21,17 +21,18 @@ namespace Sound
 	{
 	public:
 		HRESULT Play(const std::string& i_SoundFilePath);
+		HRESULT AddToDefaultQueue(const std::string& i_SoundFilePath);
+		//~Sound();
 
 	private:
 		HRESULT LoadFileData(const std::string& i_SoundFilePath, HANDLE& o_FileHandle);
 		HRESULT FindDataChunk(HANDLE i_FileHandle, DWORD fourcc, DWORD& o_dwChunkSize, DWORD& o_dwChunkPosition);
 		HRESULT ReadDataFromChunk(HANDLE i_FileHandle, void* i_Buffer, DWORD i_BufferSize, DWORD i_BufferOffset);
+		HRESULT LoadFileDataIntoBuffer(HANDLE i_FileHandle, XAUDIO2_BUFFER& o_Buffer, WAVEFORMATEX& o_WaveFormat);
 
 
 	private:
 		Audio* m_Audio = nullptr;
-		WAVEFORMATEX fileData = { 0 };
-		XAUDIO2_BUFFER buffer = { 0 };
-		std::map<std::string, IXAudio2SourceVoice*> m_ListOfAllSources;
+		std::unordered_map<std::string, IXAudio2SourceVoice*> m_ListOfAllSources;
 	};
 }
