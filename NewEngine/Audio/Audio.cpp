@@ -7,14 +7,20 @@ Audio::Audio()
 	if (FAILED(hr = XAudio2Create(&pXAudio, 0, XAUDIO2_DEFAULT_PROCESSOR))) { pXAudio = nullptr; }
 	if (FAILED(hr = pXAudio->CreateMasteringVoice(&pMasteringVoice))) { pMasteringVoice = nullptr; }
 	WAVEFORMATEX wfx = { 0 };
+	wfx.wFormatTag = 1;
 	wfx.nChannels = 2;
-	wfx.nSamplesPerSec = 44000;
+	wfx.nSamplesPerSec = 22050;
+	wfx.nAvgBytesPerSec = 88200;
+	wfx.nBlockAlign = 4;
+	wfx.wBitsPerSample = 16;
+	wfx.cbSize = 0;
 	if (FAILED(hr = pXAudio->CreateSourceVoice(&pDefaultSourceVoice, &wfx))) return;
 	pDefaultSourceVoice->Start();
 }
 
 Audio::~Audio()
 {
+	pDefaultSourceVoice->DestroyVoice();
 	pXAudio->Release();
 }
 
