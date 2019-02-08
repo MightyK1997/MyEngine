@@ -1,4 +1,5 @@
 #include "AudioWasapi.h"
+#include "Sound.h"
 
 //I've already created a working sound system using XAudio2, which i'll show in the stream later.
 //Let me know in the chat, if the font is too small.
@@ -48,6 +49,10 @@ HRESULT AudioWasapi::PlayAudioData(const std::string& i_SoundFileName)
 {
 	HRESULT hr = S_OK;
 
+
+	HANDLE soundHandle;
+	Sound::Sound::LoadFileData(i_SoundFileName, soundHandle);
+
 	if (FAILED(hr = pAudioClient->GetMixFormat(&pWaveFormat))) return hr;
 
 	if (FAILED(hr = pAudioClient->Initialize(AUDCLNT_SHAREMODE_SHARED, 0, hnsRequestedDuration, 0,
@@ -59,9 +64,6 @@ HRESULT AudioWasapi::PlayAudioData(const std::string& i_SoundFileName)
 	if (FAILED(hr = pAudioClient->GetService(IID_IAudioClient, reinterpret_cast<void**>(&pAudioRenderClient)))) return hr;
 
 	//Now we get the buffer in which we store data.
-
-
-
 
 	return hr;
 }

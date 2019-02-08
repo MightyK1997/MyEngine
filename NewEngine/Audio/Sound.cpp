@@ -1,6 +1,6 @@
 #include "Sound.h"
 
-std::wstring ConvertUtf8ToUtf16(const char* const i_string_utf8)
+std::wstring Sound::ConvertUtf8ToUtf16(const char* const i_string_utf8)
 {
 
 	//Code Copyright John-Paul Ownby.

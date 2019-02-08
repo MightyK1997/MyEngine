@@ -17,6 +17,7 @@
 
 namespace Sound
 {
+	std::wstring ConvertUtf8ToUtf16(const char* const i_string_utf8);
 	class Sound
 	{
 	public:
@@ -24,11 +25,10 @@ namespace Sound
 		HRESULT AddToDefaultQueue(const std::string& i_SoundFilePath);
 		//~Sound();
 
-	private:
-		HRESULT LoadFileData(const std::string& i_SoundFilePath, HANDLE& o_FileHandle);
-		HRESULT FindDataChunk(HANDLE i_FileHandle, DWORD fourcc, DWORD& o_dwChunkSize, DWORD& o_dwChunkPosition);
-		HRESULT ReadDataFromChunk(HANDLE i_FileHandle, void* i_Buffer, DWORD i_BufferSize, DWORD i_BufferOffset);
-		HRESULT LoadFileDataIntoBuffer(HANDLE i_FileHandle, XAUDIO2_BUFFER& o_Buffer, WAVEFORMATEX& o_WaveFormat);
+		static HRESULT LoadFileData(const std::string& i_SoundFilePath, HANDLE& o_FileHandle);
+		static HRESULT FindDataChunk(HANDLE i_FileHandle, DWORD fourcc, DWORD& o_dwChunkSize, DWORD& o_dwChunkPosition);
+		static HRESULT ReadDataFromChunk(HANDLE i_FileHandle, void* i_Buffer, DWORD i_BufferSize, DWORD i_BufferOffset);
+		static HRESULT LoadFileDataIntoBuffer(HANDLE i_FileHandle, XAUDIO2_BUFFER& o_Buffer, WAVEFORMATEX& o_WaveFormat);
 
 
 	private:
