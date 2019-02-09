@@ -1,12 +1,12 @@
 #include "Graphics.h"
 
-
-
-Graphics::Graphics()
+HRESULT DirectXValues::Initialize(HWND window, uint32_t width, uint32_t height)
 {
-}
+	HRESULT hr = S_OK;
 
 
-Graphics::~Graphics()
-{
+
+
+
+	return hr;
 }
