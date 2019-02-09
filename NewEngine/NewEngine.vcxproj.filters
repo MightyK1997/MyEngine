@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\MemoryAllocators">
+      <UniqueIdentifier>{feaac6e7-757f-409b-987f-3eea9dd83b28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MemoryAllocators">
+      <UniqueIdentifier>{762f08e3-3ca7-4504-bc9a-40eb09b44d5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Debug">
+      <UniqueIdentifier>{5cccf910-6914-4691-9e34-7ee1b2f95737}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Debug">
+      <UniqueIdentifier>{cfc8b376-eebc-4eb3-8de4-423cc4f8b57b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject">
+      <UniqueIdentifier>{603f6c70-b122-46de-a90a-19a48bbd9c22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject">
+      <UniqueIdentifier>{b230d40d-b0e7-4d97-923d-9c331c317af2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Math">
+      <UniqueIdentifier>{af5d4c5c-f0ae-4b58-9fbd-e0d739b2b29b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math">
+      <UniqueIdentifier>{4b399de2-0564-4019-83fa-5ea7bcc82eb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Math\Vector">
+      <UniqueIdentifier>{f3dd4a9d-8603-477c-a66a-e46444cdee42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math\Vector">
+      <UniqueIdentifier>{af4fff67-bc0b-43cf-bfc0-c559722598c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Math\Matrix">
+      <UniqueIdentifier>{171a62d5-bfef-49ce-80d4-3a22e2b6ae1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math\Matrix">
+      <UniqueIdentifier>{8d8d89ae-0d6d-497f-b58e-9b46b446413a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Timer">
+      <UniqueIdentifier>{14c34b45-56f3-4db5-93c0-e81e3e4849f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Timer">
+      <UniqueIdentifier>{f940f1ff-0655-4365-abf0-b3c51243e0a6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MemoryAllocators\BlockAllocator.cpp">
+      <Filter>Source Files\MemoryAllocators</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryAllocators\FixedSizeAllocator.cpp">
+      <Filter>Source Files\MemoryAllocators</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\Log.cpp">
+      <Filter>Source Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\GameObject.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Vector\Vector2.cpp">
+      <Filter>Source Files\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Vector\Vector3.cpp">
+      <Filter>Source Files\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Vector\Vector4.cpp">
+      <Filter>Source Files\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Matrix\Matrix.cpp">
+      <Filter>Source Files\Math\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer\Timer.cpp">
+      <Filter>Source Files\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MemoryAllocators\BlockAllocator.h">
+      <Filter>Header Files\MemoryAllocators</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryAllocators\FixedSizeAllocator.h">
+      <Filter>Header Files\MemoryAllocators</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug\Log.h">
+      <Filter>Header Files\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\GameObject.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector\Vector2.h">
+      <Filter>Header Files\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector\Vector3.h">
+      <Filter>Header Files\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector\Vector4.h">
+      <Filter>Header Files\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Matrix\Matrix.h">
+      <Filter>Header Files\Math\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer\Timer.h">
+      <Filter>Header Files\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Handle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
