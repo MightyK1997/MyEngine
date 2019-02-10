@@ -1,0 +1,11 @@
+return
+{
+	Material = 
+	{
+        EffectLocation = "Effects/Effect1.Effect",
+        ConstantType = "float4",
+        ConstantName = "Color",
+        ConstantValue = {1,1,1,1},
+        TextureLocation = "Textures/Texture1.texture",
+	},
+}
