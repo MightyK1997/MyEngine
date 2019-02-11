@@ -82,5 +82,6 @@
     <ClInclude Include="GraphicsHelper.h" />
     <ClInclude Include="cCamera.h" />
     <ClInclude Include="cMaterial.h" />
+    <ClInclude Include="RenderCommands.h" />
   </ItemGroup>
 </Project>
