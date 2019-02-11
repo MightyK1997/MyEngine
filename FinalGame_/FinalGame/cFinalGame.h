@@ -9,6 +9,7 @@
 //=========
 #include <Engine/Graphics/cMesh.h>
 #include <Engine/Graphics/cEffect.h>
+#include <Engine/Graphics/cMaterial.h>
 #include <Engine/Application/cbApplication.h>
 #include <Engine/Results/Results.h>
 #include <Engine/Physics/cGameObject.h>
@@ -89,6 +90,11 @@ namespace eae6320
 
 		//Mesh Handles
 		eae6320::Graphics::cMesh::Handle m_TreeHandle;
+
+
+		//Material
+		eae6320::Graphics::cMaterial::Handle m_Material1Handle;
+
 
 		//Effect Handle
 		eae6320::Graphics::cEffect::Handle effect1Handle;

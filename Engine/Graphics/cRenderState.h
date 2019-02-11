@@ -82,7 +82,7 @@ namespace eae6320
 
 			//Handle
 			using Handle = Assets::cHandle<cRenderState>;
-			static Assets::cManager<cRenderState, uint8_t> s_manager;
+			static Assets::cManager<cRenderState, uint8_t> s_Manager;
 
 			//Reference Counting
 

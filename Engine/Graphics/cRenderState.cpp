@@ -3,6 +3,8 @@
 
 #include "cRenderState.h"
 
+eae6320::Assets::cManager<eae6320::Graphics::cRenderState, uint8_t> eae6320::Graphics::cRenderState::s_Manager;
+
 // Interface
 //==========
 

@@ -269,6 +269,21 @@ NewAssetTypeInfo( "shaders",
 	}
 )
 
+NewAssetTypeInfo( "materials",
+	{
+		ConvertSourceRelativePathToBuiltRelativePath = function( i_sourceRelativePath )
+			-- Change the source file extension to the binary version
+			local relativeDirectory, file = i_sourceRelativePath:match( "(.-)([^/\\]+)$" )
+			local fileName = file:match( "([^%.]+)(.*)" )
+			local binaryFileExtensionWithPeriod = ".materialbinary"
+			return relativeDirectory .. fileName .. binaryFileExtensionWithPeriod
+		end,
+		GetBuilderRelativePath = function()
+			return "MaterialBuilder.exe"
+		end
+	}
+)
+
 NewAssetTypeInfo( "meshes",
 	{
 		ConvertSourceRelativePathToBuiltRelativePath = function( i_sourceRelativePath )

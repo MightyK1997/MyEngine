@@ -17,4 +17,8 @@ return
 		"Effects/Effect5.Effect",
 		"Effects/Effect6.Effect",]]
 	},
+
+	materials = {
+		"Materials/Material1.material",
+	}
 }

@@ -23,7 +23,7 @@ namespace eae6320
 {
 	namespace Graphics
 	{
-		namespace ConstantBufferForm
+		namespace ConstantBufferFormats
 		{
 			struct sPerFrame
 			{
@@ -40,7 +40,7 @@ namespace eae6320
 
 			struct sPerDrawCall
 			{
-				//Math::cMatrix_transformation g_transform_localToWorld;
+				Math::cMatrix_transformation g_transform_localToWorld;
 				Math::cMatrix_transformation g_transform_localToProjected;
 			};
 		}

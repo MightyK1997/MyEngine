@@ -57,6 +57,7 @@
     <ClCompile Include="Direct3D\cShader.d3d.cpp">
       <Filter>Direct3D</Filter>
     </ClCompile>
+    <ClCompile Include="cMaterial.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Includes.h">
@@ -80,5 +81,6 @@
     <ClInclude Include="cEffect.h" />
     <ClInclude Include="GraphicsHelper.h" />
     <ClInclude Include="cCamera.h" />
+    <ClInclude Include="cMaterial.h" />
   </ItemGroup>
 </Project>

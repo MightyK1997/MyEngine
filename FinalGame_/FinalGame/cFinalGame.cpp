@@ -173,6 +173,10 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	std::string fName = "data/Meshes/Tree.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_TreeHandle);
 
+	fName = "data/Materials/Material1.materialbinary";
+	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_Material1Handle);
+
+
 	std::string effectPath = "data/Effects/Effect1.effectbinary";
 	eae6320::Graphics::cEffect::s_Manager.Load(effectPath, effect1Handle);
 	effectPath = "data/Effects/Effect1.effectbinary";
