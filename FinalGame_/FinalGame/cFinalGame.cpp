@@ -192,6 +192,7 @@ eae6320::cResult eae6320::cFinalGame::CleanUp()
 	eae6320::Graphics::cEffect::s_Manager.Release(effect1Handle);
 	eae6320::Graphics::cEffect::s_Manager.Release(effect2Handle);
 	eae6320::Graphics::cMesh::s_Manager.Release(m_TreeHandle);
+	eae6320::Graphics::cMaterial::s_Manager.Release(m_Material1Handle);
 
 	for (auto&x : m_TreeObjs)
 	{

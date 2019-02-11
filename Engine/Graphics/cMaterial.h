@@ -34,12 +34,19 @@ namespace eae6320
 
 
 		private:
-			cMaterial(){}
-			~cMaterial(){}
-			EAE6320_ASSETS_DECLAREREFERENCECOUNT()
 			//Member variables
 			cEffect* m_Effect;
 			sColor m_Color;
+			void Shutdown();
+
+			cMaterial(){}
+			~cMaterial()
+			{
+				Shutdown();
+			}
+
+			EAE6320_ASSETS_DECLAREREFERENCECOUNT()
+			
 		};
 	}
 }

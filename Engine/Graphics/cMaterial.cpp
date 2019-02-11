@@ -60,3 +60,8 @@ eae6320::cResult eae6320::Graphics::cMaterial::Load(const std::string& i_FilePat
 	o_Material = outputMaterial;
 	return result;
 }
+
+void eae6320::Graphics::cMaterial::Shutdown()
+{
+	m_Effect->DecrementReferenceCount();
+}

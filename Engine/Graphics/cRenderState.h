@@ -85,10 +85,9 @@ namespace eae6320
 			static Assets::cManager<cRenderState, uint8_t> s_Manager;
 
 			//Reference Counting
+			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS();
 
 			EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cRenderState);
-
-			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS();
 
 			//Load function for RenderState
 
