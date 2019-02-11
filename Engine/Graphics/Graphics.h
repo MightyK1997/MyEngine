@@ -40,6 +40,27 @@ namespace eae6320
 			cEffect* m_RenderEffect;
 			cMesh* m_RenderMesh;
 		};
+
+		enum class RenderCommandTypes : uint8_t
+		{
+			E_DRAWINDEPENDENT = 0x01,
+			E_DRAWDEPENDENT = 0X02,
+		};
+
+		enum class BitMasksForRenderCommands : uint8_t
+		{
+			E_COMMONBITMASK =7,
+		};
+
+
+		enum class BitShiftsForRenderCommands :uint8_t
+		{
+			E_EFFECTSHIFT = 57,
+			E_MATERIALSHIFT = 50,
+			E_DEPTHSHIFT = 43,
+			E_TYPESHIFT = 13,
+			E_MESHSHIFT = 7,
+		};
 		// Submission
 		//-----------
 
@@ -99,9 +120,6 @@ namespace eae6320
 		void SetEffectsAndMeshesToRender(eae6320::Physics::cGameObject* i_GameObject[100], 
 			eae6320::Math::cMatrix_transformation i_LocaltoWorldTransforms[100], unsigned i_NumberOfGameObjectsToRender, 
 			eae6320::Graphics::cCamera* i_Camera, const float i_secondCountToExtrapolate);
-
-		void SetCameraToRender(eae6320::Graphics::cCamera* i_Camera, const float i_secondCountToExtrapolate);
-
 	}
 }
 
