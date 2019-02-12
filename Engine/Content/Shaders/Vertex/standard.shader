@@ -58,7 +58,7 @@ void main(
 		//float4 vertexPosition_camera = mul( g_transform_worldToCamera, vertexPosition_world );
 		// Project the vertex from camera space into projected space
 		o_vertexPosition_projected = mul( g_transform_localToProjected, vertexPosition_local);
-		o_vertexColor_projected = i_vertexColor_local;
+		o_vertexColor_projected = i_vertexColor_local* g_material_color;
 	}
 }
 

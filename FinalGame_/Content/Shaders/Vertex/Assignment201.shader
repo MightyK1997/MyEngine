@@ -74,7 +74,7 @@ void main(
 	}
     {
         output.o_vertexPosition_local = vertexPosition_local;
-        output.o_vertexColor_local = i_vertexColor_local;
+        output.o_vertexColor_local = i_vertexColor_local * g_material_color;
     }
 }
 

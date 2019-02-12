@@ -41,6 +41,11 @@ cbuffer g_constantBuffer_perDrawCall : register( b2 )
   float4x4 g_transform_localToProjected;
 };
 
+cbuffer g_constantBuffer_perMaterial : register(b3)
+{
+float4 g_material_color;
+};
+
 
 #elif defined( EAE6320_PLATFORM_GL )
 

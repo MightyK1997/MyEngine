@@ -15,12 +15,15 @@ namespace
 	{
 		eae6320::Graphics::ConstantBufferFormats::sPerFrame constantData_perFrame;
 		eae6320::Graphics::ConstantBufferFormats::sPerDrawCall constantData_perDrawCall[eae6320::Graphics::m_maxNumberofMeshesAndEffects];
+		eae6320::Graphics::ConstantBufferFormats::sPerMaterialCall constantData_perMaterial;
 		eae6320::Graphics::sColor backBufferValue_perFrame;
 		eae6320::Graphics::sEffectsAndMeshesToRender m_MeshesAndEffects[eae6320::Graphics::m_maxNumberofMeshesAndEffects];
 		std::vector<uint64_t> m_RenderHandles;
 		unsigned int m_NumberOfEffectsToRender;
 	};
 	eae6320::Graphics::cConstantBuffer s_constantBuffer_perDrawCall(eae6320::Graphics::ConstantBufferTypes::PerDrawCall);
+
+	eae6320::Graphics::cConstantBuffer s_ConstantBuffer_perMaterial(eae6320::Graphics::ConstantBufferTypes::PerMaterial);
 	//In our class there will be two copies of the data required to render a frame:
 	   //* One of them will be getting populated by the data currently being submitted by the application loop thread
 	   //* One of them will be fully populated, 
@@ -43,6 +46,7 @@ namespace
 	eae6320::Graphics::GraphicsHelper* s_helper;
 	uint64_t currentEffectIndex = (uint64_t)1 << 56;
 	uint64_t currentMeshIndex = (uint64_t)1 << 56;
+	uint64_t currentMaterialIndex = (uint64_t)1 << 56;
 }
 
 // Submission
@@ -102,7 +106,11 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 		if (zValue > 1) zValue = 1;
 		if (zValue < 0) zValue = 0;
 		uint64_t a = 0;
-		a |= ((a | static_cast<uint64_t>(effectHandleIndex) << static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_EFFECTSHIFT)) | (static_cast<uint64_t>(zValue * 255) << static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_DEPTHSHIFT)) | (static_cast<uint64_t>(meshHandleIndex)<< static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_MESHSHIFT)) | i);
+		a |= ((a | static_cast<uint64_t>(effectHandleIndex) << static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_EFFECTSHIFT)) |
+			(static_cast<uint64_t>(materialHandleIndex) << static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_MATERIALSHIFT)) |
+			(static_cast<uint64_t>(zValue * 255) << static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_DEPTHSHIFT)) | 
+			(static_cast<uint64_t>(meshHandleIndex)<< static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_MESHSHIFT)) | 
+			i);
 		renderCommand.push_back(a);
 	}
 	std::sort(renderCommand.begin(), renderCommand.end());
@@ -149,6 +157,7 @@ void eae6320::Graphics::RenderFrame()
 
 			auto effectIndex = (allRenderCommands[i] >> static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_EFFECTSHIFT));
 			auto meshIndex = static_cast<uint64_t>(RenderCommands::BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i] >> static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_EFFECTSHIFT));
+			auto materialIndex = static_cast<uint64_t>(RenderCommands::BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i] >> static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_MATERIALSHIFT));
 			auto index = static_cast<uint64_t>(RenderCommands::BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i]);
 
 			auto tempEffect = eae6320::Graphics::cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(effectIndex));
@@ -158,6 +167,10 @@ void eae6320::Graphics::RenderFrame()
 			{
 				tempEffect->Bind();
 				currentEffectIndex = effectIndex;
+			}
+			if (currentMaterialIndex ^ materialIndex)
+			{
+				s_ConstantBuffer_perMaterial.Update(&s_dataBeingRenderedByRenderThread->constantData_perMaterial);
 			}
 			s_constantBuffer_perDrawCall.Update(&s_dataBeingRenderedByRenderThread->constantData_perDrawCall[index]);
 			if ((currentMeshIndex ^ meshIndex))
@@ -225,6 +238,13 @@ eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& 
 			goto OnExit;
 		}
 	}
+
+	{
+		if (result = s_ConstantBuffer_perMaterial.Initialize())
+		{
+			s_ConstantBuffer_perMaterial.Bind(ShaderTypes::Vertex | ShaderTypes::Fragment);
+		}
+	}
 	// Initialize the events
 	{
 		if (!(result = s_whenAllDataHasBeenSubmittedFromApplicationThread.Initialize(Concurrency::EventType::ResetAutomaticallyAfterBeingSignaled)))
@@ -267,6 +287,18 @@ eae6320::cResult eae6320::Graphics::CleanUp()
 
 	{
 		const auto localResult = s_constantBuffer_perDrawCall.CleanUp();
+		if (!localResult)
+		{
+			EAE6320_ASSERT(false);
+			if (result)
+			{
+				result = localResult;
+			}
+		}
+	}
+
+	{
+		const auto localResult = s_ConstantBuffer_perMaterial.CleanUp();
 		if (!localResult)
 		{
 			EAE6320_ASSERT(false);
