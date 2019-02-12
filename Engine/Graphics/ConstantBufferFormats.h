@@ -23,6 +23,15 @@ namespace eae6320
 {
 	namespace Graphics
 	{
+		struct sColor
+		{
+			float r;
+			float g;
+			float b;
+			float alpha;
+
+			sColor() = default;
+		};
 		namespace ConstantBufferFormats
 		{
 			struct sPerFrame
@@ -46,7 +55,7 @@ namespace eae6320
 
 			struct sPerMaterialCall
 			{
-				float color[4];
+				sColor g_color;
 			};
 		}
 	}

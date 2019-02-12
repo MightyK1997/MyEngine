@@ -15,15 +15,16 @@ namespace
 	{
 		eae6320::Graphics::ConstantBufferFormats::sPerFrame constantData_perFrame;
 		eae6320::Graphics::ConstantBufferFormats::sPerDrawCall constantData_perDrawCall[eae6320::Graphics::m_maxNumberofMeshesAndEffects];
-		eae6320::Graphics::ConstantBufferFormats::sPerMaterialCall constantData_perMaterial;
+		eae6320::Graphics::ConstantBufferFormats::sPerMaterialCall constantData_perMaterial[eae6320::Graphics::m_maxNumberofMeshesAndEffects];
 		eae6320::Graphics::sColor backBufferValue_perFrame;
 		eae6320::Graphics::sEffectsAndMeshesToRender m_MeshesAndEffects[eae6320::Graphics::m_maxNumberofMeshesAndEffects];
 		std::vector<uint64_t> m_RenderHandles;
 		unsigned int m_NumberOfEffectsToRender;
 	};
 	eae6320::Graphics::cConstantBuffer s_constantBuffer_perDrawCall(eae6320::Graphics::ConstantBufferTypes::PerDrawCall);
-
 	eae6320::Graphics::cConstantBuffer s_ConstantBuffer_perMaterial(eae6320::Graphics::ConstantBufferTypes::PerMaterial);
+
+
 	//In our class there will be two copies of the data required to render a frame:
 	   //* One of them will be getting populated by the data currently being submitted by the application loop thread
 	   //* One of them will be fully populated, 
@@ -92,6 +93,7 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 	auto& renderCommand = s_dataBeingSubmittedByApplicationThread->m_RenderHandles;
 	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = i_NumberOfGameObjectsToRender;
 	auto m_allDrawCallConstants = s_dataBeingSubmittedByApplicationThread->constantData_perDrawCall;
+	auto constantMaterialData = s_dataBeingSubmittedByApplicationThread->constantData_perMaterial;
 	renderCommand.clear();
 	for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
 	{
@@ -100,6 +102,7 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 		auto materialHandleIndex = materialHandle.GetIndex();
 		auto effectHandleIndex = material->GetEffectHandle().GetIndex();
 		auto meshHandleIndex = i_GameObject[i]->GetGameObjectMeshHandle().GetIndex();
+		constantMaterialData[i].g_color = material->GetMaterialColor();
 		m_allDrawCallConstants[i].g_transform_localToProjected = constDataBuffer.g_transform_cameraToProjected * (constDataBuffer.g_transform_worldToCamera * i_LocaltoWorldTransforms[i]);
 		auto zValue = (constDataBuffer.g_transform_worldToCamera * i_LocaltoWorldTransforms[i]).GetTranslation().z;
 		zValue = -((zValue - 0.1f) / (100-0.1f));

@@ -26,13 +26,7 @@ namespace eae6320
 	namespace Graphics
 	{
 		//Color Struct
-		struct sColor
-		{
-			float r;
-			float g;
-			float b;
-			float alpha;
-		};
+
 		class cMesh;
 		class cEffect;
 		struct sEffectsAndMeshesToRender

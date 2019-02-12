@@ -80,18 +80,18 @@ namespace eae6320
 
 		public:
 
-			//Handle
-			using Handle = Assets::cHandle<cRenderState>;
-			static Assets::cManager<cRenderState, uint8_t> s_Manager;
+			////Handle
+			//using Handle = Assets::cHandle<cRenderState>;
+			//static Assets::cManager<cRenderState, uint8_t> s_Manager;
 
-			//Reference Counting
-			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS();
+			////Reference Counting
+			//EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS();
 
-			EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cRenderState);
+			//EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cRenderState);
 
 			//Load function for RenderState
 
-			static cResult Load(const uint8_t i_renderStateBits, cRenderState*& o_RenderState);
+			//static cResult Load(const uint8_t i_renderStateBits, cRenderState*& o_RenderState);
 
 			// Render
 			//-------
@@ -142,8 +142,8 @@ namespace eae6320
 
 			cResult InitializeFromBits();
 
-			//Renference Counting
-			EAE6320_ASSETS_DECLAREREFERENCECOUNT()
+			////Renference Counting
+			//EAE6320_ASSETS_DECLAREREFERENCECOUNT()
 		};
 	}
 }

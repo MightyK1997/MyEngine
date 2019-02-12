@@ -3,7 +3,7 @@
 
 #include "cRenderState.h"
 
-eae6320::Assets::cManager<eae6320::Graphics::cRenderState, uint8_t> eae6320::Graphics::cRenderState::s_Manager;
+//eae6320::Assets::cManager<eae6320::Graphics::cRenderState, uint8_t> eae6320::Graphics::cRenderState::s_Manager;
 
 // Interface
 //==========
@@ -53,14 +53,14 @@ void eae6320::Graphics::RenderStates::DisableDrawingBothTriangleSides( uint8_t& 
 // Access
 //-------
 
-eae6320::cResult eae6320::Graphics::cRenderState::Load(const uint8_t i_renderStateBits, cRenderState*& o_RenderState)
-{
-	cResult result;
-	cRenderState* renderState = new cRenderState();
-	result = renderState->Initialize(i_renderStateBits);
-	o_RenderState = renderState;
-	return result;
-}
+//eae6320::cResult eae6320::Graphics::cRenderState::Load(const uint8_t i_renderStateBits, cRenderState*& o_RenderState)
+//{
+//	cResult result;
+//	cRenderState* renderState = new cRenderState();
+//	result = renderState->Initialize(i_renderStateBits);
+//	o_RenderState = renderState;
+//	return result;
+//}
 
 bool eae6320::Graphics::cRenderState::IsAlphaTransparencyEnabled() const
 {

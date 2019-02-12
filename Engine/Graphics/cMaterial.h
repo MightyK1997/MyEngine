@@ -33,6 +33,8 @@ namespace eae6320
 
 			eae6320::Graphics::cEffect::Handle GetEffectHandle() { return m_EffectHandle; }
 
+			eae6320::Graphics::sColor GetMaterialColor() const { return m_Color; }
+
 
 		private:
 			//Member variables

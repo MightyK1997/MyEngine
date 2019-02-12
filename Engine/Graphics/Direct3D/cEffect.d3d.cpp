@@ -25,7 +25,7 @@ namespace eae6320
 					direct3dImmediateContext->PSSetShader(shader->m_shaderObject.fragment, noInterfaces, interfaceCount);
 				}
 			}
-			eae6320::Graphics::cRenderState::s_Manager.Get(s_renderStateHandle)->Bind();
+			s_renderState.Bind();
 			//s_renderState.Bind();
 		}
 	}

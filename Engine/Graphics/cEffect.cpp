@@ -26,7 +26,7 @@ namespace eae6320
 			}
 			//Changing this to enable depth buffering and other state from the game, defaults to 0 if nothing is passed
 			{
-				if (!(result = eae6320::Graphics::cRenderState::s_Manager.Load(i_TypeOfRender, s_renderStateHandle)))
+				if (!(result = s_renderState.Initialize(i_TypeOfRender)))
 				{
 					EAE6320_ASSERT(false);
 					goto OnExit;
@@ -70,7 +70,7 @@ namespace eae6320
 				}
 			}
 			{
-				const auto localResult = eae6320::Graphics::cRenderState::s_Manager.Release(s_renderStateHandle);
+				const auto localResult = s_renderState.CleanUp();
 				if (!localResult)
 				{
 					EAE6320_ASSERT(false);

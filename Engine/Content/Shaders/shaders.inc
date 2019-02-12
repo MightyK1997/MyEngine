@@ -41,7 +41,7 @@ cbuffer g_constantBuffer_perDrawCall : register( b2 )
   float4x4 g_transform_localToProjected;
 };
 
-cbuffer g_constantBuffer_perMaterial : register(b3)
+cbuffer g_constantBuffer_perMaterial : register(b1)
 {
 float4 g_material_color;
 };
