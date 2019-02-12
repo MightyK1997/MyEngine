@@ -90,6 +90,7 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 	constDataBuffer.g_transform_worldToCamera = eae6320::Math::cMatrix_transformation::CreateWorldToCameraTransform(
 		i_Camera->PredictFutureOrientation(i_secondCountToExtrapolate), i_Camera->PredictFuturePosition(i_secondCountToExtrapolate));
 	constDataBuffer.g_transform_cameraToProjected = eae6320::Math::cMatrix_transformation::CreateCameraToProjectedTransform_perspective(0.745f, 1, 0.1f, 100);
+	constDataBuffer.g_CameraPositionInWorld = i_Camera->GetCameraPosition();
 	auto& renderCommand = s_dataBeingSubmittedByApplicationThread->m_RenderHandles;
 	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = i_NumberOfGameObjectsToRender;
 	auto m_allDrawCallConstants = s_dataBeingSubmittedByApplicationThread->constantData_perDrawCall;
@@ -103,7 +104,8 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 		auto effectHandleIndex = material->GetEffectHandle().GetIndex();
 		auto meshHandleIndex = i_GameObject[i]->GetGameObjectMeshHandle().GetIndex();
 		constantMaterialData[i].g_color = material->GetMaterialColor();
-		m_allDrawCallConstants[i].g_transform_localToProjected = constDataBuffer.g_transform_cameraToProjected * (constDataBuffer.g_transform_worldToCamera * i_LocaltoWorldTransforms[i]);
+		m_allDrawCallConstants[i].g_transform_localToWorld = (constDataBuffer.g_transform_worldToCamera * i_LocaltoWorldTransforms[i]);
+		m_allDrawCallConstants[i].g_transform_localToProjected = constDataBuffer.g_transform_cameraToProjected *(constDataBuffer.g_transform_worldToCamera * i_LocaltoWorldTransforms[i]);
 		auto zValue = (constDataBuffer.g_transform_worldToCamera * i_LocaltoWorldTransforms[i]).GetTranslation().z;
 		zValue = -((zValue - 0.1f) / (100-0.1f));
 		if (zValue > 1) zValue = 1;
@@ -173,7 +175,7 @@ void eae6320::Graphics::RenderFrame()
 			}
 			if (currentMaterialIndex ^ materialIndex)
 			{
-				s_ConstantBuffer_perMaterial.Update(&s_dataBeingRenderedByRenderThread->constantData_perMaterial);
+				s_ConstantBuffer_perMaterial.Update(&s_dataBeingRenderedByRenderThread->constantData_perMaterial[index]);
 			}
 			s_constantBuffer_perDrawCall.Update(&s_dataBeingRenderedByRenderThread->constantData_perDrawCall[index]);
 			if ((currentMeshIndex ^ meshIndex))
