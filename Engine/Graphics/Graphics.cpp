@@ -161,7 +161,7 @@ void eae6320::Graphics::RenderFrame()
 		{
 
 			auto effectIndex = (allRenderCommands[i] >> static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_EFFECTSHIFT));
-			auto meshIndex = static_cast<uint64_t>(RenderCommands::BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i] >> static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_EFFECTSHIFT));
+			auto meshIndex = static_cast<uint64_t>(RenderCommands::BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i] >> static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_MESHSHIFT));
 			auto materialIndex = static_cast<uint64_t>(RenderCommands::BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i] >> static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_MATERIALSHIFT));
 			auto index = static_cast<uint64_t>(RenderCommands::BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i]);
 

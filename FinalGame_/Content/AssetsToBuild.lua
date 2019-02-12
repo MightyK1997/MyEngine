@@ -20,5 +20,6 @@ return
 
 	materials = {
 		"Materials/Material1.material",
+		"Materials/Material2.material",
 	}
 }

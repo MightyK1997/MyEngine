@@ -176,6 +176,9 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	fName = "data/Materials/Material1.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_Material1Handle);
 
+	fName = "data/Materials/Material2.materialbinary";
+	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_Material2Handle);
+
 	UpdateMeshAndEffect();
 
 	return Results::Success;
@@ -185,6 +188,7 @@ eae6320::cResult eae6320::cFinalGame::CleanUp()
 {
 	eae6320::Graphics::cMesh::s_Manager.Release(m_TreeHandle);
 	eae6320::Graphics::cMaterial::s_Manager.Release(m_Material1Handle);
+	eae6320::Graphics::cMaterial::s_Manager.Release(m_Material2Handle);
 
 	for (auto&x : m_TreeObjs)
 	{
@@ -219,7 +223,7 @@ void eae6320::cFinalGame::UpdateMeshAndEffect()
 		}
 		else
 		{
-			treeObj->SetGameObjectHandles(m_TreeHandle, m_Material1Handle);
+			treeObj->SetGameObjectHandles(m_TreeHandle, m_Material2Handle);
 		}
 		count++;
 	}
