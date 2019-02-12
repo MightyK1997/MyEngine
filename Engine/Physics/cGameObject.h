@@ -4,6 +4,7 @@
 
 #include "../Graphics/cMesh.h"
 #include "../Graphics/cEffect.h"
+#include "../Graphics/cMaterial.h"
 
 
 namespace eae6320
@@ -33,6 +34,7 @@ namespace eae6320
 			void SetGameObjectMesh(Graphics::cMesh* i_Mesh);
 			void SetGameObjectEffect(Graphics::cEffect* i_Effect);
 			void SetGameObjectHandles(Graphics::cMesh::Handle i_MeshHandle, Graphics::cEffect::Handle i_EffectHandle);
+			void SetGameObjectHandles(Graphics::cMesh::Handle i_MeshHandle, Graphics::cMaterial::Handle i_EffectHandle);
 			Graphics::cMesh* GetGameObjectMesh() const;
 			Graphics::cEffect* GetGameObjectEffect() const;
 			Graphics::sEffectsAndMeshesToRender GetMeshEffectPair() const;
@@ -41,6 +43,7 @@ namespace eae6320
 			Math::cQuaternion PredictFutureOrientation(float i_secondCountToExtrapolate) const;
 			Graphics::cMesh::Handle GetGameObjectMeshHandle() const { return m_MeshHandle; }
 			Graphics::cEffect::Handle GetGameObjectEffectHandle() const { return m_EffectHandle; }
+			Graphics::cMaterial::Handle GetGameObjectMaterialHandle() const { return m_MaterialHandle; }
 
 			//Get the matrix transformation
 			Math::cMatrix_transformation GetLocalToWorldTransformation(const float i_secondCountToExtrapolate);
@@ -53,6 +56,7 @@ namespace eae6320
 			Graphics::sEffectsAndMeshesToRender m_EffectMeshPairForRigidBody;
 			Graphics::cMesh::Handle m_MeshHandle;
 			Graphics::cEffect::Handle m_EffectHandle;
+			Graphics::cMaterial::Handle m_MaterialHandle;
 		};
 	}
 }

@@ -1,7 +1,6 @@
 #pragma once
 
-//#include "cEffect.h"
-#include "Graphics.h"
+#include "cEffect.h"
 #include "cConstantBuffer.h"
 #include "ConstantBufferFormats.h"
 #include "cRenderState.h"
@@ -32,10 +31,12 @@ namespace eae6320
 			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()
 			EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cMaterial)
 
+			eae6320::Graphics::cEffect::Handle GetEffectHandle() { return m_EffectHandle; }
+
 
 		private:
 			//Member variables
-			cEffect* m_Effect;
+			eae6320::Graphics::cEffect::Handle m_EffectHandle;
 			sColor m_Color;
 			void Shutdown();
 

@@ -176,12 +176,6 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	fName = "data/Materials/Material1.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_Material1Handle);
 
-
-	std::string effectPath = "data/Effects/Effect1.effectbinary";
-	eae6320::Graphics::cEffect::s_Manager.Load(effectPath, effect1Handle);
-	effectPath = "data/Effects/Effect1.effectbinary";
-	eae6320::Graphics::cEffect::s_Manager.Load(effectPath, effect2Handle);
-
 	UpdateMeshAndEffect();
 
 	return Results::Success;
@@ -189,8 +183,6 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 
 eae6320::cResult eae6320::cFinalGame::CleanUp()
 {
-	eae6320::Graphics::cEffect::s_Manager.Release(effect1Handle);
-	eae6320::Graphics::cEffect::s_Manager.Release(effect2Handle);
 	eae6320::Graphics::cMesh::s_Manager.Release(m_TreeHandle);
 	eae6320::Graphics::cMaterial::s_Manager.Release(m_Material1Handle);
 
@@ -223,11 +215,11 @@ void eae6320::cFinalGame::UpdateMeshAndEffect()
 	{
 		if (count <= 3)
 		{
-			treeObj->SetGameObjectHandles(m_TreeHandle, effect2Handle);
+			treeObj->SetGameObjectHandles(m_TreeHandle, m_Material1Handle);
 		}
 		else
 		{
-			treeObj->SetGameObjectHandles(m_TreeHandle, effect1Handle);
+			treeObj->SetGameObjectHandles(m_TreeHandle, m_Material1Handle);
 		}
 		count++;
 	}

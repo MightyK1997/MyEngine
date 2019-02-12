@@ -3,6 +3,8 @@
 #include "GraphicsHelper.h"
 #include "cMesh.h"
 #include "cEffect.h"
+#include "cMaterial.h"
+#include "RenderCommands.h"
 #include "../Physics/cGameObject.h"
 #include <algorithm>
 
@@ -89,15 +91,18 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 	renderCommand.clear();
 	for (unsigned int i = 0; i < (s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender); i++)
 	{
-		auto e = i_GameObject[i]->GetGameObjectEffectHandle().GetIndex();
-		auto m = i_GameObject[i]->GetGameObjectMeshHandle().GetIndex();
+		auto materialHandle = i_GameObject[i]->GetGameObjectMaterialHandle();
+		auto material = cMaterial::s_Manager.Get(materialHandle);
+		auto materialHandleIndex = materialHandle.GetIndex();
+		auto effectHandleIndex = material->GetEffectHandle().GetIndex();
+		auto meshHandleIndex = i_GameObject[i]->GetGameObjectMeshHandle().GetIndex();
 		m_allDrawCallConstants[i].g_transform_localToProjected = constDataBuffer.g_transform_cameraToProjected * (constDataBuffer.g_transform_worldToCamera * i_LocaltoWorldTransforms[i]);
 		auto zValue = (constDataBuffer.g_transform_worldToCamera * i_LocaltoWorldTransforms[i]).GetTranslation().z;
 		zValue = -((zValue - 0.1f) / (100-0.1f));
 		if (zValue > 1) zValue = 1;
 		if (zValue < 0) zValue = 0;
 		uint64_t a = 0;
-		a |= ((a | static_cast<uint64_t>(e) << 57) | (static_cast<uint64_t>(zValue * 255) << 49) | (static_cast<uint64_t>(m)<<7) | i);
+		a |= ((a | static_cast<uint64_t>(effectHandleIndex) << static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_EFFECTSHIFT)) | (static_cast<uint64_t>(zValue * 255) << static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_DEPTHSHIFT)) | (static_cast<uint64_t>(meshHandleIndex)<< static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_MESHSHIFT)) | i);
 		renderCommand.push_back(a);
 	}
 	std::sort(renderCommand.begin(), renderCommand.end());
@@ -142,9 +147,9 @@ void eae6320::Graphics::RenderFrame()
 		for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
 		{
 
-			auto effectIndex = (allRenderCommands[i] >> 57);
-			auto meshIndex = 7 & (allRenderCommands[i] >> 7);
-			auto index = 7 & (allRenderCommands[i]);
+			auto effectIndex = (allRenderCommands[i] >> static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_EFFECTSHIFT));
+			auto meshIndex = static_cast<uint64_t>(RenderCommands::BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i] >> static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_EFFECTSHIFT));
+			auto index = static_cast<uint64_t>(RenderCommands::BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i]);
 
 			auto tempEffect = eae6320::Graphics::cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(effectIndex));
  			auto tempMesh = eae6320::Graphics::cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(meshIndex));

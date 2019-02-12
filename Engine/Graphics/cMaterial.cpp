@@ -4,7 +4,7 @@
 eae6320::Assets::cManager<eae6320::Graphics::cMaterial> eae6320::Graphics::cMaterial::s_Manager;
 namespace
 {
-	eae6320::Graphics::cEffect* m_TempEffect;
+	eae6320::Graphics::cEffect::Handle m_TempHandle;
 	std::string m_EffectLocation;
 	uint8_t m_ConstantType;
 	std::string m_ConstantName;
@@ -26,14 +26,14 @@ eae6320::cResult LoadDataFile(const char* const i_FileName)
 	m_ConstantType = *reinterpret_cast<uint8_t*>(offset);
 	offset += sizeof(uint8_t);
 	m_ConstantName = reinterpret_cast<char*>(offset);
-	offset += m_ConstantName.size() +1;
+	offset += m_ConstantName.size() + 1;
 	for (size_t i = 0; i < m_ConstantType + 1; i++)
 	{
 		m_ConstantData.push_back(*reinterpret_cast<uint8_t*>(offset));
 		offset += sizeof(uint8_t);
 	}
 	m_TextureLocation = reinterpret_cast<char*>(offset);
-	result = eae6320::Graphics::cEffect::Load(m_EffectLocation, m_TempEffect);
+	result = eae6320::Graphics::cEffect::s_Manager.Load(m_EffectLocation, m_TempHandle);
 	return result;
 }
 
@@ -48,14 +48,11 @@ eae6320::cResult eae6320::Graphics::cMaterial::Load(const std::string& i_FilePat
 	{
 		return result;
 	}
-	if (m_TempEffect)
-	{
-		outputMaterial->m_Effect = m_TempEffect;
-		outputMaterial->m_Color = { static_cast<float>(m_ConstantData[0]),
-			static_cast<float>(m_ConstantData[1]),
-			static_cast<float>(m_ConstantData[2]),
-			static_cast<float>(m_ConstantData[3]) };
-	}
+	outputMaterial->m_EffectHandle = m_TempHandle;
+	outputMaterial->m_Color = { static_cast<float>(m_ConstantData[0]),
+		static_cast<float>(m_ConstantData[1]),
+		static_cast<float>(m_ConstantData[2]),
+		static_cast<float>(m_ConstantData[3]) };
 
 	o_Material = outputMaterial;
 	return result;
@@ -63,5 +60,5 @@ eae6320::cResult eae6320::Graphics::cMaterial::Load(const std::string& i_FilePat
 
 void eae6320::Graphics::cMaterial::Shutdown()
 {
-	m_Effect->DecrementReferenceCount();
+	eae6320::Graphics::cEffect::s_Manager.Release(m_EffectHandle);
 }

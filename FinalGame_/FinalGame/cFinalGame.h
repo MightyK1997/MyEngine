@@ -95,12 +95,6 @@ namespace eae6320
 		//Material
 		eae6320::Graphics::cMaterial::Handle m_Material1Handle;
 
-
-		//Effect Handle
-		eae6320::Graphics::cEffect::Handle effect1Handle;
-		eae6320::Graphics::cEffect::Handle effect2Handle;
-
-
 		//Cameras
 		eae6320::Graphics::cCamera* m_TopDownCamera;
 		eae6320::Graphics::cCamera* m_InCarCamera;

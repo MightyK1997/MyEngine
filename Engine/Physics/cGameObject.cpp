@@ -93,6 +93,13 @@ void eae6320::Physics::cGameObject::SetGameObjectHandles(Graphics::cMesh::Handle
 	m_EffectHandle = i_EffectHandle;
 }
 
+void eae6320::Physics::cGameObject::SetGameObjectHandles(Graphics::cMesh::Handle i_MeshHandle,
+	Graphics::cMaterial::Handle i_MaterialHandle)
+{
+	m_MeshHandle = i_MeshHandle;
+	m_MaterialHandle = i_MaterialHandle;
+}
+
 eae6320::Graphics::cMesh * eae6320::Physics::cGameObject::GetGameObjectMesh() const
 {
 	return m_EffectMeshPairForRigidBody.m_RenderMesh;

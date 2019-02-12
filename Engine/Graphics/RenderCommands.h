@@ -19,7 +19,7 @@ namespace eae6320
 				E_COMMONBITMASK = 7,
 			};
 
-			enum class BitShiftsForRenderCommands :uint8_t
+			enum class BitShiftsForRenderCommands :uint64_t
 			{
 				E_EFFECTSHIFT = 57,
 				E_MATERIALSHIFT = 50,
