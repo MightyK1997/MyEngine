@@ -10,6 +10,9 @@ namespace
 	std::string m_FragmentShaderLocation;
 	std::string m_VertexInputLayoutShaderLocation;
 	uint8_t m_RenderStateValue = 0;
+	bool isDepthBufferEnabled;
+	bool isTwoSideEnabled;
+	bool isAlphaEnabled;
 	std::string m_TempRenderState;
 }
 
@@ -49,24 +52,39 @@ eae6320::cResult LoadTableValues(lua_State& i_LuaState)
 		}
 		lua_pop(&i_LuaState, 1);
 
-
-		key2 = "RenderState";
+		key2 = "AlphaTransparency";
 		lua_pushstring(&i_LuaState, key2);
 		lua_gettable(&i_LuaState, -2);
 		if (lua_isstring(&i_LuaState, -1))
 		{
-			m_TempRenderState = lua_tostring(&i_LuaState, -1);
-			if (m_TempRenderState == "AlphaTransparency")
+			if (lua_tostring(&i_LuaState, -1) == "true")
 			{
-				m_RenderStateValue = 1;
+				isAlphaEnabled = true;
+				m_RenderStateValue |= (1 << 1);
 			}
-			else if (m_TempRenderState == "DepthBuffering")
+		}
+		lua_pop(&i_LuaState, 1);
+		key2 = "DepthBuffering";
+		lua_pushstring(&i_LuaState, key2);
+		lua_gettable(&i_LuaState, -2);
+		if (lua_isstring(&i_LuaState, -1))
+		{
+			if (lua_tostring(&i_LuaState, -1) == "true")
 			{
-				m_RenderStateValue = 2;
+				isDepthBufferEnabled = true;
+				m_RenderStateValue |= (1 << 2);
 			}
-			else if (m_TempRenderState == "DrawBothTriangleSides")
+		}
+		lua_pop(&i_LuaState, 1);
+		key2 = "DrawBothTriangleSides";
+		lua_pushstring(&i_LuaState, key2);
+		lua_gettable(&i_LuaState, -2);
+		if (lua_isstring(&i_LuaState, -1))
+		{
+			if (lua_tostring(&i_LuaState, -1) == "true")
 			{
-				m_RenderStateValue = 4;
+				isTwoSideEnabled = true;
+				m_RenderStateValue |= (1 << 3);
 			}
 		}
 		lua_pop(&i_LuaState, 1);

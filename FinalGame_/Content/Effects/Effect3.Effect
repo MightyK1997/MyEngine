@@ -5,6 +5,6 @@ Effect =
 VertexShaderLocation = "Shaders/Vertex/Assignment201.shader",
 FragmentShaderLocation = "Shaders/Fragment/Assignment201.shader",
 VertexInputLayoutShaderLocation = "Shaders/Vertex/vertexInputLayout.shader",
-RenderState = "DepthBuffering",
+DepthBuffering = "true",
 },
 }
