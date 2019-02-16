@@ -79,6 +79,8 @@ void eae6320::Graphics::SetBackBufferValue(eae6320::Graphics::sColor i_BackBuffe
 	ColorValue = i_BackBuffer;
 }
 
+using namespace eae6320::Graphics::RenderCommands;
+
 //This function gets called from the game to set the meshes and effects to render
 void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObject* i_GameObject[100],
 	eae6320::Math::cMatrix_transformation i_LocaltoWorldTransforms[100], unsigned i_NumberOfGameObjectsToRender,
@@ -101,21 +103,38 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 		auto materialHandle = i_GameObject[i]->GetGameObjectMaterialHandle();
 		auto material = cMaterial::s_Manager.Get(materialHandle);
 		auto materialHandleIndex = materialHandle.GetIndex();
-		auto effectHandleIndex = material->GetEffectHandle().GetIndex();
+		auto effectHandle = material->GetEffectHandle();
+		auto effect = cEffect::s_Manager.Get(effectHandle);
+		auto effectHandleIndex = effectHandle.GetIndex();
 		auto meshHandleIndex = i_GameObject[i]->GetGameObjectMeshHandle().GetIndex();
 		constantMaterialData[i].g_color = material->GetMaterialColor();
 		m_allDrawCallConstants[i].g_transform_localToWorld = (constDataBuffer.g_transform_worldToCamera * i_LocaltoWorldTransforms[i]);
 		m_allDrawCallConstants[i].g_transform_localToProjected = constDataBuffer.g_transform_cameraToProjected *(constDataBuffer.g_transform_worldToCamera * i_LocaltoWorldTransforms[i]);
+		bool isEffectDependent = effect->IsEffectDependent();
 		auto zValue = (constDataBuffer.g_transform_worldToCamera * i_LocaltoWorldTransforms[i]).GetTranslation().z;
 		zValue = -((zValue - 0.1f) / (100-0.1f));
 		if (zValue > 1) zValue = 1;
 		if (zValue < 0) zValue = 0;
+		zValue = isEffectDependent ? 1 - zValue : zValue;
 		uint64_t a = 0;
-		a |= ((a | static_cast<uint64_t>(effectHandleIndex) << static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_EFFECTSHIFT)) |
-			(static_cast<uint64_t>(materialHandleIndex) << static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_MATERIALSHIFT)) |
-			(static_cast<uint64_t>(zValue * 255) << static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_DEPTHSHIFT)) | 
-			(static_cast<uint64_t>(meshHandleIndex)<< static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_MESHSHIFT)) | 
-			i);
+		if (isEffectDependent)
+		{
+			a |= ((a | static_cast<uint64_t>(effectHandleIndex) << static_cast<uint64_t>(BitShiftsForDependentRenderCommands::E_EFFECTSHIFT)) |
+				(static_cast<uint64_t>(materialHandleIndex) << static_cast<uint64_t>(BitShiftsForDependentRenderCommands::E_MATERIALSHIFT)) |
+				(static_cast<uint64_t>(zValue * 255) << static_cast<uint64_t>(BitShiftsForDependentRenderCommands::E_DEPTHSHIFT)) |
+				(static_cast<uint64_t>((isEffectDependent) ? (RenderCommandTypes::E_DRAWDEPENDENT) : (RenderCommandTypes::E_DRAWINDEPENDENT)) << static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_TYPESHIFT)) |
+				(static_cast<uint64_t>(meshHandleIndex) << static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_MESHSHIFT)) |
+				i);
+		}
+		else
+		{
+			a |= ((a | static_cast<uint64_t>(effectHandleIndex) << static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_EFFECTSHIFT)) |
+				(static_cast<uint64_t>(materialHandleIndex) << static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_MATERIALSHIFT)) |
+				(static_cast<uint64_t>(zValue * 255) << static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_DEPTHSHIFT)) |
+				(static_cast<uint64_t>((isEffectDependent) ? (RenderCommandTypes::E_DRAWDEPENDENT) : (RenderCommandTypes::E_DRAWINDEPENDENT)) << static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_TYPESHIFT)) |
+				(static_cast<uint64_t>(meshHandleIndex) << static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_MESHSHIFT)) |
+				i);
+		}
 		renderCommand.push_back(a);
 	}
 	std::sort(renderCommand.begin(), renderCommand.end());
@@ -154,19 +173,31 @@ void eae6320::Graphics::RenderFrame()
 		s_helper->ClearDepthStencilView();
 		s_helper->UpdateConstantBuffer(s_dataBeingRenderedByRenderThread->constantData_perFrame);
 
-
-		auto& m_allMeshes = s_dataBeingRenderedByRenderThread->m_MeshesAndEffects;
 		auto allRenderCommands = s_dataBeingRenderedByRenderThread->m_RenderHandles;
 		for (unsigned int i = 0; i < (s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender > m_maxNumberofMeshesAndEffects ? m_maxNumberofMeshesAndEffects : s_dataBeingRenderedByRenderThread->m_NumberOfEffectsToRender); i++)
 		{
+			auto typeOfRenderCommand = static_cast<uint64_t>(BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i] >> static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_TYPESHIFT));
+			bool isDependent = (typeOfRenderCommand == static_cast<uint64_t>(RenderCommandTypes::E_DRAWDEPENDENT));
 
-			auto effectIndex = (allRenderCommands[i] >> static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_EFFECTSHIFT));
-			auto meshIndex = static_cast<uint64_t>(RenderCommands::BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i] >> static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_MESHSHIFT));
-			auto materialIndex = static_cast<uint64_t>(RenderCommands::BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i] >> static_cast<uint64_t>(RenderCommands::BitShiftsForRenderCommands::E_MATERIALSHIFT));
-			auto index = static_cast<uint64_t>(RenderCommands::BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i]);
+			uint64_t effectIndex, materialIndex;
 
-			auto tempEffect = eae6320::Graphics::cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(effectIndex));
- 			auto tempMesh = eae6320::Graphics::cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(meshIndex));
+			if (isDependent)
+			{
+				effectIndex = static_cast<uint64_t>(BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i] >> static_cast<uint64_t>(BitShiftsForDependentRenderCommands::E_EFFECTSHIFT));
+				materialIndex = static_cast<uint64_t>(BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i] >> static_cast<uint64_t>(BitShiftsForDependentRenderCommands::E_MATERIALSHIFT));
+			}
+			else
+			{
+				effectIndex = (allRenderCommands[i] >> static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_EFFECTSHIFT));
+				materialIndex = static_cast<uint64_t>(BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i] >> static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_MATERIALSHIFT));
+			}
+			uint64_t meshIndex = static_cast<uint64_t>(BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i] >>
+				static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_MESHSHIFT));
+			uint64_t index = static_cast<uint64_t>(BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i]);
+			
+
+			auto tempEffect = cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(effectIndex));
+ 			auto tempMesh = cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(meshIndex));
 
 			if ((currentEffectIndex ^ effectIndex))
 			{

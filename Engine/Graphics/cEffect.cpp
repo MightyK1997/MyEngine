@@ -97,6 +97,8 @@ namespace eae6320
 
 			uint8_t renderState = *reinterpret_cast<uint8_t*>(offset);
 			offset += sizeof(uint8_t);
+			uint8_t dependentRenderState = *reinterpret_cast<uint8_t*>(offset);
+			offset += sizeof(uint8_t);
 			uint8_t lengthOfVertexPath = *reinterpret_cast<uint8_t*>(offset);
 			offset += sizeof(uint8_t);
 			char* pathToVertexShader = reinterpret_cast<char*>(offset);
@@ -104,6 +106,11 @@ namespace eae6320
 			char* pathToFragmentShader = reinterpret_cast<char*>(offset);
 
 			result = CreateEffect(std::string(pathToVertexShader), std::string(pathToFragmentShader), renderState, outputEffect);
+
+			if (dependentRenderState == 1)
+			{
+				outputEffect->b_IsEffectDependent = true;
+			}
 
 			o_Effect = outputEffect;
 

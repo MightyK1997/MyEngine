@@ -10,6 +10,7 @@ namespace
 	std::string m_FragmentShaderLocation;
 	std::string m_VertexInputLayoutShaderLocation;
 	uint8_t m_RenderStateValue = 0;
+	uint8_t m_DependentRenderState = 0;
 	std::string m_Value;
 	std::string m_TempRenderState;
 }
@@ -168,6 +169,11 @@ eae6320::cResult eae6320::Assets::cEffectBuilder::Build(const std::vector<std::s
 	result = LoadFile(m_path_source);
 	if (!result) { OutputErrorMessageWithFileInfo(m_path_source, "Error Reading file"); }
 
+	if ((1 & m_RenderStateValue) == 1)
+	{
+		m_DependentRenderState = 1 << 0;
+	}
+
 	FILE* fptr;
 
 	m_VertexShaderLocation = "data/" + m_VertexShaderLocation;
@@ -178,6 +184,7 @@ eae6320::cResult eae6320::Assets::cEffectBuilder::Build(const std::vector<std::s
 
 	fptr = fopen(m_path_target, "w+b");
 	fwrite(&m_RenderStateValue, sizeof(uint8_t), 1, fptr);
+	fwrite(&m_DependentRenderState, sizeof(uint8_t), 1, fptr);
 	fwrite(&length, sizeof(uint8_t), 1, fptr);
 	fwrite(m_VertexShaderLocation.c_str(), m_VertexShaderLocation.length(), 1, fptr);
 	fwrite("\0", sizeof(uint8_t), 1, fptr);
