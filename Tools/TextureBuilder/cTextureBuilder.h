@@ -9,6 +9,7 @@
 //=========
 
 #include <Tools/AssetBuildLibrary/cbBuilder.h>
+#include "../../Engine/Results/cResult.h"
 
 // Class Declaration
 //==================

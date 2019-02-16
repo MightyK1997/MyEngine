@@ -239,7 +239,7 @@ namespace
 			//	* BC3 (compressed with alpha, used to be known as "DXT5")
 			const auto formatToCompressTo = resizedImage.IsAlphaAllOpaque() ? DXGI_FORMAT_BC1_UNORM : DXGI_FORMAT_BC3_UNORM;
 			constexpr DWORD useDefaultCompressionOptions = DirectX::TEX_COMPRESS_DEFAULT;
-			constexpr float useDefaultThreshold = DirectX::TEX_THRESHOLD_DEFAULT;
+			const float useDefaultThreshold = DirectX::TEX_THRESHOLD_DEFAULT;
 			if ( FAILED( DirectX::Compress( imageWithMipMaps.GetImages(), imageWithMipMaps.GetImageCount(),
 				imageWithMipMaps.GetMetadata(), formatToCompressTo, useDefaultCompressionOptions, useDefaultThreshold, o_texture ) ) )
 			{
@@ -258,7 +258,7 @@ namespace
 			else
 			{
 				// The texture is uncompressed but needs to be converted to the expected format
-				constexpr float useDefaultThreshold = DirectX::TEX_THRESHOLD_DEFAULT;
+				const float useDefaultThreshold = DirectX::TEX_THRESHOLD_DEFAULT;
 				if ( FAILED( DirectX::Convert( imageWithMipMaps.GetImages(), imageWithMipMaps.GetImageCount(),
 					imageWithMipMaps.GetMetadata(), uncompressedFormat, filterOptions, useDefaultThreshold, o_texture ) ) )
 				{

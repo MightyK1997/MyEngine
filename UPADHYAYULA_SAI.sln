@@ -138,6 +138,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MaterialBuilder", "Tools\Ma
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXTex", "External\DirectXTex\DirectXTex.vcxproj", "{0449CAF6-40FB-4A48-A7D1-03170F1A577F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureBuilder", "Tools\TextureBuilder\TextureBuilder.vcxproj", "{C593CAD3-9BB6-4851-B197-AD0A9CF8AAC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -550,6 +552,16 @@ Global
 		{0449CAF6-40FB-4A48-A7D1-03170F1A577F}.Release|x64.Build.0 = Release|x64
 		{0449CAF6-40FB-4A48-A7D1-03170F1A577F}.Release|x86.ActiveCfg = Release|Win32
 		{0449CAF6-40FB-4A48-A7D1-03170F1A577F}.Release|x86.Build.0 = Release|Win32
+		{C593CAD3-9BB6-4851-B197-AD0A9CF8AAC1}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{C593CAD3-9BB6-4851-B197-AD0A9CF8AAC1}.Debug|x64.ActiveCfg = Debug|x64
+		{C593CAD3-9BB6-4851-B197-AD0A9CF8AAC1}.Debug|x64.Build.0 = Debug|x64
+		{C593CAD3-9BB6-4851-B197-AD0A9CF8AAC1}.Debug|x86.ActiveCfg = Debug|Win32
+		{C593CAD3-9BB6-4851-B197-AD0A9CF8AAC1}.Debug|x86.Build.0 = Debug|Win32
+		{C593CAD3-9BB6-4851-B197-AD0A9CF8AAC1}.Release|Any CPU.ActiveCfg = Release|Win32
+		{C593CAD3-9BB6-4851-B197-AD0A9CF8AAC1}.Release|x64.ActiveCfg = Release|x64
+		{C593CAD3-9BB6-4851-B197-AD0A9CF8AAC1}.Release|x64.Build.0 = Release|x64
+		{C593CAD3-9BB6-4851-B197-AD0A9CF8AAC1}.Release|x86.ActiveCfg = Release|Win32
+		{C593CAD3-9BB6-4851-B197-AD0A9CF8AAC1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -596,6 +608,7 @@ Global
 		{F3A2D932-AE7F-4224-8C24-CB84665B0FF3} = {31B05C03-4BB2-4A0D-B621-B41DA6B0F57E}
 		{864A5F9F-B33E-4349-A9EF-A57AC5BB00F6} = {31B05C03-4BB2-4A0D-B621-B41DA6B0F57E}
 		{0449CAF6-40FB-4A48-A7D1-03170F1A577F} = {EE37D457-6F3F-4596-B682-FC8CB683E326}
+		{C593CAD3-9BB6-4851-B197-AD0A9CF8AAC1} = {31B05C03-4BB2-4A0D-B621-B41DA6B0F57E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A89F366F-0B7F-464F-90A8-A4828B273298}
