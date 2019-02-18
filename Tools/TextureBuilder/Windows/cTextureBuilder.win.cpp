@@ -2,6 +2,7 @@
 //=========
 
 #include "../cTextureBuilder.h"
+#include "ExternalLibraries.win.h"
 
 #include <algorithm>
 #include <Engine/Graphics/cSamplerState.h>
@@ -42,6 +43,22 @@ eae6320::cResult eae6320::Assets::cTextureBuilder::Build( const std::vector<std:
 	DirectX::ScratchImage builtTexture;
 	auto shouldComBeUninitialized = false;
 
+	// Build the texture
+	i_arguments;	// One way to customize how the texture is built would be to pass in and use command arguments
+	// The code I am providing always compresses the texture in a pre-defined way;
+	// you will have to change the code to do anything more sophisticated
+	constexpr auto compressTexture = true;
+	// The code I am providing always assumes a pre-defined sampler state that your game will use;
+	// you will have to change the code to do anything more sophisticated
+	const/*expr*/ auto desiredSamplerState = []
+	{
+		auto samplerStateBits = uint8_t(0);
+		Graphics::SamplerStates::EnableFiltering(samplerStateBits);
+		Graphics::SamplerStates::SetEdgeBehaviorU(Graphics::SamplerStates::Clamp, samplerStateBits);
+		Graphics::SamplerStates::SetEdgeBehaviorV(Graphics::SamplerStates::Clamp, samplerStateBits);
+		return samplerStateBits;
+	}();
+
 	// Initialize COM
 	{
 		void* const thisMustBeNull = nullptr;
@@ -62,21 +79,7 @@ eae6320::cResult eae6320::Assets::cTextureBuilder::Build( const std::vector<std:
 	{
 		goto OnExit;
 	}
-	// Build the texture
-	i_arguments;	// One way to customize how the texture is built would be to pass in and use command arguments
-	// The code I am providing always compresses the texture in a pre-defined way;
-	// you will have to change the code to do anything more sophisticated
-	constexpr auto compressTexture = true;
-	// The code I am providing always assumes a pre-defined sampler state that your game will use;
-	// you will have to change the code to do anything more sophisticated
-	constexpr auto desiredSamplerState = []
-	{
-		auto samplerStateBits = uint8_t(0);
-		Graphics::SamplerStates::EnableFiltering( samplerStateBits );
-		Graphics::SamplerStates::SetEdgeBehaviorU( Graphics::SamplerStates::Clamp, samplerStateBits );
-		Graphics::SamplerStates::SetEdgeBehaviorV( Graphics::SamplerStates::Clamp, samplerStateBits );
-		return samplerStateBits;
-	}();
+
 	if ( !( result = BuildTexture( m_path_source, compressTexture, desiredSamplerState,
 		sourceImage, builtTexture ) ) )
 	{
