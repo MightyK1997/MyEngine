@@ -28,6 +28,7 @@ eae6320::cResult LoadDataFile(const char* const i_FileName)
 	offset += sizeof(uint8_t);
 	m_ConstantName = reinterpret_cast<char*>(offset);
 	offset += m_ConstantName.size() + 1;
+	m_ConstantData.clear();
 	for (size_t i = 0; i < m_ConstantType + 1; i++)
 	{
 		m_ConstantData.push_back(*reinterpret_cast<uint8_t*>(offset));

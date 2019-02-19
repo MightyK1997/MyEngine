@@ -23,6 +23,8 @@ void main(
 	//Color
 	in const float4 i_color : COLOR,
 
+	in const float2 i_texture:TEXCOORD0,
+
 	// Output
 	//=======
 
@@ -32,7 +34,9 @@ void main(
 
 	//Color
 
-	out float4 o_color : COLOR
+	out float4 o_color : COLOR,
+
+	out float2 o_texture : TEXCOORD0
 
 	)
 {
@@ -40,6 +44,7 @@ void main(
 	// the actual shading code is never used
 	o_position = float4( i_position, 1.0 );
 	o_color = i_color;
+	o_texture = i_texture;
 }
 
 #elif defined( EAE6320_PLATFORM_GL )

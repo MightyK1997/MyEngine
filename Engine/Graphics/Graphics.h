@@ -10,6 +10,7 @@
 #include "ConstantBufferFormats.h"
 #include <Engine/Results/Results.h>
 #include "cCamera.h"
+#include "cSamplerState.h"
 #if defined( EAE6320_PLATFORM_WINDOWS )
 	#include <Engine/Windows/Includes.h>
 #endif
@@ -88,6 +89,8 @@ namespace eae6320
 
 		//Constant Buffer Info
 		extern eae6320::Graphics::cConstantBuffer s_constantBuffer_perFrame;
+
+		extern eae6320::Graphics::cSamplerState::Handle m_SamplerStateHandle;
 
 		void SetBackBufferValue(sColor i_BackBuffer);
 

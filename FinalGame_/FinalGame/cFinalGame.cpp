@@ -129,16 +129,16 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 
 	m_ListOfGameObjects.clear();
 	m_ListOfGameObjects.push_back(m_Lambo);
-	for (auto&x : m_TreeObjs)
-	{
-		m_ListOfGameObjects.push_back(x);
-	}
+	//for (auto&x : m_TreeObjs)
+	//{
+	//	m_ListOfGameObjects.push_back(x);
+	//}
 	m_GameObjectLocalToWorldTransforms.clear();
 	m_GameObjectLocalToWorldTransforms.push_back(m_Lambo->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
-	for (auto&x : m_TreeObjs)
+	/*for (auto&x : m_TreeObjs)
 	{
 		m_GameObjectLocalToWorldTransforms.push_back(x->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
-	}
+	}*/
 
 	eae6320::Graphics::SetEffectsAndMeshesToRender(&(m_ListOfGameObjects[0]), &(m_GameObjectLocalToWorldTransforms[0]), (uint8_t)(m_ListOfGameObjects.size()),
 		m_RenderingCamera, i_elapsedSecondCount_sinceLastSimulationUpdate);
@@ -175,10 +175,10 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 
 	ResetDetails();
 
-	std::string fName = "data/Meshes/Tree.meshbinary";
+	std::string fName = /*"data/Meshes/Tree.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_TreeHandle);
 
-	fName = "data/Meshes/Lambo-UV.meshbinary";
+	fName = */"data/Meshes/Lambo-UV.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_LamboHandle);
 
 	fName = "data/Materials/Material1.materialbinary";
@@ -225,17 +225,17 @@ void eae6320::cFinalGame::ResetDetails()
 void eae6320::cFinalGame::UpdateMeshAndEffect()
 {
 	m_Lambo->SetGameObjectHandles(m_LamboHandle, m_LamboMaterialHandle);
-	int count = 1;
-	for (auto&treeObj : m_TreeObjs)
-	{
-		if (count <= 3)
-		{
-			treeObj->SetGameObjectHandles(m_TreeHandle, m_Material1Handle);
-		}
-		else
-		{
-			treeObj->SetGameObjectHandles(m_TreeHandle, m_Material2Handle);
-		}
-		count++;
-	}
+	//int count = 1;
+	//for (auto&treeObj : m_TreeObjs)
+	//{
+	//	if (count <= 3)
+	//	{
+	//		treeObj->SetGameObjectHandles(m_TreeHandle, m_Material1Handle);
+	//	}
+	//	else
+	//	{
+	//		treeObj->SetGameObjectHandles(m_TreeHandle, m_Material2Handle);
+	//	}
+	//	count++;
+	//}
 }

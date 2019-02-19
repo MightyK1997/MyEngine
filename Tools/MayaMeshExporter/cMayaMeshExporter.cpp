@@ -805,7 +805,7 @@ namespace
 					fout << "--" << "Index Position = " << i_indexArray[i] << "\n";
 					fout << "Position = " "{" << i_vertexArray[i].vertex.x << "," << i_vertexArray[i].vertex.y << "," << i_vertexArray[i].vertex.z << "}" "," "\n";
 					fout << "Color = " "{" << i_vertexArray[i].vertex.r << "," << i_vertexArray[i].vertex.g << "," << i_vertexArray[i].vertex.b << "," << i_vertexArray[i].vertex.a << "}" "," "\n";
-					fout << "UV=""{" << i_vertexArray[i].vertex.u << "," << i_vertexArray[i].vertex.v << "}"",""\n";
+					fout << "UV=""{" << i_vertexArray[i].vertex.u << "," << 1 - i_vertexArray[i].vertex.v << "}"",""\n";
 					fout << "}" "," "\n";
 				}
 				fout << "}," "\n";

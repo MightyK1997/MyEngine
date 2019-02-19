@@ -40,10 +40,14 @@ cbuffer g_constantBuffer_perFrame : register( b0 )
 	float2 g_padding1;
 };
 
+tbuffer g_diffuseTexture : register(t0) {};
+
+sampler g_samplerState : register(s0) {};
+
 cbuffer g_constantBuffer_perMaterial : register(b1)
 {
 	float4 g_material_color;
-}
+};
 
 cbuffer g_constantBuffer_perDrawCall : register( b2 )
 {

@@ -25,12 +25,12 @@ void main(
 	//For the vertexColors
 	in const float4 i_position : SV_POSITION,
 	in const float4 i_color : COLOR,
-	in const float2 i_textureData : TEXCOORD0,
+	in const float2 i_textureData : TEXCOORD0
 
 	)
 {
 	// Output solid white
-	o_color = i_color * g_material_color;
+	o_color = i_color * g_material_color * SampleTexture2d(g_diffuseTexture, g_samplerState, i_textureData);
 }
 
 #elif defined( EAE6320_PLATFORM_GL )

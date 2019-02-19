@@ -9,6 +9,8 @@
 #include <algorithm>
 
 eae6320::Graphics::cConstantBuffer eae6320::Graphics::s_constantBuffer_perFrame(eae6320::Graphics::ConstantBufferTypes::PerFrame);
+
+eae6320::Graphics::cSamplerState::Handle eae6320::Graphics::m_SamplerStateHandle;
 namespace
 {
 	struct sDataRequiredToRenderAFrame
@@ -195,6 +197,10 @@ void eae6320::Graphics::RenderFrame()
 			uint64_t index = static_cast<uint64_t>(BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i]);
 			
 
+			auto material = cMaterial::s_Manager.UnsafeGet(static_cast<uint32_t>(materialIndex));
+
+			auto texture = cTexture::s_manager.Get(material->GetTextureHandle());
+
 			auto tempEffect = cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(effectIndex));
  			auto tempMesh = cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(meshIndex));
 
@@ -203,6 +209,7 @@ void eae6320::Graphics::RenderFrame()
 				tempEffect->Bind();
 				currentEffectIndex = effectIndex;
 			}
+			texture->Bind(0);
 			if (currentMaterialIndex ^ materialIndex)
 			{
 				s_ConstantBuffer_perMaterial.Update(&s_dataBeingRenderedByRenderThread->constantData_perMaterial[index]);
@@ -228,6 +235,8 @@ eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& 
 {
 	auto result = Results::Success;
 	s_helper = new eae6320::Graphics::GraphicsHelper();
+
+	
 
 	// Initialize the platform-specific context
 	if (!(result = sContext::g_context.Initialize(i_initializationParameters)))
@@ -294,6 +303,8 @@ eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& 
 			goto OnExit;
 		}
 	}
+	eae6320::Graphics::cSamplerState::s_manager.Load(1, m_SamplerStateHandle);
+	eae6320::Graphics::cSamplerState::s_manager.Get(m_SamplerStateHandle)->Bind(0);
 	// Initialize the views, Shading  data and Geometry
 	result = s_helper->Initialize(i_initializationParameters);
 

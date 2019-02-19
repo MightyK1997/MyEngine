@@ -65,7 +65,7 @@ namespace eae6320
 						{
 							auto& positionElement = layoutDescription[2];
 
-							positionElement.SemanticName = "TEXCOORD0";
+							positionElement.SemanticName = "TEXCOORD";
 							positionElement.SemanticIndex = 0;	// (Semantics without modifying indices at the end can always use zero)
 							positionElement.Format = DXGI_FORMAT_R32G32_FLOAT;
 							positionElement.InputSlot = 0;

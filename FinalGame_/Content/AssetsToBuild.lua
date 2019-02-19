@@ -5,7 +5,7 @@
 return
 {
 	meshes = {
-	"Meshes/Tree.txt",
+	--"Meshes/Tree.txt",
 	"Meshes/Lambo-UV.txt",
 	},
 
