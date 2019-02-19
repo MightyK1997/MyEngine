@@ -61,31 +61,31 @@ void eae6320::cFinalGame::UpdateBasedOnInput()
 	{
 		(*m_RenderingCamera).SetAngularSpeed(-1.0f);
 	}
-	m_TreeObjs[1]->SetGameObjectVelocity(Math::sVector(0, 0, 0));
+	m_Lambo->SetGameObjectVelocity(Math::sVector(0, 0, 0));
 	//(*m_RenderingCamera).SetAngularSpeed(0.0f);
 	if (UserInput::IsKeyPressed('K'))
 	{
-		m_TreeObjs[1]->SetGameObjectVelocity(Math::sVector(0, 0, 10.0f));
+		m_Lambo->SetGameObjectVelocity(Math::sVector(0, 0, 10.0f));
 	}
 	if (UserInput::IsKeyPressed('I'))
 	{
-		m_TreeObjs[1]->SetGameObjectVelocity(Math::sVector(0, 0, -10.0f));
+		m_Lambo->SetGameObjectVelocity(Math::sVector(0, 0, -10.0f));
 	}
 	if (UserInput::IsKeyPressed('L'))
 	{
-		m_TreeObjs[1]->SetGameObjectVelocity(Math::sVector(10.0f, 0, 0));
+		m_Lambo->SetGameObjectVelocity(Math::sVector(10.0f, 0, 0));
 	}
 	if (UserInput::IsKeyPressed('J'))
 	{
-		m_TreeObjs[1]->SetGameObjectVelocity(Math::sVector(-10.0f, 0, 0));
+		m_Lambo->SetGameObjectVelocity(Math::sVector(-10.0f, 0, 0));
 	}
 	if (UserInput::IsKeyPressed('U'))
 	{
-		m_TreeObjs[1]->SetGameObjectVelocity(Math::sVector(0, 10.0f, 0));
+		m_Lambo->SetGameObjectVelocity(Math::sVector(0, 10.0f, 0));
 	}
 	if (UserInput::IsKeyPressed('O'))
 	{
-		m_TreeObjs[1]->SetGameObjectVelocity(Math::sVector(0, -10.0f, 0));
+		m_Lambo->SetGameObjectVelocity(Math::sVector(0, -10.0f, 0));
 	}
 	//if (UserInput::IsKeyPressed('Z'))
 	//{
