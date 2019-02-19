@@ -58,6 +58,8 @@
       <Filter>Direct3D</Filter>
     </ClCompile>
     <ClCompile Include="cMaterial.cpp" />
+    <ClCompile Include="cSamplerState.cpp" />
+    <ClCompile Include="cTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Includes.h">
@@ -83,5 +85,11 @@
     <ClInclude Include="cCamera.h" />
     <ClInclude Include="cMaterial.h" />
     <ClInclude Include="RenderCommands.h" />
+    <ClInclude Include="cSamplerState.h" />
+    <ClInclude Include="cTexture.h" />
+    <ClInclude Include="TextureFormats.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cSamplerState.inl" />
   </ItemGroup>
 </Project>

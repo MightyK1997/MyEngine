@@ -39,6 +39,8 @@ eae6320::cResult eae6320::Graphics::cTexture::Load( const std::string& i_path, c
 
 	Platform::sDataFromFile dataFromFile;
 	cTexture* newTexture = nullptr;
+	uintptr_t currentOffset;
+	uintptr_t finalOffset;
 
 	// Load the binary data
 	{
@@ -52,8 +54,8 @@ eae6320::cResult eae6320::Graphics::cTexture::Load( const std::string& i_path, c
 	}
 
 	// Extract data from the file
-	auto currentOffset = reinterpret_cast<uintptr_t>( dataFromFile.data );
-	const auto finalOffset = currentOffset + dataFromFile.size;
+	currentOffset = reinterpret_cast<uintptr_t>( dataFromFile.data );
+	finalOffset = currentOffset + dataFromFile.size;
 
 	// The file starts with information about the texture
 	{

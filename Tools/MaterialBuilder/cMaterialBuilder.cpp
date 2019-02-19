@@ -1,5 +1,7 @@
 #include "cMaterialBuilder.h"
 #include "Tools/AssetBuildLibrary/Functions.h"
+
+#include "Tools/TextureBuilder/cTextureBuilder.h"
 #include <External/Lua/Includes.h>
 
 namespace
@@ -89,6 +91,10 @@ eae6320::cResult LoadTableValues(lua_State& i_LuaState)
 		{
 			m_TextureLocation = lua_tostring(&i_LuaState, -1);
 		}
+		else
+		{
+			m_TextureLocation = "Textures\\default_diffuse.tga";
+		}
 		lua_pop(&i_LuaState, 1);
 		lua_pop(&i_LuaState, 1);
 	}
@@ -172,9 +178,38 @@ eae6320::cResult eae6320::Assets::cMaterialBuilder::Build(const std::vector<std:
 	std::vector<uint8_t> defaultColor = { 0,0,0,1 };
 	//Writing to file
 	FILE * fptr;
+
+	std::vector<const char*> listOfDirectories;
+
+	std::string o_SourceDirectory;
+	std::string o_DestinationDir;
+	std::string o_OutputDir;
+	std::string o_ErrorMessage;
+
+	std::string tempTextureLocation = m_TextureLocation;
+
+
+	//Calling texture builder to build textures.
+	m_TextureLocation.replace(m_TextureLocation.begin(), m_TextureLocation.end(), "/",  "\\");
+
+	eae6320::Platform::GetEnvironmentVariable("GameSourceContentDir", o_SourceDirectory, &o_ErrorMessage);
+	o_SourceDirectory = o_SourceDirectory + m_TextureLocation;
+
+	if (!eae6320::Platform::DoesFileExist(o_SourceDirectory.c_str(), &o_ErrorMessage))
+	{
+		eae6320::Platform::GetEnvironmentVariable("EngineSourceContentDir", o_SourceDirectory, &o_ErrorMessage);
+		o_SourceDirectory = o_SourceDirectory + m_TextureLocation;
+	}
+	m_TextureLocation = "data\\" + m_TextureLocation;
+	eae6320::Platform::GetEnvironmentVariable("GameInstallDir", o_DestinationDir, &o_ErrorMessage);
+	o_DestinationDir = o_DestinationDir + m_TextureLocation;
+	eae6320::Platform::GetEnvironmentVariable("OutputDir", o_OutputDir, &o_ErrorMessage);
+	std::string commandToTextureBuilder = o_OutputDir + "\\TextureBuilder.exe" + " " + o_SourceDirectory + " " + o_DestinationDir;
+	std::system(commandToTextureBuilder.c_str());
+
 	fptr = fopen(m_path_target, "w+b");
 	m_EffectLocation = "data/" + m_EffectLocation;
-	m_TextureLocation = "data/" + m_TextureLocation;
+	m_TextureLocation = "data/" + tempTextureLocation;
 	fwrite(m_EffectLocation.c_str(), m_EffectLocation.length(), 1, fptr);
 	fwrite("\0", sizeof(uint8_t), 1, fptr);
 	fwrite(&m_ConstantType, sizeof(uint8_t), 1, fptr);

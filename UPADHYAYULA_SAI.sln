@@ -135,6 +135,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AudioBuilder", "Tools\AudioBuilder\AudioBuilder.vcxproj", "{F3A2D932-AE7F-4224-8C24-CB84665B0FF3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MaterialBuilder", "Tools\MaterialBuilder\MaterialBuilder.vcxproj", "{864A5F9F-B33E-4349-A9EF-A57AC5BB00F6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C593CAD3-9BB6-4851-B197-AD0A9CF8AAC1} = {C593CAD3-9BB6-4851-B197-AD0A9CF8AAC1}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectXTex", "External\DirectXTex\DirectXTex.vcxproj", "{0449CAF6-40FB-4A48-A7D1-03170F1A577F}"
 EndProject

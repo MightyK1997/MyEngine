@@ -6,6 +6,7 @@ return
 {
 	meshes = {
 	"Meshes/Tree.txt",
+	"Meshes/Lambo-UV.txt",
 	},
 
 	effects = {
@@ -20,5 +21,6 @@ return
 	materials = {
 		"Materials/Material1.material",
 		"Materials/Material2.material",
+		"Materials/LamboMaterial.material",
 	}
 }
