@@ -6,6 +6,5 @@ return
 		FragmentShaderLocation = "Shaders/Fragment/standard.shader",
 		VertexInputLayoutShaderLocation = "Shaders/Vertex/vertexInputLayout.shader",
 		DepthBuffering = "true",
-
 	},
 }
