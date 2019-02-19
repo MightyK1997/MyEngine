@@ -27,8 +27,8 @@ void main(
 	in const float3 i_vertexPosition_local : POSITION,
 
 	//Format for color
-
 	in const float4 i_vertexColor_local : COLOR,
+	in const float2 i_textureData_local : TEXCOORD0,
 
 	// Output
 	//=======
@@ -38,7 +38,11 @@ void main(
 	out float4 o_vertexPosition_projected : SV_POSITION,
 
 	//Color
-	out float4 o_vertexColor_projected : COLOR
+	out float4 o_vertexColor_projected : COLOR,
+
+	//UV
+
+	out float2 o_textureData_projected : TEXCOORD0,
 
 	)
 {
@@ -59,6 +63,7 @@ void main(
 		// Project the vertex from camera space into projected space
 		o_vertexPosition_projected = mul( g_transform_localToProjected, vertexPosition_local);
 		o_vertexColor_projected = i_vertexColor_local;
+		o_textureData_projected = i_textureData_local;
 	}
 }
 

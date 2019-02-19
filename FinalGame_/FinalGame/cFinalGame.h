@@ -90,17 +90,24 @@ namespace eae6320
 
 		//Mesh Handles
 		eae6320::Graphics::cMesh::Handle m_TreeHandle;
+		eae6320::Graphics::cMesh::Handle m_LamboHandle;
 
 
 		//Material
 		eae6320::Graphics::cMaterial::Handle m_Material1Handle;
 		eae6320::Graphics::cMaterial::Handle m_Material2Handle;
+		eae6320::Graphics::cMaterial::Handle m_LamboMaterialHandle;
 
 		//Cameras
 		eae6320::Graphics::cCamera* m_TopDownCamera;
 		eae6320::Graphics::cCamera* m_InCarCamera;
 
 		eae6320::Graphics::cCamera* m_RenderingCamera;
+
+
+		//GameObject
+
+		eae6320::Physics::cGameObject* m_Lambo;
 
 		//Lists
 		std::vector<eae6320::Physics::cGameObject*> m_TreeObjs;

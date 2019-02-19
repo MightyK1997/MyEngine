@@ -128,11 +128,13 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 	eae6320::Graphics::SetBackBufferValue(eae6320::Graphics::sColor{ 1,1,1, 1 });
 
 	m_ListOfGameObjects.clear();
+	m_ListOfGameObjects.push_back(m_Lambo);
 	for (auto&x : m_TreeObjs)
 	{
 		m_ListOfGameObjects.push_back(x);
 	}
 	m_GameObjectLocalToWorldTransforms.clear();
+	m_GameObjectLocalToWorldTransforms.push_back(m_Lambo->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
 	for (auto&x : m_TreeObjs)
 	{
 		m_GameObjectLocalToWorldTransforms.push_back(x->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
@@ -149,6 +151,9 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 {
 	eae6320::Graphics::cCamera::CreateCamera(m_TopDownCamera);
 	eae6320::Graphics::cCamera::CreateCamera(m_InCarCamera);
+	eae6320::Physics::cGameObject::CreateGameObject(m_Lambo);
+
+	m_Lambo->SetGameObjectPosition(Math::sVector(-9.0f, -10, -25.0f));
 
 	m_RenderingCamera = m_TopDownCamera;
 
@@ -173,11 +178,17 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	std::string fName = "data/Meshes/Tree.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_TreeHandle);
 
+	fName = "data/Meshes/Lambo-UV.meshbinary";
+	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_LamboHandle);
+
 	fName = "data/Materials/Material1.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_Material1Handle);
 
 	fName = "data/Materials/Material2.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_Material2Handle);
+
+	fName = "data/Materials/LamboMaterial.materialbinary";
+	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_LamboMaterialHandle);
 
 	UpdateMeshAndEffect();
 
@@ -213,7 +224,7 @@ void eae6320::cFinalGame::ResetDetails()
 
 void eae6320::cFinalGame::UpdateMeshAndEffect()
 {
-
+	m_Lambo->SetGameObjectHandles(m_LamboHandle, m_LamboMaterialHandle);
 	int count = 1;
 	for (auto&treeObj : m_TreeObjs)
 	{

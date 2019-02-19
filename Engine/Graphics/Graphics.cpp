@@ -17,7 +17,6 @@ namespace
 		eae6320::Graphics::ConstantBufferFormats::sPerDrawCall constantData_perDrawCall[eae6320::Graphics::m_maxNumberofMeshesAndEffects];
 		eae6320::Graphics::ConstantBufferFormats::sPerMaterialCall constantData_perMaterial[eae6320::Graphics::m_maxNumberofMeshesAndEffects];
 		eae6320::Graphics::sColor backBufferValue_perFrame;
-		eae6320::Graphics::sEffectsAndMeshesToRender m_MeshesAndEffects[eae6320::Graphics::m_maxNumberofMeshesAndEffects];
 		std::vector<uint64_t> m_RenderHandles;
 		unsigned int m_NumberOfEffectsToRender;
 	};

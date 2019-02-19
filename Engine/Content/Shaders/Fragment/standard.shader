@@ -24,7 +24,8 @@ void main(
 
 	//For the vertexColors
 	in const float4 i_position : SV_POSITION,
-	in const float4 i_color : COLOR
+	in const float4 i_color : COLOR,
+	in const float2 i_textureData : TEXCOORD0,
 
 	)
 {

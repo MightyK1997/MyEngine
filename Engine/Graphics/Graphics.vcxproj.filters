@@ -60,6 +60,12 @@
     <ClCompile Include="cMaterial.cpp" />
     <ClCompile Include="cSamplerState.cpp" />
     <ClCompile Include="cTexture.cpp" />
+    <ClCompile Include="Direct3D\cSamplerState.d3d.cpp">
+      <Filter>Direct3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct3D\cTexture.d3d.cpp">
+      <Filter>Direct3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Includes.h">
