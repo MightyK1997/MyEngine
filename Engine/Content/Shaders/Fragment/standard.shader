@@ -30,6 +30,7 @@ void main(
 {
 	// Output solid white
 	o_color = i_color * g_material_color;
+	o_color.a = 0.5;
 }
 
 #elif defined( EAE6320_PLATFORM_GL )
