@@ -30,7 +30,7 @@ void main(
 	)
 {
 	// Output solid white
-	o_color = i_color * g_material_color * SampleTexture2d(g_diffuseTexture, g_samplerState, i_textureData);
+	o_color = i_color * SampleTexture2d(g_diffuseTexture, g_samplerState, i_textureData);
 }
 
 #elif defined( EAE6320_PLATFORM_GL )

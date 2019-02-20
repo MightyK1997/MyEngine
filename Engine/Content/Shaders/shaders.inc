@@ -40,9 +40,8 @@ cbuffer g_constantBuffer_perFrame : register( b0 )
 	float2 g_padding1;
 };
 
-tbuffer g_diffuseTexture : register(t0) {};
-
-sampler g_samplerState : register(s0) {};
+DeclareTexture2d(g_diffuseTexture, 0);
+DeclareSamplerState(g_samplerState, 0);
 
 cbuffer g_constantBuffer_perMaterial : register(b1)
 {

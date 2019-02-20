@@ -5,7 +5,7 @@
 return
 {
 	meshes = {
-	--"Meshes/Tree.txt",
+	"Meshes/Gecko.txt",
 	"Meshes/Lambo-UV.txt",
 	},
 
@@ -22,5 +22,6 @@ return
 		"Materials/Material1.material",
 		"Materials/Material2.material",
 		"Materials/LamboMaterial.material",
+		"Materials/GeckoMaterial.material",
 	}
 }
