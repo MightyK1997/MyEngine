@@ -64,7 +64,7 @@ eae6320::cResult eae6320::Graphics::cTexture::Load( const std::string& i_path, c
 		if ( newOffset <= finalOffset )
 		{
 			const auto* const textureInfo = reinterpret_cast<TextureFormats::sTextureInfo*>( currentOffset );
-			EAE6320_ASSERT( ( textureInfo->width % 4u ) == 0u );
+			EAE6320_ASSERT( ( textureInfo->width % 4u ) == 0u ); 
 			EAE6320_ASSERT( ( textureInfo->height % 4u ) == 0u );
 			currentOffset = newOffset;
 			// Allocate a new texture with the information

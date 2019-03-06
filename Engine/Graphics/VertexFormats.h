@@ -34,6 +34,12 @@ namespace eae6320
 				float u, v;
 			};
 
+			struct sSprite
+			{
+				int8_t x, y;
+				int8_t u, v;
+			};
+
 			struct sIndex
 			{
 				uint16_t indexValue;
