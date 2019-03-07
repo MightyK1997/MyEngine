@@ -16,6 +16,7 @@ return
 		"Effects/Effect4.Effect",
 		"Effects/Effect5.Effect",
 		"Effects/Effect6.Effect",
+		"Effects/DefaultSpriteEffect.Effect",
 	},
 
 	materials = {
@@ -23,5 +24,6 @@ return
 		"Materials/Material2.material",
 		"Materials/LamboMaterial.material",
 		"Materials/GeckoMaterial.material",
+		"Materials/DefaultUIMaterial.material",
 	}
 }

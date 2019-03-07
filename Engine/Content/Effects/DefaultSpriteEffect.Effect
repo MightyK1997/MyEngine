@@ -1,0 +1,11 @@
+return
+{
+	Effect = 
+	{
+		VertexShaderLocation = "Shaders/Vertex/standard.shader",
+		FragmentShaderLocation = "Shaders/Fragment/standard.shader",
+		VertexInputLayoutShaderLocation = "Shaders/Vertex/spriteVertexInputLayout.shader",
+		AlphaBlending = "true",
+		DrawBothTriangleSides = "true",
+	},
+}

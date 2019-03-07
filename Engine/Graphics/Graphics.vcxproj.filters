@@ -67,6 +67,9 @@
       <Filter>Direct3D</Filter>
     </ClCompile>
     <ClCompile Include="cSprite.cpp" />
+    <ClCompile Include="Direct3D\cSprite.d3d.cpp">
+      <Filter>Direct3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Includes.h">

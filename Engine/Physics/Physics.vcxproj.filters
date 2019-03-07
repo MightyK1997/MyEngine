@@ -3,9 +3,11 @@
   <ItemGroup>
     <ClCompile Include="sRigidBodyState.cpp" />
     <ClCompile Include="cGameObject.cpp" />
+    <ClCompile Include="UISprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sRigidBodyState.h" />
     <ClInclude Include="cGameObject.h" />
+    <ClInclude Include="UISprite.h" />
   </ItemGroup>
 </Project>

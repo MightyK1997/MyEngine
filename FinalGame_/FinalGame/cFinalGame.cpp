@@ -190,6 +190,13 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	fName = "data/Materials/LamboMaterial.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_LamboMaterialHandle);
 
+	fName = "data/Materials/DefaultUIMaterial.materialbinary";
+	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_UIHandle);
+
+	eae6320::Graphics::cSprite::s_Manager.Load("Sprite", m_SpriteHandle);
+
+	eae6320::Physics::Sprite::CreateUISprite(Math::sVector(-1, -1, 0),m_SpriteHandle, m_UIHandle, m_Sprite);
+
 	UpdateMeshAndEffect();
 
 	return Results::Success;

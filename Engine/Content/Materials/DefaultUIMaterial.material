@@ -1,0 +1,11 @@
+return
+{
+        Material = 
+	{
+                EffectLocation = "data/Effects/DefaultSpriteEffect.Effectbinary",
+                ConstantType = "float4",
+                ConstantName = "Color",
+                ConstantValue = {1,1,1,1},
+                TextureLocation = "Textures/default_diffuse.texture",
+	},
+}

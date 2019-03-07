@@ -14,6 +14,8 @@
 #include <Engine/Results/Results.h>
 #include <Engine/Physics/cGameObject.h>
 #include <Engine/Audio_v2/Sound.h>
+#include "Engine/Physics/UISprite.h"
+#include "Engine/Graphics/cSprite.h"
 
 #if defined( EAE6320_PLATFORM_WINDOWS )
 	#include "Resource Files/Resource.h"
@@ -93,10 +95,15 @@ namespace eae6320
 		eae6320::Graphics::cMesh::Handle m_LamboHandle;
 
 
+		//UI
+		
+		eae6320::Graphics::cSprite::Handle m_SpriteHandle;
+
 		//Material
 		eae6320::Graphics::cMaterial::Handle m_Material1Handle;
 		eae6320::Graphics::cMaterial::Handle m_Material2Handle;
 		eae6320::Graphics::cMaterial::Handle m_LamboMaterialHandle;
+		eae6320::Graphics::cMaterial::Handle m_UIHandle;
 
 		//Cameras
 		eae6320::Graphics::cCamera* m_TopDownCamera;
@@ -108,6 +115,8 @@ namespace eae6320
 		//GameObject
 
 		eae6320::Physics::cGameObject* m_Lambo;
+
+		eae6320::Physics::Sprite* m_Sprite;
 
 		//Lists
 		std::vector<eae6320::Physics::cGameObject*> m_TreeObjs;

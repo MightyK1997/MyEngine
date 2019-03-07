@@ -6,6 +6,7 @@
 #include "cMaterial.h"
 #include "RenderCommands.h"
 #include "../Physics/cGameObject.h"
+#include "../Physics/UISprite.h"
 #include <algorithm>
 
 eae6320::Graphics::cConstantBuffer eae6320::Graphics::s_constantBuffer_perFrame(eae6320::Graphics::ConstantBufferTypes::PerFrame);
@@ -21,6 +22,7 @@ namespace
 		eae6320::Graphics::sColor backBufferValue_perFrame;
 		std::vector<uint64_t> m_RenderHandles;
 		unsigned int m_NumberOfEffectsToRender;
+		unsigned int m_NumberOfUISpritesToRender;
 	};
 	eae6320::Graphics::cConstantBuffer s_constantBuffer_perDrawCall(eae6320::Graphics::ConstantBufferTypes::PerDrawCall);
 	eae6320::Graphics::cConstantBuffer s_ConstantBuffer_perMaterial(eae6320::Graphics::ConstantBufferTypes::PerMaterial);
@@ -118,27 +120,45 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 		if (zValue < 0) zValue = 0;
 		zValue = isEffectDependent ? 1 - zValue : zValue;
 		uint64_t a = 0;
-		if (isEffectDependent)
-		{
-			a |= ((a | static_cast<uint64_t>(effectHandleIndex) << static_cast<uint64_t>(BitShiftsForDependentRenderCommands::E_EFFECTSHIFT)) |
-				(static_cast<uint64_t>(materialHandleIndex) << static_cast<uint64_t>(BitShiftsForDependentRenderCommands::E_MATERIALSHIFT)) |
-				(static_cast<uint64_t>(zValue * 255) << static_cast<uint64_t>(BitShiftsForDependentRenderCommands::E_DEPTHSHIFT)) |
-				(static_cast<uint64_t>((isEffectDependent) ? (RenderCommandTypes::E_DRAWDEPENDENT) : (RenderCommandTypes::E_DRAWINDEPENDENT)) << static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_TYPESHIFT)) |
-				(static_cast<uint64_t>(meshHandleIndex) << static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_MESHSHIFT)) |
-				i);
-		}
-		else
-		{
-			a |= ((a | static_cast<uint64_t>(effectHandleIndex) << static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_EFFECTSHIFT)) |
-				(static_cast<uint64_t>(materialHandleIndex) << static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_MATERIALSHIFT)) |
-				(static_cast<uint64_t>(zValue * 255) << static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_DEPTHSHIFT)) |
-				(static_cast<uint64_t>((isEffectDependent) ? (RenderCommandTypes::E_DRAWDEPENDENT) : (RenderCommandTypes::E_DRAWINDEPENDENT)) << static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_TYPESHIFT)) |
-				(static_cast<uint64_t>(meshHandleIndex) << static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_MESHSHIFT)) |
-				i);
-		}
+		a |= ((a | static_cast<uint64_t>(effectHandleIndex) << static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_EFFECTSHIFT)) |
+			(static_cast<uint64_t>(materialHandleIndex) << static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_MATERIALSHIFT)) |
+			(static_cast<uint64_t>(zValue * 255) << static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_DEPTHSHIFT)) |
+			(static_cast<uint64_t>((isEffectDependent) ? (RenderCommandTypes::E_DRAWDEPENDENT) : (RenderCommandTypes::E_DRAWINDEPENDENT)) << static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_TYPESHIFT)) |
+			(static_cast<uint64_t>(meshHandleIndex) << static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_MESHSHIFT)) |
+			i);
 		renderCommand.push_back(a);
 	}
 	std::sort(renderCommand.begin(), renderCommand.end());
+}
+
+void eae6320::Graphics::SetSpritesToRender(eae6320::Physics::Sprite* i_Sprite[100], unsigned i_NumberOfSpritesToRender)
+{
+	EAE6320_ASSERT(i_NumberOfSpritesToRender < m_maxNumberofMeshesAndEffects);
+	EAE6320_ASSERT(s_dataBeingSubmittedByApplicationThread);
+	auto& renderCommand = s_dataBeingSubmittedByApplicationThread->m_RenderHandles;
+	auto m_allDrawCallConstants = s_dataBeingSubmittedByApplicationThread->constantData_perDrawCall;
+	auto constantMaterialData = s_dataBeingSubmittedByApplicationThread->constantData_perMaterial;
+	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender += i_NumberOfSpritesToRender;
+	for (unsigned int i = 0; i < i_NumberOfSpritesToRender; i++)
+	{
+		auto materialHandle = i_Sprite[i]->GetSpriteMaterialHandle();
+		auto material = cMaterial::s_Manager.Get(materialHandle);
+		auto materialHandleIndex = materialHandle.GetIndex();
+		auto effectHandle = material->GetEffectHandle();
+		auto effect = cEffect::s_Manager.Get(effectHandle);
+		bool isEffectDependent = effect->IsEffectDependent();
+		auto effectHandleIndex = effectHandle.GetIndex();
+		auto spriteHandleIndex = i_Sprite[i]->GetSpriteHandle();
+		auto zValue = 0;
+		uint64_t a = 0;
+		a |= ((a | static_cast<uint64_t>(effectHandleIndex) << static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_EFFECTSHIFT)) |
+			(static_cast<uint64_t>(materialHandleIndex) << static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_MATERIALSHIFT)) |
+			(static_cast<uint64_t>(zValue * 255) << static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_DEPTHSHIFT)) |
+			(static_cast<uint64_t>((isEffectDependent) ? (RenderCommandTypes::E_DRAWDEPENDENT) : (RenderCommandTypes::E_DRAWINDEPENDENT)) << static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_TYPESHIFT)) |
+			(static_cast<uint64_t>(spriteHandleIndex) << static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_MESHSHIFT)) |
+			i);
+		renderCommand.push_back(a);
+	}
 }
 
 void eae6320::Graphics::RenderFrame()

@@ -50,7 +50,7 @@ namespace eae6320
 			{
 				Shutdown();
 			}
-			cResult Initialize(eae6320::Graphics::VertexFormats::sSprite* i_inputMesh, unsigned int i_VertexCount);
+			cResult Initialize(eae6320::Graphics::VertexFormats::sSprite* i_inputSprite, unsigned int i_VertexCount);
 			cResult Shutdown();
 			unsigned int indexCount;
 			EAE6320_ASSETS_DECLAREREFERENCECOUNT()
