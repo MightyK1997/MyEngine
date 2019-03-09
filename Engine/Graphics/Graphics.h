@@ -47,6 +47,9 @@ namespace eae6320
 		// for the frame currently being submitted
 		void SubmitElapsedTime( const float i_elapsedSecondCount_systemTime, const float i_elapsedSecondCount_simulationTime );
 
+		sColor ConvertNormalizedsRGBToLinear(sColor i_Color);
+		sColor ConvertNormalizedLinearTosRGB(sColor i_Color);
+
 		// When the application is ready to submit data for a new frame
 		// it should call this before submitting anything
 		// (or, said another way, it is not safe to submit data for a new frame

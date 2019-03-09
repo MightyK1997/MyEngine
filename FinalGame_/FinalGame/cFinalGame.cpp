@@ -125,7 +125,7 @@ void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecon
 
 void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_systemTime, const float i_elapsedSecondCount_sinceLastSimulationUpdate)
 {
-	eae6320::Graphics::SetBackBufferValue(eae6320::Graphics::sColor{ 1,1,1, 1 });
+	SetBackBufferValue(ConvertNormalizedsRGBToLinear(Graphics::sColor{ 1,1,1, 1 }));
 
 	m_ListOfGameObjects.clear();
 	m_ListOfGameObjects.push_back(m_Lambo);
