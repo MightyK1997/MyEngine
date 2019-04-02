@@ -225,6 +225,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="sContext.cpp" />
+    <ClCompile Include="sRGB.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cCamera.h" />
@@ -250,6 +251,7 @@
     </ClInclude>
     <ClInclude Include="RenderCommands.h" />
     <ClInclude Include="sContext.h" />
+    <ClInclude Include="sRGB.h" />
     <ClInclude Include="TextureFormats.h" />
     <ClInclude Include="VertexFormats.h" />
     <ClInclude Include="Windows\ExternalLibraries.win.h" />

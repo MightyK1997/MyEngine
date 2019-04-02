@@ -9,6 +9,7 @@
 #include <Engine/Asserts/Asserts.h>
 #include <Engine/UserInput/UserInput.h>
 #include <Engine/ControllerInput/ControllerInput.h>
+#include "Engine/Graphics/sRGB.h"
 
 // Inherited Implementation
 //=========================
@@ -125,7 +126,7 @@ void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecon
 
 void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_systemTime, const float i_elapsedSecondCount_sinceLastSimulationUpdate)
 {
-	SetBackBufferValue(ConvertNormalizedsRGBToLinear(Graphics::sColor{ 1,1,1, 1 }));
+	SetBackBufferValue(Graphics::Color::ConvertNormalizedsRGBToLinear(Graphics::sColor{ 1,1,1, 1 }));
 
 	m_ListOfGameObjects.clear();
 	m_ListOfGameObjects.push_back(m_Lambo);

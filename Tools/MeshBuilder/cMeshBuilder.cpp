@@ -1,6 +1,7 @@
 #include "cMeshBuilder.h"
 
 #include <fstream>
+#include "Engine/Graphics/sRGB.h"
 #include <Engine/Graphics/cEffect.h>
 #include <Engine/Graphics/cMesh.h>
 #include <Tools/AssetBuildLibrary/Functions.h>
@@ -68,22 +69,27 @@ eae6320::cResult LoadVertexData(lua_State& i_LuaState, eae6320::Graphics::Vertex
 		lua_pushnil(&i_LuaState);
 		while (lua_next(&i_LuaState, -2))
 		{
+			eae6320::Graphics::sColor color = {0,0,0,0};
 			if (i == 0)
 			{
-				io_mesh->r = static_cast<uint8_t>(lua_tonumber(&i_LuaState, -1)) * 255;
+				color.r = static_cast<float>(lua_tonumber(&i_LuaState, -1));
 			}
 			else if (i == 1)
 			{
-				io_mesh->g = static_cast<uint8_t>(lua_tonumber(&i_LuaState, -1)) * 255;
+				color.g = static_cast<float>(lua_tonumber(&i_LuaState, -1));
 			}
 			else if (i == 2)
 			{
-				io_mesh->b = static_cast<uint8_t>(lua_tonumber(&i_LuaState, -1)) * 255;
+				color.b = static_cast<float>(lua_tonumber(&i_LuaState, -1));
 			}
 			else if (i == 3)
 			{
 				io_mesh->a = static_cast<uint8_t>(lua_tonumber(&i_LuaState, -1)) * 255;
 			}
+			eae6320::Graphics::sColor retcolor = eae6320::Graphics::Color::ConvertNormalizedsRGBToLinear(color);
+			io_mesh->r = static_cast<uint8_t>(retcolor.r) * 255;
+			io_mesh->g = static_cast<uint8_t>(retcolor.g) * 255;
+			io_mesh->b = static_cast<uint8_t>(retcolor.b) * 255;
 			i++;
 			lua_pop(&i_LuaState, 1);
 		}

@@ -39,6 +39,14 @@ namespace eae6320
 {
 	namespace Graphics
 	{
+		namespace TextureTypes
+		{
+			enum class eType : uint8_t
+			{
+				COLOR = 0,
+			};
+		}
+
 		class cTexture
 		{
 			// Interface

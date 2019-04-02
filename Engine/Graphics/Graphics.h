@@ -45,10 +45,7 @@ namespace eae6320
 		// but the following is an example (that gets called automatically)
 		// of how the application submits the total elapsed times
 		// for the frame currently being submitted
-		void SubmitElapsedTime( const float i_elapsedSecondCount_systemTime, const float i_elapsedSecondCount_simulationTime );
-
-		sColor ConvertNormalizedsRGBToLinear(sColor i_Color);
-		sColor ConvertNormalizedLinearTosRGB(sColor i_Color);
+		void SubmitElapsedTime(const float i_elapsedSecondCount_systemTime, const float i_elapsedSecondCount_simulationTime);
 
 		// When the application is ready to submit data for a new frame
 		// it should call this before submitting anything

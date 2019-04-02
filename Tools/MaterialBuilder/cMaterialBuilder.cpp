@@ -4,6 +4,8 @@
 #include "Tools/TextureBuilder/cTextureBuilder.h"
 #include <External/Lua/Includes.h>
 #include <algorithm>
+#include "Engine/Graphics/GraphicsHelper.h"
+#include "Engine/Graphics/sRGB.h"
 
 namespace
 {
@@ -70,18 +72,37 @@ eae6320::cResult LoadTableValues(lua_State& i_LuaState)
 		}
 		lua_pop(&i_LuaState, 1);
 
-		key2 = "ConstantValue";
-		lua_pushstring(&i_LuaState, key2);
-		lua_gettable(&i_LuaState, -2);
-		if (lua_istable(&i_LuaState, -1))
+		if(m_ConstantName == "Color")
 		{
-			lua_pushnil(&i_LuaState);
-			while (lua_next(&i_LuaState, -2))
+			key2 = "ConstantValue";
+			lua_pushstring(&i_LuaState, key2);
+			lua_gettable(&i_LuaState, -2);
+			if (lua_istable(&i_LuaState, -1))
 			{
-				m_ConstantData.push_back(static_cast<uint8_t>(lua_tonumber(&i_LuaState, -1)));
+				lua_pushnil(&i_LuaState);
+				while (lua_next(&i_LuaState, -2))
+				{
+					m_ConstantData.push_back(static_cast<uint8_t>(lua_tonumber(&i_LuaState, -1)));
+					lua_pop(&i_LuaState, 1);
+				}
 				lua_pop(&i_LuaState, 1);
 			}
-			lua_pop(&i_LuaState, 1);
+		}
+		else
+		{
+			key2 = "ConstantValue";
+			lua_pushstring(&i_LuaState, key2);
+			lua_gettable(&i_LuaState, -2);
+			if (lua_istable(&i_LuaState, -1))
+			{
+				lua_pushnil(&i_LuaState);
+				while (lua_next(&i_LuaState, -2))
+				{
+					m_ConstantData.push_back(static_cast<uint8_t>(lua_tonumber(&i_LuaState, -1)));
+					lua_pop(&i_LuaState, 1);
+				}
+				lua_pop(&i_LuaState, 1);
+			}
 		}
 		
 
@@ -202,7 +223,7 @@ eae6320::cResult eae6320::Assets::cMaterialBuilder::Build(const std::vector<std:
 
 	eae6320::Platform::GetEnvironmentVariable("OutputDir", o_OutputDir, &o_ErrorMessage);
 
-	std::string commandToTextureBuilder = o_OutputDir + "\\TextureBuilder.exe" + " " + o_SourceDirectory + " " + o_DestinationDir;
+	std::string commandToTextureBuilder = o_OutputDir + "\\TextureBuilder.exe" + " " + o_SourceDirectory + " " + o_DestinationDir + " " + std::to_string(0);
 
 	std::system(commandToTextureBuilder.c_str());
 
