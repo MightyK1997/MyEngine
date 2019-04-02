@@ -185,9 +185,6 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	fName = "data/Materials/GeckoMaterial.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_Material1Handle);
 
-	fName = "data/Materials/Material2.materialbinary";
-	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_Material2Handle);
-
 	fName = "data/Materials/LamboMaterial.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_LamboMaterialHandle);
 
@@ -199,14 +196,16 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 eae6320::cResult eae6320::cFinalGame::CleanUp()
 {
 	eae6320::Graphics::cMesh::s_Manager.Release(m_TreeHandle);
+	eae6320::Graphics::cMesh::s_Manager.Release(m_LamboHandle);
 	eae6320::Graphics::cMaterial::s_Manager.Release(m_Material1Handle);
-	eae6320::Graphics::cMaterial::s_Manager.Release(m_Material2Handle);
+	eae6320::Graphics::cMaterial::s_Manager.Release(m_LamboMaterialHandle);
 
 	for (auto&x : m_TreeObjs)
 	{
 		x->DecrementReferenceCount();
 	}
 
+	m_Lambo->DecrementReferenceCount();
 	m_TopDownCamera->DecrementReferenceCount();
 	m_InCarCamera->DecrementReferenceCount();
 
@@ -226,17 +225,8 @@ void eae6320::cFinalGame::ResetDetails()
 void eae6320::cFinalGame::UpdateMeshAndEffect()
 {
 	m_Lambo->SetGameObjectHandles(m_LamboHandle, m_LamboMaterialHandle);
-	int count = 1;
 	for (auto&treeObj : m_TreeObjs)
 	{
-		if (count <= 3)
-		{
-			treeObj->SetGameObjectHandles(m_TreeHandle, m_Material1Handle);
-		}
-		else
-		{
-			treeObj->SetGameObjectHandles(m_TreeHandle, m_Material1Handle);
-		}
-		count++;
+		treeObj->SetGameObjectHandles(m_TreeHandle, m_Material1Handle);
 	}
 }

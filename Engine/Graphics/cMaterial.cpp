@@ -65,4 +65,5 @@ eae6320::cResult eae6320::Graphics::cMaterial::Load(const std::string& i_FilePat
 void eae6320::Graphics::cMaterial::Shutdown()
 {
 	eae6320::Graphics::cEffect::s_Manager.Release(m_EffectHandle);
+	eae6320::Graphics::cTexture::s_manager.Release(m_TextureHandle);
 }
