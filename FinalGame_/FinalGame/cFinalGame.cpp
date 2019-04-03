@@ -128,20 +128,21 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 	eae6320::Graphics::SetBackBufferValue(eae6320::Graphics::sColor{ 1,1,1, 1 });
 
 	m_ListOfGameObjects.clear();
-	m_ListOfGameObjects.push_back(m_Lambo);
-	for (auto&x : m_TreeObjs)
-	{
-		m_ListOfGameObjects.push_back(x);
-	}
+	//m_ListOfGameObjects.push_back(m_Lambo);
+	//for (auto&x : m_TreeObjs)
+	//{
+	//	m_ListOfGameObjects.push_back(x);
+	//}
 	m_GameObjectLocalToWorldTransforms.clear();
-	m_GameObjectLocalToWorldTransforms.push_back(m_Lambo->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
-	for (auto&x : m_TreeObjs)
+	/*m_GameObjectLocalToWorldTransforms.push_back(m_Lambo->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));*/
+	/*for (auto&x : m_TreeObjs)
 	{
 		m_GameObjectLocalToWorldTransforms.push_back(x->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
-	}
+	}*/
 
-	eae6320::Graphics::SetEffectsAndMeshesToRender(&(m_ListOfGameObjects[0]), &(m_GameObjectLocalToWorldTransforms[0]), (uint8_t)(m_ListOfGameObjects.size()),
-		m_RenderingCamera, i_elapsedSecondCount_sinceLastSimulationUpdate);
+	//eae6320::Graphics::SetEffectsAndMeshesToRender(&(m_ListOfGameObjects[0]), &(m_GameObjectLocalToWorldTransforms[0]), (uint8_t)(m_ListOfGameObjects.size()),
+	//	m_RenderingCamera, i_elapsedSecondCount_sinceLastSimulationUpdate);
+	eae6320::Graphics::SetSpritesToRender(&m_Sprite, 1);
 }
 
 // Initialization / Clean Up

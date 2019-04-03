@@ -24,10 +24,10 @@ void main(
 	// but must match the C call to CreateInputLayout()
 
 	// These values come from one of the VertexFormats::sMesh that the vertex buffer was filled with in C code
-	in const float3 i_vertexPosition_local : POSITION,
+	in const float3 i_vertexPosition_local : POS,
 
 	//UV
-	in const float2 i_textureData_local : TEXCOORD,
+	in const float2 i_textureData_local : TEX,
 
 	// Output
 	//=======

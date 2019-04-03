@@ -52,7 +52,6 @@ namespace eae6320
 			}
 			cResult Initialize(eae6320::Graphics::VertexFormats::sSprite* i_inputSprite, unsigned int i_VertexCount);
 			cResult Shutdown();
-			unsigned int indexCount;
 			EAE6320_ASSETS_DECLAREREFERENCECOUNT()
 #ifdef EAE6320_PLATFORM_D3D
 				// A vertex buffer holds the data for each vertex

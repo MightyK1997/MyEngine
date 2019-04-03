@@ -1,6 +1,8 @@
 #include "cSprite.h"
 #include "../Platform/Platform.h"
 
+eae6320::Assets::cManager<eae6320::Graphics::cSprite> eae6320::Graphics::cSprite::s_Manager;
+
 eae6320::cResult eae6320::Graphics::cSprite::Load(const std::string& i_FilePath, cSprite*& o_Sprite)
 {
 	cResult result = Results::Success;

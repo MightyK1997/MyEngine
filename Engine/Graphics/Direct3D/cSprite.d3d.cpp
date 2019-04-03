@@ -40,9 +40,9 @@ namespace eae6320
 						{
 							auto& positionElement = layoutDescription[0];
 
-							positionElement.SemanticName = "POSITION";
+							positionElement.SemanticName = "POS";
 							positionElement.SemanticIndex = 0;	// (Semantics without modifying indices at the end can always use zero)
-							positionElement.Format = DXGI_FORMAT_R32G32B32_FLOAT;
+							positionElement.Format = DXGI_FORMAT_R32G32_FLOAT;
 							positionElement.InputSlot = 0;
 							positionElement.AlignedByteOffset = offsetof(eae6320::Graphics::VertexFormats::sSprite, x);
 							positionElement.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
@@ -52,7 +52,7 @@ namespace eae6320
 						{
 							auto& positionElement = layoutDescription[1];
 
-							positionElement.SemanticName = "TEXCOORD";
+							positionElement.SemanticName = "TEX";
 							positionElement.SemanticIndex = 0;	// (Semantics without modifying indices at the end can always use zero)
 							positionElement.Format = DXGI_FORMAT_R32G32_FLOAT;
 							positionElement.InputSlot = 0;
@@ -154,6 +154,22 @@ namespace eae6320
 						direct3dImmediateContext->Draw(4, 0);
 					}
 				}
+		}
+
+		cResult cSprite::Shutdown()
+		{
+			auto result = Results::Success;
+			if (m_vertexBuffer)
+			{
+				m_vertexBuffer->Release();
+				m_vertexBuffer = nullptr;
+			}
+			if (m_vertexInputLayout)
+			{
+				m_vertexInputLayout->Release();
+				m_vertexInputLayout = nullptr;
+			}
+			return result;
 		}
 	}
 }

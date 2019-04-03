@@ -18,9 +18,9 @@ void main(
 	// but must match the C call to CreateInputLayout()
 
 	// These values come from one of the VertexFormats::sMesh that the vertex buffer was filled with in C code
-	in const float3 i_position : POSITION,
+	in const float2 i_position : POS,
 
-	in const float2 i_texture:TEXCOORD0,
+	in const float2 i_texture:TEX,
 
 	// Output
 	//=======
@@ -35,7 +35,7 @@ void main(
 {
 	// The shader program is only used to generate a vertex input layout object;
 	// the actual shading code is never used
-	o_position = float4( i_position, 1.0 );
+	o_position = float4( i_position, 0.0,1.0 );
 	o_texture = i_texture;
 }
 

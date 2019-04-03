@@ -20,6 +20,7 @@ void main(
 	// Whatever color value is output from the fragment shader
 	// will determine the color of the corresponding pixel on the screen
 	out float4 o_color : SV_TARGET,
+	in const float2 i_textureData : TEX
 	)
 {
 	// Output solid white

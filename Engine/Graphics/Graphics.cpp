@@ -122,7 +122,7 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 		uint64_t a = 0;
 		a |= ((a | static_cast<uint64_t>(effectHandleIndex) << static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_EFFECTSHIFT)) |
 			(static_cast<uint64_t>(materialHandleIndex) << static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_MATERIALSHIFT)) |
-			(static_cast<uint64_t>(zValue * 255) << static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_DEPTHSHIFT)) |
+			(static_cast<uint64_t>(zValue * 255) << (isEffectDependent ? static_cast<uint64_t>(BitShiftsForDependentRenderCommands::E_DEPTHSHIFT) : static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_DEPTHSHIFT))) |
 			(static_cast<uint64_t>((isEffectDependent) ? (RenderCommandTypes::E_DRAWDEPENDENT) : (RenderCommandTypes::E_DRAWINDEPENDENT)) << static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_TYPESHIFT)) |
 			(static_cast<uint64_t>(meshHandleIndex) << static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_MESHSHIFT)) |
 			i);
@@ -138,7 +138,7 @@ void eae6320::Graphics::SetSpritesToRender(eae6320::Physics::Sprite* i_Sprite[10
 	auto& renderCommand = s_dataBeingSubmittedByApplicationThread->m_RenderHandles;
 	auto m_allDrawCallConstants = s_dataBeingSubmittedByApplicationThread->constantData_perDrawCall;
 	auto constantMaterialData = s_dataBeingSubmittedByApplicationThread->constantData_perMaterial;
-	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender += i_NumberOfSpritesToRender;
+	auto val = s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender;
 	for (unsigned int i = 0; i < i_NumberOfSpritesToRender; i++)
 	{
 		auto materialHandle = i_Sprite[i]->GetSpriteMaterialHandle();
@@ -148,17 +148,19 @@ void eae6320::Graphics::SetSpritesToRender(eae6320::Physics::Sprite* i_Sprite[10
 		auto effect = cEffect::s_Manager.Get(effectHandle);
 		bool isEffectDependent = effect->IsEffectDependent();
 		auto effectHandleIndex = effectHandle.GetIndex();
-		auto spriteHandleIndex = i_Sprite[i]->GetSpriteHandle();
+		auto spriteHandleIndex = i_Sprite[i]->GetSpriteHandle().GetIndex();
 		auto zValue = 0;
 		uint64_t a = 0;
-		a |= ((a | static_cast<uint64_t>(effectHandleIndex) << static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_EFFECTSHIFT)) |
-			(static_cast<uint64_t>(materialHandleIndex) << static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_MATERIALSHIFT)) |
-			(static_cast<uint64_t>(zValue * 255) << static_cast<uint64_t>(BitShiftsForIndependentRenderCommands::E_DEPTHSHIFT)) |
-			(static_cast<uint64_t>((isEffectDependent) ? (RenderCommandTypes::E_DRAWDEPENDENT) : (RenderCommandTypes::E_DRAWINDEPENDENT)) << static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_TYPESHIFT)) |
+
+		a |= ((a | static_cast<uint64_t>(effectHandleIndex) << static_cast<uint64_t>(BitShiftsForDependentRenderCommands::E_EFFECTSHIFT)) |
+			(static_cast<uint64_t>(materialHandleIndex) << static_cast<uint64_t>(BitShiftsForDependentRenderCommands::E_MATERIALSHIFT)) |
+			(static_cast<uint64_t>(zValue * 255) << static_cast<uint64_t>(BitShiftsForDependentRenderCommands::E_DEPTHSHIFT)) |
+			(static_cast<uint64_t>(RenderCommands::RenderCommandTypes::E_DRAWSPRITE) << static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_TYPESHIFT)) |
 			(static_cast<uint64_t>(spriteHandleIndex) << static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_MESHSHIFT)) |
-			i);
+			(val + i));
 		renderCommand.push_back(a);
 	}
+	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender += i_NumberOfSpritesToRender;
 }
 
 void eae6320::Graphics::RenderFrame()
@@ -199,10 +201,11 @@ void eae6320::Graphics::RenderFrame()
 		{
 			auto typeOfRenderCommand = static_cast<uint64_t>(BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i] >> static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_TYPESHIFT));
 			bool isDependent = (typeOfRenderCommand == static_cast<uint64_t>(RenderCommandTypes::E_DRAWDEPENDENT));
+			bool isSprite = (typeOfRenderCommand == static_cast<uint64_t>(RenderCommandTypes::E_DRAWSPRITE));
 
 			uint64_t effectIndex, materialIndex;
 
-			if (isDependent)
+			if (isDependent || isSprite)
 			{
 				effectIndex = static_cast<uint64_t>(BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i] >> static_cast<uint64_t>(BitShiftsForDependentRenderCommands::E_EFFECTSHIFT));
 				materialIndex = static_cast<uint64_t>(BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i] >> static_cast<uint64_t>(BitShiftsForDependentRenderCommands::E_MATERIALSHIFT));
@@ -214,7 +217,7 @@ void eae6320::Graphics::RenderFrame()
 			}
 			uint64_t meshIndex = static_cast<uint64_t>(BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i] >>
 				static_cast<uint64_t>(BitShiftsForCommonRenderCommands::E_MESHSHIFT));
-			uint64_t index = static_cast<uint64_t>(BitMasksForRenderCommands::E_COMMONBITMASK) & (allRenderCommands[i]);
+			uint64_t index = static_cast<uint8_t>(allRenderCommands[i]);
 			
 
 			auto material = cMaterial::s_Manager.UnsafeGet(static_cast<uint32_t>(materialIndex));
@@ -222,7 +225,7 @@ void eae6320::Graphics::RenderFrame()
 			auto texture = cTexture::s_manager.Get(material->GetTextureHandle());
 
 			auto tempEffect = cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(effectIndex));
- 			auto tempMesh = cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(meshIndex));
+ 			
 
 			if ((currentEffectIndex ^ effectIndex))
 			{
@@ -235,14 +238,23 @@ void eae6320::Graphics::RenderFrame()
 				s_ConstantBuffer_perMaterial.Update(&s_dataBeingRenderedByRenderThread->constantData_perMaterial[index]);
 			}
 			s_constantBuffer_perDrawCall.Update(&s_dataBeingRenderedByRenderThread->constantData_perDrawCall[index]);
-			if ((currentMeshIndex ^ meshIndex))
+			if (!isSprite)
 			{
-				tempMesh->Draw(true);
-				currentMeshIndex = meshIndex;
+				auto tempMesh = cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(meshIndex));
+				if ((currentMeshIndex ^ meshIndex))
+				{
+					tempMesh->Draw(true);
+					currentMeshIndex = meshIndex;
+				}
+				else
+				{
+					tempMesh->Draw(false);
+				}
 			}
 			else
 			{
-				tempMesh->Draw(false);
+				auto tempMesh = cSprite::s_Manager.UnsafeGet(static_cast<uint32_t>(meshIndex));
+					tempMesh->Draw(true);
 			}
 		}
 		s_helper->SwapChain();

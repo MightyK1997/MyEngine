@@ -2,10 +2,10 @@ return
 {
 	Effect = 
 	{
-		VertexShaderLocation = "Shaders/Vertex/standard.shader",
-		FragmentShaderLocation = "Shaders/Fragment/standard.shader",
+		VertexShaderLocation = "Shaders/Vertex/standardSprite.shader",
+		FragmentShaderLocation = "Shaders/Fragment/standardSprite.shader",
 		VertexInputLayoutShaderLocation = "Shaders/Vertex/spriteVertexInputLayout.shader",
-		AlphaBlending = "true",
+		AlphaTransparency = "true",
 		DrawBothTriangleSides = "true",
 	},
 }

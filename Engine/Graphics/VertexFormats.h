@@ -36,8 +36,8 @@ namespace eae6320
 
 			struct sSprite
 			{
-				int8_t x, y;
-				int8_t u, v;
+				float x, y;
+				float u, v;
 			};
 
 			struct sIndex

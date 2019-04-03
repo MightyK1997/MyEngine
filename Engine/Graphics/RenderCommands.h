@@ -12,6 +12,7 @@ namespace eae6320
 			{
 				E_DRAWINDEPENDENT = 0x01,
 				E_DRAWDEPENDENT = 0X02,
+				E_DRAWSPRITE = 0x04,
 			};
 
 			enum class BitMasksForRenderCommands : uint8_t
