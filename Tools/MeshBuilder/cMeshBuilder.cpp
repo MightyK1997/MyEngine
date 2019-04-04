@@ -119,6 +119,33 @@ eae6320::cResult LoadVertexData(lua_State& i_LuaState, eae6320::Graphics::Vertex
 		lua_pop(&i_LuaState, 1);
 	}
 
+	i = 0;
+	constexpr auto* const key4 = "Normals";
+	lua_pushstring(&i_LuaState, key4);
+	lua_gettable(&i_LuaState, -2);
+	if (lua_istable(&i_LuaState, -1))
+	{
+		lua_pushnil(&i_LuaState);
+		while (lua_next(&i_LuaState, -2))
+		{
+			if (i == 0)
+			{
+				io_mesh->nx = static_cast<float>(lua_tonumber(&i_LuaState, -1));
+			}
+			else if (i == 1)
+			{
+				io_mesh->ny = static_cast<float>(lua_tonumber(&i_LuaState, -1));
+			}
+			else if (i == 2)
+			{
+				io_mesh->nz = static_cast<float>(lua_tonumber(&i_LuaState, -1));
+			}
+			i++;
+			lua_pop(&i_LuaState, 1);
+		}
+		lua_pop(&i_LuaState, 1);
+	}
+
 
 	return result;
 }
