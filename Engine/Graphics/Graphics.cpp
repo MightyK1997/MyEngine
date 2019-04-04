@@ -236,7 +236,7 @@ eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& 
 	auto result = Results::Success;
 	s_helper = new eae6320::Graphics::GraphicsHelper();
 
-	uint8_t samplerStateBits = SamplerStates::eSamplerState::Tile;
+	uint8_t samplerStateBits = SamplerStates::eSamplerState::Tile | SamplerStates::EdgeBehaviorU | SamplerStates::EdgeBehaviorV;
 
 	// Initialize the platform-specific context
 	if (!(result = sContext::g_context.Initialize(i_initializationParameters)))

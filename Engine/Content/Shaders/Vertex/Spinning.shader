@@ -65,7 +65,13 @@ void main(
 		// Project the vertex from camera space into projected space
 		o_vertexPosition_projected = mul( g_transform_localToProjected, vertexPosition_local);
 		o_vertexColor_projected = float4(1,1,1,1);
-		o_textureData_projected = i_textureData_local;
+		float2 pivot = float2(0.5,0.5);
+		 float2x2 rot = float2x2(cos(10 * g_elapsedSecondCount_simulationTime), -sin(10 * g_elapsedSecondCount_simulationTime), sin(10 * g_elapsedSecondCount_simulationTime), cos(10 * g_elapsedSecondCount_simulationTime));
+                // Rotation consedering pivot
+                float2 uv = i_textureData_local.xy - pivot;
+                o_textureData_projected = mul(rot, uv);
+                o_textureData_projected += pivot;
+		//o_textureData_projected = float2(cos(i_textureData_local.x + g_elapsedSecondCount_simulationTime), sin(i_textureData_local.y + g_elapsedSecondCount_simulationTime));
 	}
 }
 
