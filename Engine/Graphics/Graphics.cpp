@@ -236,7 +236,7 @@ eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& 
 	auto result = Results::Success;
 	s_helper = new eae6320::Graphics::GraphicsHelper();
 
-	
+	uint8_t samplerStateBits = SamplerStates::eSamplerState::Tile;
 
 	// Initialize the platform-specific context
 	if (!(result = sContext::g_context.Initialize(i_initializationParameters)))
@@ -303,7 +303,8 @@ eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& 
 			goto OnExit;
 		}
 	}
-	eae6320::Graphics::cSamplerState::s_manager.Load(1, m_SamplerStateHandle);
+
+	eae6320::Graphics::cSamplerState::s_manager.Load(samplerStateBits, m_SamplerStateHandle);
 	eae6320::Graphics::cSamplerState::s_manager.Get(m_SamplerStateHandle)->Bind(0);
 	// Initialize the views, Shading  data and Geometry
 	result = s_helper->Initialize(i_initializationParameters);

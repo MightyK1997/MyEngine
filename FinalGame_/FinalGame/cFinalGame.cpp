@@ -126,7 +126,7 @@ void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecon
 
 void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCount_systemTime, const float i_elapsedSecondCount_sinceLastSimulationUpdate)
 {
-	SetBackBufferValue(Graphics::Color::ConvertNormalizedsRGBToLinear(Graphics::sColor{ 1,1,1, 1 }));
+	SetBackBufferValue(Graphics::Color::ConvertNormalizedsRGBToLinear(Graphics::sColor{ 0,0,0, 1 }));
 
 	m_ListOfGameObjects.clear();
 	m_ListOfGameObjects.push_back(m_Lambo);
@@ -179,13 +179,13 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	std::string fName = "data/Meshes/Gecko.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_TreeHandle);
 
-	fName = "data/Meshes/Lambo-UV.meshbinary";
+	fName = "data/Meshes/Plane.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_LamboHandle);
 
 	fName = "data/Materials/GeckoMaterial.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_Material1Handle);
 
-	fName = "data/Materials/LamboMaterial.materialbinary";
+	fName = "data/Materials/water.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_LamboMaterialHandle);
 
 	UpdateMeshAndEffect();

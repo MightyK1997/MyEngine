@@ -7,6 +7,7 @@ return
 	meshes = {
 	"Meshes/Gecko.txt",
 	"Meshes/Lambo-UV.txt",
+	"Meshes/Plane.txt",
 	},
 
 	effects = {
@@ -16,6 +17,8 @@ return
 		"Effects/Effect4.Effect",
 		"Effects/Effect5.Effect",
 		"Effects/Effect6.Effect",
+		"Effects/Alpha.Effect",
+		"Effects/Water.Effect",
 	},
 
 	materials = {
@@ -23,5 +26,7 @@ return
 		"Materials/Material2.material",
 		"Materials/LamboMaterial.material",
 		"Materials/GeckoMaterial.material",
+		"Materials/AlphaMaterial.material",
+		"Materials/Water.material",
 	}
 }
