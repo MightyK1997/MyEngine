@@ -65,7 +65,7 @@ void main(
 		// Project the vertex from camera space into projected space
 		o_vertexPosition_projected = mul( g_transform_localToProjected, vertexPosition_local);
 		o_vertexColor_projected = float4(1,1,1,1);
-		o_textureData_projected = i_textureData_local;
+		o_textureData_projected = i_textureData_local * g_elapsedSecondCount_simulationTime;
 	}
 }
 

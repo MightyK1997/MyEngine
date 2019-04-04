@@ -1,0 +1,11 @@
+return
+{
+        Material = 
+	{
+                EffectLocation = "Effects/Alpha.Effectbinary",
+                ConstantType = "float4",
+                ConstantName = "Color",
+                ConstantValue = {0,0,0,1},
+                TextureLocation = "Textures/water.jpg",
+	},
+}
