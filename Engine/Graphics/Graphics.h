@@ -11,6 +11,7 @@
 #include <Engine/Results/Results.h>
 #include "cCamera.h"
 #include "cSamplerState.h"
+#include "cDirectionalLight.h"
 #if defined( EAE6320_PLATFORM_WINDOWS )
 	#include <Engine/Windows/Includes.h>
 #endif
@@ -95,7 +96,7 @@ namespace eae6320
 		void SetBackBufferValue(sColor i_BackBuffer);
 
 		void SetEffectsAndMeshesToRender(eae6320::Physics::cGameObject* i_GameObject[100], 
-			eae6320::Math::cMatrix_transformation i_LocaltoWorldTransforms[100], unsigned i_NumberOfGameObjectsToRender, 
+			eae6320::Math::cMatrix_transformation i_LocaltoWorldTransforms[100], unsigned i_NumberOfGameObjectsToRender, Graphics::cDirectionalLight*  i_DirectionalLight,
 			eae6320::Graphics::cCamera* i_Camera, const float i_secondCountToExtrapolate);
 	}
 }

@@ -34,7 +34,7 @@ void main(
 	// so that the GPU can figure out which fragments need to be shaded
 	out float4 o_position : SV_POSITION,
 
-	out float3 o_normals : TEXCOORD1,
+	out float3 o_normals : NORMAL,
 
 	//Color
 

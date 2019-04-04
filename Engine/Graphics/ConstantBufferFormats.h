@@ -14,6 +14,7 @@
 #include "Configuration.h"
 
 #include <Engine/Math/cMatrix_transformation.h>
+#include <Engine/Math/cQuaternion.h>
 #include <Engine/Math/sVector.h>
 
 // Format Definitions
@@ -38,6 +39,8 @@ namespace eae6320
 			{
 				Math::cMatrix_transformation g_transform_worldToCamera;
 				Math::cMatrix_transformation g_transform_cameraToProjected;
+				Math::sVector g_LightRotation;
+				float padding2;
 
 				Math::sVector g_CameraPositionInWorld;
 				float padding0;

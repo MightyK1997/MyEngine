@@ -62,6 +62,14 @@ void eae6320::cFinalGame::UpdateBasedOnInput()
 	{
 		(*m_RenderingCamera).SetAngularSpeed(-1.0f);
 	}
+	if (UserInput::IsKeyPressed('M'))
+	{
+		(*m_DirectionalLight).SetAngularSpeed(1.0f);
+	}
+	if (UserInput::IsKeyPressed('N'))
+	{
+		(*m_DirectionalLight).SetAngularSpeed(-1.0f);
+	}
 	m_Lambo->SetGameObjectVelocity(Math::sVector(0, 0, 0));
 	//(*m_RenderingCamera).SetAngularSpeed(0.0f);
 	if (UserInput::IsKeyPressed('K'))
@@ -104,6 +112,7 @@ void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecon
 	static float startTimer = 0;
 	f += i_elapsedSecondCount_sinceLastUpdate;
 	m_TopDownCamera->Update(i_elapsedSecondCount_sinceLastUpdate);
+	m_DirectionalLight->Update(i_elapsedSecondCount_sinceLastUpdate);
 	m_InCarCamera->Update(i_elapsedSecondCount_sinceLastUpdate);
 	m_TreeObjs[1]->UpdateGameObject(i_elapsedSecondCount_sinceLastUpdate);
 	if (IsKeyPressed(ControllerKeyCodes::RIGHT_SHOULDER) || UserInput::IsKeyPressed('C'))
@@ -142,7 +151,7 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 	}
 
 	eae6320::Graphics::SetEffectsAndMeshesToRender(&(m_ListOfGameObjects[0]), &(m_GameObjectLocalToWorldTransforms[0]), (uint8_t)(m_ListOfGameObjects.size()),
-		m_RenderingCamera, i_elapsedSecondCount_sinceLastSimulationUpdate);
+		m_DirectionalLight, m_RenderingCamera, i_elapsedSecondCount_sinceLastSimulationUpdate);
 }
 
 // Initialization / Clean Up
@@ -153,9 +162,11 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	eae6320::Graphics::cCamera::CreateCamera(m_TopDownCamera);
 	eae6320::Graphics::cCamera::CreateCamera(m_InCarCamera);
 	eae6320::Physics::cGameObject::CreateGameObject(m_Lambo);
+	eae6320::Graphics::cDirectionalLight::CreateDirectionalLight(m_DirectionalLight);
 
+	m_DirectionalLight->SetLightPosition(Math::sVector(0, 0, 0));
+	m_DirectionalLight->SetLightColor({ 1,1,1,1, });
 	m_Lambo->SetGameObjectPosition(Math::sVector(0.0f, -10, -25.0f));
-
 	m_RenderingCamera = m_TopDownCamera;
 
 	for (size_t i = 1; i < 7; i++)

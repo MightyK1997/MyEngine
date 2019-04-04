@@ -14,6 +14,7 @@
 #include <Engine/Results/Results.h>
 #include <Engine/Physics/cGameObject.h>
 #include <Engine/Audio_v2/Sound.h>
+#include "Engine/Graphics/cDirectionalLight.h"
 
 #if defined( EAE6320_PLATFORM_WINDOWS )
 	#include "Resource Files/Resource.h"
@@ -97,6 +98,9 @@ namespace eae6320
 		eae6320::Graphics::cMaterial::Handle m_Material1Handle;
 		eae6320::Graphics::cMaterial::Handle m_Material2Handle;
 		eae6320::Graphics::cMaterial::Handle m_LamboMaterialHandle;
+
+		//Directional Light
+		eae6320::Graphics::cDirectionalLight* m_DirectionalLight;
 
 		//Cameras
 		eae6320::Graphics::cCamera* m_TopDownCamera;

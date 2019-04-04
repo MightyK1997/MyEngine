@@ -24,13 +24,14 @@ void main(
 
 	//For the vertexColors
 	in const float4 i_position : SV_POSITION,
+	in const float3 i_normals : NORMAL,
 	in const float4 i_color : COLOR,
 	in const float2 i_textureData : TEXCOORD0
 
 	)
 {
-	// Output solid white
-	o_color = i_color * SampleTexture2d(g_diffuseTexture, g_samplerState, i_textureData);
+	const float4 ambientLight = float4(0.2,0.2,0.2,1);
+	o_color = i_color * SampleTexture2d(g_diffuseTexture, g_samplerState, i_textureData) * (saturate(dot(normalize(g_LightRotation), normalize(i_normals))) + ambientLight);
 }
 
 #elif defined( EAE6320_PLATFORM_GL )

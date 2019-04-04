@@ -67,6 +67,7 @@
       <Filter>Direct3D</Filter>
     </ClCompile>
     <ClCompile Include="sRGB.cpp" />
+    <ClCompile Include="cDirectionalLight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Includes.h">
@@ -96,6 +97,7 @@
     <ClInclude Include="cTexture.h" />
     <ClInclude Include="TextureFormats.h" />
     <ClInclude Include="sRGB.h" />
+    <ClInclude Include="cDirectionalLight.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cSamplerState.inl" />
