@@ -30,7 +30,7 @@ namespace eae6320
 					// "POSITION" here matches with "POSITION" in shader code).
 					// Note that OpenGL uses arbitrarily assignable number IDs to do the same thing.
 					// Adding "COLOR"
-					constexpr unsigned int vertexElementCount = 3;
+					constexpr unsigned int vertexElementCount = 4;
 					D3D11_INPUT_ELEMENT_DESC layoutDescription[vertexElementCount] = {};
 					{
 						// Slot 0
@@ -75,7 +75,7 @@ namespace eae6320
 						}
 						//For Normals
 						{
-							auto& positionElement = layoutDescription[2];
+							auto& positionElement = layoutDescription[3];
 
 							positionElement.SemanticName = "NORMAL";
 							positionElement.SemanticIndex = 0;	// (Semantics without modifying indices at the end can always use zero)

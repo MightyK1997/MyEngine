@@ -20,6 +20,8 @@ void main(
 	// These values come from one of the VertexFormats::sMesh that the vertex buffer was filled with in C code
 	in const float3 i_position : POSITION,
 
+	in const float3 i_normals : NORMAL,
+
 	//Color
 	in const float4 i_color : COLOR,
 
@@ -31,6 +33,8 @@ void main(
 	// An SV_POSITION value must always be output from every vertex shader
 	// so that the GPU can figure out which fragments need to be shaded
 	out float4 o_position : SV_POSITION,
+
+	out float3 o_normals : TEXCOORD1,
 
 	//Color
 
@@ -45,6 +49,7 @@ void main(
 	o_position = float4( i_position, 1.0 );
 	o_color = i_color;
 	o_texture = i_texture;
+	o_normals = i_normals;
 }
 
 #elif defined( EAE6320_PLATFORM_GL )
