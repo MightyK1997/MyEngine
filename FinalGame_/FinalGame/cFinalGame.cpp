@@ -29,7 +29,9 @@ void eae6320::cFinalGame::UpdateBasedOnInput()
 		EAE6320_ASSERT(result);
 	}
 	(*m_RenderingCamera).SetCameraVelocity(Math::sVector(0, 0, 0));
+	(*m_DirectionalLight).SetLightVelocity(Math::sVector());
 	(*m_RenderingCamera).SetAngularSpeed(0.0f);
+	(*m_DirectionalLight).SetAngularSpeed(0.0f);
 	if (UserInput::IsKeyPressed('S'))
 	{
 		(*m_RenderingCamera).SetCameraVelocity(Math::sVector(0, 0, 10.0f));
@@ -74,27 +76,19 @@ void eae6320::cFinalGame::UpdateBasedOnInput()
 	//(*m_RenderingCamera).SetAngularSpeed(0.0f);
 	if (UserInput::IsKeyPressed('K'))
 	{
-		m_Lambo->SetGameObjectVelocity(Math::sVector(0, 0, 10.0f));
+		(*m_DirectionalLight).SetLightVelocity(Math::sVector(0, 10.0f, 0.0f));
 	}
 	if (UserInput::IsKeyPressed('I'))
 	{
-		m_Lambo->SetGameObjectVelocity(Math::sVector(0, 0, -10.0f));
+		(*m_DirectionalLight).SetLightVelocity(Math::sVector(0, 10.0f, 0));
 	}
 	if (UserInput::IsKeyPressed('L'))
 	{
-		m_Lambo->SetGameObjectVelocity(Math::sVector(10.0f, 0, 0));
+		(*m_DirectionalLight).SetLightVelocity(Math::sVector(10.0f, 0, 0));
 	}
 	if (UserInput::IsKeyPressed('J'))
 	{
-		m_Lambo->SetGameObjectVelocity(Math::sVector(-10.0f, 0, 0));
-	}
-	if (UserInput::IsKeyPressed('U'))
-	{
-		m_Lambo->SetGameObjectVelocity(Math::sVector(0, 10.0f, 0));
-	}
-	if (UserInput::IsKeyPressed('O'))
-	{
-		m_Lambo->SetGameObjectVelocity(Math::sVector(0, -10.0f, 0));
+		(*m_DirectionalLight).SetLightVelocity(Math::sVector(-10.0f, 0, 0));
 	}
 	//if (UserInput::IsKeyPressed('Z'))
 	//{
@@ -165,7 +159,8 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	eae6320::Graphics::cDirectionalLight::CreateDirectionalLight(m_DirectionalLight);
 
 	m_DirectionalLight->SetLightPosition(Math::sVector(0, 0, 0));
-	m_DirectionalLight->SetLightColor({ 1,0,0,1, });
+	m_DirectionalLight->SetLightRotation(Math::cQuaternion(-0.02f, 0.0f, -0.9f,0.0f));
+	m_DirectionalLight->SetLightColor({ 1,1,1,1, });
 	m_Lambo->SetGameObjectPosition(Math::sVector(0.0f, -10, -25.0f));
 	m_RenderingCamera = m_TopDownCamera;
 
@@ -190,13 +185,13 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	std::string fName = "data/Meshes/Gecko.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_TreeHandle);
 
-	fName = "data/Meshes/Plane.meshbinary";
+	fName = "data/Meshes/Lambo-UV.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_LamboHandle);
 
 	fName = "data/Materials/GeckoMaterial.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_Material1Handle);
 
-	fName = "data/Materials/water.materialbinary";
+	fName = "data/Materials/LamboMaterial.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_LamboMaterialHandle);
 
 	UpdateMeshAndEffect();

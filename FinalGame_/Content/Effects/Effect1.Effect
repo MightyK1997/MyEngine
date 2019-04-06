@@ -3,7 +3,7 @@ return
 	Effect = 
 	{
 		VertexShaderLocation = "Shaders/Vertex/standard.shader",
-		FragmentShaderLocation = "Shaders/Fragment/standard.shader",
+		FragmentShaderLocation = "Shaders/Fragment/standard-binnphong.shader",
 		VertexInputLayoutShaderLocation = "Shaders/Vertex/vertexInputLayout.shader",
 		DepthBuffering = "true",
 	},

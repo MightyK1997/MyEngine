@@ -95,7 +95,8 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 	constDataBuffer.g_transform_cameraToProjected = eae6320::Math::cMatrix_transformation::CreateCameraToProjectedTransform_perspective(0.745f, 1, 0.1f, 100);
 	constDataBuffer.g_CameraPositionInWorld = i_Camera->GetCameraPosition();
 	constDataBuffer.g_LightRotation = i_DirectionalLight->GetLightRotation().CalculateForwardDirection();
-	constDataBuffer.g_LightColor = i_DirectionalLight->GetLightColor();
+	constDataBuffer.g_LightColor = eae6320::Graphics::Color::ConvertNormalizedsRGBToLinear(i_DirectionalLight->GetLightColor());
+	constDataBuffer.g_LightPositionInWorld = i_DirectionalLight->GetLightPosition();
 	auto& renderCommand = s_dataBeingSubmittedByApplicationThread->m_RenderHandles;
 	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = i_NumberOfGameObjectsToRender;
 	auto m_allDrawCallConstants = s_dataBeingSubmittedByApplicationThread->constantData_perDrawCall;
