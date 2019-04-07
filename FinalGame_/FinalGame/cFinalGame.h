@@ -99,8 +99,9 @@ namespace eae6320
 		eae6320::Graphics::cMaterial::Handle m_Material2Handle;
 		eae6320::Graphics::cMaterial::Handle m_LamboMaterialHandle;
 
-		//Directional Light
-		eae6320::Graphics::cDirectionalLight* m_DirectionalLight;
+		//Light
+		eae6320::Graphics::cLight* m_DirectionalLight;
+		eae6320::Graphics::cLight* m_PointLight;
 
 		//Cameras
 		eae6320::Graphics::cCamera* m_TopDownCamera;

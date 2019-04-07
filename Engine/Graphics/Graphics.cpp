@@ -84,7 +84,7 @@ using namespace eae6320::Graphics::RenderCommands;
 
 //This function gets called from the game to set the meshes and effects to render
 void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObject* i_GameObject[100],
-	eae6320::Math::cMatrix_transformation i_LocaltoWorldTransforms[100], unsigned i_NumberOfGameObjectsToRender, Graphics::cDirectionalLight*  i_DirectionalLight,
+	eae6320::Math::cMatrix_transformation i_LocaltoWorldTransforms[100], unsigned i_NumberOfGameObjectsToRender, Graphics::cLight*  i_DirectionalLight, Graphics::cLight* i_PointLight,
 	eae6320::Graphics::cCamera* i_Camera, const float i_secondCountToExtrapolate)
 {
 	EAE6320_ASSERT(i_NumberOfGameObjectsToRender < m_maxNumberofMeshesAndEffects);
@@ -94,9 +94,17 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 		i_Camera->PredictFutureOrientation(i_secondCountToExtrapolate), i_Camera->PredictFuturePosition(i_secondCountToExtrapolate));
 	constDataBuffer.g_transform_cameraToProjected = eae6320::Math::cMatrix_transformation::CreateCameraToProjectedTransform_perspective(0.745f, 1, 0.1f, 100);
 	constDataBuffer.g_CameraPositionInWorld = i_Camera->GetCameraPosition();
+
+
 	constDataBuffer.g_LightRotation = i_DirectionalLight->GetLightRotation().CalculateForwardDirection();
 	constDataBuffer.g_LightColor = eae6320::Graphics::Color::ConvertNormalizedsRGBToLinear(i_DirectionalLight->GetLightColor());
 	constDataBuffer.g_LightPositionInWorld = i_DirectionalLight->GetLightPosition();
+
+	constDataBuffer.g_PointLightColor = eae6320::Graphics::Color::ConvertNormalizedsRGBToLinear(i_PointLight->GetLightColor());
+	constDataBuffer.g_PointLightPositionInWorld = i_PointLight->GetLightPosition();
+	constDataBuffer.g_PointLightRotation = i_PointLight->GetLightRotation().CalculateForwardDirection();
+
+
 	auto& renderCommand = s_dataBeingSubmittedByApplicationThread->m_RenderHandles;
 	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = i_NumberOfGameObjectsToRender;
 	auto m_allDrawCallConstants = s_dataBeingSubmittedByApplicationThread->constantData_perDrawCall;

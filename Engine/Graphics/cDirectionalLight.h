@@ -10,13 +10,13 @@ namespace eae6320
 {
 	namespace Graphics
 	{
-		class cDirectionalLight
+		class cLight
 		{
 		public:
 			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()
-				EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cDirectionalLight)
-				static cResult CreateDirectionalLight(cDirectionalLight*& o_Light);
-			static cResult CreateDirectionalLight(Math::sVector i_InputPosition, Math::cQuaternion i_InputRotation,sColor i_Color, cDirectionalLight*& o_OutputLight);
+				EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cLight)
+				static cResult CreateDirectionalLight(cLight*& o_Light);
+			static cResult CreateDirectionalLight(Math::sVector i_InputPosition, Math::cQuaternion i_InputRotation,sColor i_Color, cLight*& o_OutputLight);
 
 
 			void SetLightPosition(Math::sVector i_InputPosition) { m_RigidBody.position = i_InputPosition; }
@@ -39,8 +39,8 @@ namespace eae6320
 			void Update(const float i_elapsedSecondCount_sinceLastUpdate);
 
 		private:
-			cDirectionalLight() = default;
-			~cDirectionalLight() = default;
+			cLight() = default;
+			~cLight() = default;
 			EAE6320_ASSETS_DECLAREREFERENCECOUNT()
 				Physics::sRigidBodyState m_RigidBody;
 			sColor m_LightColor = { 0,0,0,1 };

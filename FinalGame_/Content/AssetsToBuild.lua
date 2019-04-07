@@ -8,6 +8,7 @@ return
 	"Meshes/Gecko.txt",
 	"Meshes/Lambo-UV.txt",
 	"Meshes/Plane.txt",
+	"Meshes/PointLight.txt",
 	},
 
 	effects = {

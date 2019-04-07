@@ -29,9 +29,9 @@ void eae6320::cFinalGame::UpdateBasedOnInput()
 		EAE6320_ASSERT(result);
 	}
 	(*m_RenderingCamera).SetCameraVelocity(Math::sVector(0, 0, 0));
-	(*m_DirectionalLight).SetLightVelocity(Math::sVector());
+	(*m_PointLight).SetLightVelocity(Math::sVector(0, 0, 0));
 	(*m_RenderingCamera).SetAngularSpeed(0.0f);
-	(*m_DirectionalLight).SetAngularSpeed(0.0f);
+	(*m_PointLight).SetAngularSpeed(0.0f);
 	if (UserInput::IsKeyPressed('S'))
 	{
 		(*m_RenderingCamera).SetCameraVelocity(Math::sVector(0, 0, 10.0f));
@@ -66,48 +66,41 @@ void eae6320::cFinalGame::UpdateBasedOnInput()
 	}
 	if (UserInput::IsKeyPressed('M'))
 	{
-		(*m_DirectionalLight).SetAngularSpeed(1.0f);
+		(*m_PointLight).SetAngularSpeed(1.0f);
 	}
 	if (UserInput::IsKeyPressed('N'))
 	{
-		(*m_DirectionalLight).SetAngularSpeed(-1.0f);
+		(*m_PointLight).SetAngularSpeed(-1.0f);
 	}
-	m_Lambo->SetGameObjectVelocity(Math::sVector(0, 0, 0));
-	//(*m_RenderingCamera).SetAngularSpeed(0.0f);
 	if (UserInput::IsKeyPressed('K'))
 	{
-		(*m_DirectionalLight).SetLightVelocity(Math::sVector(0, 10.0f, 0.0f));
+		(*m_PointLight).SetLightVelocity(Math::sVector(0, 0, 10.0f));
 	}
 	if (UserInput::IsKeyPressed('I'))
 	{
-		(*m_DirectionalLight).SetLightVelocity(Math::sVector(0, 10.0f, 0));
+		(*m_PointLight).SetLightVelocity(Math::sVector(0, 0, -10.0f));
 	}
 	if (UserInput::IsKeyPressed('L'))
 	{
-		(*m_DirectionalLight).SetLightVelocity(Math::sVector(10.0f, 0, 0));
+		(*m_PointLight).SetLightVelocity(Math::sVector(10.0f, 0, 0));
 	}
 	if (UserInput::IsKeyPressed('J'))
 	{
-		(*m_DirectionalLight).SetLightVelocity(Math::sVector(-10.0f, 0, 0));
+		(*m_PointLight).SetLightVelocity(Math::sVector(-10.0f, 0, 0));
 	}
-	//if (UserInput::IsKeyPressed('Z'))
-	//{
-	//	m_TreeObjs[1]->S(1.0f);
-	//}
-	//if (UserInput::IsKeyPressed('X'))
-	//{
-	//	(*m_RenderingCamera).SetAngularSpeed(-1.0f);
-	//}
 }
 
 void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecondCount_sinceLastUpdate)
 {
 	static float f = 0;
 	static float startTimer = 0;
+	m_Lambo->SetGameObjectPosition(m_PointLight->GetLightPosition());
 	f += i_elapsedSecondCount_sinceLastUpdate;
 	m_TopDownCamera->Update(i_elapsedSecondCount_sinceLastUpdate);
 	m_DirectionalLight->Update(i_elapsedSecondCount_sinceLastUpdate);
+	m_PointLight->Update(i_elapsedSecondCount_sinceLastUpdate);
 	m_InCarCamera->Update(i_elapsedSecondCount_sinceLastUpdate);
+	m_Lambo->UpdateGameObject(i_elapsedSecondCount_sinceLastUpdate);
 	m_TreeObjs[1]->UpdateGameObject(i_elapsedSecondCount_sinceLastUpdate);
 	if (IsKeyPressed(ControllerKeyCodes::RIGHT_SHOULDER) || UserInput::IsKeyPressed('C'))
 	{
@@ -145,7 +138,7 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 	}
 
 	eae6320::Graphics::SetEffectsAndMeshesToRender(&(m_ListOfGameObjects[0]), &(m_GameObjectLocalToWorldTransforms[0]), (uint8_t)(m_ListOfGameObjects.size()),
-		m_DirectionalLight, m_RenderingCamera, i_elapsedSecondCount_sinceLastSimulationUpdate);
+		m_DirectionalLight,m_PointLight, m_RenderingCamera, i_elapsedSecondCount_sinceLastSimulationUpdate);
 }
 
 // Initialization / Clean Up
@@ -156,12 +149,19 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	eae6320::Graphics::cCamera::CreateCamera(m_TopDownCamera);
 	eae6320::Graphics::cCamera::CreateCamera(m_InCarCamera);
 	eae6320::Physics::cGameObject::CreateGameObject(m_Lambo);
-	eae6320::Graphics::cDirectionalLight::CreateDirectionalLight(m_DirectionalLight);
+	eae6320::Graphics::cLight::CreateDirectionalLight(m_DirectionalLight);
+	eae6320::Graphics::cLight::CreateDirectionalLight(m_PointLight);
 
 	m_DirectionalLight->SetLightPosition(Math::sVector(0, 0, 0));
 	m_DirectionalLight->SetLightRotation(Math::cQuaternion(-0.02f, 0.0f, -0.9f,0.0f));
 	m_DirectionalLight->SetLightColor({ 1,1,1,1, });
-	m_Lambo->SetGameObjectPosition(Math::sVector(0.0f, -10, -25.0f));
+
+
+
+	m_PointLight->SetLightPosition(Math::sVector(0, 0, 0));
+	m_PointLight->SetLightColor({ 1,0,0,1, });
+
+	m_Lambo->SetGameObjectPosition(m_PointLight->GetLightPosition());
 	m_RenderingCamera = m_TopDownCamera;
 
 	for (size_t i = 1; i < 7; i++)
@@ -180,18 +180,20 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 		}		
 	}
 
+
+
 	ResetDetails();
 
 	std::string fName = "data/Meshes/Gecko.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_TreeHandle);
 
-	fName = "data/Meshes/Lambo-UV.meshbinary";
+	fName = "data/Meshes/PointLight.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_LamboHandle);
 
 	fName = "data/Materials/GeckoMaterial.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_Material1Handle);
 
-	fName = "data/Materials/LamboMaterial.materialbinary";
+	fName = "data/Materials/Material1.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_LamboMaterialHandle);
 
 	UpdateMeshAndEffect();
