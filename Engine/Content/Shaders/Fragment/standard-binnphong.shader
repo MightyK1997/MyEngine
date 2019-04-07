@@ -30,21 +30,16 @@ void main(
 
 	)
 {
+	const float4 textureColor = SampleTexture2d(g_diffuseTexture, g_samplerState, i_textureData);
 	const float4 ambientLight = float4(0.2,0.2,0.2,1);
-
     const float3 normalizedNormal = normalize(i_normals);
-    const float3 normalizeL = normalize(g_LightPositionInWorld - i_position.xyz);
-    const float3 normalizeV = normalize( i_position.xyz - g_CameraPositionInWorld);
-
+    const float3 normalizeL = normalize(g_LightRotation);
+    const float3 normalizeV = normalize(g_CameraPositionInWorld - i_position.xyz);
     const float3 H = normalize(normalizeL+normalizeV);
-
-    const float4 blinnPhong = (0.5) * pow(saturate(dot(normalizedNormal, H)), 1);
-
-    const float4 specularLight = blinnPhong * g_LightColor;
-
-    const float4 diffuseLight = g_LightColor * (saturate(dot(normalize(g_LightRotation), normalize(i_normals))));
-
-	o_color = i_color * SampleTexture2d(g_diffuseTexture, g_samplerState, i_textureData) * (diffuseLight + ambientLight + specularLight);
+    const float4 blinnPhong = pow(saturate(dot(normalizedNormal, H)), 50);
+    const float4 specularLight = saturate(blinnPhong * g_LightColor) * 10;
+    const float4 diffuseLight = saturate(g_LightColor * (saturate(dot(normalize(g_LightRotation), normalizedNormal))));
+	o_color = i_color * (specularLight + diffuseLight + ambientLight) * textureColor;
 }
 
 #elif defined( EAE6320_PLATFORM_GL )
