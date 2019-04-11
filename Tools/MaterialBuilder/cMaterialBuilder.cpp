@@ -12,7 +12,7 @@ namespace
 	std::string m_EffectLocation;
 	uint8_t m_ConstantType;
 	std::string m_ConstantName;
-	std::vector<uint8_t> m_ConstantData;
+	std::vector<float> m_ConstantData;
 	std::string m_TextureLocation;
 }
 
@@ -82,7 +82,7 @@ eae6320::cResult LoadTableValues(lua_State& i_LuaState)
 				lua_pushnil(&i_LuaState);
 				while (lua_next(&i_LuaState, -2))
 				{
-					m_ConstantData.push_back(static_cast<uint8_t>(lua_tonumber(&i_LuaState, -1)));
+					m_ConstantData.push_back(static_cast<float>(lua_tonumber(&i_LuaState, -1)));
 					lua_pop(&i_LuaState, 1);
 				}
 				lua_pop(&i_LuaState, 1);
@@ -193,11 +193,16 @@ eae6320::cResult LoadFile(const char* const i_FileName)
 eae6320::cResult eae6320::Assets::cMaterialBuilder::Build(const std::vector<std::string>& i_arguments)
 {
 	cResult result = Results::Success;
+	eae6320::Graphics::sColor color;
 	std::string m_errorString;
 	result = LoadFile(m_path_source);
 
 	if (!result) { OutputErrorMessageWithFileInfo(m_path_source, "Error Reading file"); }
-	std::vector<uint8_t> defaultColor = { 0,0,0,1 };
+	eae6320::Graphics::sColor defaultColor = eae6320::Graphics::Color::ConvertNormalizedsRGBToLinear({ 0,0,0,1 });
+	if (m_ConstantData.size() > 1)
+	{
+		color = eae6320::Graphics::Color::ConvertNormalizedsRGBToLinear({ m_ConstantData[0], m_ConstantData[1], m_ConstantData[2], m_ConstantData[3] });
+	}
 	//Writing to file
 	FILE * fptr;
 
@@ -239,17 +244,11 @@ eae6320::cResult eae6320::Assets::cMaterialBuilder::Build(const std::vector<std:
 	fwrite("\0", sizeof(uint8_t), 1, fptr);
 	if (m_ConstantData.size() < 1)
 	{
-		for (auto x : defaultColor)
-		{
-			fwrite(&x, sizeof(uint8_t), 1, fptr);
-		}
+		fwrite(&defaultColor, sizeof(eae6320::Graphics::sColor), 1, fptr);
 	}
 	else
 	{
-		for (auto x : m_ConstantData)
-		{
-			fwrite(&x, sizeof(uint8_t), 1, fptr);
-		}
+		fwrite(&color, sizeof(eae6320::Graphics::sColor), 1, fptr);
 	}
 	fwrite(tempTextureLocation.c_str(), tempTextureLocation.length(), 1, fptr);
 	fwrite("\0", sizeof(uint8_t), 1, fptr);

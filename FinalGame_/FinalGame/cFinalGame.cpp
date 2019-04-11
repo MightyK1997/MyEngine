@@ -30,6 +30,7 @@ void eae6320::cFinalGame::UpdateBasedOnInput()
 	}
 	(*m_RenderingCamera).SetCameraVelocity(Math::sVector(0, 0, 0));
 	(*m_RenderingCamera).SetAngularSpeed(0.0f);
+	(*m_DirectionalLight).SetAngularSpeed(0.0f);
 	if (UserInput::IsKeyPressed('S'))
 	{
 		(*m_RenderingCamera).SetCameraVelocity(Math::sVector(0, 0, 10.0f));
@@ -165,7 +166,7 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	eae6320::Graphics::cDirectionalLight::CreateDirectionalLight(m_DirectionalLight);
 
 	m_DirectionalLight->SetLightPosition(Math::sVector(0, 0, 0));
-	m_DirectionalLight->SetLightColor({ 1,0,0,1, });
+	m_DirectionalLight->SetLightColor({ 1,1,1,1, });
 	m_Lambo->SetGameObjectPosition(Math::sVector(0.0f, -10, -25.0f));
 	m_RenderingCamera = m_TopDownCamera;
 

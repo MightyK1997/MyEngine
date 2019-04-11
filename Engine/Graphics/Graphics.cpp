@@ -95,7 +95,7 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 	constDataBuffer.g_transform_cameraToProjected = eae6320::Math::cMatrix_transformation::CreateCameraToProjectedTransform_perspective(0.745f, 1, 0.1f, 100);
 	constDataBuffer.g_CameraPositionInWorld = i_Camera->GetCameraPosition();
 	constDataBuffer.g_LightRotation = i_DirectionalLight->GetLightRotation().CalculateForwardDirection();
-	constDataBuffer.g_LightColor = i_DirectionalLight->GetLightColor();
+	constDataBuffer.g_LightColor = Color::ConvertNormalizedsRGBToLinear(i_DirectionalLight->GetLightColor());
 	auto& renderCommand = s_dataBeingSubmittedByApplicationThread->m_RenderHandles;
 	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = i_NumberOfGameObjectsToRender;
 	auto m_allDrawCallConstants = s_dataBeingSubmittedByApplicationThread->constantData_perDrawCall;
@@ -110,7 +110,7 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 		auto effect = cEffect::s_Manager.Get(effectHandle);
 		auto effectHandleIndex = effectHandle.GetIndex();
 		auto meshHandleIndex = i_GameObject[i]->GetGameObjectMeshHandle().GetIndex();
-		constantMaterialData[i].g_color = material->GetMaterialColor();
+		constantMaterialData[i].g_color = Color::ConvertNormalizedsRGBToLinear(material->GetMaterialColor());
 		m_allDrawCallConstants[i].g_transform_localToWorld = (constDataBuffer.g_transform_worldToCamera * i_LocaltoWorldTransforms[i]);
 		m_allDrawCallConstants[i].g_transform_localToProjected = constDataBuffer.g_transform_cameraToProjected *(constDataBuffer.g_transform_worldToCamera * i_LocaltoWorldTransforms[i]);
 		bool isEffectDependent = effect->IsEffectDependent();
