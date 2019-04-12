@@ -6,7 +6,7 @@ namespace
 {
 	std::string m_EffectLocation;
 	uint8_t m_ConstantType;
-	std::string m_ConstantName;
+	uint8_t m_ConstantVariant;
 	std::vector<float> m_ConstantData;
 	std::string m_TextureLocation;
 }
@@ -63,7 +63,10 @@ eae6320::cResult LoadTableValues(lua_State& i_LuaState)
 		lua_gettable(&i_LuaState, -2);
 		if (lua_isstring(&i_LuaState, -1))
 		{
-			m_ConstantName = lua_tostring(&i_LuaState, -1);
+			if (lua_tostring(&i_LuaState, -1) == "Color")
+			{
+				m_ConstantVariant = 1<<0;
+			}
 		}
 		lua_pop(&i_LuaState, 1);
 
@@ -178,8 +181,7 @@ eae6320::cResult eae6320::Assets::cMaterialBuilder::Build(const std::vector<std:
 	fwrite(m_EffectLocation.c_str(), m_EffectLocation.length(), 1, fptr);
 	fwrite("\0", sizeof(uint8_t), 1, fptr);
 	fwrite(&m_ConstantType, sizeof(uint8_t), 1, fptr);
-	fwrite(m_ConstantName.c_str(), m_ConstantName.length(), 1, fptr);
-	fwrite("\0", sizeof(uint8_t), 1, fptr);
+	fwrite(&m_ConstantVariant, sizeof(uint8_t), 1, fptr);
 	if (m_ConstantData.size() < 1)
 	{
 		for (auto x : defaultColor)
