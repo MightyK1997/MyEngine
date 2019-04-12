@@ -51,6 +51,7 @@ eae6320::cResult eae6320::Graphics::cMaterial::Load(const std::string& i_FilePat
 		return result;
 	}
 	outputMaterial->m_EffectHandle = m_TempHandle;
+	outputMaterial->m_TextureHandle = m_TempTextureHandle;
 	outputMaterial->m_Color = { (m_ConstantData[0]),(m_ConstantData[1]),(m_ConstantData[2]),(m_ConstantData[3]) };
 	m_ConstantData.clear();
 
