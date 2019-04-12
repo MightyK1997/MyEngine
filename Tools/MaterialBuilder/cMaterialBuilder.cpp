@@ -213,7 +213,7 @@ eae6320::cResult eae6320::Assets::cMaterialBuilder::Build(const std::vector<std:
 	//Writing to material binary file
 	fptr = fopen(m_path_target, "w+b");
 	m_EffectLocation = "data/" + m_EffectLocation + "binary";
-	m_TextureLocation = "data/" + m_TextureLocation;
+	m_TextureLocation = "data/" + tempTextureLocation;
 	fwrite(m_EffectLocation.c_str(), m_EffectLocation.length(), 1, fptr);
 	fwrite("\0", sizeof(uint8_t), 1, fptr);
 	fwrite(&m_ConstantType, sizeof(uint8_t), 1, fptr);
@@ -232,7 +232,7 @@ eae6320::cResult eae6320::Assets::cMaterialBuilder::Build(const std::vector<std:
 			fwrite(&x, sizeof(float), 1, fptr);
 		}
 	}
-	fwrite(tempTextureLocation.c_str(), tempTextureLocation.length(), 1, fptr);
+	fwrite(m_TextureLocation.c_str(), m_TextureLocation.length(), 1, fptr);
 	fwrite("\0", sizeof(uint8_t), 1, fptr);
 	fclose(fptr);
 	return result;

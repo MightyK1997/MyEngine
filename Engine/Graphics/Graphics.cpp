@@ -316,6 +316,7 @@ OnExit:
 eae6320::cResult eae6320::Graphics::CleanUp()
 {
 	auto result = s_helper->CleanUp();
+	eae6320::Graphics::cSamplerState::s_manager.Release(m_SamplerStateHandle);
 
 	//CleanUp
 	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = 0;

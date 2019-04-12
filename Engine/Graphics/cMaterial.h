@@ -40,6 +40,7 @@ namespace eae6320
 			cMaterial(){}
 			~cMaterial()
 			{
+				eae6320::Graphics::cTexture::s_manager.Release(m_TextureHandle);
 				Shutdown();
 			}
 
