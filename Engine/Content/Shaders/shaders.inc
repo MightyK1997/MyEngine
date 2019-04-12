@@ -26,10 +26,24 @@
 	float4x4 g_transform_worldToCamera;
 	float4x4 g_transform_cameraToProjected;
 
+	float3 g_CameraPositionInWorld;
+	float g_padding0;
+
 	float g_elapsedSecondCount_systemTime;
 	float g_elapsedSecondCount_simulationTime;
 	// For float4 alignment
-	float2 g_padding;
+	float2 g_padding1;
+};
+
+cbuffer g_constantBuffer_perDrawCall : register( b2 )
+{
+  float4x4 g_transform_localToWorld;
+  float4x4 g_transform_localToProjected;
+};
+
+cbuffer g_constantBuffer_perMaterial : register(b1)
+{
+float4 g_material_color;
 };
 
 
@@ -48,6 +62,11 @@
 	float g_elapsedSecondCount_simulationTime;
 	// For vec4 alignment
 	vec2 g_padding;
+};
+
+layout( std140, binding = 2 ) uniform g_constantBuffer_perdrawCall
+{
+  mat4 g_transform_localToWorld;
 };
 
 #endif

@@ -269,6 +269,78 @@ NewAssetTypeInfo( "shaders",
 	}
 )
 
+NewAssetTypeInfo( "materials",
+	{
+		ConvertSourceRelativePathToBuiltRelativePath = function( i_sourceRelativePath )
+			-- Change the source file extension to the binary version
+			local relativeDirectory, file = i_sourceRelativePath:match( "(.-)([^/\\]+)$" )
+			local fileName = file:match( "([^%.]+)(.*)" )
+			local binaryFileExtensionWithPeriod = ".materialbinary"
+			return relativeDirectory .. fileName .. binaryFileExtensionWithPeriod
+		end,
+		GetBuilderRelativePath = function()
+			return "MaterialBuilder.exe"
+		end
+	}
+)
+
+NewAssetTypeInfo( "meshes",
+	{
+		ConvertSourceRelativePathToBuiltRelativePath = function( i_sourceRelativePath )
+			 --Change the source file extension to the binary version
+			local relativeDirectory, file = i_sourceRelativePath:match( "(.-)([^/\\]+)$" )
+			local fileName = file:match( "([^%.]+)" )
+			local binaryFileExtensionWithPeriod = ".meshbinary"
+			return relativeDirectory .. fileName .. binaryFileExtensionWithPeriod
+		end,
+		GetBuilderRelativePath = function()
+			return "MeshBuilder.exe"
+		end
+	}
+)
+
+NewAssetTypeInfo( "sounds",
+	{
+		ConvertSourceRelativePathToBuiltRelativePath = function( i_sourceRelativePath )
+			-- Change the source file extension to the binary version
+			local relativeDirectory, file = i_sourceRelativePath:match( "(.-)([^/\\]+)$" )
+			local fileName, extensionWithPeriod = file:match( "([^%.]+)(.*)" )
+			return relativeDirectory .. fileName .. extensionWithPeriod
+		end,
+		GetBuilderRelativePath = function()
+			return "AudioBuilder.exe"
+		end
+	}
+)
+
+NewAssetTypeInfo("effects",
+{
+	RegisterReferencedAssets = function ( i_sourceRelativePath )
+		local sourceAbsolutePath = FindSourceContentAbsolutePathFromRelativePath(i_sourceRelativePath)
+		if DoesFileExist(sourceAbsolutePath) then
+		 local ret = dofile(sourceAbsolutePath)
+		 if type(ret) == "table" then
+		   local Effect = ret["Effect"]
+			RegisterAssetToBeBuilt(Effect["VertexShaderLocation"], "shaders", {"vertex"})
+			RegisterAssetToBeBuilt(Effect["FragmentShaderLocation"], "shaders", {"fragment"})
+			RegisterAssetToBeBuilt(Effect["VertexInputLayoutShaderLocation"], "shaders", {"vertex"})
+		 end
+		end
+end,
+ConvertSourceRelativePathToBuiltRelativePath = function( i_sourceRelativePath )
+			 --Change the source file extension to the binary version
+			local relativeDirectory, file = i_sourceRelativePath:match( "(.-)([^/\\]+)$" )
+			local fileName = file:match( "([^%.]+)" )
+			local binaryFileExtensionWithPeriod = ".effectbinary"
+			return relativeDirectory .. fileName .. binaryFileExtensionWithPeriod
+		end,
+		GetBuilderRelativePath = function()
+			return "EffectBuilder.exe"
+		end
+}
+)
+
+
 -- Local Function Definitions
 --===========================
 

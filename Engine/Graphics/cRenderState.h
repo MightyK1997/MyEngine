@@ -16,6 +16,9 @@
 
 #include <cstdint>
 #include <Engine/Results/Results.h>
+#include <Engine/Assets/cHandle.h>
+#include <Engine/Assets/cManager.h>
+#include <Engine/Assets/ReferenceCountedAssets.h>
 
 // Render State Bits
 //==================
@@ -77,6 +80,19 @@ namespace eae6320
 
 		public:
 
+			////Handle
+			//using Handle = Assets::cHandle<cRenderState>;
+			//static Assets::cManager<cRenderState, uint8_t> s_Manager;
+
+			////Reference Counting
+			//EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS();
+
+			//EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cRenderState);
+
+			//Load function for RenderState
+
+			//static cResult Load(const uint8_t i_renderStateBits, cRenderState*& o_RenderState);
+
 			// Render
 			//-------
 
@@ -125,6 +141,9 @@ namespace eae6320
 			//--------------------------
 
 			cResult InitializeFromBits();
+
+			////Renference Counting
+			//EAE6320_ASSETS_DECLAREREFERENCECOUNT()
 		};
 	}
 }

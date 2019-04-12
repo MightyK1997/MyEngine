@@ -25,6 +25,8 @@ eae6320::cResult eae6320::Graphics::cConstantBuffer::Initialize( const void* con
 			switch ( m_type )
 			{
 				case ConstantBufferTypes::PerFrame: m_size = sizeof( ConstantBufferFormats::sPerFrame ); break;
+				case ConstantBufferTypes::PerDrawCall: m_size = sizeof(ConstantBufferFormats::sPerDrawCall); break;
+				case ConstantBufferTypes::PerMaterial:m_size = sizeof(ConstantBufferFormats::sPerMaterialCall); break;
 
 			// This should never happen
 			default:

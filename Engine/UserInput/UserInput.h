@@ -9,6 +9,8 @@
 //=========
 
 #include <cstdint>
+#include "Engine/Math/sVector.h"
+#include <Engine/Windows/Includes.h>
 
 // Interface
 //==========
@@ -69,7 +71,29 @@ namespace eae6320
 				F11 = 0x7a,
 				F12 = 0x7b,
 			};
+
+			enum eMouseKeyCodes
+			{
+				MouseLeft = 0x0001,
+				MouseRight = 0x0004,
+				MouseMiddle = 0x0010,
+				MouseExtraButton1 = 0x0020,
+				MouseExtraButton2 = 0x100
+			};
 		}
+
+		//Set Input data
+
+		void SetRawInputData(LPBYTE input);
+
+		//Get Mouse coordinates corresponding to the entire screen.
+		//Also considers multiple monitors.
+		Math::sVector GetMouseScreenCoordinates();
+
+		//Gets the mouse coordinates only for the current selected window.
+		Math::sVector GetMouseWindowCoordinates();
+
+		bool IsMouseKeyDown(KeyCodes::eMouseKeyCodes i_KeyCode);
 	}
 }
 

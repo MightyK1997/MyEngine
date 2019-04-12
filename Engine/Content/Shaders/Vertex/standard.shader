@@ -26,29 +26,39 @@ void main(
 	// These values come from one of the VertexFormats::sMesh that the vertex buffer was filled with in C code
 	in const float3 i_vertexPosition_local : POSITION,
 
+	//Format for color
+
+	in const float4 i_vertexColor_local : COLOR,
+
 	// Output
 	//=======
 
 	// An SV_POSITION value must always be output from every vertex shader
 	// so that the GPU can figure out which fragments need to be shaded
-	out float4 o_vertexPosition_projected : SV_POSITION
+	out float4 o_vertexPosition_projected : SV_POSITION,
+
+	//Color
+	out float4 o_vertexColor_projected : COLOR
 
 	)
 {
 	// Transform the local vertex into world space
 	float4 vertexPosition_world;
+	float4 vertexPosition_local;
 	{
 		// This will be done in a future assignment.
 		// For now, however, local space is treated as if it is world space.
-		float4 vertexPosition_local = float4( i_vertexPosition_local, 1.0 );
-		vertexPosition_world = vertexPosition_local;
+		vertexPosition_local = float4( i_vertexPosition_local, 1.0 );
+		//vertexPosition_world = vertexPosition_local;
+		//vertexPosition_world = mul(g_transform_localToWorld, vertexPosition_local);
 	}
 	// Calculate the position of this vertex projected onto the display
 	{
 		// Transform the vertex from world space into camera space
-		float4 vertexPosition_camera = mul( g_transform_worldToCamera, vertexPosition_world );
+		//float4 vertexPosition_camera = mul( g_transform_worldToCamera, vertexPosition_world );
 		// Project the vertex from camera space into projected space
-		o_vertexPosition_projected = mul( g_transform_cameraToProjected, vertexPosition_camera );
+		o_vertexPosition_projected = mul( g_transform_localToProjected, vertexPosition_local);
+		o_vertexColor_projected = i_vertexColor_local;
 	}
 }
 
@@ -62,6 +72,11 @@ void main(
 
 // These values come from one of the VertexFormats::sMesh that the vertex buffer was filled with in C code
 layout( location = 0 ) in vec3 i_vertexPosition_local;
+
+//Color
+
+layout(location = 1)in vec4 i_color;
+layout(location = 0)out vec4 o_color;
 
 // Output
 //=======
@@ -81,7 +96,8 @@ void main()
 		// This will be done in a future assignment.
 		// For now, however, local space is treated as if it is world space.
 		vec4 vertexPosition_local = vec4( i_vertexPosition_local, 1.0 );
-		vertexPosition_world = vertexPosition_local;
+		/*vertexPosition_world = vertexPosition_local;*/
+		vertexPosition_world = g_transform_localToWorld * vertexPosition_local;
 	}
 	// Calculate the position of this vertex projected onto the display
 	{
@@ -89,6 +105,7 @@ void main()
 		vec4 vertexPosition_camera = g_transform_worldToCamera * vertexPosition_world;
 		// Project the vertex from camera space into projected space
 		gl_Position = g_transform_cameraToProjected * vertexPosition_camera;
+		o_color = i_color;
 	}
 }
 

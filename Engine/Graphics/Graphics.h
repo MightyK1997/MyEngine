@@ -4,15 +4,12 @@
 
 #ifndef EAE6320_GRAPHICS_H
 #define EAE6320_GRAPHICS_H
-
-// Includes
-//=========
-
 #include "Configuration.h"
-
 #include <cstdint>
+#include "cConstantBuffer.h"
+#include "ConstantBufferFormats.h"
 #include <Engine/Results/Results.h>
-
+#include "cCamera.h"
 #if defined( EAE6320_PLATFORM_WINDOWS )
 	#include <Engine/Windows/Includes.h>
 #endif
@@ -22,8 +19,22 @@
 
 namespace eae6320
 {
+	namespace Physics
+	{
+		class cGameObject;
+	}
 	namespace Graphics
 	{
+		//Color Struct
+
+		class cMesh;
+		class cEffect;
+		struct sEffectsAndMeshesToRender
+		{
+			cEffect* m_RenderEffect;
+			cMesh* m_RenderMesh;
+		};
+
 		// Submission
 		//-----------
 
@@ -67,8 +78,22 @@ namespace eae6320
 #endif
 		};
 
+
 		cResult Initialize( const sInitializationParameters& i_initializationParameters );
 		cResult CleanUp();
+
+		const unsigned int m_maxNumberofMeshesAndEffects = 100;
+
+		extern eae6320::Graphics::sEffectsAndMeshesToRender m_EffectsAndMeshes[m_maxNumberofMeshesAndEffects];
+
+		//Constant Buffer Info
+		extern eae6320::Graphics::cConstantBuffer s_constantBuffer_perFrame;
+
+		void SetBackBufferValue(sColor i_BackBuffer);
+
+		void SetEffectsAndMeshesToRender(eae6320::Physics::cGameObject* i_GameObject[100], 
+			eae6320::Math::cMatrix_transformation i_LocaltoWorldTransforms[100], unsigned i_NumberOfGameObjectsToRender, 
+			eae6320::Graphics::cCamera* i_Camera, const float i_secondCountToExtrapolate);
 	}
 }
 

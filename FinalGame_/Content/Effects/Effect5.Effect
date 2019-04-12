@@ -1,0 +1,10 @@
+return
+{
+Effect = 
+{
+VertexShaderLocation = "Shaders/Vertex/Assignment203.shader",
+FragmentShaderLocation = "Shaders/Fragment/Assignment203.shader",
+VertexInputLayoutShaderLocation = "Shaders/Vertex/vertexInputLayout.shader",
+DepthBuffering = "true",
+},
+}

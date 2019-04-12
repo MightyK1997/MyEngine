@@ -14,6 +14,7 @@
 #include "Configuration.h"
 
 #include <Engine/Math/cMatrix_transformation.h>
+#include <Engine/Math/sVector.h>
 
 // Format Definitions
 //===================
@@ -22,6 +23,15 @@ namespace eae6320
 {
 	namespace Graphics
 	{
+		struct sColor
+		{
+			float r;
+			float g;
+			float b;
+			float alpha;
+
+			sColor() = default;
+		};
 		namespace ConstantBufferFormats
 		{
 			struct sPerFrame
@@ -29,9 +39,23 @@ namespace eae6320
 				Math::cMatrix_transformation g_transform_worldToCamera;
 				Math::cMatrix_transformation g_transform_cameraToProjected;
 
+				Math::sVector g_CameraPositionInWorld;
+				float padding0;
+
 				float g_elapsedSecondCount_systemTime = 0.0f;
 				float g_elapsedSecondCount_simulationTime = 0.0f;
-				float padding[2];	// For float4 alignment
+				float padding1[2];	// For float4 alignment
+			};
+
+			struct sPerDrawCall
+			{
+				Math::cMatrix_transformation g_transform_localToWorld;
+				Math::cMatrix_transformation g_transform_localToProjected;
+			};
+
+			struct sPerMaterialCall
+			{
+				sColor g_color;
 			};
 		}
 	}
