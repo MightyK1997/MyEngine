@@ -7,7 +7,7 @@ namespace
 	eae6320::Graphics::cEffect::Handle m_TempHandle;
 	std::string m_EffectLocation;
 	uint8_t m_ConstantType;
-	std::string m_ConstantName;
+	uint8_t m_ConstantVariant;
 	std::vector<float> m_ConstantData;
 	std::string m_TextureLocation;
 }
@@ -25,8 +25,8 @@ eae6320::cResult LoadDataFile(const char* const i_FileName)
 	offset += m_EffectLocation.size() + 1;
 	m_ConstantType = *reinterpret_cast<uint8_t*>(offset);
 	offset += sizeof(uint8_t);
-	m_ConstantName = reinterpret_cast<char*>(offset);
-	offset += m_ConstantName.size() + 1;
+	m_ConstantVariant = *reinterpret_cast<uint8_t*>(offset);
+	offset += sizeof(uint8_t);
 	for (size_t i = 0; i < m_ConstantType + 1; i++)
 	{
 		m_ConstantData.push_back(*reinterpret_cast<float*>(offset));
