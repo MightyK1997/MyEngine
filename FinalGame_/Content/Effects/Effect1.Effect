@@ -5,6 +5,7 @@ return
 		VertexShaderLocation = "Shaders/Vertex/standard.shader",
 		FragmentShaderLocation = "Shaders/Fragment/standard.shader",
 		VertexInputLayoutShaderLocation = "Shaders/Vertex/vertexInputLayout.shader",
+		AlphaTransparency = "true",
 		DepthBuffering = "true",
 	},
 }
