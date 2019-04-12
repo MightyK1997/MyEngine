@@ -68,9 +68,9 @@ void main(
 	// Calculate the position of this vertex projected onto the display
 	{
 		// Transform the vertex from world space into camera space
-		float4 vertexPosition_camera = mul( g_transform_worldToCamera, vertexPosition_world );
+		//float4 vertexPosition_camera = mul( g_transform_worldToCamera, vertexPosition_world );
 		// Project the vertex from camera space into projected space
-		output.o_vertexPosition_projected = mul( g_transform_localToProjected, i_vertexPosition_local );
+		output.o_vertexPosition_projected = mul( g_transform_localToProjected, vertexPosition_local );
 		output.o_vertexColor_projected = i_vertexColor_local;
 	}
     {
