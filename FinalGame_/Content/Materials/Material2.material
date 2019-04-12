@@ -2,10 +2,10 @@ return
 {
         Material = 
 	{
-                EffectLocation = "Effects/Effect1",
+                EffectLocation = "Effects/Effect1.effect",
                 ConstantType = "float4",
                 ConstantName = "Color",
                 ConstantValue = {1,0,0,1},
-                TextureLocation = "Textures/Texture1",
+                TextureLocation = "Textures/Texture1.texture",
 	},
 }
