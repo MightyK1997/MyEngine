@@ -196,7 +196,7 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	fName = "data/Materials/GeckoMaterial.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_Material1Handle);
 
-	fName = "data/Materials/water.materialbinary";
+	fName = "data/Materials/water-spinning.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_LamboMaterialHandle);
 
 	UpdateMeshAndEffect();
