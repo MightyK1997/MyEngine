@@ -179,9 +179,14 @@ eae6320::cResult eae6320::Assets::cMaterialBuilder::Build(const std::vector<std:
 	cResult result = Results::Success;
 	std::string m_errorString;
 	result = LoadFile(m_path_source);
+	eae6320::Graphics::sColor color;
 
 	if (!result) { OutputErrorMessageWithFileInfo(m_path_source, "Error Reading file"); }
-	std::vector<uint8_t> defaultColor = { 0,0,0,1 };
+	eae6320::Graphics::sColor defaultColor = eae6320::Graphics::Color::ConvertNormalizedsRGBToLinear({ 0,0,0,1 });
+	if (m_ConstantData.size() > 1)
+	{
+		color = eae6320::Graphics::Color::ConvertNormalizedsRGBToLinear({ m_ConstantData[0], m_ConstantData[1], m_ConstantData[2], m_ConstantData[3] });
+	}
 	//Writing to file
 	FILE * fptr;
 
@@ -222,17 +227,11 @@ eae6320::cResult eae6320::Assets::cMaterialBuilder::Build(const std::vector<std:
 	fwrite(&m_ConstantVariant, sizeof(uint8_t), 1, fptr);
 	if (m_ConstantData.size() < 1)
 	{
-		for (auto x : defaultColor)
-		{
-			fwrite(&x, sizeof(float), 1, fptr);
-		}
+		fwrite(&defaultColor, sizeof(eae6320::Graphics::sColor), 1, fptr);
 	}
 	else
 	{
-		for (auto x : m_ConstantData)
-		{
-			fwrite(&x, sizeof(float), 1, fptr);
-		}
+		fwrite(&color, sizeof(eae6320::Graphics::sColor), 1, fptr);
 	}
 	fwrite(m_TextureLocation.c_str(), m_TextureLocation.length(), 1, fptr);
 	fwrite("\0", sizeof(uint8_t), 1, fptr);
