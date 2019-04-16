@@ -102,7 +102,7 @@ namespace eae6320
 			uint8_t lengthOfVertexPath = *reinterpret_cast<uint8_t*>(offset);
 			offset += sizeof(uint8_t);
 			char* pathToVertexShader = reinterpret_cast<char*>(offset);
-			offset += lengthOfVertexPath + 1;
+			offset += ((uintptr_t)lengthOfVertexPath) + 1;
 			char* pathToFragmentShader = reinterpret_cast<char*>(offset);
 
 			result = CreateEffect(std::string(pathToVertexShader), std::string(pathToFragmentShader), renderState, outputEffect);

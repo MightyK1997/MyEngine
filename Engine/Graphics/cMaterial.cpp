@@ -8,8 +8,8 @@ namespace
 	eae6320::Graphics::cTexture::Handle m_TempTextureHandle;
 	std::string m_EffectLocation;
 	uint8_t m_ConstantType;
-	std::string m_ConstantName;
-	std::vector<float> m_ConstantData;
+	uint8_t m_ConstantVariant;
+	eae6320::Graphics::sColor m_ConstantData;
 	std::string m_TextureLocation;
 }
 
@@ -26,14 +26,10 @@ eae6320::cResult LoadDataFile(const char* const i_FileName)
 	offset += m_EffectLocation.size() + 1;
 	m_ConstantType = *reinterpret_cast<uint8_t*>(offset);
 	offset += sizeof(uint8_t);
-	m_ConstantName = reinterpret_cast<char*>(offset);
-	offset += m_ConstantName.size() + 1;
-	m_ConstantData.clear();
-	for (size_t i = 0; i < m_ConstantType + 1; i++)
-	{
-		m_ConstantData.push_back(*reinterpret_cast<float*>(offset));
-		offset += sizeof(float);
-	}
+	m_ConstantVariant = *reinterpret_cast<uint8_t*>(offset);
+	offset += sizeof(uint8_t);
+	m_ConstantData = *reinterpret_cast<eae6320::Graphics::sColor*>(offset);
+	offset += sizeof(eae6320::Graphics::sColor);
 	m_TextureLocation = reinterpret_cast<char*>(offset);
 	result = eae6320::Graphics::cEffect::s_Manager.Load(m_EffectLocation, m_TempHandle);
 	result = eae6320::Graphics::cTexture::s_manager.Load(m_TextureLocation, m_TempTextureHandle);
@@ -53,7 +49,7 @@ eae6320::cResult eae6320::Graphics::cMaterial::Load(const std::string& i_FilePat
 	}
 	outputMaterial->m_EffectHandle = m_TempHandle;
 	outputMaterial->m_TextureHandle = m_TempTextureHandle;
-	outputMaterial->m_Color = { (m_ConstantData[0]),(m_ConstantData[1]),(m_ConstantData[2]),(m_ConstantData[3]) };
+	outputMaterial->m_Color = m_ConstantData;
 
 	o_Material = outputMaterial;
 	return result;

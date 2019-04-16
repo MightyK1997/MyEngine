@@ -2,10 +2,10 @@ return
 {
         Material = 
 	{
-                EffectLocation = "Effects/Effect1.Effect",
+                EffectLocation = "Effects/water-moving.Effect",
                 ConstantType = "float4",
                 ConstantName = "Color",
                 ConstantValue = {0,0,0,1},
-                TextureLocation = "Textures/lambo_diffuse.jpeg",
+                TextureLocation = "Textures/water.jpg",
 	},
 }

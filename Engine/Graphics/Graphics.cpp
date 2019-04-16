@@ -238,12 +238,12 @@ eae6320::cResult eae6320::Graphics::Initialize(const sInitializationParameters& 
 	auto result = Results::Success;
 	s_helper = new eae6320::Graphics::GraphicsHelper();
 
-	uint8_t samplerStateBits = SamplerStates::eSamplerState::Tile;
+	uint8_t samplerStateBits = SamplerStates::eSamplerState::Tile | SamplerStates::EdgeBehaviorU | SamplerStates::EdgeBehaviorV;
 
 	// Initialize the platform-specific context
 	if (!(result = sContext::g_context.Initialize(i_initializationParameters)))
 	{
-		EAE6320_ASSERT(false);
+		EAE6320_ASSERT(false); 
 		goto OnExit;
 	}
 	// Initialize the asset managers
@@ -320,6 +320,7 @@ eae6320::cResult eae6320::Graphics::CleanUp()
 {
 	auto result = s_helper->CleanUp();
 	eae6320::Graphics::cSamplerState::s_manager.Release(m_SamplerStateHandle);
+
 	//CleanUp
 	s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender = 0;
 	{
