@@ -2,7 +2,7 @@ return
 {
         Material = 
 	{
-                EffectLocation = "Effects/water-spinning.Effectbinary",
+                EffectLocation = "Effects/water-spinning.Effect",
                 ConstantType = "float4",
                 ConstantName = "Color",
                 ConstantValue = {0,0,0,1},

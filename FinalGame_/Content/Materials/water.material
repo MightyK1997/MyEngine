@@ -2,7 +2,7 @@ return
 {
         Material = 
 	{
-                EffectLocation = "Effects/Alpha.Effectbinary",
+                EffectLocation = "Effects/Alpha.Effect",
                 ConstantType = "float4",
                 ConstantName = "Color",
                 ConstantValue = {0,0,0,1},
