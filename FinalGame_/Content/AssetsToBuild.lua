@@ -20,6 +20,8 @@ return
 		"Effects/Effect6.Effect",
 		"Effects/Alpha.Effect",
 		"Effects/Water.Effect",
+		"Effects/Water-moving.Effect",
+		"Effects/Water-spinning.Effect",
 	},
 
 	materials = {
@@ -29,5 +31,7 @@ return
 		"Materials/GeckoMaterial.material",
 		"Materials/AlphaMaterial.material",
 		"Materials/Water.material",
+		"Materials/Water-moving.material",
+		"Materials/Water-spinning.material",
 	}
 }

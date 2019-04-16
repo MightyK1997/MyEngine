@@ -30,7 +30,7 @@ void main(
 
 	)
 {
-	const float4 ambientLight = float4(0.2,0.2,0.2,1);
+	const float4 ambientLight = ConvertNormalizedsRGBToLinear(float4(0.2,0.2,0.2,1));
 	o_color = i_color * SampleTexture2d(g_diffuseTexture, g_samplerState, i_textureData) * (g_LightColor * (saturate(dot(normalize(g_LightRotation), normalize(i_normals)))) + ambientLight);
 }
 

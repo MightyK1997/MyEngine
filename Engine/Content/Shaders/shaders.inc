@@ -23,6 +23,15 @@
 	#define DeclareSamplerState( i_name, i_id ) SamplerState i_name : register( s##i_id )
 
 	#define SampleTexture2d( i_texture, i_samplerState, i_uv ) i_texture.Sample( i_samplerState, i_uv )
+	float4 ConvertNormalizedsRGBToLinear(in const float4 i_Color)
+	{
+		float4 returnColor;
+		returnColor.x = i_Color.x < 0.04045f ? i_Color.x / 12.92f : pow(((i_Color.x + 0.055f) / 1.055f), 2.4f);
+		returnColor.y = i_Color.y < 0.04045f ? i_Color.y / 12.92f : pow(((i_Color.y + 0.055f) / 1.055f), 2.4f);
+		returnColor.z = i_Color.z < 0.04045f ? i_Color.z / 12.92f : pow(((i_Color.z + 0.055f) / 1.055f), 2.4f);
+		returnColor.w = i_Color.w;
+		return returnColor;
+	}
 	
 	//Adding constant buffers here to not redeclare them in every shader.
 	
