@@ -34,10 +34,10 @@ namespace eae6320
 			//Member variables
 			cEffect::Handle m_EffectHandle;
 			cTexture::Handle m_TextureHandle;
-			sColor m_Color;
+			sColor m_Color = sColor{ 0,0,0,0 };
 			void Shutdown();
 
-			cMaterial(){}
+			cMaterial() = default;
 			~cMaterial()
 			{
 				eae6320::Graphics::cTexture::s_manager.Release(m_TextureHandle);
