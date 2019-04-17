@@ -66,11 +66,11 @@ void eae6320::cFinalGame::UpdateBasedOnInput()
 	}
 	if (UserInput::IsKeyPressed('M'))
 	{
-		(*m_PointLight).SetAngularSpeed(1.0f);
+		(*m_PointLight).SetLightVelocity(Math::sVector(0, 10.0f, 0));
 	}
 	if (UserInput::IsKeyPressed('N'))
 	{
-		(*m_PointLight).SetAngularSpeed(-1.0f);
+		(*m_PointLight).SetLightVelocity(Math::sVector(0, -10.0f, 0));
 	}
 	if (UserInput::IsKeyPressed('K'))
 	{
@@ -154,12 +154,12 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 
 	m_DirectionalLight->SetLightPosition(Math::sVector(0, 0, 0));
 	m_DirectionalLight->SetLightRotation(Math::cQuaternion(-0.02f, 0.0f, -0.9f,0.0f));
-	m_DirectionalLight->SetLightColor({ 1,1,1,1, });
+	m_DirectionalLight->SetLightColor({ 1,1,1,1 });
 
 
 
 	m_PointLight->SetLightPosition(Math::sVector(0, 0, 0));
-	m_PointLight->SetLightColor({ 1,0,0,1, });
+	m_PointLight->SetLightColor({ 1,1,1,1 });
 
 	m_Lambo->SetGameObjectPosition(m_PointLight->GetLightPosition());
 	m_RenderingCamera = m_TopDownCamera;

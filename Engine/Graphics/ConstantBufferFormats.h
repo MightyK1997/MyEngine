@@ -40,12 +40,13 @@ namespace eae6320
 				Math::cMatrix_transformation g_transform_worldToCamera;
 				Math::cMatrix_transformation g_transform_cameraToProjected;
 				Math::sVector g_LightRotation;
+				float pad0;
 				Math::sVector g_LightPositionInWorld;
-
+				float pad1;
 				Math::sVector g_PointLightPositionInWorld;
+				float pad2;
 				Math::sVector g_PointLightRotation;
-
-				float padding2;
+				float pad3;
 				sColor g_LightColor;
 				sColor g_PointLightColor;
 

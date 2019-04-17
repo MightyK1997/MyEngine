@@ -25,6 +25,7 @@ void main(
 	//For the vertexColors
 	in const float4 i_position : SV_POSITION,
 	in const float3 i_normals : NORMAL,
+	in const float4 i_vertex_position_world : TEXCOORD1,
 	in const float4 i_color : COLOR,
 	in const float2 i_textureData : TEXCOORD0
 
@@ -34,31 +35,40 @@ void main(
 	const float4 ambientLight = float4(0.2,0.2,0.2,1);
 	const float3 normalizedNormal = normalize(i_normals);
 
+
 	//Directional Light
 
-    const float3 normalizeL = normalize(g_LightRotation);
-    const float3 normalizeV = normalize(g_CameraPositionInWorld - i_position.xyz);
+    const float3 normalizeL = -normalize(g_LightRotation);
+	const float3 viewDist = g_CameraPositionInWorld - i_vertex_position_world.xyz;
+    const float3 normalizeV = normalize(viewDist);
     const float3 H = normalize(normalizeL+normalizeV);
     const float4 blinnPhong = pow(saturate(dot(normalizedNormal, H)), 50);
     const float4 specularLight = saturate(blinnPhong * g_LightColor) * 10;
-    const float4 diffuseLight = saturate(g_LightColor * (saturate(dot(normalize(g_LightRotation), normalizedNormal))));
+    const float4 diffuseLight = saturate(g_LightColor * (saturate(dot(normalize(g_LightRotation), i_normals))));
 
 	const float4 diffuseOutput = (diffuseLight + ambientLight);
 
-	//float4 directionalLightOutput = diffuseOutput + specularLight;
+	float4 directionalLightOutput = diffuseOutput + specularLight;
+
+
+
+
 
 	//PointLight
+	float3 pointLightDir = g_PointLightPositionInWorld - i_vertex_position_world.xyz;
+	float distance = length(pointLightDir);
 
-	const float3 distance = g_PointLightPositionInWorld - i_position.xyz;
-	const float3 normalizePointL = normalize(distance);
-	const float3 pointH = normalize(normalizePointL + normalizeV);
-	const float4 pointBlinnPhong = pow(saturate(dot(normalizedNormal, pointH)), 50);
-	const float dist = max(length(distance), 1);
-	const float4 pointSpecular = (1000 / dist) * 1 * pointBlinnPhong * g_PointLightColor;
-	const float4 pointDiffuseLight = saturate(g_PointLightColor * (saturate(dot(normalizePointL, normalizedNormal))) * length(distance));
+	float attenuation = 1.0 / (distance);
 
+	float3 pointH = normalize(normalize(pointLightDir) + normalizeV);
 
-	o_color = (i_color * textureColor * pointDiffuseLight) + pointSpecular;
+	const float4 binnPhongPoint = pow(saturate(dot(pointH, normalizedNormal)), 10);
+	float4 diffusePoint = g_PointLightColor * saturate(dot(pointLightDir, i_normals));
+	float4 specularPoint = (g_PointLightColor) * binnPhongPoint;
+
+	float4 pointLightOutput = (diffusePoint * attenuation) + (specularPoint * attenuation) +ambientLight;
+
+	o_color = pointLightOutput;
 }
 
 #elif defined( EAE6320_PLATFORM_GL )

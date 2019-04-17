@@ -45,6 +45,8 @@ void main(
 	//Normals
 	out float3 o_normals : NORMAL,
 
+	out float4 o_vertexPosition_world : TEXCOORD1,
+
 	//Color
 	out float4 o_vertexColor_projected : COLOR,
 
@@ -62,7 +64,7 @@ void main(
 		// For now, however, local space is treated as if it is world space.
 		vertexPosition_local = float4( i_vertexPosition_local, 1.0 );
 		//vertexPosition_world = vertexPosition_local;
-		//vertexPosition_world = mul(g_transform_localToWorld, vertexPosition_local);
+		vertexPosition_world = mul(g_transform_localToWorld, vertexPosition_local);
 	}
 	// Calculate the position of this vertex projected onto the display
 	{
@@ -79,6 +81,7 @@ void main(
 		o_vertexPosition_projected = mul( g_transform_localToProjected, vertexPosition_local);
 		o_vertexColor_projected = float4(1,1,1,1);
 		o_textureData_projected = i_textureData_local;
+		o_vertexPosition_world = vertexPosition_world;
 		o_normals = mul(rotation_localToWorld,i_normals);
 	}
 }

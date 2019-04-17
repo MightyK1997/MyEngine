@@ -40,10 +40,14 @@ cbuffer g_constantBuffer_perFrame : register( b0 )
 	float4x4 g_transform_worldToCamera;
 	float4x4 g_transform_cameraToProjected;
 	float3 g_LightRotation;
+	float pad0;
 	float3 g_LightPositionInWorld;
+	float pad1;
 	float3 g_PointLightPositionInWorld;
+	float pad2;
 	float3 g_PointLightRotation;
-	float g_padding2;
+	float pad3;
+
 	float4 g_LightColor;
 	float4 g_PointLightColor;
 
