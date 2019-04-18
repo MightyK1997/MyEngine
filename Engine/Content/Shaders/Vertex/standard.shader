@@ -33,7 +33,7 @@ void main(
 	in const float3 i_tangent : TANGENT,
 
 	//Bitangent
-	in const float3 i_bitangent : TANGENT,
+	in const float3 i_bitangent : TANGENT1,
 
 	//Format for color
 	in const float4 i_vertexColor_local : COLOR,
@@ -55,7 +55,7 @@ void main(
 
 	out float3 o_tangent : TANGENT,
 
-	out float3 o_bitangent : TANGENT,
+	out float3 o_bitangent : TANGENT1,
 
 	//Color
 	out float4 o_vertexColor_projected : COLOR,

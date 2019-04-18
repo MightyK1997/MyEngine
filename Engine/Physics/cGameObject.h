@@ -30,6 +30,7 @@ namespace eae6320
 			Math::cQuaternion GetGameObjectRotation();
 			Math::sVector GetGameObjectVelocity();
 			void SetGameObjectVelocity(Math::sVector i_Velocity);
+			void SetGameObjectAngularVelocity(float i_AngularVelocity);
 			void SetGameObjectAcceleration(Math::sVector i_Acceleration);
 			void SetGameObjectMesh(Graphics::cMesh* i_Mesh);
 			void SetGameObjectEffect(Graphics::cEffect* i_Effect);

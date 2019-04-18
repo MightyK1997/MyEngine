@@ -101,8 +101,8 @@ namespace eae6320
 						{
 							auto& positionElement = layoutDescription[5];
 
-							positionElement.SemanticName = "TANGENT1";
-							positionElement.SemanticIndex = 0;	// (Semantics without modifying indices at the end can always use zero)
+							positionElement.SemanticName = "TANGENT";
+							positionElement.SemanticIndex = 1;	// (Semantics without modifying indices at the end can always use zero)
 							positionElement.Format = DXGI_FORMAT_R32G32B32_FLOAT;
 							positionElement.InputSlot = 0;
 							positionElement.AlignedByteOffset = offsetof(eae6320::Graphics::VertexFormats::sMesh, btx);

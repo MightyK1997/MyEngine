@@ -71,6 +71,11 @@ void eae6320::Physics::cGameObject::SetGameObjectVelocity(Math::sVector i_Veloci
 	m_RigidBody.velocity = i_Velocity;
 }
 
+void eae6320::Physics::cGameObject::SetGameObjectAngularVelocity(float i_AngularVelocity)
+{
+	m_RigidBody.angularSpeed = i_AngularVelocity;
+}
+
 void eae6320::Physics::cGameObject::SetGameObjectAcceleration(Math::sVector i_Acceleration)
 {
 	m_RigidBody.acceleration = i_Acceleration;

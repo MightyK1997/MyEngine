@@ -9,6 +9,7 @@ return
 	"Meshes/Lambo-UV.txt",
 	"Meshes/Plane.txt",
 	"Meshes/PointLight.txt",
+	"Meshes/Globe.txt",
 	},
 
 	effects = {
@@ -29,6 +30,7 @@ return
 		"Materials/Material2.material",
 		"Materials/LamboMaterial.material",
 		"Materials/GeckoMaterial.material",
+		"Materials/Earth.material",
 		"Materials/AlphaMaterial.material",
 		"Materials/Water.material",
 		"Materials/Water-moving.material",

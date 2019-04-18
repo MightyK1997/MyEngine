@@ -24,7 +24,7 @@ void main(
 
 	in const float3 i_tangent : TANGENT,
 
-	in const float3 i_bitangent : TANGENT,
+	in const float3 i_bitangent : TANGENT1,
 
 	//Color
 	in const float4 i_color : COLOR,
@@ -42,7 +42,7 @@ void main(
 
 	out float3 o_tangent : TANGENT,
 
-	out float3 o_bitangent : TANGENT,
+	out float3 o_bitangent : TANGENT1,
 
 	//Color
 
@@ -59,7 +59,7 @@ void main(
 	o_texture = i_texture;
 	o_normals = i_normals;
 	o_tangent = i_tangent;
-	o_bitangent = o_bitangent;
+	o_bitangent = i_bitangent;
 }
 
 #elif defined( EAE6320_PLATFORM_GL )
