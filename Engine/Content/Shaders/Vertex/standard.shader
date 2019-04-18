@@ -29,6 +29,12 @@ void main(
 	//Normal
 	in const float3 i_normals : NORMAL,
 
+	//Tangent
+	in const float3 i_tangent : TANGENT,
+
+	//Bitangent
+	in const float3 i_bitangent : TANGENT,
+
 	//Format for color
 	in const float4 i_vertexColor_local : COLOR,
 
@@ -46,6 +52,10 @@ void main(
 	out float3 o_normals : NORMAL,
 
 	out float4 o_vertexPosition_world : TEXCOORD1,
+
+	out float3 o_tangent : TANGENT,
+
+	out float3 o_bitangent : TANGENT,
 
 	//Color
 	out float4 o_vertexColor_projected : COLOR,
@@ -83,6 +93,8 @@ void main(
 		o_textureData_projected = i_textureData_local;
 		o_vertexPosition_world = vertexPosition_world;
 		o_normals = mul(rotation_localToWorld,i_normals);
+		o_tangent = mul(rotation_localToWorld, i_tangent);
+		o_bitangent = mul(rotation_localToWorld, i_bitangent);
 	}
 }
 

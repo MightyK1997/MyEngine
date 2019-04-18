@@ -146,6 +146,60 @@ eae6320::cResult LoadVertexData(lua_State& i_LuaState, eae6320::Graphics::Vertex
 		lua_pop(&i_LuaState, 1);
 	}
 
+	i = 0;
+	constexpr auto* const key5 = "Tangents";
+	lua_pushstring(&i_LuaState, key5);
+	lua_gettable(&i_LuaState, -2);
+	if (lua_istable(&i_LuaState, -1))
+	{
+		lua_pushnil(&i_LuaState);
+		while (lua_next(&i_LuaState, -2))
+		{
+			if (i == 0)
+			{
+				io_mesh->tx = static_cast<float>(lua_tonumber(&i_LuaState, -1));
+			}
+			else if (i == 1)
+			{
+				io_mesh->ty = static_cast<float>(lua_tonumber(&i_LuaState, -1));
+			}
+			else if (i == 2)
+			{
+				io_mesh->tz = static_cast<float>(lua_tonumber(&i_LuaState, -1));
+			}
+			i++;
+			lua_pop(&i_LuaState, 1);
+		}
+		lua_pop(&i_LuaState, 1);
+	}
+
+	i = 0;
+	constexpr auto* const key6 = "BiTangents";
+	lua_pushstring(&i_LuaState, key6);
+	lua_gettable(&i_LuaState, -2);
+	if (lua_istable(&i_LuaState, -1))
+	{
+		lua_pushnil(&i_LuaState);
+		while (lua_next(&i_LuaState, -2))
+		{
+			if (i == 0)
+			{
+				io_mesh->btx = static_cast<float>(lua_tonumber(&i_LuaState, -1));
+			}
+			else if (i == 1)
+			{
+				io_mesh->bty = static_cast<float>(lua_tonumber(&i_LuaState, -1));
+			}
+			else if (i == 2)
+			{
+				io_mesh->btz = static_cast<float>(lua_tonumber(&i_LuaState, -1));
+			}
+			i++;
+			lua_pop(&i_LuaState, 1);
+		}
+		lua_pop(&i_LuaState, 1);
+	}
+
 
 	return result;
 }

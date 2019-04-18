@@ -30,7 +30,7 @@ namespace eae6320
 					// "POSITION" here matches with "POSITION" in shader code).
 					// Note that OpenGL uses arbitrarily assignable number IDs to do the same thing.
 					// Adding "COLOR"
-					constexpr unsigned int vertexElementCount = 4;
+					constexpr unsigned int vertexElementCount = 6;
 					D3D11_INPUT_ELEMENT_DESC layoutDescription[vertexElementCount] = {};
 					{
 						// Slot 0
@@ -82,6 +82,30 @@ namespace eae6320
 							positionElement.Format = DXGI_FORMAT_R32G32B32_FLOAT;
 							positionElement.InputSlot = 0;
 							positionElement.AlignedByteOffset = offsetof(eae6320::Graphics::VertexFormats::sMesh, nx);
+							positionElement.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+							positionElement.InstanceDataStepRate = 0;	// (Must be zero for per-vertex data)
+						}
+
+						{
+							auto& positionElement = layoutDescription[4];
+
+							positionElement.SemanticName = "TANGENT";
+							positionElement.SemanticIndex = 0;	// (Semantics without modifying indices at the end can always use zero)
+							positionElement.Format = DXGI_FORMAT_R32G32B32_FLOAT;
+							positionElement.InputSlot = 0;
+							positionElement.AlignedByteOffset = offsetof(eae6320::Graphics::VertexFormats::sMesh, tx);
+							positionElement.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+							positionElement.InstanceDataStepRate = 0;	// (Must be zero for per-vertex data)
+						}
+
+						{
+							auto& positionElement = layoutDescription[5];
+
+							positionElement.SemanticName = "TANGENT1";
+							positionElement.SemanticIndex = 0;	// (Semantics without modifying indices at the end can always use zero)
+							positionElement.Format = DXGI_FORMAT_R32G32B32_FLOAT;
+							positionElement.InputSlot = 0;
+							positionElement.AlignedByteOffset = offsetof(eae6320::Graphics::VertexFormats::sMesh, btx);
 							positionElement.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 							positionElement.InstanceDataStepRate = 0;	// (Must be zero for per-vertex data)
 						}

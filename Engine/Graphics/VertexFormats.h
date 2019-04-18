@@ -33,6 +33,8 @@ namespace eae6320
 				uint8_t r, g, b, a;
 				float u, v;
 				float nx, ny, nz;
+				float tx, ty, tz;
+				float btx, bty, btz;
 			};
 
 			struct sIndex

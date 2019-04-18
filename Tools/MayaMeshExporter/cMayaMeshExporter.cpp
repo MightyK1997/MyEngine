@@ -807,6 +807,8 @@ namespace
 					fout << "Color = " "{" << i_vertexArray[i].vertex.r << "," << i_vertexArray[i].vertex.g << "," << i_vertexArray[i].vertex.b << "," << i_vertexArray[i].vertex.a << "}" "," "\n";
 					fout << "UV=""{" << i_vertexArray[i].vertex.u << "," << 1 - i_vertexArray[i].vertex.v << "}"",""\n";
 					fout << "Normals=""{" << i_vertexArray[i].vertex.nx << "," << i_vertexArray[i].vertex.ny << "," << i_vertexArray[i].vertex.nz << "}" "," "\n";
+					fout << "Tangents=""{" << i_vertexArray[i].vertex.tx << "," << i_vertexArray[i].vertex.ty << "," << i_vertexArray[i].vertex.tz << "}" "," "\n";
+					fout << "BiTangents=""{" << i_vertexArray[i].vertex.btx << "," << i_vertexArray[i].vertex.bty << "," << i_vertexArray[i].vertex.btz << "}" "," "\n";
 					fout << "}" "," "\n";
 				}
 				fout << "}," "\n";
