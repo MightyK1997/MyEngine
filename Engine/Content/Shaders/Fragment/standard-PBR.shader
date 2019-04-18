@@ -6,6 +6,8 @@
 
 #include <Shaders/shaders.inc>
 
+#define 2PI 6.28318531;
+
 #if defined( EAE6320_PLATFORM_D3D )
 
 
@@ -33,9 +35,12 @@ void main(
 
 	)
 {
+	const float4 ambientLight = float4(0.2,0.2,0.2,1);
+	const float materialConstant = 0.04;
+
 	const float4 textureColor = SampleTexture2d(g_diffuseTexture, g_samplerState, i_textureData);
 	const float4 normalData = SampleTexture2d(g_Normal, g_samplerState, i_textureData);
-	const float4 ambientLight = float4(0.2,0.2,0.2,1);
+	
 	float3 normalizedNormal = normalize(normalData.xyz);
 	const float3 normalizedTangent = normalize(i_tangent);
 	const float3 normalizedBitangent = normalize(i_bitangent);
@@ -60,7 +65,17 @@ void main(
 	const float3 viewDist = g_CameraPositionInWorld - i_vertex_position_world.xyz;
     const float3 normalizeV = normalize(viewDist);
     const float3 H = normalize(normalizeL+normalizeV);
-    const float4 blinnPhong = pow(saturate(dot(normalizedNormal, H)), 50);
+
+	[D(h) * F(l,h) * G(l,v,h)] / [4 * |n⋅v| * |n⋅l|]
+
+	D(h)
+
+    const float4 blinnPhong = pow(saturate(dot(normalizedNormal, H)), 50) * (52 / 2PI );
+
+	F(I,h)
+
+	const float4 FresnelEquation = materialConstant + ()
+
     const float4 specularLight = saturate(blinnPhong * g_LightColor) * 10;
     const float4 diffuseLight = saturate(g_LightColor * (saturate(dot(normalize(g_LightRotation), normalizedNormal.xyz))));
 
@@ -76,7 +91,7 @@ void main(
 
 	float3 pointH = normalize(normalize(pointLightDir) + normalizeV);
 
-	const float4 binnPhongPoint = pow(saturate(dot(pointH, normalizedNormal)), 50);
+	const float4 binnPhongPoint = pow(saturate(dot(normalizedNormal, pointH)), 50);
 	float4 diffusePoint = g_PointLightColor * saturate(dot(pointLightDir, normalizedNormal.xyz)) * 20;
 	float4 specularPoint = (g_PointLightColor) * binnPhongPoint * 50;
 
