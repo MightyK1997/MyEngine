@@ -64,6 +64,16 @@ void eae6320::cFinalGame::UpdateBasedOnInput()
 	{
 		(*m_RenderingCamera).SetAngularSpeed(-1.0f);
 	}
+	if (UserInput::IsKeyPressed('U'))
+	{
+		(*m_DirectionalLight).SetAngularSpeed(1.0f);
+	}
+	if (UserInput::IsKeyPressed('O'))
+	{
+		(*m_DirectionalLight).SetAngularSpeed(-1.0f);
+	}
+
+
 	if (UserInput::IsKeyPressed('M'))
 	{
 		(*m_PointLight).SetLightVelocity(Math::sVector(0, 10.0f, 0));
