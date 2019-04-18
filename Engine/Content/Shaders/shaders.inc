@@ -61,6 +61,7 @@ cbuffer g_constantBuffer_perFrame : register( b0 )
 };
 
 Texture2D g_diffuseTexture : register(t0);
+Texture2D g_Normal : register(t1);
 SamplerState g_samplerState : register(s0);
 
 cbuffer g_constantBuffer_perMaterial : register(b1)

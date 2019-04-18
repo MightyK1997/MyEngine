@@ -29,7 +29,37 @@ namespace
 	eae6320::cResult LoadSourceImage( const char *const i_path, DirectX::ScratchImage &o_image );
 	eae6320::cResult WriteTextureToFile( const char* const i_path_target, const DirectX::ScratchImage &i_texture, const uint8_t i_desiredSamplerState );
 	uint8_t textureType;
+	DXGI_FORMAT RemoveSRGB(DXGI_FORMAT fmt)
+	{
+		switch (fmt)
+		{
+		case DXGI_FORMAT_R8G8B8A8_UNORM_SRGB:
+			return DXGI_FORMAT_R8G8B8A8_UNORM;
+
+		case DXGI_FORMAT_BC1_UNORM_SRGB:
+			return DXGI_FORMAT_BC1_UNORM;
+
+		case DXGI_FORMAT_BC2_UNORM_SRGB:
+			return DXGI_FORMAT_BC2_UNORM;
+
+		case DXGI_FORMAT_BC3_UNORM_SRGB:
+			return DXGI_FORMAT_BC3_UNORM;
+
+		case DXGI_FORMAT_B8G8R8A8_UNORM_SRGB:
+			return DXGI_FORMAT_B8G8R8A8_UNORM;
+
+		case DXGI_FORMAT_B8G8R8X8_UNORM_SRGB:
+			return DXGI_FORMAT_B8G8R8X8_UNORM;
+
+		case DXGI_FORMAT_BC7_UNORM_SRGB:
+			return DXGI_FORMAT_BC7_UNORM;
+
+		default:
+			return fmt;
+		}
+	}
 }
+
 
 // Inherited Implementation
 //=========================
@@ -88,6 +118,10 @@ eae6320::cResult eae6320::Assets::cTextureBuilder::Build( const std::vector<std:
 	if (textureType == static_cast<uint8_t>(eae6320::Graphics::TextureTypes::eType::COLOR))
 	{
 		sourceImage.OverrideFormat(DirectX::MakeSRGB(sourceImage.GetMetadata().format));
+	}
+	else if(textureType == static_cast<uint8_t>(eae6320::Graphics::TextureTypes::eType::NORMAL))
+	{
+		sourceImage.OverrideFormat(RemoveSRGB(sourceImage.GetMetadata().format));
 	}
 
 
@@ -373,7 +407,7 @@ namespace
 		if ( !fout.is_open() )
 		{
 			result = eae6320::Results::Failure;
-			eae6320::Assets::OutputErrorMessageWithFileInfo( i_path_target, "Target texture file couldn't be opened for writing" );
+			eae6320::Assets::OutputErrorMessageWithFileInfo( i_path_target, i_path_target);
 			return result;
 		}
 		const eae6320::cScopeCleanUp scopeCleanUp( [i_path_target, &fout]

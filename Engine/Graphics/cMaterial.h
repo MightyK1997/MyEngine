@@ -24,8 +24,9 @@ namespace eae6320
 			EAE6320_ASSETS_DECLAREREFERENCECOUNTINGFUNCTIONS()
 			EAE6320_ASSETS_DECLAREDELETEDREFERENCECOUNTEDFUNCTIONS(cMaterial)
 
-			eae6320::Graphics::cEffect::Handle GetEffectHandle() { return m_EffectHandle; }
-			eae6320::Graphics::cTexture::Handle GetTextureHandle() { return m_TextureHandle; }
+			eae6320::Graphics::cEffect::Handle GetEffectHandle() const { return m_EffectHandle; }
+			eae6320::Graphics::cTexture::Handle GetTextureHandle() const { return m_TextureHandle; }
+			eae6320::Graphics::cTexture::Handle GetNormalMapHandle() const { return m_NormalMapHandle; }
 
 			eae6320::Graphics::sColor GetMaterialColor() const { return m_Color; }
 
@@ -34,13 +35,13 @@ namespace eae6320
 			//Member variables
 			cEffect::Handle m_EffectHandle;
 			cTexture::Handle m_TextureHandle;
+			cTexture::Handle m_NormalMapHandle;
 			sColor m_Color = sColor{ 0,0,0,0 };
 			void Shutdown();
 
 			cMaterial() = default;
 			~cMaterial()
 			{
-				eae6320::Graphics::cTexture::s_manager.Release(m_TextureHandle);
 				Shutdown();
 			}
 

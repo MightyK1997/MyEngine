@@ -44,6 +44,7 @@ namespace eae6320
 			enum class eType : uint8_t
 			{
 				COLOR = 0,
+				NORMAL = 1,
 			};
 		}
 

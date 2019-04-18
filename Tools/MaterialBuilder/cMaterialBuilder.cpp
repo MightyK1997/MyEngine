@@ -14,6 +14,30 @@ namespace
 	uint8_t m_ConstantVariant;
 	std::vector<float> m_ConstantData;
 	std::string m_TextureLocation;
+	std::string m_NormalLocation;
+
+	std::string GetSourceDirectory(std::string i_Directory)
+	{
+		std::string o_SourceDirectory;
+		std::string o_ErrorMessage;
+		eae6320::Platform::GetEnvironmentVariable("GameSourceContentDir", o_SourceDirectory, &o_ErrorMessage);
+		o_SourceDirectory = o_SourceDirectory + i_Directory;
+		if (!eae6320::Platform::DoesFileExist(o_SourceDirectory.c_str(), &o_ErrorMessage))
+		{
+			eae6320::Platform::GetEnvironmentVariable("EngineSourceContentDir", o_SourceDirectory, &o_ErrorMessage);
+			o_SourceDirectory = o_SourceDirectory + i_Directory;
+		}
+		return o_SourceDirectory;
+	}
+
+	std::string GetDestDirectory(std::string i_Directory)
+	{
+		std::string o_DestinationDir;
+		std::string o_ErrorMessage;
+		eae6320::Platform::GetEnvironmentVariable("GameInstallDir", o_DestinationDir, &o_ErrorMessage);
+		o_DestinationDir = o_DestinationDir + i_Directory;
+		return o_DestinationDir;
+	}
 }
 
 
@@ -100,6 +124,19 @@ eae6320::cResult LoadTableValues(lua_State& i_LuaState)
 		else
 		{
 			m_TextureLocation = "Textures/default_diffuse.tga";
+		}
+		lua_pop(&i_LuaState, 1);
+
+		key2 = "NormalMapLocation";
+		lua_pushstring(&i_LuaState, key2);
+		lua_gettable(&i_LuaState, -2);
+		if (lua_isstring(&i_LuaState, -1))
+		{
+			m_NormalLocation = lua_tostring(&i_LuaState, -1);
+		}
+		else
+		{
+			m_NormalLocation = "Textures/default_normal.tga";
 		}
 		lua_pop(&i_LuaState, 1);
 		lua_pop(&i_LuaState, 1);
@@ -196,24 +233,24 @@ eae6320::cResult eae6320::Assets::cMaterialBuilder::Build(const std::vector<std:
 	std::string o_ErrorMessage;
 
 	std::string tempTextureLocation = m_TextureLocation;
+	std::string tempNormalLocation = m_NormalLocation;
 
 	//Calling texture builder.
 	std::replace(m_TextureLocation.begin(), m_TextureLocation.end(), '/', '\\');
-	eae6320::Platform::GetEnvironmentVariable("GameSourceContentDir", o_SourceDirectory, &o_ErrorMessage);
-	o_SourceDirectory = o_SourceDirectory + m_TextureLocation;
-	if (!eae6320::Platform::DoesFileExist(o_SourceDirectory.c_str(), &o_ErrorMessage))
-	{
-		eae6320::Platform::GetEnvironmentVariable("EngineSourceContentDir", o_SourceDirectory, &o_ErrorMessage);
-		o_SourceDirectory = o_SourceDirectory + m_TextureLocation;
-	}
+	o_SourceDirectory = GetSourceDirectory(m_TextureLocation);
 	m_TextureLocation = "data\\" + m_TextureLocation;
-	eae6320::Platform::GetEnvironmentVariable("GameInstallDir", o_DestinationDir, &o_ErrorMessage);
-	o_DestinationDir = o_DestinationDir + m_TextureLocation;
-
+	o_DestinationDir = GetDestDirectory(m_TextureLocation);
 	eae6320::Platform::GetEnvironmentVariable("OutputDir", o_OutputDir, &o_ErrorMessage);
-
 	std::string commandToTextureBuilder = o_OutputDir + "\\TextureBuilder.exe" + " " + o_SourceDirectory + " " + o_DestinationDir + " " + std::to_string(0);
+	std::system(commandToTextureBuilder.c_str());
 
+	//For Normal Maps
+	std::replace(m_NormalLocation.begin(), m_NormalLocation.end(), '/', '\\');
+	o_SourceDirectory = GetSourceDirectory(m_NormalLocation);
+	m_NormalLocation = "data\\" + m_NormalLocation;
+	o_DestinationDir = GetDestDirectory(m_NormalLocation);
+	eae6320::Platform::GetEnvironmentVariable("OutputDir", o_OutputDir, &o_ErrorMessage);
+	commandToTextureBuilder = o_OutputDir + "\\TextureBuilder.exe" + " " + o_SourceDirectory + " " + o_DestinationDir + " " + std::to_string(1);
 	std::system(commandToTextureBuilder.c_str());
 
 
@@ -221,6 +258,7 @@ eae6320::cResult eae6320::Assets::cMaterialBuilder::Build(const std::vector<std:
 	fptr = fopen(m_path_target, "w+b");
 	m_EffectLocation = "data/" + m_EffectLocation + "binary";
 	m_TextureLocation = "data/" + tempTextureLocation;
+	m_NormalLocation = "data/" + tempNormalLocation;
 	fwrite(m_EffectLocation.c_str(), m_EffectLocation.length(), 1, fptr);
 	fwrite("\0", sizeof(uint8_t), 1, fptr);
 	fwrite(&m_ConstantType, sizeof(uint8_t), 1, fptr);
@@ -234,6 +272,8 @@ eae6320::cResult eae6320::Assets::cMaterialBuilder::Build(const std::vector<std:
 		fwrite(&color, sizeof(eae6320::Graphics::sColor), 1, fptr);
 	}
 	fwrite(m_TextureLocation.c_str(), m_TextureLocation.length(), 1, fptr);
+	fwrite("\0", sizeof(uint8_t), 1, fptr);
+	fwrite(m_NormalLocation.c_str(), m_NormalLocation.length(), 1, fptr);
 	fwrite("\0", sizeof(uint8_t), 1, fptr);
 	fclose(fptr);
 	return result;
