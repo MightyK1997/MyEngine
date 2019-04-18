@@ -8,6 +8,8 @@ Position = {-3,-3,0},
 Color = {1,1,1,1},
 UV={0,1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 94
@@ -15,6 +17,8 @@ Position = {-2.4,2.4,0},
 Color = {1,1,1,1},
 UV={0.1,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 59
@@ -22,6 +26,8 @@ Position = {-2.4,2.4,0},
 Color = {1,1,1,1},
 UV={0.1,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 2
@@ -29,6 +35,8 @@ Position = {-2.4,2.4,0},
 Color = {1,1,1,1},
 UV={0.1,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 364
@@ -36,6 +44,8 @@ Position = {-2.4,2.4,0},
 Color = {1,1,1,1},
 UV={0.1,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 5
@@ -43,6 +53,8 @@ Position = {-1.8,2.4,0},
 Color = {1,1,1,1},
 UV={0.2,0.1},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 4
@@ -50,6 +62,8 @@ Position = {-1.8,2.4,0},
 Color = {1,1,1,1},
 UV={0.2,0.1},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 7
@@ -57,6 +71,8 @@ Position = {-1.8,2.4,0},
 Color = {1,1,1,1},
 UV={0.2,0.1},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 42
@@ -64,6 +80,8 @@ Position = {-1.8,2.4,0},
 Color = {1,1,1,1},
 UV={0.2,0.1},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 6
@@ -71,6 +89,8 @@ Position = {-1.2,2.4,0},
 Color = {1,1,1,1},
 UV={0.3,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 368
@@ -78,6 +98,8 @@ Position = {-1.2,2.4,0},
 Color = {1,1,1,1},
 UV={0.3,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 9
@@ -85,6 +107,8 @@ Position = {-1.2,2.4,0},
 Color = {1,1,1,1},
 UV={0.3,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 8
@@ -92,6 +116,8 @@ Position = {-1.2,2.4,0},
 Color = {1,1,1,1},
 UV={0.3,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 11
@@ -99,6 +125,8 @@ Position = {-0.6,2.4,0},
 Color = {1,1,1,1},
 UV={0.4,0.1},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 44
@@ -106,6 +134,8 @@ Position = {-0.6,2.4,0},
 Color = {1,1,1,1},
 UV={0.4,0.1},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 10
@@ -113,6 +143,8 @@ Position = {-0.6,2.4,0},
 Color = {1,1,1,1},
 UV={0.4,0.1},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 372
@@ -120,6 +152,8 @@ Position = {-0.6,2.4,0},
 Color = {1,1,1,1},
 UV={0.4,0.1},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 13
@@ -127,6 +161,8 @@ Position = {0,2.4,0},
 Color = {1,1,1,1},
 UV={0.5,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 12
@@ -134,6 +170,8 @@ Position = {0,2.4,0},
 Color = {1,1,1,1},
 UV={0.5,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 15
@@ -141,6 +179,8 @@ Position = {0,2.4,0},
 Color = {1,1,1,1},
 UV={0.5,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 46
@@ -148,6 +188,8 @@ Position = {0,2.4,0},
 Color = {1,1,1,1},
 UV={0.5,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 14
@@ -155,6 +197,8 @@ Position = {0.6,2.4,0},
 Color = {1,1,1,1},
 UV={0.6,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 376
@@ -162,6 +206,8 @@ Position = {0.6,2.4,0},
 Color = {1,1,1,1},
 UV={0.6,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 17
@@ -169,6 +215,8 @@ Position = {0.6,2.4,0},
 Color = {1,1,1,1},
 UV={0.6,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 16
@@ -176,6 +224,8 @@ Position = {0.6,2.4,0},
 Color = {1,1,1,1},
 UV={0.6,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 19
@@ -183,6 +233,8 @@ Position = {1.2,2.4,0},
 Color = {1,1,1,1},
 UV={0.7,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 48
@@ -190,6 +242,8 @@ Position = {1.2,2.4,0},
 Color = {1,1,1,1},
 UV={0.7,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 18
@@ -197,6 +251,8 @@ Position = {1.2,2.4,0},
 Color = {1,1,1,1},
 UV={0.7,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 380
@@ -204,6 +260,8 @@ Position = {1.2,2.4,0},
 Color = {1,1,1,1},
 UV={0.7,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 21
@@ -211,6 +269,8 @@ Position = {1.8,2.4,0},
 Color = {1,1,1,1},
 UV={0.8,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 20
@@ -218,6 +278,8 @@ Position = {1.8,2.4,0},
 Color = {1,1,1,1},
 UV={0.8,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 23
@@ -225,6 +287,8 @@ Position = {1.8,2.4,0},
 Color = {1,1,1,1},
 UV={0.8,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 50
@@ -232,6 +296,8 @@ Position = {1.8,2.4,0},
 Color = {1,1,1,1},
 UV={0.8,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 22
@@ -239,6 +305,8 @@ Position = {2.4,2.4,0},
 Color = {1,1,1,1},
 UV={0.9,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 384
@@ -246,6 +314,8 @@ Position = {2.4,2.4,0},
 Color = {1,1,1,1},
 UV={0.9,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 25
@@ -253,6 +323,8 @@ Position = {2.4,2.4,0},
 Color = {1,1,1,1},
 UV={0.9,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 24
@@ -260,6 +332,8 @@ Position = {2.4,2.4,0},
 Color = {1,1,1,1},
 UV={0.9,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 27
@@ -267,6 +341,8 @@ Position = {3,2.4,0},
 Color = {1,1,1,1},
 UV={1,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 52
@@ -274,6 +350,8 @@ Position = {3,2.4,0},
 Color = {1,1,1,1},
 UV={1,0.1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 26
@@ -281,6 +359,8 @@ Position = {3,-3,0},
 Color = {1,1,1,1},
 UV={1,1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 388
@@ -288,6 +368,8 @@ Position = {-3,3,0},
 Color = {1,1,1,1},
 UV={0,0},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 29
@@ -295,6 +377,8 @@ Position = {-2.4,3,0},
 Color = {1,1,1,1},
 UV={0.1,0},
 Normals={0,5.9557e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-5.9557e-23},
 },
 {
 --Index Position = 28
@@ -302,6 +386,8 @@ Position = {-2.4,3,0},
 Color = {1,1,1,1},
 UV={0.1,0},
 Normals={0,5.9557e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-5.9557e-23},
 },
 {
 --Index Position = 31
@@ -309,6 +395,8 @@ Position = {-1.8,3,0},
 Color = {1,1,1,1},
 UV={0.2,0},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 54
@@ -316,6 +404,8 @@ Position = {-1.8,3,0},
 Color = {1,1,1,1},
 UV={0.2,0},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 30
@@ -323,6 +413,8 @@ Position = {-1.2,3,0},
 Color = {1,1,1,1},
 UV={0.3,0},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 392
@@ -330,6 +422,8 @@ Position = {-1.2,3,0},
 Color = {1,1,1,1},
 UV={0.3,0},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 33
@@ -337,6 +431,8 @@ Position = {-0.6,3,0},
 Color = {1,1,1,1},
 UV={0.4,0},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 32
@@ -344,6 +440,8 @@ Position = {-0.6,3,0},
 Color = {1,1,1,1},
 UV={0.4,0},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 35
@@ -351,6 +449,8 @@ Position = {0,3,0},
 Color = {1,1,1,1},
 UV={0.5,0},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 56
@@ -358,6 +458,8 @@ Position = {0,3,0},
 Color = {1,1,1,1},
 UV={0.5,0},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 34
@@ -365,6 +467,8 @@ Position = {0.6,3,0},
 Color = {1,1,1,1},
 UV={0.6,0},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 395
@@ -372,6 +476,8 @@ Position = {0.6,3,0},
 Color = {1,1,1,1},
 UV={0.6,0},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 37
@@ -379,6 +485,8 @@ Position = {1.2,3,0},
 Color = {1,1,1,1},
 UV={0.7,0},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 36
@@ -386,6 +494,8 @@ Position = {1.2,3,0},
 Color = {1,1,1,1},
 UV={0.7,0},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 38
@@ -393,6 +503,8 @@ Position = {1.8,3,0},
 Color = {1,1,1,1},
 UV={0.8,0},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 58
@@ -400,6 +512,8 @@ Position = {1.8,3,0},
 Color = {1,1,1,1},
 UV={0.8,0},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 40
@@ -407,6 +521,8 @@ Position = {2.4,3,0},
 Color = {1,1,1,1},
 UV={0.9,0},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 3
@@ -414,6 +530,8 @@ Position = {2.4,3,0},
 Color = {1,1,1,1},
 UV={0.9,0},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 41
@@ -421,6 +539,8 @@ Position = {-3,-2.4,0},
 Color = {1,1,1,1},
 UV={0,0.9},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 42
@@ -428,6 +548,8 @@ Position = {-3,-2.4,0},
 Color = {1,1,1,1},
 UV={0,0.9},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 7
@@ -435,6 +557,8 @@ Position = {3,3,0},
 Color = {1,1,1,1},
 UV={1,0},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 43
@@ -442,6 +566,8 @@ Position = {-2.4,-2.4,0},
 Color = {1,1,1,1},
 UV={0.1,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 44
@@ -449,6 +575,8 @@ Position = {-2.4,-2.4,0},
 Color = {1,1,1,1},
 UV={0.1,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 11
@@ -456,6 +584,8 @@ Position = {-2.4,-2.4,0},
 Color = {1,1,1,1},
 UV={0.1,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 45
@@ -463,6 +593,8 @@ Position = {-2.4,-2.4,0},
 Color = {1,1,1,1},
 UV={0.1,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 46
@@ -470,6 +602,8 @@ Position = {-1.8,-2.4,0},
 Color = {1,1,1,1},
 UV={0.2,0.9},
 Normals={0,3.97047e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-3.97047e-23},
 },
 {
 --Index Position = 15
@@ -477,6 +611,8 @@ Position = {-1.8,-2.4,0},
 Color = {1,1,1,1},
 UV={0.2,0.9},
 Normals={0,3.97047e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-3.97047e-23},
 },
 {
 --Index Position = 47
@@ -484,6 +620,8 @@ Position = {-1.8,-2.4,0},
 Color = {1,1,1,1},
 UV={0.2,0.9},
 Normals={0,3.97047e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-3.97047e-23},
 },
 {
 --Index Position = 48
@@ -491,6 +629,8 @@ Position = {-1.8,-2.4,0},
 Color = {1,1,1,1},
 UV={0.2,0.9},
 Normals={0,3.97047e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-3.97047e-23},
 },
 {
 --Index Position = 19
@@ -498,6 +638,8 @@ Position = {-1.2,-2.4,0},
 Color = {1,1,1,1},
 UV={0.3,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 49
@@ -505,6 +647,8 @@ Position = {-1.2,-2.4,0},
 Color = {1,1,1,1},
 UV={0.3,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 50
@@ -512,6 +656,8 @@ Position = {-1.2,-2.4,0},
 Color = {1,1,1,1},
 UV={0.3,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 23
@@ -519,6 +665,8 @@ Position = {-1.2,-2.4,0},
 Color = {1,1,1,1},
 UV={0.3,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 51
@@ -526,6 +674,8 @@ Position = {-0.6,-2.4,0},
 Color = {1,1,1,1},
 UV={0.4,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 52
@@ -533,6 +683,8 @@ Position = {-0.6,-2.4,0},
 Color = {1,1,1,1},
 UV={0.4,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 27
@@ -540,6 +692,8 @@ Position = {-0.6,-2.4,0},
 Color = {1,1,1,1},
 UV={0.4,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 53
@@ -547,6 +701,8 @@ Position = {-0.6,-2.4,0},
 Color = {1,1,1,1},
 UV={0.4,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 54
@@ -554,6 +710,8 @@ Position = {0,-2.4,0},
 Color = {1,1,1,1},
 UV={0.5,0.9},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 31
@@ -561,6 +719,8 @@ Position = {0,-2.4,0},
 Color = {1,1,1,1},
 UV={0.5,0.9},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 55
@@ -568,6 +728,8 @@ Position = {0,-2.4,0},
 Color = {1,1,1,1},
 UV={0.5,0.9},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 56
@@ -575,6 +737,8 @@ Position = {0,-2.4,0},
 Color = {1,1,1,1},
 UV={0.5,0.9},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 35
@@ -582,6 +746,8 @@ Position = {0.6,-2.4,0},
 Color = {1,1,1,1},
 UV={0.6,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 57
@@ -589,6 +755,8 @@ Position = {0.6,-2.4,0},
 Color = {1,1,1,1},
 UV={0.6,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 58
@@ -596,6 +764,8 @@ Position = {0.6,-2.4,0},
 Color = {1,1,1,1},
 UV={0.6,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 38
@@ -603,6 +773,8 @@ Position = {0.6,-2.4,0},
 Color = {1,1,1,1},
 UV={0.6,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 61
@@ -610,6 +782,8 @@ Position = {1.2,-2.4,0},
 Color = {1,1,1,1},
 UV={0.7,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 59
@@ -617,6 +791,8 @@ Position = {1.2,-2.4,0},
 Color = {1,1,1,1},
 UV={0.7,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 94
@@ -624,6 +800,8 @@ Position = {1.2,-2.4,0},
 Color = {1,1,1,1},
 UV={0.7,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 62
@@ -631,6 +809,8 @@ Position = {1.2,-2.4,0},
 Color = {1,1,1,1},
 UV={0.7,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 60
@@ -638,6 +818,8 @@ Position = {1.8,-2.4,0},
 Color = {1,1,1,1},
 UV={0.8,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 63
@@ -645,6 +827,8 @@ Position = {1.8,-2.4,0},
 Color = {1,1,1,1},
 UV={0.8,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 102
@@ -652,6 +836,8 @@ Position = {1.8,-2.4,0},
 Color = {1,1,1,1},
 UV={0.8,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 64
@@ -659,6 +845,8 @@ Position = {1.8,-2.4,0},
 Color = {1,1,1,1},
 UV={0.8,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 67
@@ -666,6 +854,8 @@ Position = {-2.4,-3,0},
 Color = {1,1,1,1},
 UV={0.1,1},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 105
@@ -673,6 +863,8 @@ Position = {-2.4,-3,0},
 Color = {1,1,1,1},
 UV={0.1,1},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 65
@@ -680,6 +872,8 @@ Position = {2.4,-2.4,0},
 Color = {1,1,1,1},
 UV={0.9,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 132
@@ -687,6 +881,8 @@ Position = {2.4,-2.4,0},
 Color = {1,1,1,1},
 UV={0.9,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 69
@@ -694,6 +890,8 @@ Position = {2.4,-2.4,0},
 Color = {1,1,1,1},
 UV={0.9,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 66
@@ -701,6 +899,8 @@ Position = {2.4,-2.4,0},
 Color = {1,1,1,1},
 UV={0.9,0.9},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 171
@@ -708,6 +908,8 @@ Position = {3,-2.4,0},
 Color = {1,1,1,1},
 UV={1,0.9},
 Normals={0,-5.9557e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,5.9557e-23},
 },
 {
 --Index Position = 70
@@ -715,6 +917,8 @@ Position = {3,-2.4,0},
 Color = {1,1,1,1},
 UV={1,0.9},
 Normals={0,-5.9557e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,5.9557e-23},
 },
 {
 --Index Position = 68
@@ -722,6 +926,8 @@ Position = {-3,-1.8,0},
 Color = {1,1,1,1},
 UV={0,0.8},
 Normals={0,-5.9557e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,5.9557e-23},
 },
 {
 --Index Position = 72
@@ -729,6 +935,8 @@ Position = {-3,-1.8,0},
 Color = {1,1,1,1},
 UV={0,0.8},
 Normals={0,-5.9557e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,5.9557e-23},
 },
 {
 --Index Position = 109
@@ -736,6 +944,8 @@ Position = {-2.4,-1.8,0},
 Color = {1,1,1,1},
 UV={0.1,0.8},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 71
@@ -743,6 +953,8 @@ Position = {-2.4,-1.8,0},
 Color = {1,1,1,1},
 UV={0.1,0.8},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 208
@@ -750,6 +962,8 @@ Position = {-2.4,-1.8,0},
 Color = {1,1,1,1},
 UV={0.1,0.8},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 74
@@ -757,6 +971,8 @@ Position = {-2.4,-1.8,0},
 Color = {1,1,1,1},
 UV={0.1,0.8},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 73
@@ -764,6 +980,8 @@ Position = {-1.8,-1.8,0},
 Color = {1,1,1,1},
 UV={0.2,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 76
@@ -771,6 +989,8 @@ Position = {-1.8,-1.8,0},
 Color = {1,1,1,1},
 UV={0.2,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 113
@@ -778,6 +998,8 @@ Position = {-1.8,-1.8,0},
 Color = {1,1,1,1},
 UV={0.2,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 75
@@ -785,6 +1007,8 @@ Position = {-1.8,-1.8,0},
 Color = {1,1,1,1},
 UV={0.2,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 246
@@ -792,6 +1016,8 @@ Position = {-1.2,-1.8,0},
 Color = {1,1,1,1},
 UV={0.3,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 78
@@ -799,6 +1025,8 @@ Position = {-1.2,-1.8,0},
 Color = {1,1,1,1},
 UV={0.3,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 77
@@ -806,6 +1034,8 @@ Position = {-1.2,-1.8,0},
 Color = {1,1,1,1},
 UV={0.3,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 80
@@ -813,6 +1043,8 @@ Position = {-1.2,-1.8,0},
 Color = {1,1,1,1},
 UV={0.3,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 117
@@ -820,6 +1052,8 @@ Position = {-0.6,-1.8,0},
 Color = {1,1,1,1},
 UV={0.4,0.8},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 79
@@ -827,6 +1061,8 @@ Position = {-0.6,-1.8,0},
 Color = {1,1,1,1},
 UV={0.4,0.8},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 284
@@ -834,6 +1070,8 @@ Position = {-0.6,-1.8,0},
 Color = {1,1,1,1},
 UV={0.4,0.8},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 82
@@ -841,6 +1079,8 @@ Position = {-0.6,-1.8,0},
 Color = {1,1,1,1},
 UV={0.4,0.8},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 81
@@ -848,6 +1088,8 @@ Position = {0,-1.8,0},
 Color = {1,1,1,1},
 UV={0.5,0.8},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 84
@@ -855,6 +1097,8 @@ Position = {0,-1.8,0},
 Color = {1,1,1,1},
 UV={0.5,0.8},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 122
@@ -862,6 +1106,8 @@ Position = {0,-1.8,0},
 Color = {1,1,1,1},
 UV={0.5,0.8},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 83
@@ -869,6 +1115,8 @@ Position = {0,-1.8,0},
 Color = {1,1,1,1},
 UV={0.5,0.8},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 322
@@ -876,6 +1124,8 @@ Position = {0.6,-1.8,0},
 Color = {1,1,1,1},
 UV={0.6,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 86
@@ -883,6 +1133,8 @@ Position = {0.6,-1.8,0},
 Color = {1,1,1,1},
 UV={0.6,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 85
@@ -890,6 +1142,8 @@ Position = {0.6,-1.8,0},
 Color = {1,1,1,1},
 UV={0.6,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 88
@@ -897,6 +1151,8 @@ Position = {0.6,-1.8,0},
 Color = {1,1,1,1},
 UV={0.6,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 127
@@ -904,6 +1160,8 @@ Position = {1.2,-1.8,0},
 Color = {1,1,1,1},
 UV={0.7,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 87
@@ -911,6 +1169,8 @@ Position = {1.2,-1.8,0},
 Color = {1,1,1,1},
 UV={0.7,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 360
@@ -918,6 +1178,8 @@ Position = {1.2,-1.8,0},
 Color = {1,1,1,1},
 UV={0.7,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 90
@@ -925,6 +1187,8 @@ Position = {1.2,-1.8,0},
 Color = {1,1,1,1},
 UV={0.7,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 89
@@ -932,6 +1196,8 @@ Position = {-1.8,-3,0},
 Color = {1,1,1,1},
 UV={0.2,1},
 Normals={0,3.97047e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-3.97047e-23},
 },
 {
 --Index Position = 92
@@ -939,6 +1205,8 @@ Position = {-1.8,-3,0},
 Color = {1,1,1,1},
 UV={0.2,1},
 Normals={0,3.97047e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-3.97047e-23},
 },
 {
 --Index Position = 131
@@ -946,6 +1214,8 @@ Position = {1.8,-1.8,0},
 Color = {1,1,1,1},
 UV={0.8,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 91
@@ -953,6 +1223,8 @@ Position = {1.8,-1.8,0},
 Color = {1,1,1,1},
 UV={0.8,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 398
@@ -960,6 +1232,8 @@ Position = {1.8,-1.8,0},
 Color = {1,1,1,1},
 UV={0.8,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 96
@@ -967,6 +1241,8 @@ Position = {1.8,-1.8,0},
 Color = {1,1,1,1},
 UV={0.8,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 93
@@ -974,6 +1250,8 @@ Position = {2.4,-1.8,0},
 Color = {1,1,1,1},
 UV={0.9,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 98
@@ -981,6 +1259,8 @@ Position = {2.4,-1.8,0},
 Color = {1,1,1,1},
 UV={0.9,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 137
@@ -988,6 +1268,8 @@ Position = {2.4,-1.8,0},
 Color = {1,1,1,1},
 UV={0.9,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 95
@@ -995,6 +1277,8 @@ Position = {2.4,-1.8,0},
 Color = {1,1,1,1},
 UV={0.9,0.8},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 132
@@ -1002,6 +1286,8 @@ Position = {3,-1.8,0},
 Color = {1,1,1,1},
 UV={1,0.8},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 65
@@ -1009,6 +1295,8 @@ Position = {3,-1.8,0},
 Color = {1,1,1,1},
 UV={1,0.8},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 97
@@ -1016,6 +1304,8 @@ Position = {-3,-1.2,0},
 Color = {1,1,1,1},
 UV={0,0.7},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 39
@@ -1023,6 +1313,8 @@ Position = {-3,-1.2,0},
 Color = {1,1,1,1},
 UV={0,0.7},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 100
@@ -1030,6 +1322,8 @@ Position = {-2.4,-1.2,0},
 Color = {1,1,1,1},
 UV={0.1,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 99
@@ -1037,6 +1331,8 @@ Position = {-2.4,-1.2,0},
 Color = {1,1,1,1},
 UV={0.1,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 101
@@ -1044,6 +1340,8 @@ Position = {-2.4,-1.2,0},
 Color = {1,1,1,1},
 UV={0.1,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 141
@@ -1051,6 +1349,8 @@ Position = {-2.4,-1.2,0},
 Color = {1,1,1,1},
 UV={0.1,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 102
@@ -1058,6 +1358,8 @@ Position = {-1.8,-1.2,0},
 Color = {1,1,1,1},
 UV={0.2,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 63
@@ -1065,6 +1367,8 @@ Position = {-1.8,-1.2,0},
 Color = {1,1,1,1},
 UV={0.2,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 104
@@ -1072,6 +1376,8 @@ Position = {-1.8,-1.2,0},
 Color = {1,1,1,1},
 UV={0.2,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 103
@@ -1079,6 +1385,8 @@ Position = {-1.8,-1.2,0},
 Color = {1,1,1,1},
 UV={0.2,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 106
@@ -1086,6 +1394,8 @@ Position = {-1.2,-1.2,0},
 Color = {1,1,1,1},
 UV={0.3,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 145
@@ -1093,6 +1403,8 @@ Position = {-1.2,-1.2,0},
 Color = {1,1,1,1},
 UV={0.3,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 105
@@ -1100,6 +1412,8 @@ Position = {-1.2,-1.2,0},
 Color = {1,1,1,1},
 UV={0.3,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 67
@@ -1107,6 +1421,8 @@ Position = {-1.2,-1.2,0},
 Color = {1,1,1,1},
 UV={0.3,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 108
@@ -1114,6 +1430,8 @@ Position = {-0.6,-1.2,0},
 Color = {1,1,1,1},
 UV={0.4,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 107
@@ -1121,6 +1439,8 @@ Position = {-0.6,-1.2,0},
 Color = {1,1,1,1},
 UV={0.4,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 110
@@ -1128,6 +1448,8 @@ Position = {-0.6,-1.2,0},
 Color = {1,1,1,1},
 UV={0.4,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 149
@@ -1135,6 +1457,8 @@ Position = {-0.6,-1.2,0},
 Color = {1,1,1,1},
 UV={0.4,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 109
@@ -1142,6 +1466,8 @@ Position = {0,-1.2,0},
 Color = {1,1,1,1},
 UV={0.5,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 72
@@ -1149,6 +1475,8 @@ Position = {0,-1.2,0},
 Color = {1,1,1,1},
 UV={0.5,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 112
@@ -1156,6 +1484,8 @@ Position = {0,-1.2,0},
 Color = {1,1,1,1},
 UV={0.5,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 111
@@ -1163,6 +1493,8 @@ Position = {0,-1.2,0},
 Color = {1,1,1,1},
 UV={0.5,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 114
@@ -1170,6 +1502,8 @@ Position = {0.6,-1.2,0},
 Color = {1,1,1,1},
 UV={0.6,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 153
@@ -1177,6 +1511,8 @@ Position = {0.6,-1.2,0},
 Color = {1,1,1,1},
 UV={0.6,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 113
@@ -1184,6 +1520,8 @@ Position = {0.6,-1.2,0},
 Color = {1,1,1,1},
 UV={0.6,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 76
@@ -1191,6 +1529,8 @@ Position = {0.6,-1.2,0},
 Color = {1,1,1,1},
 UV={0.6,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 116
@@ -1198,6 +1538,8 @@ Position = {-1.2,-3,0},
 Color = {1,1,1,1},
 UV={0.3,1},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 115
@@ -1205,6 +1547,8 @@ Position = {-1.2,-3,0},
 Color = {1,1,1,1},
 UV={0.3,1},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 118
@@ -1212,6 +1556,8 @@ Position = {1.2,-1.2,0},
 Color = {1,1,1,1},
 UV={0.7,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 157
@@ -1219,6 +1565,8 @@ Position = {1.2,-1.2,0},
 Color = {1,1,1,1},
 UV={0.7,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 117
@@ -1226,6 +1574,8 @@ Position = {1.2,-1.2,0},
 Color = {1,1,1,1},
 UV={0.7,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 80
@@ -1233,6 +1583,8 @@ Position = {1.2,-1.2,0},
 Color = {1,1,1,1},
 UV={0.7,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 121
@@ -1240,6 +1592,8 @@ Position = {1.8,-1.2,0},
 Color = {1,1,1,1},
 UV={0.8,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 119
@@ -1247,6 +1601,8 @@ Position = {1.8,-1.2,0},
 Color = {1,1,1,1},
 UV={0.8,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 123
@@ -1254,6 +1610,8 @@ Position = {1.8,-1.2,0},
 Color = {1,1,1,1},
 UV={0.8,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 161
@@ -1261,6 +1619,8 @@ Position = {1.8,-1.2,0},
 Color = {1,1,1,1},
 UV={0.8,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 120
@@ -1268,6 +1628,8 @@ Position = {2.4,-1.2,0},
 Color = {1,1,1,1},
 UV={0.9,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 124
@@ -1275,6 +1637,8 @@ Position = {2.4,-1.2,0},
 Color = {1,1,1,1},
 UV={0.9,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 162
@@ -1282,6 +1646,8 @@ Position = {2.4,-1.2,0},
 Color = {1,1,1,1},
 UV={0.9,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 122
@@ -1289,6 +1655,8 @@ Position = {2.4,-1.2,0},
 Color = {1,1,1,1},
 UV={0.9,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 84
@@ -1296,6 +1664,8 @@ Position = {3,-1.2,0},
 Color = {1,1,1,1},
 UV={1,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 126
@@ -1303,6 +1673,8 @@ Position = {3,-1.2,0},
 Color = {1,1,1,1},
 UV={1,0.7},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 125
@@ -1310,6 +1682,8 @@ Position = {-3,-0.6,0},
 Color = {1,1,1,1},
 UV={0,0.6},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 128
@@ -1317,6 +1691,8 @@ Position = {-3,-0.6,0},
 Color = {1,1,1,1},
 UV={0,0.6},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 167
@@ -1324,6 +1700,8 @@ Position = {-2.4,-0.6,0},
 Color = {1,1,1,1},
 UV={0.1,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 127
@@ -1331,6 +1709,8 @@ Position = {-2.4,-0.6,0},
 Color = {1,1,1,1},
 UV={0.1,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 88
@@ -1338,6 +1718,8 @@ Position = {-2.4,-0.6,0},
 Color = {1,1,1,1},
 UV={0.1,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 130
@@ -1345,6 +1727,8 @@ Position = {-2.4,-0.6,0},
 Color = {1,1,1,1},
 UV={0.1,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 129
@@ -1352,6 +1736,8 @@ Position = {-1.8,-0.6,0},
 Color = {1,1,1,1},
 UV={0.2,0.6},
 Normals={0,3.97047e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-3.97047e-23},
 },
 {
 --Index Position = 134
@@ -1359,6 +1745,8 @@ Position = {-1.8,-0.6,0},
 Color = {1,1,1,1},
 UV={0.2,0.6},
 Normals={0,3.97047e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-3.97047e-23},
 },
 {
 --Index Position = 173
@@ -1366,6 +1754,8 @@ Position = {-1.8,-0.6,0},
 Color = {1,1,1,1},
 UV={0.2,0.6},
 Normals={0,3.97047e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-3.97047e-23},
 },
 {
 --Index Position = 131
@@ -1373,6 +1763,8 @@ Position = {-1.8,-0.6,0},
 Color = {1,1,1,1},
 UV={0.2,0.6},
 Normals={0,3.97047e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-3.97047e-23},
 },
 {
 --Index Position = 92
@@ -1380,6 +1772,8 @@ Position = {-1.2,-0.6,0},
 Color = {1,1,1,1},
 UV={0.3,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 136
@@ -1387,6 +1781,8 @@ Position = {-1.2,-0.6,0},
 Color = {1,1,1,1},
 UV={0.3,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 133
@@ -1394,6 +1790,8 @@ Position = {-1.2,-0.6,0},
 Color = {1,1,1,1},
 UV={0.3,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 171
@@ -1401,6 +1799,8 @@ Position = {-1.2,-0.6,0},
 Color = {1,1,1,1},
 UV={0.3,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 66
@@ -1408,6 +1808,8 @@ Position = {-0.6,-0.6,0},
 Color = {1,1,1,1},
 UV={0.4,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 135
@@ -1415,6 +1817,8 @@ Position = {-0.6,-0.6,0},
 Color = {1,1,1,1},
 UV={0.4,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 138
@@ -1422,6 +1826,8 @@ Position = {-0.6,-0.6,0},
 Color = {1,1,1,1},
 UV={0.4,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 177
@@ -1429,6 +1835,8 @@ Position = {-0.6,-0.6,0},
 Color = {1,1,1,1},
 UV={0.4,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 137
@@ -1436,6 +1844,8 @@ Position = {0,-0.6,0},
 Color = {1,1,1,1},
 UV={0.5,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 98
@@ -1443,6 +1853,8 @@ Position = {0,-0.6,0},
 Color = {1,1,1,1},
 UV={0.5,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 140
@@ -1450,6 +1862,8 @@ Position = {0,-0.6,0},
 Color = {1,1,1,1},
 UV={0.5,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 139
@@ -1457,6 +1871,8 @@ Position = {0,-0.6,0},
 Color = {1,1,1,1},
 UV={0.5,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 142
@@ -1464,6 +1880,8 @@ Position = {-0.6,-3,0},
 Color = {1,1,1,1},
 UV={0.4,1},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 181
@@ -1471,6 +1889,8 @@ Position = {-0.6,-3,0},
 Color = {1,1,1,1},
 UV={0.4,1},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 141
@@ -1478,6 +1898,8 @@ Position = {0.6,-0.6,0},
 Color = {1,1,1,1},
 UV={0.6,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 101
@@ -1485,6 +1907,8 @@ Position = {0.6,-0.6,0},
 Color = {1,1,1,1},
 UV={0.6,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 143
@@ -1492,6 +1916,8 @@ Position = {0.6,-0.6,0},
 Color = {1,1,1,1},
 UV={0.6,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 144
@@ -1499,6 +1925,8 @@ Position = {0.6,-0.6,0},
 Color = {1,1,1,1},
 UV={0.6,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 146
@@ -1506,6 +1934,8 @@ Position = {1.2,-0.6,0},
 Color = {1,1,1,1},
 UV={0.7,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 186
@@ -1513,6 +1943,8 @@ Position = {1.2,-0.6,0},
 Color = {1,1,1,1},
 UV={0.7,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 145
@@ -1520,6 +1952,8 @@ Position = {1.2,-0.6,0},
 Color = {1,1,1,1},
 UV={0.7,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 106
@@ -1527,6 +1961,8 @@ Position = {1.2,-0.6,0},
 Color = {1,1,1,1},
 UV={0.7,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 148
@@ -1534,6 +1970,8 @@ Position = {1.8,-0.6,0},
 Color = {1,1,1,1},
 UV={0.8,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 147
@@ -1541,6 +1979,8 @@ Position = {1.8,-0.6,0},
 Color = {1,1,1,1},
 UV={0.8,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 150
@@ -1548,6 +1988,8 @@ Position = {1.8,-0.6,0},
 Color = {1,1,1,1},
 UV={0.8,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 189
@@ -1555,6 +1997,8 @@ Position = {1.8,-0.6,0},
 Color = {1,1,1,1},
 UV={0.8,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 149
@@ -1562,6 +2006,8 @@ Position = {2.4,-0.6,0},
 Color = {1,1,1,1},
 UV={0.9,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 110
@@ -1569,6 +2015,8 @@ Position = {2.4,-0.6,0},
 Color = {1,1,1,1},
 UV={0.9,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 152
@@ -1576,6 +2024,8 @@ Position = {2.4,-0.6,0},
 Color = {1,1,1,1},
 UV={0.9,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 151
@@ -1583,6 +2033,8 @@ Position = {2.4,-0.6,0},
 Color = {1,1,1,1},
 UV={0.9,0.6},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 154
@@ -1590,6 +2042,8 @@ Position = {3,-0.6,0},
 Color = {1,1,1,1},
 UV={1,0.6},
 Normals={0,-5.9557e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,5.9557e-23},
 },
 {
 --Index Position = 193
@@ -1597,6 +2051,8 @@ Position = {3,-0.6,0},
 Color = {1,1,1,1},
 UV={1,0.6},
 Normals={0,-5.9557e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,5.9557e-23},
 },
 {
 --Index Position = 153
@@ -1604,6 +2060,8 @@ Position = {-3,0,0},
 Color = {1,1,1,1},
 UV={0,0.5},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 114
@@ -1611,6 +2069,8 @@ Position = {-3,0,0},
 Color = {1,1,1,1},
 UV={0,0.5},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 156
@@ -1618,6 +2078,8 @@ Position = {-2.4,0,0},
 Color = {1,1,1,1},
 UV={0.1,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 155
@@ -1625,6 +2087,8 @@ Position = {-2.4,0,0},
 Color = {1,1,1,1},
 UV={0.1,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 158
@@ -1632,6 +2096,8 @@ Position = {-2.4,0,0},
 Color = {1,1,1,1},
 UV={0.1,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 197
@@ -1639,6 +2105,8 @@ Position = {-2.4,0,0},
 Color = {1,1,1,1},
 UV={0.1,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 157
@@ -1646,6 +2114,8 @@ Position = {-1.8,0,0},
 Color = {1,1,1,1},
 UV={0.2,0.5},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 118
@@ -1653,6 +2123,8 @@ Position = {-1.8,0,0},
 Color = {1,1,1,1},
 UV={0.2,0.5},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 160
@@ -1660,6 +2132,8 @@ Position = {-1.8,0,0},
 Color = {1,1,1,1},
 UV={0.2,0.5},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 159
@@ -1667,6 +2141,8 @@ Position = {-1.8,0,0},
 Color = {1,1,1,1},
 UV={0.2,0.5},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 163
@@ -1674,6 +2150,8 @@ Position = {-1.2,0,0},
 Color = {1,1,1,1},
 UV={0.3,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 201
@@ -1681,6 +2159,8 @@ Position = {-1.2,0,0},
 Color = {1,1,1,1},
 UV={0.3,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 161
@@ -1688,6 +2168,8 @@ Position = {-1.2,0,0},
 Color = {1,1,1,1},
 UV={0.3,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 123
@@ -1695,6 +2177,8 @@ Position = {-1.2,0,0},
 Color = {1,1,1,1},
 UV={0.3,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 165
@@ -1702,6 +2186,8 @@ Position = {-0.6,0,0},
 Color = {1,1,1,1},
 UV={0.4,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 162
@@ -1709,6 +2195,8 @@ Position = {-0.6,0,0},
 Color = {1,1,1,1},
 UV={0.4,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 124
@@ -1716,6 +2204,8 @@ Position = {-0.6,0,0},
 Color = {1,1,1,1},
 UV={0.4,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 166
@@ -1723,6 +2213,8 @@ Position = {-0.6,0,0},
 Color = {1,1,1,1},
 UV={0.4,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 164
@@ -1730,6 +2222,8 @@ Position = {0,-3,0},
 Color = {1,1,1,1},
 UV={0.5,1},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 168
@@ -1737,6 +2231,8 @@ Position = {0,-3,0},
 Color = {1,1,1,1},
 UV={0.5,1},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 205
@@ -1744,6 +2240,8 @@ Position = {0,0,0},
 Color = {1,1,1,1},
 UV={0.5,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 167
@@ -1751,6 +2249,8 @@ Position = {0,0,0},
 Color = {1,1,1,1},
 UV={0.5,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 128
@@ -1758,6 +2258,8 @@ Position = {0,0,0},
 Color = {1,1,1,1},
 UV={0.5,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 172
@@ -1765,6 +2267,8 @@ Position = {0,0,0},
 Color = {1,1,1,1},
 UV={0.5,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 169
@@ -1772,6 +2276,8 @@ Position = {0.6,0,0},
 Color = {1,1,1,1},
 UV={0.6,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 174
@@ -1779,6 +2285,8 @@ Position = {0.6,0,0},
 Color = {1,1,1,1},
 UV={0.6,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 211
@@ -1786,6 +2294,8 @@ Position = {0.6,0,0},
 Color = {1,1,1,1},
 UV={0.6,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 170
@@ -1793,6 +2303,8 @@ Position = {0.6,0,0},
 Color = {1,1,1,1},
 UV={0.6,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 208
@@ -1800,6 +2312,8 @@ Position = {1.2,0,0},
 Color = {1,1,1,1},
 UV={0.7,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 71
@@ -1807,6 +2321,8 @@ Position = {1.2,0,0},
 Color = {1,1,1,1},
 UV={0.7,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 173
@@ -1814,6 +2330,8 @@ Position = {1.2,0,0},
 Color = {1,1,1,1},
 UV={0.7,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 134
@@ -1821,6 +2339,8 @@ Position = {1.2,0,0},
 Color = {1,1,1,1},
 UV={0.7,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 176
@@ -1828,6 +2348,8 @@ Position = {1.8,0,0},
 Color = {1,1,1,1},
 UV={0.8,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 175
@@ -1835,6 +2357,8 @@ Position = {1.8,0,0},
 Color = {1,1,1,1},
 UV={0.8,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 178
@@ -1842,6 +2366,8 @@ Position = {1.8,0,0},
 Color = {1,1,1,1},
 UV={0.8,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 215
@@ -1849,6 +2375,8 @@ Position = {1.8,0,0},
 Color = {1,1,1,1},
 UV={0.8,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 177
@@ -1856,6 +2384,8 @@ Position = {2.4,0,0},
 Color = {1,1,1,1},
 UV={0.9,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 138
@@ -1863,6 +2393,8 @@ Position = {2.4,0,0},
 Color = {1,1,1,1},
 UV={0.9,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 180
@@ -1870,6 +2402,8 @@ Position = {2.4,0,0},
 Color = {1,1,1,1},
 UV={0.9,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 179
@@ -1877,6 +2411,8 @@ Position = {2.4,0,0},
 Color = {1,1,1,1},
 UV={0.9,0.5},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 182
@@ -1884,6 +2420,8 @@ Position = {3,0,0},
 Color = {1,1,1,1},
 UV={1,0.5},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 219
@@ -1891,6 +2429,8 @@ Position = {3,0,0},
 Color = {1,1,1,1},
 UV={1,0.5},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 181
@@ -1898,6 +2438,8 @@ Position = {-3,0.6,0},
 Color = {1,1,1,1},
 UV={0,0.4},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 142
@@ -1905,6 +2447,8 @@ Position = {-3,0.6,0},
 Color = {1,1,1,1},
 UV={0,0.4},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 184
@@ -1912,6 +2456,8 @@ Position = {-2.4,0.6,0},
 Color = {1,1,1,1},
 UV={0.1,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 183
@@ -1919,6 +2465,8 @@ Position = {-2.4,0.6,0},
 Color = {1,1,1,1},
 UV={0.1,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 185
@@ -1926,6 +2474,8 @@ Position = {-2.4,0.6,0},
 Color = {1,1,1,1},
 UV={0.1,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 223
@@ -1933,6 +2483,8 @@ Position = {-2.4,0.6,0},
 Color = {1,1,1,1},
 UV={0.1,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 186
@@ -1940,6 +2492,8 @@ Position = {-1.8,0.6,0},
 Color = {1,1,1,1},
 UV={0.2,0.4},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 146
@@ -1947,6 +2501,8 @@ Position = {-1.8,0.6,0},
 Color = {1,1,1,1},
 UV={0.2,0.4},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 188
@@ -1954,6 +2510,8 @@ Position = {-1.8,0.6,0},
 Color = {1,1,1,1},
 UV={0.2,0.4},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 187
@@ -1961,6 +2519,8 @@ Position = {-1.8,0.6,0},
 Color = {1,1,1,1},
 UV={0.2,0.4},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 190
@@ -1968,6 +2528,8 @@ Position = {-1.2,0.6,0},
 Color = {1,1,1,1},
 UV={0.3,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 228
@@ -1975,6 +2537,8 @@ Position = {-1.2,0.6,0},
 Color = {1,1,1,1},
 UV={0.3,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 189
@@ -1982,6 +2546,8 @@ Position = {-1.2,0.6,0},
 Color = {1,1,1,1},
 UV={0.3,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 150
@@ -1989,6 +2555,8 @@ Position = {-1.2,0.6,0},
 Color = {1,1,1,1},
 UV={0.3,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 192
@@ -1996,6 +2564,8 @@ Position = {0.6,-3,0},
 Color = {1,1,1,1},
 UV={0.6,1},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 191
@@ -2003,6 +2573,8 @@ Position = {0.6,-3,0},
 Color = {1,1,1,1},
 UV={0.6,1},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 194
@@ -2010,6 +2582,8 @@ Position = {-0.6,0.6,0},
 Color = {1,1,1,1},
 UV={0.4,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 231
@@ -2017,6 +2591,8 @@ Position = {-0.6,0.6,0},
 Color = {1,1,1,1},
 UV={0.4,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 193
@@ -2024,6 +2600,8 @@ Position = {-0.6,0.6,0},
 Color = {1,1,1,1},
 UV={0.4,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 154
@@ -2031,6 +2609,8 @@ Position = {-0.6,0.6,0},
 Color = {1,1,1,1},
 UV={0.4,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 196
@@ -2038,6 +2618,8 @@ Position = {0,0.6,0},
 Color = {1,1,1,1},
 UV={0.5,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 195
@@ -2045,6 +2627,8 @@ Position = {0,0.6,0},
 Color = {1,1,1,1},
 UV={0.5,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 198
@@ -2052,6 +2636,8 @@ Position = {0,0.6,0},
 Color = {1,1,1,1},
 UV={0.5,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 235
@@ -2059,6 +2645,8 @@ Position = {0,0.6,0},
 Color = {1,1,1,1},
 UV={0.5,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 197
@@ -2066,6 +2654,8 @@ Position = {0.6,0.6,0},
 Color = {1,1,1,1},
 UV={0.6,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 158
@@ -2073,6 +2663,8 @@ Position = {0.6,0.6,0},
 Color = {1,1,1,1},
 UV={0.6,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 200
@@ -2080,6 +2672,8 @@ Position = {0.6,0.6,0},
 Color = {1,1,1,1},
 UV={0.6,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 199
@@ -2087,6 +2681,8 @@ Position = {0.6,0.6,0},
 Color = {1,1,1,1},
 UV={0.6,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 202
@@ -2094,6 +2690,8 @@ Position = {1.2,0.6,0},
 Color = {1,1,1,1},
 UV={0.7,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 239
@@ -2101,6 +2699,8 @@ Position = {1.2,0.6,0},
 Color = {1,1,1,1},
 UV={0.7,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 201
@@ -2108,6 +2708,8 @@ Position = {1.2,0.6,0},
 Color = {1,1,1,1},
 UV={0.7,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 163
@@ -2115,6 +2717,8 @@ Position = {1.2,0.6,0},
 Color = {1,1,1,1},
 UV={0.7,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 204
@@ -2122,6 +2726,8 @@ Position = {1.8,0.6,0},
 Color = {1,1,1,1},
 UV={0.8,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 203
@@ -2129,6 +2735,8 @@ Position = {1.8,0.6,0},
 Color = {1,1,1,1},
 UV={0.8,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 206
@@ -2136,6 +2744,8 @@ Position = {1.8,0.6,0},
 Color = {1,1,1,1},
 UV={0.8,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 243
@@ -2143,6 +2753,8 @@ Position = {1.8,0.6,0},
 Color = {1,1,1,1},
 UV={0.8,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 205
@@ -2150,6 +2762,8 @@ Position = {2.4,0.6,0},
 Color = {1,1,1,1},
 UV={0.9,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 168
@@ -2157,6 +2771,8 @@ Position = {2.4,0.6,0},
 Color = {1,1,1,1},
 UV={0.9,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 210
@@ -2164,6 +2780,8 @@ Position = {2.4,0.6,0},
 Color = {1,1,1,1},
 UV={0.9,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 207
@@ -2171,6 +2789,8 @@ Position = {2.4,0.6,0},
 Color = {1,1,1,1},
 UV={0.9,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 212
@@ -2178,6 +2798,8 @@ Position = {3,0.6,0},
 Color = {1,1,1,1},
 UV={1,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 249
@@ -2185,6 +2807,8 @@ Position = {3,0.6,0},
 Color = {1,1,1,1},
 UV={1,0.4},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 209
@@ -2192,6 +2816,8 @@ Position = {-3,1.2,0},
 Color = {1,1,1,1},
 UV={0,0.3},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 246
@@ -2199,6 +2825,8 @@ Position = {-3,1.2,0},
 Color = {1,1,1,1},
 UV={0,0.3},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 75
@@ -2206,6 +2834,8 @@ Position = {-2.4,1.2,0},
 Color = {1,1,1,1},
 UV={0.1,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 211
@@ -2213,6 +2843,8 @@ Position = {-2.4,1.2,0},
 Color = {1,1,1,1},
 UV={0.1,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 174
@@ -2220,6 +2852,8 @@ Position = {-2.4,1.2,0},
 Color = {1,1,1,1},
 UV={0.1,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 214
@@ -2227,6 +2861,8 @@ Position = {-2.4,1.2,0},
 Color = {1,1,1,1},
 UV={0.1,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 213
@@ -2234,6 +2870,8 @@ Position = {-1.8,1.2,0},
 Color = {1,1,1,1},
 UV={0.2,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 216
@@ -2241,6 +2879,8 @@ Position = {-1.8,1.2,0},
 Color = {1,1,1,1},
 UV={0.2,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 253
@@ -2248,6 +2888,8 @@ Position = {-1.8,1.2,0},
 Color = {1,1,1,1},
 UV={0.2,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 215
@@ -2255,6 +2897,8 @@ Position = {-1.8,1.2,0},
 Color = {1,1,1,1},
 UV={0.2,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 178
@@ -2262,6 +2906,8 @@ Position = {1.2,-3,0},
 Color = {1,1,1,1},
 UV={0.7,1},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 218
@@ -2269,6 +2915,8 @@ Position = {1.2,-3,0},
 Color = {1,1,1,1},
 UV={0.7,1},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 217
@@ -2276,6 +2924,8 @@ Position = {-1.2,1.2,0},
 Color = {1,1,1,1},
 UV={0.3,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 220
@@ -2283,6 +2933,8 @@ Position = {-1.2,1.2,0},
 Color = {1,1,1,1},
 UV={0.3,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 257
@@ -2290,6 +2942,8 @@ Position = {-1.2,1.2,0},
 Color = {1,1,1,1},
 UV={0.3,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 219
@@ -2297,6 +2951,8 @@ Position = {-1.2,1.2,0},
 Color = {1,1,1,1},
 UV={0.3,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 182
@@ -2304,6 +2960,8 @@ Position = {-0.6,1.2,0},
 Color = {1,1,1,1},
 UV={0.4,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 222
@@ -2311,6 +2969,8 @@ Position = {-0.6,1.2,0},
 Color = {1,1,1,1},
 UV={0.4,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 221
@@ -2318,6 +2978,8 @@ Position = {-0.6,1.2,0},
 Color = {1,1,1,1},
 UV={0.4,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 224
@@ -2325,6 +2987,8 @@ Position = {-0.6,1.2,0},
 Color = {1,1,1,1},
 UV={0.4,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 261
@@ -2332,6 +2996,8 @@ Position = {0,1.2,0},
 Color = {1,1,1,1},
 UV={0.5,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 223
@@ -2339,6 +3005,8 @@ Position = {0,1.2,0},
 Color = {1,1,1,1},
 UV={0.5,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 185
@@ -2346,6 +3014,8 @@ Position = {0,1.2,0},
 Color = {1,1,1,1},
 UV={0.5,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 226
@@ -2353,6 +3023,8 @@ Position = {0,1.2,0},
 Color = {1,1,1,1},
 UV={0.5,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 225
@@ -2360,6 +3032,8 @@ Position = {0.6,1.2,0},
 Color = {1,1,1,1},
 UV={0.6,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 227
@@ -2367,6 +3041,8 @@ Position = {0.6,1.2,0},
 Color = {1,1,1,1},
 UV={0.6,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 265
@@ -2374,6 +3050,8 @@ Position = {0.6,1.2,0},
 Color = {1,1,1,1},
 UV={0.6,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 228
@@ -2381,6 +3059,8 @@ Position = {0.6,1.2,0},
 Color = {1,1,1,1},
 UV={0.6,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 190
@@ -2388,6 +3068,8 @@ Position = {1.2,1.2,0},
 Color = {1,1,1,1},
 UV={0.7,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 230
@@ -2395,6 +3077,8 @@ Position = {1.2,1.2,0},
 Color = {1,1,1,1},
 UV={0.7,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 229
@@ -2402,6 +3086,8 @@ Position = {1.2,1.2,0},
 Color = {1,1,1,1},
 UV={0.7,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 232
@@ -2409,6 +3095,8 @@ Position = {1.2,1.2,0},
 Color = {1,1,1,1},
 UV={0.7,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 270
@@ -2416,6 +3104,8 @@ Position = {1.8,1.2,0},
 Color = {1,1,1,1},
 UV={0.8,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 231
@@ -2423,6 +3113,8 @@ Position = {1.8,1.2,0},
 Color = {1,1,1,1},
 UV={0.8,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 194
@@ -2430,6 +3122,8 @@ Position = {1.8,1.2,0},
 Color = {1,1,1,1},
 UV={0.8,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 234
@@ -2437,6 +3131,8 @@ Position = {1.8,1.2,0},
 Color = {1,1,1,1},
 UV={0.8,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 233
@@ -2444,6 +3140,8 @@ Position = {2.4,1.2,0},
 Color = {1,1,1,1},
 UV={0.9,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 236
@@ -2451,6 +3149,8 @@ Position = {2.4,1.2,0},
 Color = {1,1,1,1},
 UV={0.9,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 273
@@ -2458,6 +3158,8 @@ Position = {2.4,1.2,0},
 Color = {1,1,1,1},
 UV={0.9,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 235
@@ -2465,6 +3167,8 @@ Position = {2.4,1.2,0},
 Color = {1,1,1,1},
 UV={0.9,0.3},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 198
@@ -2472,6 +3176,8 @@ Position = {3,1.2,0},
 Color = {1,1,1,1},
 UV={1,0.3},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 238
@@ -2479,6 +3185,8 @@ Position = {3,1.2,0},
 Color = {1,1,1,1},
 UV={1,0.3},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 237
@@ -2486,6 +3194,8 @@ Position = {-3,1.8,0},
 Color = {1,1,1,1},
 UV={0,0.2},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 240
@@ -2493,6 +3203,8 @@ Position = {-3,1.8,0},
 Color = {1,1,1,1},
 UV={0,0.2},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 277
@@ -2500,6 +3212,8 @@ Position = {-2.4,1.8,0},
 Color = {1,1,1,1},
 UV={0.1,0.2},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 239
@@ -2507,6 +3221,8 @@ Position = {-2.4,1.8,0},
 Color = {1,1,1,1},
 UV={0.1,0.2},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 202
@@ -2514,6 +3230,8 @@ Position = {-2.4,1.8,0},
 Color = {1,1,1,1},
 UV={0.1,0.2},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 242
@@ -2521,6 +3239,8 @@ Position = {-2.4,1.8,0},
 Color = {1,1,1,1},
 UV={0.1,0.2},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 241
@@ -2528,6 +3248,8 @@ Position = {1.8,-3,0},
 Color = {1,1,1,1},
 UV={0.8,1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 244
@@ -2535,6 +3257,8 @@ Position = {1.8,-3,0},
 Color = {1,1,1,1},
 UV={0.8,1},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 281
@@ -2542,6 +3266,8 @@ Position = {-1.8,1.8,0},
 Color = {1,1,1,1},
 UV={0.2,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 243
@@ -2549,6 +3275,8 @@ Position = {-1.8,1.8,0},
 Color = {1,1,1,1},
 UV={0.2,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 206
@@ -2556,6 +3284,8 @@ Position = {-1.8,1.8,0},
 Color = {1,1,1,1},
 UV={0.2,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 248
@@ -2563,6 +3293,8 @@ Position = {-1.8,1.8,0},
 Color = {1,1,1,1},
 UV={0.2,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 245
@@ -2570,6 +3302,8 @@ Position = {-1.2,1.8,0},
 Color = {1,1,1,1},
 UV={0.3,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 250
@@ -2577,6 +3311,8 @@ Position = {-1.2,1.8,0},
 Color = {1,1,1,1},
 UV={0.3,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 287
@@ -2584,6 +3320,8 @@ Position = {-1.2,1.8,0},
 Color = {1,1,1,1},
 UV={0.3,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 247
@@ -2591,6 +3329,8 @@ Position = {-1.2,1.8,0},
 Color = {1,1,1,1},
 UV={0.3,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 284
@@ -2598,6 +3338,8 @@ Position = {-0.6,1.8,0},
 Color = {1,1,1,1},
 UV={0.4,0.2},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 79
@@ -2605,6 +3347,8 @@ Position = {-0.6,1.8,0},
 Color = {1,1,1,1},
 UV={0.4,0.2},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 249
@@ -2612,6 +3356,8 @@ Position = {-0.6,1.8,0},
 Color = {1,1,1,1},
 UV={0.4,0.2},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 212
@@ -2619,6 +3365,8 @@ Position = {-0.6,1.8,0},
 Color = {1,1,1,1},
 UV={0.4,0.2},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 252
@@ -2626,6 +3374,8 @@ Position = {0,1.8,0},
 Color = {1,1,1,1},
 UV={0.5,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 251
@@ -2633,6 +3383,8 @@ Position = {0,1.8,0},
 Color = {1,1,1,1},
 UV={0.5,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 254
@@ -2640,6 +3392,8 @@ Position = {0,1.8,0},
 Color = {1,1,1,1},
 UV={0.5,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 291
@@ -2647,6 +3401,8 @@ Position = {0,1.8,0},
 Color = {1,1,1,1},
 UV={0.5,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 253
@@ -2654,6 +3410,8 @@ Position = {0.6,1.8,0},
 Color = {1,1,1,1},
 UV={0.6,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 216
@@ -2661,6 +3419,8 @@ Position = {0.6,1.8,0},
 Color = {1,1,1,1},
 UV={0.6,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 256
@@ -2668,6 +3428,8 @@ Position = {0.6,1.8,0},
 Color = {1,1,1,1},
 UV={0.6,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 255
@@ -2675,6 +3437,8 @@ Position = {0.6,1.8,0},
 Color = {1,1,1,1},
 UV={0.6,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 258
@@ -2682,6 +3446,8 @@ Position = {1.2,1.8,0},
 Color = {1,1,1,1},
 UV={0.7,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 295
@@ -2689,6 +3455,8 @@ Position = {1.2,1.8,0},
 Color = {1,1,1,1},
 UV={0.7,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 257
@@ -2696,6 +3464,8 @@ Position = {1.2,1.8,0},
 Color = {1,1,1,1},
 UV={0.7,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 220
@@ -2703,6 +3473,8 @@ Position = {1.2,1.8,0},
 Color = {1,1,1,1},
 UV={0.7,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 260
@@ -2710,6 +3482,8 @@ Position = {1.8,1.8,0},
 Color = {1,1,1,1},
 UV={0.8,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 259
@@ -2717,6 +3491,8 @@ Position = {1.8,1.8,0},
 Color = {1,1,1,1},
 UV={0.8,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 262
@@ -2724,6 +3500,8 @@ Position = {1.8,1.8,0},
 Color = {1,1,1,1},
 UV={0.8,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 299
@@ -2731,6 +3509,8 @@ Position = {1.8,1.8,0},
 Color = {1,1,1,1},
 UV={0.8,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 261
@@ -2738,6 +3518,8 @@ Position = {2.4,1.8,0},
 Color = {1,1,1,1},
 UV={0.9,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 224
@@ -2745,6 +3527,8 @@ Position = {2.4,1.8,0},
 Color = {1,1,1,1},
 UV={0.9,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 264
@@ -2752,6 +3536,8 @@ Position = {2.4,1.8,0},
 Color = {1,1,1,1},
 UV={0.9,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 263
@@ -2759,6 +3545,8 @@ Position = {2.4,1.8,0},
 Color = {1,1,1,1},
 UV={0.9,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 266
@@ -2766,6 +3554,8 @@ Position = {3,1.8,0},
 Color = {1,1,1,1},
 UV={1,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 303
@@ -2773,6 +3563,8 @@ Position = {3,1.8,0},
 Color = {1,1,1,1},
 UV={1,0.2},
 Normals={0,0,1},
+Tangents={1,-0,0},
+BiTangents={0,1,0},
 },
 {
 --Index Position = 265
@@ -2780,6 +3572,8 @@ Position = {-3,2.4,0},
 Color = {1,1,1,1},
 UV={0,0.1},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 227
@@ -2787,6 +3581,8 @@ Position = {-3,2.4,0},
 Color = {1,1,1,1},
 UV={0,0.1},
 Normals={0,-1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,1.98523e-23},
 },
 {
 --Index Position = 268
@@ -2794,6 +3590,8 @@ Position = {2.4,-3,0},
 Color = {1,1,1,1},
 UV={0.9,1},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 {
 --Index Position = 267
@@ -2801,6 +3599,8 @@ Position = {2.4,-3,0},
 Color = {1,1,1,1},
 UV={0.9,1},
 Normals={0,1.98523e-23,1},
+Tangents={1,-0,0},
+BiTangents={0,1,-1.98523e-23},
 },
 },
 IndexBuffer = 
