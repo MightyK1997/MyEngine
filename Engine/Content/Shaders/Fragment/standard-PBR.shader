@@ -6,8 +6,6 @@
 
 #include <Shaders/shaders.inc>
 
-#define 2PI 6.28318531;
-
 #if defined( EAE6320_PLATFORM_D3D )
 
 
@@ -37,6 +35,7 @@ void main(
 {
 	const float4 ambientLight = float4(0.2,0.2,0.2,1);
 	const float materialConstant = 0.04;
+	const float shininess = 100;
 
 	const float4 textureColor = SampleTexture2d(g_diffuseTexture, g_samplerState, i_textureData);
 	const float4 normalData = SampleTexture2d(g_Normal, g_samplerState, i_textureData);
@@ -66,22 +65,27 @@ void main(
     const float3 normalizeV = normalize(viewDist);
     const float3 H = normalize(normalizeL+normalizeV);
 
-	[D(h) * F(l,h) * G(l,v,h)] / [4 * |n⋅v| * |n⋅l|]
+	//D(h)
 
-	D(h)
+    const float4 blinnPhong = pow(saturate(dot(temp, H)), shininess);
 
-    const float4 blinnPhong = pow(saturate(dot(normalizedNormal, H)), 50) * (52 / 2PI );
+	//F(I,h)
 
-	F(I,h)
+	const float4 fresnelEquation = materialConstant + ((1-materialConstant) * (1- pow((dot(normalizeL, H)), 5)));
 
-	const float4 FresnelEquation = materialConstant + ()
+	//New Specular
+	//[D(h) * F(l,h)] / 8
+	const float4 specularLight = saturate(blinnPhong * fresnelEquation * 0.125 * (shininess + 2));
 
-    const float4 specularLight = saturate(blinnPhong * g_LightColor) * 10;
-    const float4 diffuseLight = saturate(g_LightColor * (saturate(dot(normalize(g_LightRotation), normalizedNormal.xyz))));
 
-	const float4 diffuseOutput = (diffuseLight + ambientLight);
+    //const float4 specularLight = saturate(blinnPhong * g_LightColor) * 10;
+    //const float4 diffuseLight = saturate(g_LightColor * (saturate(dot(normalize(g_LightRotation), normalizedNormal.xyz))));
 
-	float4 directionalLightOutput = diffuseOutput + specularLight;
+	const float4 diffuseOutput = (g_material_color);
+
+	//Final directional Output
+	//(n.l) * lightColor * (Specular + diffuse + ambient);
+	float4 directionalLightOutput = (diffuseOutput + specularLight + ambientLight) * g_LightColor * saturate(dot(normalizeL, normalizedNormal.xyz));
 
 	//PointLight
 	float3 pointLightDir = g_PointLightPositionInWorld - i_vertex_position_world.xyz;
@@ -97,7 +101,7 @@ void main(
 
 	float4 pointLightOutput = (diffusePoint * attenuation) + (specularPoint * attenuation) +ambientLight;
 
-	o_color = (pointLightOutput + directionalLightOutput) * i_color * textureColor;
+	o_color = directionalLightOutput * textureColor * i_color;
 }
 
 #elif defined( EAE6320_PLATFORM_GL )

@@ -3,9 +3,9 @@ return
 	Effect = 
 	{
 		VertexShaderLocation = "Shaders/Vertex/standard.shader",
-		FragmentShaderLocation = "Shaders/Fragment/standard-binnphong.shader",
+		FragmentShaderLocation = "Shaders/Fragment/standard-PBR.shader",
 		VertexInputLayoutShaderLocation = "Shaders/Vertex/vertexInputLayout.shader",
-		AlphaTransparency = "true",
+		--AlphaTransparency = "true",
 		DepthBuffering = "true",
 	},
 }

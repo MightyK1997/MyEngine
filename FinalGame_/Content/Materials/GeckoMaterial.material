@@ -5,7 +5,7 @@ return
                 EffectLocation = "Effects/Effect1.Effect",
                 ConstantType = "float4",
                 ConstantName = "Color",
-                ConstantValue = {0,0,0,1},
+                ConstantValue = {1,1,1,1},
                 TextureLocation = "Textures/troubleshoottexture.jpg",
                 NormalMapLocation = "Textures/default_normal.tga",
 	},
