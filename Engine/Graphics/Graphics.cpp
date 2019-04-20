@@ -46,6 +46,7 @@ namespace
 
 	//Graphics Helper 
 	eae6320::Graphics::GraphicsHelper* s_helper;
+	eae6320::Graphics::cTexture::Handle m_envHandle;
 	uint64_t currentEffectIndex = (uint64_t)1 << 56;
 	uint64_t currentMeshIndex = (uint64_t)1 << 56;
 	uint64_t currentMaterialIndex = (uint64_t)1 << 56;
@@ -158,6 +159,16 @@ void eae6320::Graphics::SumbitMaterialData(float i_Smoothness)
 	for(size_t i=0;i< s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender ;i++)
 	{
 		constantMaterialData[i].g_smoothness = i_Smoothness;
+	}
+}
+
+void eae6320::Graphics::SubmitEnvMap(eae6320::Graphics::cTexture::Handle i_EnvMapHandle)
+{
+	if (i_EnvMapHandle != m_envHandle)
+	{
+		auto envMap = cTexture::s_manager.Get(i_EnvMapHandle);
+		envMap->Bind(3);
+		m_envHandle = i_EnvMapHandle;
 	}
 }
 

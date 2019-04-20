@@ -93,11 +93,18 @@ namespace eae6320
 		eae6320::Graphics::cMesh::Handle m_TreeHandle;
 		eae6320::Graphics::cMesh::Handle m_LamboHandle;
 		eae6320::Graphics::cMesh::Handle m_PointLightMeshHandle;
+		eae6320::Graphics::cMesh::Handle m_SkyboxMeshHandle;
 
 		//Material
 		eae6320::Graphics::cMaterial::Handle m_Material1Handle;
 		eae6320::Graphics::cMaterial::Handle m_Material2Handle;
 		eae6320::Graphics::cMaterial::Handle m_LamboMaterialHandle;
+		eae6320::Graphics::cMaterial::Handle m_SkyboxMaterialHandle;
+
+		//EnvMap
+		eae6320::Graphics::cTexture::Handle m_EnvMapHandle;
+		eae6320::Graphics::cTexture::Handle m_EnvMapHandle2;
+		eae6320::Graphics::cTexture::Handle m_RenderingEnvMapHandle;
 
 		//Light
 		eae6320::Graphics::cLight* m_DirectionalLight;
@@ -113,6 +120,7 @@ namespace eae6320
 		//GameObject
 
 		eae6320::Physics::cGameObject* m_Lambo;
+		eae6320::Physics::cGameObject* m_Skybox;
 		eae6320::Physics::cGameObject* m_PointLightGameObject;
 
 		//Lists

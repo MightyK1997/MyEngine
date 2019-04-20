@@ -1,10 +1,11 @@
 return
 {
-Effect = 
-{
-VertexShaderLocation = "Shaders/Vertex/Assignment204.shader",
-FragmentShaderLocation = "Shaders/Fragment/Assignment204.shader",
-VertexInputLayoutShaderLocation = "Shaders/Vertex/vertexInputLayout.shader",
-DepthBuffering = "true",
-},
+	Effect = 
+	{
+		VertexShaderLocation = "Shaders/Vertex/standard.shader",
+		FragmentShaderLocation = "Shaders/Fragment/standard-PBR.shader",
+		VertexInputLayoutShaderLocation = "Shaders/Vertex/vertexInputLayout.shader",
+		DepthBuffering = "true",
+        DrawBothTriangleSides = "true",
+	},
 }

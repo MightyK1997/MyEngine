@@ -106,6 +106,10 @@ void eae6320::cFinalGame::UpdateBasedOnInput()
 	{
 		m_MaterialSmoothness--;
 	}
+	if (UserInput::IsKeyPressed('B'))
+	{
+		m_RenderingEnvMapHandle = m_EnvMapHandle2;
+	}
 }
 
 void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecondCount_sinceLastUpdate)
@@ -145,6 +149,7 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 	m_ListOfGameObjects.clear();
 	m_ListOfGameObjects.push_back(m_Lambo);
 	m_ListOfGameObjects.push_back(m_PointLightGameObject);
+	//m_ListOfGameObjects.push_back(m_Skybox);
 	for (auto&x : m_TreeObjs)
 	{
 		m_ListOfGameObjects.push_back(x);
@@ -152,6 +157,7 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 	m_GameObjectLocalToWorldTransforms.clear();
 	m_GameObjectLocalToWorldTransforms.push_back(m_Lambo->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
 	m_GameObjectLocalToWorldTransforms.push_back(m_PointLightGameObject->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
+	//m_GameObjectLocalToWorldTransforms.push_back(m_Skybox->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
 	for (auto&x : m_TreeObjs)
 	{
 		m_GameObjectLocalToWorldTransforms.push_back(x->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
@@ -160,6 +166,7 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 	eae6320::Graphics::SetEffectsAndMeshesToRender(&(m_ListOfGameObjects[0]), &(m_GameObjectLocalToWorldTransforms[0]), (uint8_t)(m_ListOfGameObjects.size()),
 		m_DirectionalLight,m_PointLight, m_RenderingCamera, i_elapsedSecondCount_sinceLastSimulationUpdate);
 	eae6320::Graphics::SumbitMaterialData(m_MaterialSmoothness);
+	eae6320::Graphics::SubmitEnvMap(m_RenderingEnvMapHandle);
 }
 
 // Initialization / Clean Up
@@ -171,6 +178,7 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	eae6320::Graphics::cCamera::CreateCamera(m_InCarCamera);
 	eae6320::Physics::cGameObject::CreateGameObject(m_Lambo);
 	eae6320::Physics::cGameObject::CreateGameObject(m_PointLightGameObject);
+	eae6320::Physics::cGameObject::CreateGameObject(m_Skybox);
 	eae6320::Graphics::cLight::CreateDirectionalLight(m_DirectionalLight); 
 	eae6320::Graphics::cLight::CreateDirectionalLight(m_PointLight);
 
@@ -203,8 +211,6 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 		}		
 	}
 
-
-
 	ResetDetails();
 
 	std::string fName = "data/Meshes/Gecko.meshbinary";
@@ -216,14 +222,28 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	fName = "data/Meshes/PointLight.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_PointLightMeshHandle);
 
+	fName = "data/Meshes/skybox.meshbinary";
+	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_SkyboxMeshHandle);
+
 	fName = "data/Materials/GeckoMaterial.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_Material1Handle);
 
 	fName = "data/Materials/material1.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_Material2Handle);
 
-	fName = "data/Materials/Treematerial.materialbinary";
+	fName = "data/Materials/gold.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_LamboMaterialHandle);
+
+	fName = "data/Materials/skybox.materialbinary";
+	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_SkyboxMaterialHandle);
+
+	fName = "data/envmaps/yokohoma.dds";
+	eae6320::Graphics::cTexture::s_manager.Load(fName, m_EnvMapHandle);
+
+	fName = "data/envmaps/yokohoma2.dds";
+	eae6320::Graphics::cTexture::s_manager.Load(fName, m_EnvMapHandle2);
+
+	m_RenderingEnvMapHandle = m_EnvMapHandle2;
 
 	UpdateMeshAndEffect();
 
@@ -238,6 +258,7 @@ eae6320::cResult eae6320::cFinalGame::CleanUp()
 	eae6320::Graphics::cMaterial::s_Manager.Release(m_Material1Handle);
 	eae6320::Graphics::cMaterial::s_Manager.Release(m_Material2Handle);
 	eae6320::Graphics::cMaterial::s_Manager.Release(m_LamboMaterialHandle);
+	eae6320::Graphics::cTexture::s_manager.Release(m_EnvMapHandle);
 
 	for (auto&x : m_TreeObjs)
 	{
@@ -266,6 +287,7 @@ void eae6320::cFinalGame::UpdateMeshAndEffect()
 {
 	m_Lambo->SetGameObjectHandles(m_LamboHandle, m_LamboMaterialHandle);
 	m_PointLightGameObject->SetGameObjectHandles(m_PointLightMeshHandle, m_Material2Handle);
+	m_Skybox->SetGameObjectHandles(m_SkyboxMeshHandle, m_SkyboxMaterialHandle);
 	for (auto&treeObj : m_TreeObjs)
 	{
 		treeObj->SetGameObjectHandles(m_TreeHandle, m_Material1Handle);

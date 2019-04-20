@@ -313,6 +313,20 @@ NewAssetTypeInfo( "sounds",
 	}
 )
 
+NewAssetTypeInfo( "envmaps",
+	{
+		ConvertSourceRelativePathToBuiltRelativePath = function( i_sourceRelativePath )
+			-- Change the source file extension to the binary version
+			local relativeDirectory, file = i_sourceRelativePath:match( "(.-)([^/\\]+)$" )
+			local fileName, extensionWithPeriod = file:match( "([^%.]+)(.*)" )
+			return relativeDirectory .. fileName .. extensionWithPeriod
+		end,
+		GetBuilderRelativePath = function()
+			return "TextureBuilder.exe"
+		end
+	}
+)
+
 NewAssetTypeInfo("effects",
 {
 	RegisterReferencedAssets = function ( i_sourceRelativePath )

@@ -1,0 +1,10 @@
+return
+{
+        Material = 
+	{
+                EffectLocation = "Effects/gold.Effect",
+                ConstantType = "float4",
+                ConstantName = "Color",
+                ConstantValue = {0,0,0,1},
+	},
+}

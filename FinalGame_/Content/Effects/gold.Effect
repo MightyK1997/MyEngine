@@ -1,0 +1,11 @@
+return
+{
+	Effect = 
+	{
+		VertexShaderLocation = "Shaders/Vertex/standard.shader",
+		FragmentShaderLocation = "Shaders/Fragment/gold.shader",
+		VertexInputLayoutShaderLocation = "Shaders/Vertex/vertexInputLayout.shader",
+		--AlphaTransparency = "true",
+		DepthBuffering = "true",
+	},
+}

@@ -12,6 +12,7 @@
 #include "cCamera.h"
 #include "cSamplerState.h"
 #include "cDirectionalLight.h"
+#include "cTexture.h"
 #if defined( EAE6320_PLATFORM_WINDOWS )
 	#include <Engine/Windows/Includes.h>
 #endif
@@ -100,6 +101,8 @@ namespace eae6320
 			eae6320::Graphics::cCamera* i_Camera, const float i_secondCountToExtrapolate);
 
 		void SumbitMaterialData(float i_Smoothness);
+
+		void SubmitEnvMap(eae6320::Graphics::cTexture::Handle i_EnvMapHandle);
 	}
 }
 

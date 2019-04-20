@@ -10,6 +10,7 @@ return
 	"Meshes/Plane.txt",
 	"Meshes/PointLight.txt",
 	"Meshes/Globe.txt",
+	"Meshes/Skybox.txt",
 	},
 
 	effects = {
@@ -21,6 +22,7 @@ return
 		"Effects/Effect6.Effect",
 		"Effects/Alpha.Effect",
 		"Effects/Water.Effect",
+		"Effects/gold.Effect",
 		"Effects/Water-moving.Effect",
 		"Effects/Water-spinning.Effect",
 	},
@@ -36,5 +38,12 @@ return
 		"Materials/Water-moving.material",
 		"Materials/Water-spinning.material",
 		"Materials/Treematerial.material",
+		"Materials/skybox.material",
+		"Materials/gold.material",
+	},
+
+	envmaps = {
+		"envmaps/yokohoma.dds",
+		"envmaps/yokohoma2.dds",
 	}
 }
