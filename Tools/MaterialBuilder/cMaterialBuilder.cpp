@@ -247,7 +247,7 @@ eae6320::cResult eae6320::Assets::cMaterialBuilder::Build(const std::vector<std:
 
 	std::string tempTextureLocation = m_TextureLocation;
 	std::string tempNormalLocation = m_NormalLocation;
-	std::string tempGlossLocation = m_NormalLocation;
+	std::string tempGlossLocation = m_GlossLocation;
 
 	//Calling texture builder.
 	std::replace(m_TextureLocation.begin(), m_TextureLocation.end(), '/', '\\');

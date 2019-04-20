@@ -8,5 +8,6 @@ return
                 ConstantValue = {1,1,1,1},
                 TextureLocation = "Textures/earth.jpg",
                 NormalMapLocation = "Textures/earth_normal.jpg",
+                GlossMapLocation = "Textures/GlossMap.png",
 	},
 }

@@ -28,7 +28,7 @@ namespace
 	constexpr eae6320::Graphics::TextureFormats::eType GetFormat( const DXGI_FORMAT i_dxgiFormat );
 	eae6320::cResult LoadSourceImage( const char *const i_path, DirectX::ScratchImage &o_image );
 	eae6320::cResult WriteTextureToFile( const char* const i_path_target, const DirectX::ScratchImage &i_texture, const uint8_t i_desiredSamplerState );
-	uint8_t textureType;
+	eae6320::Graphics::TextureTypes::eType textureType;
 	DXGI_FORMAT RemoveSRGB(DXGI_FORMAT fmt)
 	{
 		switch (fmt)
@@ -78,7 +78,7 @@ eae6320::cResult eae6320::Assets::cTextureBuilder::Build( const std::vector<std:
 	// Build the texture
 	i_arguments;	// One way to customize how the texture is built would be to pass in and use command arguments
 
-	textureType = std::stoi(i_arguments[0]);
+	textureType = static_cast<eae6320::Graphics::TextureTypes::eType>(std::stoi(i_arguments[0]));
 
 	// The code I am providing always compresses the texture in a pre-defined way;
 	// you will have to change the code to do anything more sophisticated
@@ -115,11 +115,11 @@ eae6320::cResult eae6320::Assets::cTextureBuilder::Build( const std::vector<std:
 		goto OnExit;
 	}
 
-	if (textureType == static_cast<uint8_t>(eae6320::Graphics::TextureTypes::eType::COLOR))
+	if (textureType == eae6320::Graphics::TextureTypes::eType::COLOR)
 	{
 		sourceImage.OverrideFormat(DirectX::MakeSRGB(sourceImage.GetMetadata().format));
 	}
-	else if(textureType == static_cast<uint8_t>(eae6320::Graphics::TextureTypes::eType::NORMAL))
+	else if((textureType == eae6320::Graphics::TextureTypes::eType::NORMAL) || (textureType == eae6320::Graphics::TextureTypes::eType::GLOSS))
 	{
 		sourceImage.OverrideFormat(RemoveSRGB(sourceImage.GetMetadata().format));
 	}
@@ -168,7 +168,19 @@ namespace
 			// The uncompressed format is chosen naively and assumes "standard" textures
 			// (it will lose precision on any source images that use more than 8 bits per channel
 			// and lose information on any that aren't normalized [0,1])
-			const auto formatToDecompressTo = (textureType == static_cast<uint8_t>(eae6320::Graphics::TextureTypes::eType::COLOR)) ? DXGI_FORMAT_R8G8B8A8_UNORM_SRGB : DXGI_FORMAT_R8G8B8A8_UNORM;
+			DXGI_FORMAT formatToDecompressTo;
+			switch (textureType)
+			{
+			case eae6320::Graphics::TextureTypes::eType::COLOR:
+				formatToDecompressTo = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+				break;
+			case eae6320::Graphics::TextureTypes::eType::NORMAL:
+				formatToDecompressTo = DXGI_FORMAT_R8G8B8A8_UNORM;
+				break;
+			case eae6320::Graphics::TextureTypes::eType::GLOSS:
+				formatToDecompressTo = DXGI_FORMAT_R8G8B8A8_UNORM;
+				break;
+			}
 			const auto result = DirectX::Decompress( io_sourceImageThatMayNotBeValidAfterThisCall.GetImages(), io_sourceImageThatMayNotBeValidAfterThisCall.GetImageCount(),
 				io_sourceImageThatMayNotBeValidAfterThisCall.GetMetadata(), formatToDecompressTo, uncompressedImage );
 			if ( FAILED( result ) )
@@ -286,11 +298,11 @@ namespace
 			//	* BC1 (compressed with no alpha, used to be known as "DXT1")
 			//	* BC3 (compressed with alpha, used to be known as "DXT5")
 
-			auto val1 = (textureType == static_cast<uint8_t>(eae6320::Graphics::TextureTypes::eType::COLOR)) ? DXGI_FORMAT_BC1_UNORM_SRGB : DXGI_FORMAT_BC1_UNORM;
+			auto val1 = (textureType == eae6320::Graphics::TextureTypes::eType::COLOR) ? DXGI_FORMAT_BC1_UNORM_SRGB : DXGI_FORMAT_BC1_UNORM;
 
-			auto val2 = (textureType == static_cast<uint8_t>(eae6320::Graphics::TextureTypes::eType::COLOR)) ? DXGI_FORMAT_BC3_UNORM_SRGB : DXGI_FORMAT_BC3_UNORM;
+			auto val2 = (textureType == eae6320::Graphics::TextureTypes::eType::COLOR) ? DXGI_FORMAT_BC3_UNORM_SRGB : DXGI_FORMAT_BC3_UNORM;
 
-			const auto formatToCompressTo = resizedImage.IsAlphaAllOpaque() ? val1 : val2;
+			auto formatToCompressTo = (textureType == eae6320::Graphics::TextureTypes::eType::GLOSS) ? DXGI_FORMAT_BC4_UNORM : (resizedImage.IsAlphaAllOpaque() ? val1 : val2);
 			constexpr DWORD useDefaultCompressionOptions = DirectX::TEX_COMPRESS_DEFAULT;
 			const float useDefaultThreshold = DirectX::TEX_THRESHOLD_DEFAULT;
 			if ( FAILED( DirectX::Compress( imageWithMipMaps.GetImages(), imageWithMipMaps.GetImageCount(),

@@ -27,6 +27,7 @@ namespace eae6320
 			eae6320::Graphics::cEffect::Handle GetEffectHandle() const { return m_EffectHandle; }
 			eae6320::Graphics::cTexture::Handle GetTextureHandle() const { return m_TextureHandle; }
 			eae6320::Graphics::cTexture::Handle GetNormalMapHandle() const { return m_NormalMapHandle; }
+			eae6320::Graphics::cTexture::Handle GetGlossMapHandle() const { return m_GlossMapHandle; }
 
 			eae6320::Graphics::sColor GetMaterialColor() const { return m_Color; }
 

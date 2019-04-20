@@ -23,7 +23,6 @@
 	#define DeclareSamplerState( i_name, i_id ) SamplerState i_name : register( s##i_id )
 
 	#define SampleTexture2d( i_texture, i_samplerState, i_uv ) i_texture.Sample( i_samplerState, i_uv )
-	#define SampleTexture1d( i_texture, i_samplerState, i_u ) i_texture.Sample( i_samplerState, i_u )
 	float4 ConvertNormalizedsRGBToLinear(in const float4 i_Color)
 	{
 		float4 returnColor;
@@ -63,7 +62,7 @@ cbuffer g_constantBuffer_perFrame : register( b0 )
 
 Texture2D g_diffuseTexture : register(t0);
 Texture2D g_Normal : register(t1);
-Texture1D g_Gloss : register(t2);
+Texture2D g_Gloss : register(t2);
 SamplerState g_samplerState : register(s0);
 
 cbuffer g_constantBuffer_perMaterial : register(b1)

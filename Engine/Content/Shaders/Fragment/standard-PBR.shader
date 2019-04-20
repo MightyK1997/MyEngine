@@ -38,6 +38,9 @@ void main(
 
 	const float4 textureColor = SampleTexture2d(g_diffuseTexture, g_samplerState, i_textureData);
 	const float4 normalData = SampleTexture2d(g_Normal, g_samplerState, i_textureData);
+	const float4 glossData = SampleTexture2d(g_Gloss, g_samplerState, i_textureData);
+
+	const float finalSmoothness = glossData.x * g_material_smoothness;
 	
 	float3 normalizedNormal = normalize(normalData.xyz);
 	const float3 normalizedTangent = normalize(i_tangent);
@@ -66,7 +69,7 @@ void main(
 
 	//D(h)
 
-    const float4 blinnPhong = pow(saturate(dot(temp, H)), g_material_smoothness);
+    const float4 blinnPhong = pow(saturate(dot(temp, H)), finalSmoothness);
 
 	//F(I,h)
 
@@ -74,7 +77,7 @@ void main(
 
 	//New Specular
 	//[D(h) * F(l,h)] / 8
-	const float4 specularLight = saturate(blinnPhong * fresnelEquation * 0.125 * (g_material_smoothness + 2));
+	const float4 specularLight = saturate(blinnPhong * fresnelEquation * 0.125 * (finalSmoothness + 2));
 
 
     //const float4 specularLight = saturate(blinnPhong * g_LightColor) * 10;

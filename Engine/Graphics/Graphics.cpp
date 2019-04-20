@@ -221,6 +221,7 @@ void eae6320::Graphics::RenderFrame()
 
 			auto texture = cTexture::s_manager.Get(material->GetTextureHandle());
 			auto normal = cTexture::s_manager.Get(material->GetNormalMapHandle());
+			auto gloss = cTexture::s_manager.Get(material->GetGlossMapHandle());
 
 			auto tempEffect = cEffect::s_Manager.UnsafeGet(static_cast<uint32_t>(effectIndex));
  			auto tempMesh = cMesh::s_Manager.UnsafeGet(static_cast<uint32_t>(meshIndex));
@@ -232,6 +233,7 @@ void eae6320::Graphics::RenderFrame()
 			}
 			texture->Bind(0);
 			normal->Bind(1);
+			gloss->Bind(2);
 			if (currentMaterialIndex ^ materialIndex)
 			{
 				s_ConstantBuffer_perMaterial.Update(&s_dataBeingRenderedByRenderThread->constantData_perMaterial[index]);

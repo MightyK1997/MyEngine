@@ -112,7 +112,7 @@ void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecon
 {
 	static float f = 0;
 	static float startTimer = 0;
-	//m_Lambo->SetGameObjectPosition(m_PointLight->GetLightPosition());
+	m_Lambo->SetGameObjectPosition(m_PointLight->GetLightPosition());
 	f += i_elapsedSecondCount_sinceLastUpdate;
 	m_TopDownCamera->Update(i_elapsedSecondCount_sinceLastUpdate);
 	m_DirectionalLight->Update(i_elapsedSecondCount_sinceLastUpdate);
@@ -177,7 +177,7 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 
 
 
-	m_PointLight->SetLightPosition(Math::sVector(0, 0, 50));
+	m_PointLight->SetLightPosition(Math::sVector(0, 0, -10));
 	m_PointLight->SetLightColor({ 1,1,1,1 });
 
 	m_Lambo->SetGameObjectPosition(m_PointLight->GetLightPosition());
@@ -206,13 +206,13 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	std::string fName = "data/Meshes/Gecko.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_TreeHandle);
 
-	fName = "data/Meshes/Globe.meshbinary";
+	fName = "data/Meshes/PointLight.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_LamboHandle);
 
 	fName = "data/Materials/GeckoMaterial.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_Material1Handle);
 
-	fName = "data/Materials/Earth.materialbinary";
+	fName = "data/Materials/Material1.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_LamboMaterialHandle);
 
 	UpdateMeshAndEffect();
