@@ -40,7 +40,7 @@ void main(
 	const float4 normalData = SampleTexture2d(g_Normal, g_samplerState, i_textureData);
 	const float4 glossData = SampleTexture2d(g_Gloss, g_samplerState, i_textureData);
 
-	const float finalSmoothness = glossData.x * g_material_smoothness;
+	const float finalSmoothness = glossData.x * g_material_smoothness * 256;
 	
 	float3 normalizedNormal = normalize(normalData.xyz);
 	const float3 normalizedTangent = normalize(i_tangent);
@@ -93,17 +93,24 @@ void main(
 	float3 pointLightDir = g_PointLightPositionInWorld - i_vertex_position_world.xyz;
 	float distance = length(pointLightDir);
 
+	const float3 normalizedPointLightDir = normalize(pointLightDir);
+
 	float attenuation = 1.0 / (distance);
 
-	float3 pointH = normalize(normalize(pointLightDir) + normalizeV);
+	float3 pointH = normalize(normalizedPointLightDir + normalizeV);
 
-	const float4 binnPhongPoint = pow(saturate(dot(normalizedNormal, pointH)), 50);
-	float4 diffusePoint = g_PointLightColor * saturate(dot(pointLightDir, normalizedNormal.xyz)) * 20;
-	float4 specularPoint = (g_PointLightColor) * binnPhongPoint * 50;
+	//D[h]
+	const float4 binnPhongPoint = pow(saturate(dot(normalizedNormal, pointH)), finalSmoothness);
+	const float4 fresnelEquationPoint = materialConstant + ((1-materialConstant) * (1- pow((dot(normalizedPointLightDir, pointH)), 5)));
 
-	float4 pointLightOutput = (diffusePoint * attenuation) + (specularPoint * attenuation) +ambientLight;
+	//float4 specularPoint = (g_PointLightColor) * binnPhongPoint * (finalSmoothness + 2));
+	const float4 specularPoint = saturate(binnPhongPoint * fresnelEquation * 0.125 * (finalSmoothness +2));
 
-	o_color = directionalLightOutput * textureColor * i_color;
+	float4 diffusePoint = g_material_color;
+
+	float4 pointLightOutput = (diffusePoint + specularPoint + ambientLight) * g_PointLightColor * saturate(dot(normalizedPointLightDir, normalizedNormal.xyz)) * 10;
+
+	o_color = (directionalLightOutput + pointLightOutput) * textureColor * i_color;
 }
 
 #elif defined( EAE6320_PLATFORM_GL )

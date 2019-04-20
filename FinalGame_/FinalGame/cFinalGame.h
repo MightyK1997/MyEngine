@@ -92,7 +92,7 @@ namespace eae6320
 		//Mesh Handles
 		eae6320::Graphics::cMesh::Handle m_TreeHandle;
 		eae6320::Graphics::cMesh::Handle m_LamboHandle;
-
+		eae6320::Graphics::cMesh::Handle m_PointLightMeshHandle;
 
 		//Material
 		eae6320::Graphics::cMaterial::Handle m_Material1Handle;
@@ -113,6 +113,7 @@ namespace eae6320
 		//GameObject
 
 		eae6320::Physics::cGameObject* m_Lambo;
+		eae6320::Physics::cGameObject* m_PointLightGameObject;
 
 		//Lists
 		std::vector<eae6320::Physics::cGameObject*> m_TreeObjs;

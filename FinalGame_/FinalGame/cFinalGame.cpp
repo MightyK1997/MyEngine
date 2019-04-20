@@ -112,13 +112,13 @@ void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecon
 {
 	static float f = 0;
 	static float startTimer = 0;
-	m_Lambo->SetGameObjectPosition(m_PointLight->GetLightPosition());
 	f += i_elapsedSecondCount_sinceLastUpdate;
 	m_TopDownCamera->Update(i_elapsedSecondCount_sinceLastUpdate);
 	m_DirectionalLight->Update(i_elapsedSecondCount_sinceLastUpdate);
 	m_PointLight->Update(i_elapsedSecondCount_sinceLastUpdate);
+	m_PointLightGameObject->SetGameObjectPosition(m_PointLight->GetLightPosition());
 	m_InCarCamera->Update(i_elapsedSecondCount_sinceLastUpdate);
-	m_Lambo->UpdateGameObject(i_elapsedSecondCount_sinceLastUpdate);
+	m_PointLightGameObject->UpdateGameObject(i_elapsedSecondCount_sinceLastUpdate);
 	m_TreeObjs[1]->UpdateGameObject(i_elapsedSecondCount_sinceLastUpdate);
 	if (IsKeyPressed(ControllerKeyCodes::RIGHT_SHOULDER) || UserInput::IsKeyPressed('C'))
 	{
@@ -144,12 +144,14 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 
 	m_ListOfGameObjects.clear();
 	m_ListOfGameObjects.push_back(m_Lambo);
+	m_ListOfGameObjects.push_back(m_PointLightGameObject);
 	for (auto&x : m_TreeObjs)
 	{
 		m_ListOfGameObjects.push_back(x);
 	}
 	m_GameObjectLocalToWorldTransforms.clear();
 	m_GameObjectLocalToWorldTransforms.push_back(m_Lambo->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
+	m_GameObjectLocalToWorldTransforms.push_back(m_PointLightGameObject->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
 	for (auto&x : m_TreeObjs)
 	{
 		m_GameObjectLocalToWorldTransforms.push_back(x->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
@@ -168,7 +170,8 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	eae6320::Graphics::cCamera::CreateCamera(m_TopDownCamera);
 	eae6320::Graphics::cCamera::CreateCamera(m_InCarCamera);
 	eae6320::Physics::cGameObject::CreateGameObject(m_Lambo);
-	eae6320::Graphics::cLight::CreateDirectionalLight(m_DirectionalLight);
+	eae6320::Physics::cGameObject::CreateGameObject(m_PointLightGameObject);
+	eae6320::Graphics::cLight::CreateDirectionalLight(m_DirectionalLight); 
 	eae6320::Graphics::cLight::CreateDirectionalLight(m_PointLight);
 
 	m_DirectionalLight->SetLightPosition(Math::sVector(0, 0, 0));
@@ -180,7 +183,8 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	m_PointLight->SetLightPosition(Math::sVector(0, 0, -10));
 	m_PointLight->SetLightColor({ 1,1,1,1 });
 
-	m_Lambo->SetGameObjectPosition(m_PointLight->GetLightPosition());
+	m_Lambo->SetGameObjectPosition(Math::sVector(0, 0, -10));
+	m_PointLightGameObject->SetGameObjectPosition(Math::sVector(0, 0, -10));
 	m_RenderingCamera = m_TopDownCamera;
 
 	for (size_t i = 1; i < 7; i++)
@@ -206,13 +210,19 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	std::string fName = "data/Meshes/Gecko.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_TreeHandle);
 
-	fName = "data/Meshes/PointLight.meshbinary";
+	fName = "data/Meshes/Plane.meshbinary";
 	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_LamboHandle);
+
+	fName = "data/Meshes/PointLight.meshbinary";
+	eae6320::Graphics::cMesh::s_Manager.Load(fName, m_PointLightMeshHandle);
 
 	fName = "data/Materials/GeckoMaterial.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_Material1Handle);
 
-	fName = "data/Materials/Material1.materialbinary";
+	fName = "data/Materials/material1.materialbinary";
+	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_Material2Handle);
+
+	fName = "data/Materials/Treematerial.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_LamboMaterialHandle);
 
 	UpdateMeshAndEffect();
@@ -224,7 +234,9 @@ eae6320::cResult eae6320::cFinalGame::CleanUp()
 {
 	eae6320::Graphics::cMesh::s_Manager.Release(m_TreeHandle);
 	eae6320::Graphics::cMesh::s_Manager.Release(m_LamboHandle);
+	eae6320::Graphics::cMesh::s_Manager.Release(m_PointLightMeshHandle);
 	eae6320::Graphics::cMaterial::s_Manager.Release(m_Material1Handle);
+	eae6320::Graphics::cMaterial::s_Manager.Release(m_Material2Handle);
 	eae6320::Graphics::cMaterial::s_Manager.Release(m_LamboMaterialHandle);
 
 	for (auto&x : m_TreeObjs)
@@ -233,6 +245,7 @@ eae6320::cResult eae6320::cFinalGame::CleanUp()
 	}
 
 	m_Lambo->DecrementReferenceCount();
+	m_PointLightGameObject->DecrementReferenceCount();
 	m_TopDownCamera->DecrementReferenceCount();
 	m_InCarCamera->DecrementReferenceCount();
 
@@ -252,6 +265,7 @@ void eae6320::cFinalGame::ResetDetails()
 void eae6320::cFinalGame::UpdateMeshAndEffect()
 {
 	m_Lambo->SetGameObjectHandles(m_LamboHandle, m_LamboMaterialHandle);
+	m_PointLightGameObject->SetGameObjectHandles(m_PointLightMeshHandle, m_Material2Handle);
 	for (auto&treeObj : m_TreeObjs)
 	{
 		treeObj->SetGameObjectHandles(m_TreeHandle, m_Material1Handle);

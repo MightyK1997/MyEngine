@@ -1,0 +1,13 @@
+return
+{
+        Material = 
+	{
+                EffectLocation = "Effects/Effect1.Effect",
+                ConstantType = "float4",
+                ConstantName = "Color",
+                ConstantValue = {1,1,1,1},
+                TextureLocation = "Textures/bark1-albedo.png",
+                NormalMapLocation = "Textures/bark1-normal3.png",
+                GlossMapLocation = "Textures/bark1-rough-edited.png",
+	},
+}
