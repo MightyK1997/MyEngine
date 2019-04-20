@@ -98,6 +98,14 @@ void eae6320::cFinalGame::UpdateBasedOnInput()
 	{
 		(*m_PointLight).SetLightVelocity(Math::sVector(-10.0f, 0, 0));
 	}
+	if (UserInput::IsKeyPressed('G'))
+	{
+		m_MaterialSmoothness++;
+	}
+	if (UserInput::IsKeyPressed('H'))
+	{
+		m_MaterialSmoothness--;
+	}
 }
 
 void eae6320::cFinalGame::UpdateSimulationBasedOnTime(const float i_elapsedSecondCount_sinceLastUpdate)
@@ -149,6 +157,7 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 
 	eae6320::Graphics::SetEffectsAndMeshesToRender(&(m_ListOfGameObjects[0]), &(m_GameObjectLocalToWorldTransforms[0]), (uint8_t)(m_ListOfGameObjects.size()),
 		m_DirectionalLight,m_PointLight, m_RenderingCamera, i_elapsedSecondCount_sinceLastSimulationUpdate);
+	eae6320::Graphics::SumbitMaterialData(m_MaterialSmoothness);
 }
 
 // Initialization / Clean Up

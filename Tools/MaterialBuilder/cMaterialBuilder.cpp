@@ -15,6 +15,7 @@ namespace
 	std::vector<float> m_ConstantData;
 	std::string m_TextureLocation;
 	std::string m_NormalLocation;
+	std::string m_GlossLocation;
 
 	std::string GetSourceDirectory(std::string i_Directory)
 	{
@@ -139,6 +140,18 @@ eae6320::cResult LoadTableValues(lua_State& i_LuaState)
 			m_NormalLocation = "Textures/default_normal.tga";
 		}
 		lua_pop(&i_LuaState, 1);
+		key2 = "GlossMapLocation";
+		lua_pushstring(&i_LuaState, key2);
+		lua_gettable(&i_LuaState, -2);
+		if (lua_isstring(&i_LuaState, -1))
+		{
+			m_GlossLocation = lua_tostring(&i_LuaState, -1);
+		}
+		else
+		{
+			m_GlossLocation = "Textures/default_diffuse.tga";
+		}
+		lua_pop(&i_LuaState, 1);
 		lua_pop(&i_LuaState, 1);
 	}
 	return result;
@@ -234,6 +247,7 @@ eae6320::cResult eae6320::Assets::cMaterialBuilder::Build(const std::vector<std:
 
 	std::string tempTextureLocation = m_TextureLocation;
 	std::string tempNormalLocation = m_NormalLocation;
+	std::string tempGlossLocation = m_NormalLocation;
 
 	//Calling texture builder.
 	std::replace(m_TextureLocation.begin(), m_TextureLocation.end(), '/', '\\');
@@ -253,12 +267,22 @@ eae6320::cResult eae6320::Assets::cMaterialBuilder::Build(const std::vector<std:
 	commandToTextureBuilder = o_OutputDir + "\\TextureBuilder.exe" + " " + o_SourceDirectory + " " + o_DestinationDir + " " + std::to_string(1);
 	std::system(commandToTextureBuilder.c_str());
 
+	//For Gloss Texture
+	std::replace(m_GlossLocation.begin(), m_GlossLocation.end(), '/', '\\');
+	o_SourceDirectory = GetSourceDirectory(m_GlossLocation);
+	m_GlossLocation = "data\\" + m_GlossLocation;
+	o_DestinationDir = GetDestDirectory(m_GlossLocation);
+	eae6320::Platform::GetEnvironmentVariable("OutputDir", o_OutputDir, &o_ErrorMessage);
+	commandToTextureBuilder = o_OutputDir + "\\TextureBuilder.exe" + " " + o_SourceDirectory + " " + o_DestinationDir + " " + std::to_string(2);
+	std::system(commandToTextureBuilder.c_str());
+
 
 	//Writing to material binary file
 	fptr = fopen(m_path_target, "w+b");
 	m_EffectLocation = "data/" + m_EffectLocation + "binary";
 	m_TextureLocation = "data/" + tempTextureLocation;
 	m_NormalLocation = "data/" + tempNormalLocation;
+	m_GlossLocation = "data/" + tempGlossLocation;
 	fwrite(m_EffectLocation.c_str(), m_EffectLocation.length(), 1, fptr);
 	fwrite("\0", sizeof(uint8_t), 1, fptr);
 	fwrite(&m_ConstantType, sizeof(uint8_t), 1, fptr);
@@ -274,6 +298,8 @@ eae6320::cResult eae6320::Assets::cMaterialBuilder::Build(const std::vector<std:
 	fwrite(m_TextureLocation.c_str(), m_TextureLocation.length(), 1, fptr);
 	fwrite("\0", sizeof(uint8_t), 1, fptr);
 	fwrite(m_NormalLocation.c_str(), m_NormalLocation.length(), 1, fptr);
+	fwrite("\0", sizeof(uint8_t), 1, fptr);
+	fwrite(m_GlossLocation.c_str(), m_GlossLocation.length(), 1, fptr);
 	fwrite("\0", sizeof(uint8_t), 1, fptr);
 	fclose(fptr);
 	return result;

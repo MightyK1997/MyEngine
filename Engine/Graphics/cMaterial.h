@@ -36,6 +36,7 @@ namespace eae6320
 			cEffect::Handle m_EffectHandle;
 			cTexture::Handle m_TextureHandle;
 			cTexture::Handle m_NormalMapHandle;
+			cTexture::Handle m_GlossMapHandle;
 			sColor m_Color = sColor{ 0,0,0,0 };
 			void Shutdown();
 

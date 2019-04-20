@@ -67,6 +67,8 @@ namespace eae6320
 			struct sPerMaterialCall
 			{
 				sColor g_color;
+				float g_smoothness;
+				float padding1[3];
 			};
 		}
 	}

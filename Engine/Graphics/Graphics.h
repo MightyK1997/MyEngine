@@ -98,6 +98,8 @@ namespace eae6320
 		void SetEffectsAndMeshesToRender(eae6320::Physics::cGameObject* i_GameObject[100], 
 			eae6320::Math::cMatrix_transformation i_LocaltoWorldTransforms[100], unsigned i_NumberOfGameObjectsToRender, Graphics::cLight*  i_DirectionalLight, Graphics::cLight* i_PointLight,
 			eae6320::Graphics::cCamera* i_Camera, const float i_secondCountToExtrapolate);
+
+		void SumbitMaterialData(float i_Smoothness);
 	}
 }
 

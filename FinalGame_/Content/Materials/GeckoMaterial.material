@@ -8,5 +8,6 @@ return
                 ConstantValue = {1,1,1,1},
                 TextureLocation = "Textures/troubleshoottexture.jpg",
                 NormalMapLocation = "Textures/default_normal.tga",
+                GlossMapLocation = "Textures/GlossMap.png",
 	},
 }

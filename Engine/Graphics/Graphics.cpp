@@ -152,6 +152,15 @@ void eae6320::Graphics::SetEffectsAndMeshesToRender(eae6320::Physics::cGameObjec
 	std::sort(renderCommand.begin(), renderCommand.end());
 }
 
+void eae6320::Graphics::SumbitMaterialData(float i_Smoothness)
+{
+	auto constantMaterialData = s_dataBeingSubmittedByApplicationThread->constantData_perMaterial;
+	for(size_t i=0;i< s_dataBeingSubmittedByApplicationThread->m_NumberOfEffectsToRender ;i++)
+	{
+		constantMaterialData[i].g_smoothness = i_Smoothness;
+	}
+}
+
 void eae6320::Graphics::RenderFrame()
 {
 	// Wait for the application loop to submit data to be rendered

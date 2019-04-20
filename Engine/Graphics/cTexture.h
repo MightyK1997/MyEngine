@@ -45,7 +45,7 @@ namespace eae6320
 			{
 				COLOR = 0,
 				NORMAL = 1,
-			};
+				GLOSS = 2,			};
 		}
 
 		class cTexture

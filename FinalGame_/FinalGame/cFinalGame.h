@@ -122,6 +122,7 @@ namespace eae6320
 	private:
 		//Other private variables
 		bool m_IsCameraSwitched = false;
+		float m_MaterialSmoothness = 1.0f;
 
 	private:
 		void UpdateMeshAndEffect();
