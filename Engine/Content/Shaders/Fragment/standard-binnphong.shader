@@ -81,12 +81,12 @@ void main(
 	float3 pointH = normalize(normalize(pointLightDir) + normalizeV);
 
 	const float4 binnPhongPoint = pow(saturate(dot(pointH, normalizedNormal)), 50);
-	float4 diffusePoint = g_PointLightColor * saturate(dot(pointLightDir, normalizedNormal.xyz)) * 20;
-	float4 specularPoint = (g_PointLightColor) * binnPhongPoint * 50;
+	float4 diffusePoint = g_PointLightColor * saturate(dot(pointLightDir, normalizedNormal.xyz));
+	float4 specularPoint = (g_PointLightColor) * binnPhongPoint;
 
 	float4 pointLightOutput = (diffusePoint * attenuation) + (specularPoint * attenuation) +ambientLight;
 
-	o_color = (pointLightOutput + directionalLightOutput) * i_color * textureColor;
+	o_color = (pointLightOutput) * i_color * textureColor;
 }
 
 #elif defined( EAE6320_PLATFORM_GL )

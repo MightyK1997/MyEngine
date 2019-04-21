@@ -6,6 +6,6 @@ return
                 ConstantType = "float4",
                 ConstantName = "Color",
                 ConstantValue = {1,1,1,1},
-                NormalMapLocation = "Textures/normal_map_raisen.tga",
+                NormalMapLocation = "Textures/QR.png",
 	},
 }
