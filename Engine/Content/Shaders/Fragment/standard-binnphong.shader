@@ -33,22 +33,22 @@ void main(
 {
 	const float4 textureColor = SampleTexture2d(g_diffuseTexture, g_samplerState, i_textureData);
 	const float4 ambientLight = float4(0.2,0.2,0.2,1);
-	const float3 normalizedNormal = normalize(i_normals);
+	const float3 normalizedNormal = normalize(float3(i_normals.x, i_normals.y, i_normals.z));
 
 
 	//Directional Light
 
-    const float3 normalizeL = -normalize(g_LightRotation);
+    const float3 normalizeL = normalize(g_LightPositionInWorld - i_vertex_position_world.xyz);
 	const float3 viewDist = g_CameraPositionInWorld - i_vertex_position_world.xyz;
     const float3 normalizeV = normalize(viewDist);
     const float3 H = normalize(normalizeL+normalizeV);
     const float4 blinnPhong = pow(saturate(dot(normalizedNormal, H)), 50);
     const float4 specularLight = saturate(blinnPhong * g_LightColor) * 10;
-    const float4 diffuseLight = saturate(g_LightColor * (saturate(dot(normalize(g_LightRotation), i_normals))));
+    const float4 diffuseLight = saturate(g_LightColor * (clamp(dot(normalizeL, normalizedNormal),0,1)));
 
 	const float4 diffuseOutput = (diffuseLight + ambientLight);
 
-	float4 directionalLightOutput = diffuseOutput + specularLight;
+	float4 directionalLightOutput = diffuseOutput;
 
 
 
@@ -66,9 +66,14 @@ void main(
 	float4 diffusePoint = g_PointLightColor * saturate(dot(pointLightDir, i_normals)) * 5;
 	float4 specularPoint = (g_PointLightColor) * binnPhongPoint * 5;
 
-	float4 pointLightOutput = (diffusePoint * attenuation) + (specularPoint * attenuation) +ambientLight;
+	specularPoint = (specularPoint * attenuation);
 
-	o_color = (pointLightOutput + directionalLightOutput) * i_color * textureColor;
+	float4 pointLightOutput = (diffusePoint * attenuation) +ambientLight;
+
+	float4 totalDiffuse = (pointLightOutput + directionalLightOutput);
+	float4 totalSpecular = specularPoint + specularLight;
+
+	o_color = (totalDiffuse * i_color * textureColor) + totalSpecular;
 }
 
 #elif defined( EAE6320_PLATFORM_GL )

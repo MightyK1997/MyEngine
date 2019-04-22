@@ -76,27 +76,27 @@ void eae6320::cFinalGame::UpdateBasedOnInput()
 
 	if (UserInput::IsKeyPressed('M'))
 	{
-		(*m_PointLight).SetLightVelocity(Math::sVector(0, 10.0f, 0));
+		(*m_DirectionalLight).SetLightVelocity(Math::sVector(0, 10.0f, 0));
 	}
 	if (UserInput::IsKeyPressed('N'))
 	{
-		(*m_PointLight).SetLightVelocity(Math::sVector(0, -10.0f, 0));
+		(*m_DirectionalLight).SetLightVelocity(Math::sVector(0, -10.0f, 0));
 	}
 	if (UserInput::IsKeyPressed('K'))
 	{
-		(*m_PointLight).SetLightVelocity(Math::sVector(0, 0, 10.0f));
+		(*m_DirectionalLight).SetLightVelocity(Math::sVector(0, 0, 10.0f));
 	}
 	if (UserInput::IsKeyPressed('I'))
 	{
-		(*m_PointLight).SetLightVelocity(Math::sVector(0, 0, -10.0f));
+		(*m_DirectionalLight).SetLightVelocity(Math::sVector(0, 0, -10.0f));
 	}
 	if (UserInput::IsKeyPressed('L'))
 	{
-		(*m_PointLight).SetLightVelocity(Math::sVector(10.0f, 0, 0));
+		(*m_DirectionalLight).SetLightVelocity(Math::sVector(10.0f, 0, 0));
 	}
 	if (UserInput::IsKeyPressed('J'))
 	{
-		(*m_PointLight).SetLightVelocity(Math::sVector(-10.0f, 0, 0));
+		(*m_DirectionalLight).SetLightVelocity(Math::sVector(-10.0f, 0, 0));
 	}
 }
 
