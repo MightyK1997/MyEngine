@@ -56,7 +56,7 @@ void main(
 
 	//Directional Light
 
-    const float3 normalizeL = normalize(g_LightRotation);
+    const float3 normalizeL = normalize(g_LightPositionInWorld - i_vertex_position_world.xyz);
 	const float3 viewDist = g_CameraPositionInWorld - i_vertex_position_world.xyz;
     const float3 normalizeV = normalize(viewDist);
     const float3 H = normalize(normalizeL+normalizeV);
@@ -80,7 +80,7 @@ void main(
 
 	float3 pointH = normalize(normalize(pointLightDir) + normalizeV);
 
-	const float4 binnPhongPoint = pow(saturate(dot(pointH, normalizedNormal)), 50);
+	const float4 binnPhongPoint = pow(saturate(dot(pointH, normalizedNormal)), 10);
 	float4 diffusePoint = g_PointLightColor * saturate(dot(pointLightDir, normalizedNormal.xyz));
 	float4 specularPoint = (g_PointLightColor) * binnPhongPoint;
 
