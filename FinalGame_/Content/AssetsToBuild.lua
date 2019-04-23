@@ -36,5 +36,6 @@ return
 		"Materials/Water-moving.material",
 		"Materials/Water-spinning.material",
 		"Materials/Treematerial.material",
+		"Materials/Stone.material",
 	}
 }

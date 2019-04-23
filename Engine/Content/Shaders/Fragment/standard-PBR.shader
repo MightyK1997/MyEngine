@@ -40,7 +40,7 @@ void main(
 	const float4 normalData = SampleTexture2d(g_Normal, g_samplerState, i_textureData);
 	const float4 glossData = SampleTexture2d(g_Gloss, g_samplerState, i_textureData);
 
-	const float finalSmoothness = glossData.x * g_material_smoothness * 256;
+	const float finalSmoothness = glossData.x * 50;
 	
 	float3 normalizedNormal = normalize(normalData.xyz);
 	const float3 normalizedTangent = normalize(i_tangent);
@@ -62,7 +62,7 @@ void main(
 
 	//Directional Light
 
-    const float3 normalizeL = normalize(g_LightRotation);
+    const float3 normalizeL = normalize(g_LightPositionInWorld - i_vertex_position_world.xyz);
 	const float3 viewDist = g_CameraPositionInWorld - i_vertex_position_world.xyz;
     const float3 normalizeV = normalize(viewDist);
     const float3 H = normalize(normalizeL+normalizeV);
@@ -83,7 +83,9 @@ void main(
     //const float4 specularLight = saturate(blinnPhong * g_LightColor) * 10;
     //const float4 diffuseLight = saturate(g_LightColor * (saturate(dot(normalize(g_LightRotation), normalizedNormal.xyz))));
 
-	const float4 diffuseOutput = (g_material_color);
+	const float4 diffuseOutput = (g_material_color) * g_LightColor * saturate(dot(normalizeL, normalizedNormal.xyz));
+
+	const float4 specularOutput = specularLight * g_LightColor * saturate(dot(normalizeL, normalizedNormal.xyz));
 
 	//Final directional Output
 	//(n.l) * lightColor * (Specular + diffuse + ambient);
@@ -106,11 +108,13 @@ void main(
 	//float4 specularPoint = (g_PointLightColor) * binnPhongPoint * (finalSmoothness + 2));
 	const float4 specularPoint = saturate(binnPhongPoint * fresnelEquation * 0.125 * (finalSmoothness +2));
 
-	float4 diffusePoint = g_material_color;
+	float4 diffusePoint = g_material_color * g_PointLightColor * saturate(dot(normalizedPointLightDir, normalizedNormal.xyz));
+
+	float4 specularOutputPoint = specularPoint * g_PointLightColor * saturate(dot(normalizedPointLightDir, normalizedNormal.xyz)) * 10;
 
 	float4 pointLightOutput = (diffusePoint + specularPoint + ambientLight) * g_PointLightColor * saturate(dot(normalizedPointLightDir, normalizedNormal.xyz)) * 10;
 
-	o_color = (directionalLightOutput + pointLightOutput) * textureColor * i_color;
+	o_color = (diffusePoint) * textureColor * i_color + (specularOutputPoint);
 }
 
 #elif defined( EAE6320_PLATFORM_GL )

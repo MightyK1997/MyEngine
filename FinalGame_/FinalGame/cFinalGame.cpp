@@ -60,11 +60,35 @@ void eae6320::cFinalGame::UpdateBasedOnInput()
 	}
 	if (UserInput::IsKeyPressed('Z'))
 	{
-		(*m_Lambo).SetGameObjectAngularVelocity(1.0f);
+		(*m_RenderingCamera).SetAngularSpeed(1.0f);
 	}
 	if (UserInput::IsKeyPressed('X'))
 	{
-		(*m_Lambo).SetGameObjectAngularVelocity(-1.0f);
+		(*m_RenderingCamera).SetAngularSpeed(-1.0f);
+	}
+	if (UserInput::IsKeyPressed('R'))
+	{
+		(*m_DirectionalLight).SetLightVelocity(Math::sVector(0, 0, 10.0f));
+	}
+	if (UserInput::IsKeyPressed('Y'))
+	{
+		(*m_DirectionalLight).SetLightVelocity(Math::sVector(0, 0, -10.0f));
+	}
+	if (UserInput::IsKeyPressed('F'))
+	{
+		(*m_DirectionalLight).SetLightVelocity(Math::sVector(10.0f, 0, 0));
+	}
+	if (UserInput::IsKeyPressed('V'))
+	{
+		(*m_DirectionalLight).SetLightVelocity(Math::sVector(-10.0f, 0, 0));
+	}
+	if (UserInput::IsKeyPressed('T'))
+	{
+		(*m_DirectionalLight).SetLightVelocity(Math::sVector(0, 10.0f, 0));
+	}
+	if (UserInput::IsKeyPressed('B'))
+	{
+		(*m_DirectionalLight).SetLightVelocity(Math::sVector(0, -10.0f, 0));
 	}
 	if (UserInput::IsKeyPressed('U'))
 	{
@@ -144,14 +168,14 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 
 	m_ListOfGameObjects.clear();
 	m_ListOfGameObjects.push_back(m_Lambo);
-	m_ListOfGameObjects.push_back(m_PointLightGameObject);
+	//m_ListOfGameObjects.push_back(m_PointLightGameObject);
 	for (auto&x : m_TreeObjs)
 	{
 		m_ListOfGameObjects.push_back(x);
 	}
 	m_GameObjectLocalToWorldTransforms.clear();
 	m_GameObjectLocalToWorldTransforms.push_back(m_Lambo->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
-	m_GameObjectLocalToWorldTransforms.push_back(m_PointLightGameObject->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
+	//m_GameObjectLocalToWorldTransforms.push_back(m_PointLightGameObject->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
 	for (auto&x : m_TreeObjs)
 	{
 		m_GameObjectLocalToWorldTransforms.push_back(x->GetLocalToWorldTransformation(i_elapsedSecondCount_sinceLastSimulationUpdate));
@@ -159,7 +183,7 @@ void eae6320::cFinalGame::SubmitDataToBeRendered(const float i_elapsedSecondCoun
 
 	eae6320::Graphics::SetEffectsAndMeshesToRender(&(m_ListOfGameObjects[0]), &(m_GameObjectLocalToWorldTransforms[0]), (uint8_t)(m_ListOfGameObjects.size()),
 		m_DirectionalLight,m_PointLight, m_RenderingCamera, i_elapsedSecondCount_sinceLastSimulationUpdate);
-	eae6320::Graphics::SumbitMaterialData(m_MaterialSmoothness);
+	eae6320::Graphics::SumbitMaterialData(m_MaterialSmoothness<=0 ? 1 : m_MaterialSmoothness);
 }
 
 // Initialization / Clean Up
@@ -222,7 +246,7 @@ eae6320::cResult eae6320::cFinalGame::Initialize()
 	fName = "data/Materials/material1.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_Material2Handle);
 
-	fName = "data/Materials/Treematerial.materialbinary";
+	fName = "data/Materials/Stone.materialbinary";
 	eae6320::Graphics::cMaterial::s_Manager.Load(fName, m_LamboMaterialHandle);
 
 	UpdateMeshAndEffect();
