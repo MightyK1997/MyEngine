@@ -1,8 +1,7 @@
 #pragma once
 
 #include <array>
-#include <immintrin.h>
-#include <xmmintrin.h>
+#include <cassert>
 
 namespace Engine
 {
@@ -13,21 +12,27 @@ namespace Engine
 			class Vector3
 			{
 			public:
-				Vector3() {
-					for (size_t i = 0; i < 3; i++)
-					{
-						m_Vector3[i] = 0;
-					}
-				}
+				Vector3() : m_Vector3{ 0,0,0 }{}
 				Vector3(float x, float y, float z);
 				Vector3(float);
-				float operator[](int i_Pos) { return m_Vector3[i_Pos]; }
-				float x(void) { return m_Vector3[0]; }
-				float y(void) { return m_Vector3[1]; }
-				float z(void) { return m_Vector3[2]; }
-				//Vector3 x(float i_Input);
-				//Vector3 y(float i_Input);
-				//Vector3 z(float i_Input);
+
+				Vector3(const Vector3& i_Vector3) = default;
+				Vector3& operator=(const Vector3& i_Vector3) = default;
+
+				~Vector3() = default;
+				float operator[](const int& i_Pos)
+				{
+					assert(i_Pos > 0 && i_Pos <= 3);
+					return m_Vector3[i_Pos - 1];
+				}
+				float x() const { return m_Vector3[0]; }
+				float y() const { return m_Vector3[1]; }
+				float z() const { return m_Vector3[2]; }
+
+
+				//Dot and cross product
+				float Dot(const Vector3& i_Second) const;
+				Vector3 Cross(const Vector3& i_Second) const;
 
 			private:
 				std::array<float, 3> m_Vector3;
