@@ -12,9 +12,11 @@ namespace Engine
 			class Vector3
 			{
 			public:
-				Vector3() : m_Vector3{ 0,0,0 }{}
-				Vector3(float x, float y, float z);
-				Vector3(float);
+				Vector3(float x = 0, float y = 0, float z = 0) : m_Vector3{ x,y,z }{}
+				Vector3(float x)
+				{
+					m_Vector3 = { x };
+				}
 
 				Vector3(const Vector3& i_Vector3) = default;
 				Vector3& operator=(const Vector3& i_Vector3) = default;

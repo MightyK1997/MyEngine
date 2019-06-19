@@ -25,11 +25,10 @@ namespace Handle
 			uint64_t id;
 			uint32_t m_ReferenceCount;
 
-			AssetData(tAsset* m_Asset, uint64_t id, uint32_t m_ReferenceCount) :m_Asset(m_Asset), id(id), m_ReferenceCount(m_ReferenceCount) {}
+			AssetData(tAsset* m_Asset, uint64_t id, uint32_t m_ReferenceCount) : m_Asset(m_Asset), id(id), m_ReferenceCount(m_ReferenceCount) {}
 		};
 
 		std::vector<AssetData> m_AllAssets;
 		std::map<tKey, Handle<tAsset>> m_ListOfAllHandles;
 	};
 }
-

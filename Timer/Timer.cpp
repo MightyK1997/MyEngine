@@ -1,27 +1,28 @@
 #include "Timer.h"
 
+namespace
+{
+	LARGE_INTEGER m_CurrentCPUTime, m_PreviousCPUTime, m_CPUFrequency;
+}
+
 namespace Engine
 {
 	namespace Timer
 	{
-		void Timer::Update()
+		void Update()
 		{
 			QueryPerformanceCounter(&m_CurrentCPUTime);
-			m_ElapsedTime = (m_CurrentCPUTime.QuadPart - m_PreviousCPUTime.QuadPart) / m_CPUFrequency.QuadPart;
+			deltaTime = static_cast<float>((m_CurrentCPUTime.QuadPart - m_PreviousCPUTime.QuadPart) / m_CPUFrequency.QuadPart);
 			m_PreviousCPUTime = m_CurrentCPUTime;
 		}
 
-		void Timer::ShutDown()
-		{
-		}
-
-		void Timer::Initialize()
+		void Initialize()
 		{
 			QueryPerformanceCounter(&m_PreviousCPUTime);
 			QueryPerformanceFrequency(&m_CPUFrequency);
 		}
 
-		float Timer::GetTimeDifference(long i_InputTime)
+		float GetTimeDifference(long i_InputTime)
 		{
 			QueryPerformanceCounter(&m_CurrentCPUTime);
 			auto numberOfTicks = m_CurrentCPUTime.QuadPart - m_PreviousCPUTime.QuadPart;

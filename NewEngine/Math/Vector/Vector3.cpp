@@ -6,17 +6,6 @@ namespace Engine
 	{
 		namespace Vector
 		{
-			Vector3::Vector3(float x, float y, float z)
-			{
-				m_Vector3 = { x, y, z };
-			}
-
-			Vector3::Vector3(float i_Input)
-			{
-				m_Vector3 = { i_Input };
-			}
-
-
 			float Vector3::Dot(const Vector3& i_Second) const
 			{
 				return m_Vector3[0] * i_Second.x() + m_Vector3[1] * i_Second.y() + m_Vector3[2] * i_Second.z();
