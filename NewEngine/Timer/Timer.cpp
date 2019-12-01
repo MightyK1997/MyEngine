@@ -6,12 +6,13 @@ namespace Engine
 	{
 		void Timer::Update()
 		{
-			QueryPerformanceCounter(&m_CurrentCPUTime);
-			m_ElapsedTime = (m_CurrentCPUTime.QuadPart - m_PreviousCPUTime.QuadPart) / m_CPUFrequency.QuadPart;
-			m_PreviousCPUTime = m_CurrentCPUTime;
+			QueryPerformanceCounter(&m_CurrentCPUTicks);
+			m_ElapsedTime = (m_CurrentCPUTicks.QuadPart - m_PreviousCPUTime.QuadPart) / m_CPUFrequency.QuadPart;
+			m_DeltaTime = m_PreviousCPUTime.QuadPart - m_CurrentCPUTicks.QuadPart;
+			m_PreviousCPUTime = m_CurrentCPUTicks;
 		}
 
-		void Timer::ShutDown()
+		void Timer::Shutdown()
 		{
 		}
 
@@ -19,14 +20,6 @@ namespace Engine
 		{
 			QueryPerformanceCounter(&m_PreviousCPUTime);
 			QueryPerformanceFrequency(&m_CPUFrequency);
-		}
-
-		float Timer::GetTimeDifference(long i_InputTime)
-		{
-			QueryPerformanceCounter(&m_CurrentCPUTime);
-			auto numberOfTicks = m_CurrentCPUTime.QuadPart - m_PreviousCPUTime.QuadPart;
-			m_PreviousCPUTime = m_CurrentCPUTime;
-			return static_cast<float>(numberOfTicks / (m_CPUFrequency.QuadPart * 1000));
 		}
 	}
 }

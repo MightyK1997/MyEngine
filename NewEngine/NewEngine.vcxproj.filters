@@ -55,6 +55,12 @@
     <Filter Include="Source Files\Timer">
       <UniqueIdentifier>{f940f1ff-0655-4365-abf0-b3c51243e0a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Perf">
+      <UniqueIdentifier>{c49bb51d-d32b-4cc8-8da8-3e2214f91111}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Perf">
+      <UniqueIdentifier>{3c4d8cbe-b8b9-4cd8-90da-c7735d7b0cbc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MemoryAllocators\BlockAllocator.cpp">
@@ -86,6 +92,12 @@
     </ClCompile>
     <ClCompile Include="Manager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Perf\Perf.cpp">
+      <Filter>Source Files\Perf</Filter>
+    </ClCompile>
+    <ClCompile Include="Perf\PerfObject.cpp">
+      <Filter>Source Files\Perf</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,6 +132,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Perf\Perf.h">
+      <Filter>Header Files\Perf</Filter>
+    </ClInclude>
+    <ClInclude Include="Perf\PerfObject.h">
+      <Filter>Header Files\Perf</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEngineClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

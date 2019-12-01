@@ -1,23 +1,27 @@
 #pragma once
 #include  <Windows.h>
+#include <cstdint>
+
+#include "../BaseEngineClass.h"
 
 namespace Engine
 {
 	namespace Timer
 	{
-		class Timer
+		class Timer : Engine::BaseClass
 		{
 		public:
-			void CalculateTimeSinceLastCall();
-			float GetTimeDifference(long i_InputTime);
+			//Base Class functions
+			virtual void Initialize() override;
+			virtual void Update() override;
+			virtual void Shutdown() override;
 
-			void Initialize();
-			void Update();
-			void ShutDown();
+			uint64_t DeltaTime() { return m_DeltaTime; }
 
 		private:
-			LARGE_INTEGER m_CurrentCPUTime, m_PreviousCPUTime, m_CPUFrequency;
-			__int64 m_ElapsedTime;
+			LARGE_INTEGER m_CurrentCPUTicks, m_PreviousCPUTime, m_CPUFrequency;
+			uint64_t m_ElapsedTime;
+			uint64_t m_DeltaTime;
 		};
 	}
 }

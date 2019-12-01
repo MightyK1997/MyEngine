@@ -28,9 +28,12 @@
     <ClCompile Include="Math\Vector\Vector4.cpp" />
     <ClCompile Include="MemoryAllocators\BlockAllocator.cpp" />
     <ClCompile Include="MemoryAllocators\FixedSizeAllocator.cpp" />
+    <ClCompile Include="Perf\Perf.cpp" />
+    <ClCompile Include="Perf\PerfObject.cpp" />
     <ClCompile Include="Timer\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseEngineClass.h" />
     <ClInclude Include="Debug\Log.h" />
     <ClInclude Include="GameObject\GameObject.h" />
     <ClInclude Include="Handle.h" />
@@ -41,6 +44,8 @@
     <ClInclude Include="Math\Vector\Vector4.h" />
     <ClInclude Include="MemoryAllocators\BlockAllocator.h" />
     <ClInclude Include="MemoryAllocators\FixedSizeAllocator.h" />
+    <ClInclude Include="Perf\Perf.h" />
+    <ClInclude Include="Perf\PerfObject.h" />
     <ClInclude Include="Timer\Timer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -48,32 +53,32 @@
     <ProjectGuid>{F7D1B133-D54C-4A46-9BDB-0FAB5EFC2121}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NewEngine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
